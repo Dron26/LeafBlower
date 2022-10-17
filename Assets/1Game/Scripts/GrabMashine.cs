@@ -32,13 +32,21 @@ public class GrabMashine : MonoBehaviour
     private int _quantityAllStepUp;
 
     private WaitForSeconds _waitForSeconds;
-
-
+    private int _quantityAllPsrticles;
+    private int percentAll;
+    private int percent;
+    private int minQuantityAllPsrticles;
 
     public UnityAction<bool> StartFillng;
 
     private void Start()
     {
+
+        _quantityAllPsrticles = _particleSystem.GetComponent<ParticleSystem>().maxParticles;
+        percentAll = 100;
+        percent = 30;
+        minQuantityAllPsrticles = (_quantityAllPsrticles / percentAll) * percent;
+
         _grabMashine = GetComponentInParent<GrabMashine>();
         float waiteTime=0.2f;
         _waitForSeconds = new WaitForSeconds(waiteTime);
@@ -76,6 +84,8 @@ public class GrabMashine : MonoBehaviour
         else
         {
             _quantityStepUp++;
+            _trashBagIdle.transform.localScale = _trashBagStartSize;
+            StartFillng?.Invoke(false);
         }
        
 
@@ -84,8 +94,9 @@ public class GrabMashine : MonoBehaviour
     private void CreateTrashBag()
     {
         TrashBag _newTrashBag = Instantiate(_trashBag, _trashBagStartPosition, Quaternion.identity);
-        _newTrashBag.transform.SetParent()
+        _newTrashBag.transform.SetParent(_grabMashine.transform, false);
     }
+
 
 
 
@@ -98,6 +109,7 @@ public class GrabMashine : MonoBehaviour
             {
                 StartCoroutine(ChangeSize());
             }
+            yield return null;
         }
     }
     private void OnEnable()
@@ -124,6 +136,10 @@ public class GrabMashine : MonoBehaviour
             StartFillng?.Invoke(true);
             _quantityAllStepUp++;
             _tempQuantityUpSize += _quantityUpSize;
+        }
+        else if (_quantityCathcedParticle== minQuantityAllPsrticles)
+        {
+            CreateTrashBag();
         }
     }
 }
