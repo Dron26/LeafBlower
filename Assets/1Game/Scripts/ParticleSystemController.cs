@@ -83,14 +83,12 @@ public class ParticleSystemController : MonoBehaviour
                 }
             }
             _particleSystem.SetTriggerParticles(ParticleSystemTriggerEventType.Inside, inside);
+        }
 
-
-            if (_allQuantityParticles <= minQuantityAllPsrticles)
-            {
-                CatchAllParticle?.Invoke();
-                gameObject.SetActive(false);
-            }
-
+        if (_allQuantityParticles <= minQuantityAllPsrticles)
+        {
+            CatchAllParticle?.Invoke();
+            gameObject.SetActive(false);
         }
     }
 }

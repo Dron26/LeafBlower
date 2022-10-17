@@ -101,9 +101,24 @@ public class GrabMashine : MonoBehaviour
         }
     }
 
+    private IEnumerator WaitQueue()
+    {
+        while (_quantityAllStepUp >0)
+        {
+            if (_quantityAllStepUp == 0 & isFilling == false)
+            {
+                EndFill();
+            }
+            yield return null;
+        }
+
+        StopCoroutine(WaitQueue());
+    }
+
+
     private void OnCatchAllParticle()
     {
-        EndFill();
+        StartCoroutine(WaitQueue());
     }
 
     private void EndFill()
