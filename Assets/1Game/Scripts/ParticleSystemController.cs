@@ -40,7 +40,7 @@ public class ParticleSystemController : MonoBehaviour
 
                     if (particle.startSize < _minSizeParticle)
                     {
-                        _grabMashine[i].GetParticle(particle);
+                        _grabMashine[i].OnGetParticle();
                         particle.velocity = _velosityParticle;
                     }
                     else

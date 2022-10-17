@@ -10,6 +10,8 @@ public class TrashBagIdle : MonoBehaviour
     private void Start()
     {
         _grabMashine = GetComponent<GrabMashine>();
+        _meshRenderer = GetComponent<MeshRenderer>();
+        _meshRenderer.enabled = false;
     }
 
     private void OnEnable()
@@ -22,8 +24,8 @@ public class TrashBagIdle : MonoBehaviour
         _grabMashine.StartFillng -= OnStartFilling;
     }
 
-    private void OnStartFilling()
+    private void OnStartFilling(bool isWork)
     {
-
+        _meshRenderer.enabled = isWork;
     }
 }
