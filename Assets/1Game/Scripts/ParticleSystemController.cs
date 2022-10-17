@@ -28,19 +28,15 @@ public class ParticleSystemController : MonoBehaviour
 
         for (int i = 0; i < _grabMashines.Count; i++)
         {
-
             Collider colliderLeavesTank = _grabMashines[i].GetComponentInChildren<LeavesTank>().GetComponent<Collider>();
             _leavesTanks.Add(colliderLeavesTank);
-
-
         }
         
     }
 
     private void OnParticleCollision(GameObject other)
     {
-        if (other.TryGetComponent<LeavesTank>(out LeavesTank leavesTank))
-        {
+
 
             List<ParticleSystem.Particle> inside = new List<ParticleSystem.Particle>();
             int numInside = _particleSystem.GetTriggerParticles(ParticleSystemTriggerEventType.Inside, inside);
@@ -50,29 +46,25 @@ public class ParticleSystemController : MonoBehaviour
                 for (int j = 0; j < numInside; j++)
                 {
                     ParticleSystem.Particle particle = inside[j];
-                    if (_leavesTanks)
-)
+                    if (_leavesTanks[i].bounds.Contains(particle.position))
                     {
+                        if (particle.startSize < _minSizeParticle)
+                        {
+                            _grabMashines[i].OnGetParticle();
+                            particle.velocity = _velosityParticle;
+                        }
+                        else
+                        {
+                            particle.startSize += _stepSizeDown;
 
+                        }
+                        inside[j] = particle;
                     }
-
-                    if (particle.startSize < _minSizeParticle)
-                    {
-                        _grabMashines[i].OnGetParticle();
-                        particle.velocity = _velosityParticle;
-                    }
-                    else
-                    {
-                        particle.startSize += _stepSizeDown;
-
-                    }
-                    inside[j] = particle;
-
 
                     _particleSystem.SetTriggerParticles(ParticleSystemTriggerEventType.Inside, inside);
                 }
             }
-        }
+        
     }
 }
 //CatchParticle?.Invoke(particle);
