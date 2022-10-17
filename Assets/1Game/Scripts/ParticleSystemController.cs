@@ -55,7 +55,7 @@ public class ParticleSystemController : MonoBehaviour
                         }
                         else
                         {
-                            particle.startSize += _stepSizeDown;
+                            particle.startSize -= _stepSizeDown;
 
                         }
                         inside[j] = particle;

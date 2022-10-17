@@ -5010,7 +5010,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1892595839929096363}
   - component: {fileID: 1892595839929096367}
-  - component: {fileID: 679457352972196742}
   m_Layer: 0
   m_Name: Garb
   m_TagString: Untagged
@@ -5064,22 +5063,6 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &679457352972196742
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1892595839929096362}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e8fdf1cdc107b044b8cd82b532b7e72e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _particleSystem: {fileID: 6916883401721870323, guid: 258af78ee09dcc14ebc1ffa7acb1e3db,
-    type: 3}
-  _trashBag: {fileID: 8230712461786708018, guid: d1a075ba09006ef4e92056fb58a9966b,
-    type: 3}
 --- !u!1 &1892595840047455138
 GameObject:
   m_ObjectHideFlags: 0
