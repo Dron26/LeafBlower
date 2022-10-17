@@ -24,37 +24,37 @@ public class Test2 : MonoBehaviour
     //    Debug.Log("sada");
     //}
 
-//    void OnParticleTrigger()
-//    {
-//        Debug.Log("khg");
-//;
+    void OnParticleTrigger()
+    {
+        Debug.Log("khg");
+        ;
 
-//        // particles
-//        List<ParticleSystem.Particle> enter = new List<ParticleSystem.Particle>();
-//        List<ParticleSystem.Particle> exit = new List<ParticleSystem.Particle>();
+        // particles
+        List<ParticleSystem.Particle> enter = new List<ParticleSystem.Particle>();
+        List<ParticleSystem.Particle> exit = new List<ParticleSystem.Particle>();
 
-//        // get
-//        //int numEnter = ps.GetTriggerParticles(ParticleSystemTriggerEventType.Enter, enter);
-//        int numExit = ps.GetTriggerParticles(ParticleSystemTriggerEventType.Exit, exit);
+        // get
+        //int numEnter = ps.GetTriggerParticles(ParticleSystemTriggerEventType.Enter, enter);
+        int numExit = ps.GetTriggerParticles(ParticleSystemTriggerEventType.Exit, exit);
 
-//        // iterate
-//        for (int i = 0; i < numEnter; i++)
-//        {
-//            ParticleSystem.Particle p = enter[i];
-//            p.startColor = new Color32(255, 0, 0, 255);
-//            enter[i] = p;
-//        }
-//        for (int i = 0; i < numExit; i++)
-//        {
-//            ParticleSystem.Particle p = exit[i];
-//            p.startColor = new Color32(0, 255, 0, 255);
-//            exit[i] = p;
-//        }
+        // iterate
+        for (int i = 0; i < numEnter; i++)
+        {
+            ParticleSystem.Particle p = enter[i];
+            p.startColor = new Color32(255, 0, 0, 255);
+            enter[i] = p;
+        }
+        for (int i = 0; i < numExit; i++)
+        {
+            ParticleSystem.Particle p = exit[i];
+            p.startColor = new Color32(0, 255, 0, 255);
+            exit[i] = p;
+        }
 
-//        // set
-//        ps.SetTriggerParticles(ParticleSystemTriggerEventType.Enter, enter);
-//        ps.SetTriggerParticles(ParticleSystemTriggerEventType.Exit, exit);
-//    }
+        // set
+        ps.SetTriggerParticles(ParticleSystemTriggerEventType.Enter, enter);
+        ps.SetTriggerParticles(ParticleSystemTriggerEventType.Exit, exit);
+    }
 
     //// Функция обратного вызова для столкновения частиц
     //private void OnParticleCollision(GameObject other)
