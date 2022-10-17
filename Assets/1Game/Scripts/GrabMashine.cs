@@ -7,13 +7,14 @@ public class GrabMashine : MonoBehaviour
 {
     [SerializeField]  private ParticleSystemController _particleSystem;
     [SerializeField]  private TrashBag _trashBag;
+    [SerializeField] private FinishPointForTrashBag _finishPoint;
     private GrabMashine _grabMashine;
      private TrashBagIdle _trashBagIdle;
      
     private Vector3 _trashBagStartSize;
     private Vector3 _trashBagStartPosition;
     private Vector3 _tempSize;
-
+    private Quaternion _rotationTrashBagIdle;
     private float _maxSize;
     private float _stepUpSize;
     private float _maxStepUp;
@@ -38,6 +39,7 @@ public class GrabMashine : MonoBehaviour
     private int minQuantityAllPsrticles;
 
     public UnityAction<bool> StartFillng;
+    public UnityAction CreateNewTrashBag;
 
     private void Start()
     {
@@ -52,8 +54,9 @@ public class GrabMashine : MonoBehaviour
         float waiteTime=0.2f;
         _waitForSeconds = new WaitForSeconds(waiteTime);
         _trashBagIdle = GetComponentInChildren<TrashBagIdle>();
+        _rotationTrashBagIdle = _trashBagIdle.transform.localRotation;
         _trashBagStartSize = _trashBagIdle.transform.localScale;
-        _trashBagStartPosition= _trashBagIdle.transform.position;
+        _trashBagStartPosition = _trashBagIdle.transform.localPosition ;
         _tempSize = _trashBagStartSize;
         _maxSize = 1.13f;
         _maxStepUp=0.2f;
@@ -81,26 +84,22 @@ public class GrabMashine : MonoBehaviour
         {
             _tempQuantityStepUp = 0;
             CreateTrashBag();
-        }
-        else
-        {
-            _quantityStepUp++;
             _trashBagIdle.transform.localScale = _trashBagStartSize;
             StartFillng?.Invoke(false);
         }
-       
-
+        else
+        {
+           
+        }    
     }
 
     private void CreateTrashBag()
     {
         TrashBag _newTrashBag = Instantiate(_trashBag, _trashBagStartPosition, Quaternion.identity);
-        _newTrashBag.transform.SetParent(_grabMashine.transform, false);
+        _newTrashBag.transform.SetParent(_finishPoint.transform, false);
+        CreateNewTrashBag?.Invoke();
+
     }
-
-
-
-
 
     private IEnumerator CountParticle()
     {
@@ -122,11 +121,6 @@ public class GrabMashine : MonoBehaviour
     {
         
     }
-
-
-    
-    
-
 
     public void OnGetParticle()
     {
