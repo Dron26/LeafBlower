@@ -41,6 +41,7 @@ public class GrabMashine : MonoBehaviour
 
     private void Start()
     {
+        _isWork = true;
 
         _quantityAllPsrticles = _particleSystem.GetComponent<ParticleSystem>().maxParticles;
         percentAll = 100;

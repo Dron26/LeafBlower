@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
+[RequireComponent(typeof(ParticleSystem))]
+
 public class ParticleSystemController : MonoBehaviour
 {
     [SerializeField] private List<GrabMashine> _grabMashines;
@@ -11,7 +13,8 @@ public class ParticleSystemController : MonoBehaviour
     private Vector3 _velosityParticle;
     private float _stepSizeDown;
     private float _minSizeParticle;
-
+    public int maxQuantityParticles;
+    public int _allQuantityParticles;
     public UnityAction<ParticleSystem.Particle> CatchParticle;
     private List <Collider> _leavesTanks;
 
@@ -19,12 +22,14 @@ public class ParticleSystemController : MonoBehaviour
     private void Start()
     {
         float maxVelocity = 100f;
-        
-        _velosityParticle = new Vector3(maxVelocity, maxVelocity, maxVelocity);
-        _stepSizeDown = 0.1f;
-        _minSizeParticle = 0.3f;
         _particleSystem = GetComponent<ParticleSystem>();
+
         _leavesTanks = new List<Collider>();
+        maxQuantityParticles = _particleSystem.maxParticles;
+        _velosityParticle = new Vector3(maxVelocity, maxVelocity, maxVelocity);
+        _stepSizeDown = 0.05f;
+        _minSizeParticle = 0.3f;
+
 
         for (int i = 0; i < _grabMashines.Count; i++)
         {
@@ -37,8 +42,9 @@ public class ParticleSystemController : MonoBehaviour
     private void OnParticleCollision(GameObject other)
     {
 
+        _allQuantityParticles = _particleSystem.particleCount;
 
-            List<ParticleSystem.Particle> inside = new List<ParticleSystem.Particle>();
+        List<ParticleSystem.Particle> inside = new List<ParticleSystem.Particle>();
             int numInside = _particleSystem.GetTriggerParticles(ParticleSystemTriggerEventType.Inside, inside);
 
             for (int i = 0; i < _grabMashines.Count; i++)
@@ -59,11 +65,10 @@ public class ParticleSystemController : MonoBehaviour
 
                         }
                         inside[j] = particle;
-                    }
-
-                    _particleSystem.SetTriggerParticles(ParticleSystemTriggerEventType.Inside, inside);
+                    }               
                 }
-            }
+            _particleSystem.SetTriggerParticles(ParticleSystemTriggerEventType.Inside, inside);
+        }
         
     }
 }
