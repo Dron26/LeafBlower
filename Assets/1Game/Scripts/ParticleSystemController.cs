@@ -4,15 +4,17 @@ using UnityEngine;
 
 public class ParticleSystemController : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    [SerializeField ]private List<GrabMashine>  _grabMashine;
+
+
+
+    private void OnParticleCollision(GameObject other)
     {
-        
+        if (other.TryGetComponent<GrabMashine>(out GrabMashine grabMashine))
+        {
+
+        }
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+
 }
