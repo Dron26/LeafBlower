@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 3528580166306569579}
   - component: {fileID: 3466836887784834805}
   - component: {fileID: 8230712461786708018}
+  - component: {fileID: 9185913022667012020}
   m_Layer: 0
   m_Name: SM_Prop_TrashBag_02
   m_TagString: Untagged
@@ -51,7 +52,7 @@ MeshRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3528580166304717785}
   m_Enabled: 1
-  m_CastShadows: 1
+  m_CastShadows: 0
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
   m_StaticShadowCaster: 0
@@ -109,5 +110,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f176475ef4f71d545844f18c5edf24b0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &9185913022667012020
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3528580166304717785}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6e52e819960900147895ee5c53677025, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 

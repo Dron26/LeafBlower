@@ -7,9 +7,10 @@ public class GrabMashine : MonoBehaviour
 {
     [SerializeField]  private ParticleSystemController _particleSystem;
     [SerializeField]  private TrashBag _trashBag;
-    [SerializeField] private FinishPointForTrashBag _finishPoint;
+     private FinishPointForTrashBag _finishPoint;
     private GrabMashine _grabMashine;
      private TrashBagIdle _trashBagIdle;
+    private CreatePoint _createPoint;
      
     private Vector3 _trashBagStartSize;
     private Vector3 _trashBagStartPosition;
@@ -33,23 +34,19 @@ public class GrabMashine : MonoBehaviour
     private int _quantityAllStepUp;
 
     private WaitForSeconds _waitForSeconds;
-    private int _quantityAllPsrticles;
-    private int percentAll;
-    private int percent;
-    private int minQuantityAllPsrticles;
+    
 
     public UnityAction<bool> StartFillng;
     public UnityAction CreateNewTrashBag;
+    private int maxVolumeTrashBag;
+    private bool isFilling;
 
     private void Start()
     {
         _isWork = true;
-
-        _quantityAllPsrticles = _particleSystem.GetComponent<ParticleSystem>().maxParticles;
-        percentAll = 100;
-        percent = 30;
-        minQuantityAllPsrticles = (_quantityAllPsrticles / percentAll) * percent;
-
+        _finishPoint = GetComponentInChildren<FinishPointForTrashBag>();
+        _createPoint = GetComponentInChildren<CreatePoint>();
+        maxVolumeTrashBag = 200;
         _grabMashine = GetComponentInParent<GrabMashine>();
         float waiteTime=0.2f;
         _waitForSeconds = new WaitForSeconds(waiteTime);
@@ -65,11 +62,13 @@ public class GrabMashine : MonoBehaviour
         _tempQuantityUpSize = _quantityUpSize;
         _quantityStepUp = 4;
         StartCoroutine(CountParticle());
+
     }
 
    private IEnumerator ChangeSize()
     {
-        
+        isFilling = true;
+
         while (_tempSize.x <= _trashBagStartSize.x+ _maxStepUp)
         {
             _trashBagIdle.transform.localScale = new Vector3 (_tempSize.x + _stepUpSize, _tempSize.y + _stepUpSize, _tempSize.z + _stepUpSize);
@@ -82,59 +81,77 @@ public class GrabMashine : MonoBehaviour
 
         if (_tempQuantityStepUp==_quantityStepUp )
         {
-            _tempQuantityStepUp = 0;
-            CreateTrashBag();
-            _trashBagIdle.transform.localScale = _trashBagStartSize;
-            StartFillng?.Invoke(false);
+            EndFill();
         }
-        else
-        {
-           
-        }    
-    }
 
-    private void CreateTrashBag()
-    {
-        TrashBag _newTrashBag = Instantiate(_trashBag, _trashBagStartPosition, Quaternion.identity);
-        _newTrashBag.transform.SetParent(_finishPoint.transform, false);
-        CreateNewTrashBag?.Invoke();
-
+        StopCoroutine(ChangeSize());
+        isFilling = false;
     }
 
     private IEnumerator CountParticle()
     {
         while (_isWork == true)
         {
-            if (_quantityAllStepUp>1)
+            if (_quantityAllStepUp > 0 & isFilling == false)
             {
+                StartFillng?.Invoke(true);
                 StartCoroutine(ChangeSize());
             }
             yield return null;
         }
     }
+
+    private void OnCatchAllParticle()
+    {
+        EndFill();
+    }
+
+    private void EndFill()
+    {
+
+        _trashBagIdle.transform.localScale = _trashBagStartSize;
+        _tempSize = _trashBagStartSize;
+        _tempQuantityStepUp = 0;
+        StartFillng?.Invoke(false);
+        CreateTrashBag();
+    }
+
+
+
+    private void CreateTrashBag()
+    {
+        TrashBag _newTrashBag = Instantiate(_trashBag, _createPoint.transform.localPosition, Quaternion.identity);
+        _newTrashBag.transform.SetParent(transform, false);
+        _newTrashBag.GetComponent<TrashBagMover>().Initialize(_finishPoint.transform.localPosition);
+        CreateNewTrashBag?.Invoke();
+    }
+
+  
     private void OnEnable()
     {
-        
+        _particleSystem.CatchAllParticle += OnCatchAllParticle;
     }
 
     private void OnDisable()
     {
-        
+        _particleSystem.CatchAllParticle -= OnCatchAllParticle;
     }
 
     public void OnGetParticle()
     {
+        
         _quantityCathcedParticle++;
 
         if (_quantityCathcedParticle == _tempQuantityUpSize)
-        {
-            StartFillng?.Invoke(true);
+        {         
             _quantityAllStepUp++;
             _tempQuantityUpSize += _quantityUpSize;
         }
-        else if (_quantityCathcedParticle== minQuantityAllPsrticles)
+        else if (_quantityCathcedParticle== maxVolumeTrashBag)
         {
             CreateTrashBag();
         }
     }
+
+ 
 }
