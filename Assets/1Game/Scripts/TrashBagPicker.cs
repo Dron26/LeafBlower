@@ -78,31 +78,31 @@ public class TrashBagPicker : MonoBehaviour
 
     private IEnumerator ChangeWay(TrashBag trashBag)
     {
-        float stepInRow = 1.7f;
+        float stepInRow = 0.3f;
         float stepinSecondrow = -0.4f;
         float stepUpLevel = 1.17f;
 
         if (_quantityInRow == 1)
         {
             _quantityInRow++;
-            _wayPoint[1] = new Vector3(_storePoint.transform.position.x + stepInRow, _storePoint.transform.position.y, _storePoint.transform.position.z);
+            _wayPoint[1] = new Vector3(_storePoint.transform.localPosition.x + stepInRow, _storePoint.transform.localPosition.y, _storePoint.transform.localPosition.z);
         }
         else if (_quantityInRow == 1 & _quantityRow < 2)
         {
 
             _quantityInRow--;
-            _wayPoint[1] = new Vector3(_storePoint.transform.position.x - stepInRow, _storePoint.transform.position.y, _storePoint.transform.position.z - stepinSecondrow);
+            _wayPoint[1] = new Vector3(_storePoint.transform.localPosition.x - stepInRow, _storePoint.transform.localPosition.y, _storePoint.transform.localPosition.z - stepinSecondrow);
         }
         else if(_quantityRow == 2)
         {
             _quantityRow = 0;
             _quantityInRow--;
             _quantityLevel++;
-            _wayPoint[1] = new Vector3(_storePoint.transform.position.x - stepInRow, _storePoint.transform.position.y + stepUpLevel, _storePoint.transform.position.z + stepinSecondrow);
+            _wayPoint[1] = new Vector3(_storePoint.transform.localPosition.x - stepInRow, _storePoint.transform.localPosition.y + stepUpLevel, _storePoint.transform.localPosition.z + stepinSecondrow);
         }
 
         yield return null;
-
+        _quantityInRow++;
         StartCoroutine(Move(trashBag));
         StopCoroutine(ChangeWay(trashBag));
     }
