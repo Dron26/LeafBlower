@@ -1,3 +1,4 @@
+using DG.Tweening;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -10,6 +11,7 @@ public class TrashBagPicker : MonoBehaviour
     private MainPointForTrashBag _mainPoint;
     public UnityAction TakeTrashBag;
     private List<TrashBag> _pickedTrashBag;
+    private List<Vector3> _wayPoint;
     private TrashBag _trashBag;
     private Vector3 _localPositionTrashBag;
     private Vector3 _localPositionStorePoint;
@@ -24,14 +26,19 @@ public class TrashBagPicker : MonoBehaviour
     private int _quantityRow;
     private int _quantityLevel;
 
-
+    private bool isPositionChange;
     private void Start()
     {
+        isPositionChange = false;
         _maxQuantityPickedTrashBag = 8;
         _storePoint = GetComponentInChildren<TrashBagStorePoint>();
         _mainPoint = GetComponentInChildren<MainPointForTrashBag>();
         _localPositionStorePoint = _storePoint.transform.localPosition;
         _localPositionMainPoint = _mainPoint.transform.localPosition;
+
+        _wayPoint.Add(_localPositionMainPoint);
+        _wayPoint.Add(_localPositionStorePoint);
+
     }
 
     private void OnTriggerEnter(Collider other)
@@ -46,9 +53,7 @@ public class TrashBagPicker : MonoBehaviour
                 trashBag.transform.SetParent(transform, false);
                 StartCoroutine(PickTrashBag());
                 TakeTrashBag?.Invoke();
-            }
-
-            
+            } 
         }
     }
 
@@ -75,14 +80,25 @@ public class TrashBagPicker : MonoBehaviour
 
         while (_localPositionTrashBag != _localPositionStorePoint)
         {
-            if (_quantityAllStepUp == 0 & isFilling == false)
+            float time = 1f;
+
+            
+
+            for (int i = 0; i < _wayPoint.Count; i++)
             {
-                EndFill();
+                Tween tween = transform.DOLocalMove(new Vector3(_wayPoint[i].x, _wayPoint[i].y, _wayPoint[i].z), time);
+
+                if (transform!=)
+                {
+
+                }
             }
+            
             yield return null;
         }
 
-        StopCoroutine(PickTrashBag());
+
+        StopCoroutine(MoveTrashBag());
     }
 
 }
