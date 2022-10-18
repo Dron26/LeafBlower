@@ -9,18 +9,18 @@ public class NewBehaviourScript1 : MonoBehaviour
 
     private void Start()
     {
-        
-        Tween tween = GameObject.transform.DOMove(transform.position, 3);
+        GameObject.transform.SetParent(transform, true);
+        Tween tween = GameObject.transform.DOMove(transform.position, 1);
 
-        StartCoroutine(Move());
+        //StartCoroutine(Move());
     }
 
     private IEnumerator Move()
     {
 
-            while (GameObject.transform.position != transform.position)
+            while (GameObject.transform.localPosition != transform.position)
             {
-                if (GameObject.transform.position == transform.position)
+                if (GameObject.transform.localPosition == transform.position)
                 {
                 GameObject.transform.SetParent(transform, false);
             }

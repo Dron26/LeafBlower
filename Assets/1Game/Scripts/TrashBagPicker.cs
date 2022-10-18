@@ -47,7 +47,7 @@ public class TrashBagPicker : MonoBehaviour
         _storePoint = GetComponentInChildren<TrashBagStorePoint>();
         _mainPoint = _storePoint.GetComponentInChildren<MainPointForTrashBag>();
         _localPositionStorePoint = _storePoint.transform.localPosition;
-        _localPositionMainPoint = _mainPoint.transform.position;
+        _localPositionMainPoint = _mainPoint.transform.localPosition;
         _wayPoint.Add(_localPositionMainPoint);
         _wayPoint.Add(_localPositionStorePoint);
     }
@@ -59,7 +59,7 @@ public class TrashBagPicker : MonoBehaviour
             if (_pickedTrashBag.Count <= _maxQuantityPickedTrashBag)
             {
                 _pickedTrashBag.Push(trashBag);
-                //trashBag.transform.SetParent(transform, false);
+                trashBag.transform.SetParent(transform, true);
                 StartCoroutine(ChangeWay(trashBag));
                 TakeTrashBag?.Invoke();
             }
@@ -93,7 +93,7 @@ public class TrashBagPicker : MonoBehaviour
             _quantityInRow--;
             _wayPoint[1] = new Vector3(_storePoint.transform.position.x - stepInRow, _storePoint.transform.position.y, _storePoint.transform.position.z - stepinSecondrow);
         }
-        else
+        else if(_quantityRow == 2)
         {
             _quantityRow = 0;
             _quantityInRow--;
@@ -114,20 +114,21 @@ public class TrashBagPicker : MonoBehaviour
 
         for (int i = 0; i < _wayPoint.Count; i++)
         {
-            Tween tween = trashBag.transform.DOMove(_wayPoint[i], time);
+            Tween tween = trashBag.transform.DOLocalMove(_wayPoint[i], time);
 
             while (isPositionChange == false)
             {
-                if (trashBag.transform.position == _wayPoint[0])
+                if (trashBag.transform.localPosition == _wayPoint[i])
                 {
                     isPositionChange = true;
                 }
 
                 yield return null;
             }
-            trashBag.transform.SetParent(transform, false);
+           
         }
 
+        trashBag.transform.SetParent(transform, false);
         StopCoroutine(Move(trashBag));
     }
 }
