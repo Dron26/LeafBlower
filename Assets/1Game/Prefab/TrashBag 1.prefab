@@ -11,7 +11,9 @@ GameObject:
   - component: {fileID: 3845919280309489439}
   - component: {fileID: 3845919280308272587}
   - component: {fileID: 3845919280307573021}
-  - component: {fileID: 3871923643917060739}
+  - component: {fileID: -5479627070531232122}
+  - component: {fileID: 7454522302846470164}
+  - component: {fileID: 954615456517933809}
   m_Layer: 0
   m_Name: TrashBag 1
   m_TagString: Untagged
@@ -84,17 +86,40 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!64 &3871923643917060739
-MeshCollider:
+--- !u!114 &-5479627070531232122
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3845919280309393327}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f176475ef4f71d545844f18c5edf24b0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &7454522302846470164
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3845919280309393327}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6e52e819960900147895ee5c53677025, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!135 &954615456517933809
+SphereCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3845919280309393327}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
-  serializedVersion: 4
-  m_Convex: 1
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 43580756525308632, guid: d84f83cf4b3db6d4d9e9ea1744883c5f, type: 2}
+  serializedVersion: 2
+  m_Radius: 0.48980606
+  m_Center: {x: 0.0000076293945, y: 0.48980606, z: 0}

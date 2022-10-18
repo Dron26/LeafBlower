@@ -13,10 +13,9 @@ public class TrashBagPicker : MonoBehaviour
     public UnityAction TakeTrashBag;
     public UnityAction TakeMaxQuantityTrashBag;
 
-    private List<TrashBag> _pickedTrashBag;
-    private Vector3[] _wayPoint;
-    private TrashBag _trashBag;
-    private Vector3 _localPositionTrashBag;
+
+    private Stack<TrashBag> _pickedTrashBag ;
+    private List<Vector3> _wayPoint;
     private Vector3 _localPositionStorePoint;
     private Vector3 _localPositionMainPoint;
     private Vector3 vector3;
@@ -38,17 +37,19 @@ public class TrashBagPicker : MonoBehaviour
 
     private void Start()
     {
+        _wayPoint = new List<Vector3>();
+        _pickedTrashBag = new Stack<TrashBag>();
         _quantityLevel = 0;
         _quantityRow = 0;
         _maxQuantityLevel = 8;
         isPositionChange = false;
         _maxQuantityPickedTrashBag = 8;
         _storePoint = GetComponentInChildren<TrashBagStorePoint>();
-        _mainPoint = GetComponentInChildren<MainPointForTrashBag>();
+        _mainPoint = _storePoint.GetComponentInChildren<MainPointForTrashBag>();
         _localPositionStorePoint = _storePoint.transform.localPosition;
-        _localPositionMainPoint = _mainPoint.transform.localPosition;
-        _wayPoint[0] = _localPositionMainPoint;
-        _wayPoint[1] = _localPositionStorePoint;
+        _localPositionMainPoint = _mainPoint.transform.position;
+        _wayPoint.Add(_localPositionMainPoint);
+        _wayPoint.Add(_localPositionStorePoint);
     }
 
     private void OnTriggerEnter(Collider other)
@@ -57,11 +58,9 @@ public class TrashBagPicker : MonoBehaviour
         {
             if (_pickedTrashBag.Count <= _maxQuantityPickedTrashBag)
             {
-                _pickedTrashBag.Add(trashBag);
-                _trashBag = trashBag;
-                _localPositionTrashBag = trashBag.transform.localPosition;
-                trashBag.transform.SetParent(transform, false);
-                StartCoroutine(ChangeWay());
+                _pickedTrashBag.Push(trashBag);
+                //trashBag.transform.SetParent(transform, false);
+                StartCoroutine(ChangeWay(trashBag));
                 TakeTrashBag?.Invoke();
             }
             else
@@ -77,7 +76,7 @@ public class TrashBagPicker : MonoBehaviour
         _maxQuantityPickedTrashBag = quantity;
     }
 
-    private IEnumerator ChangeWay()
+    private IEnumerator ChangeWay(TrashBag trashBag)
     {
         float stepInRow = 1.7f;
         float stepinSecondrow = -0.4f;
@@ -86,49 +85,50 @@ public class TrashBagPicker : MonoBehaviour
         if (_quantityInRow == 1)
         {
             _quantityInRow++;
-            _wayPoint[1] = new Vector3(_localPositionStorePoint.x + stepInRow, _localPositionStorePoint.y, _localPositionStorePoint.z);
+            _wayPoint[1] = new Vector3(_storePoint.transform.position.x + stepInRow, _storePoint.transform.position.y, _storePoint.transform.position.z);
         }
         else if (_quantityInRow == 1 & _quantityRow < 2)
         {
 
             _quantityInRow--;
-            _wayPoint[1] = new Vector3(_localPositionStorePoint.x - stepInRow, _localPositionStorePoint.y, _localPositionStorePoint.z - stepinSecondrow);
+            _wayPoint[1] = new Vector3(_storePoint.transform.position.x - stepInRow, _storePoint.transform.position.y, _storePoint.transform.position.z - stepinSecondrow);
         }
         else
         {
             _quantityRow = 0;
             _quantityInRow--;
             _quantityLevel++;
-            _wayPoint[1] = new Vector3(_localPositionStorePoint.x - stepInRow, _localPositionStorePoint.y + stepUpLevel, _localPositionStorePoint.z + stepinSecondrow);
+            _wayPoint[1] = new Vector3(_storePoint.transform.position.x - stepInRow, _storePoint.transform.position.y + stepUpLevel, _storePoint.transform.position.z + stepinSecondrow);
         }
 
         yield return null;
 
-        StartCoroutine(Move());
-        StopCoroutine(ChangeWay());
+        StartCoroutine(Move(trashBag));
+        StopCoroutine(ChangeWay(trashBag));
     }
 
-    private IEnumerator Move()
+    private IEnumerator Move(TrashBag trashBag)
     {
         float time = 1f;
         _quantityRow++;
 
-        for (int i = 0; i < _wayPoint.Length; i++)
+        for (int i = 0; i < _wayPoint.Count; i++)
         {
-            Tween tween = _trashBag.transform.DOLocalMove(_wayPoint[0], time);
+            Tween tween = trashBag.transform.DOMove(_wayPoint[i], time);
 
             while (isPositionChange == false)
             {
-                if (_trashBag.transform.position == _wayPoint[0])
+                if (trashBag.transform.position == _wayPoint[0])
                 {
                     isPositionChange = true;
                 }
 
                 yield return null;
             }
+            trashBag.transform.SetParent(transform, false);
         }
 
-        StopCoroutine(Move());
+        StopCoroutine(Move(trashBag));
     }
 }
 
