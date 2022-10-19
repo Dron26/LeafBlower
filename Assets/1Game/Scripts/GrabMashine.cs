@@ -10,8 +10,7 @@ public class GrabMashine : MonoBehaviour
      private FinishPointForTrashBag _finishPoint;
     private GrabMashine _grabMashine;
      private TrashBagIdle _trashBagIdle;
-    private CreatePoint _createPoint;
-     
+    private CreatePoint _createPoint;   
     private Vector3 _trashBagStartSize;
     private Vector3 _trashBagStartPosition;
     private Vector3 _tempSize;
@@ -21,21 +20,14 @@ public class GrabMashine : MonoBehaviour
     private float _maxStepUp;
     private float _stepSizeDown;
     private float _minSizeParticle;
-
-    //private List <ParticleSystem.Particle> _particle;
     private int _quantityCathcedParticle;
     private bool _isWork;
     private int _quantityUpSize;
     private int _tempQuantityUpSize;
-
     private int _quantityStepUp;
     private int _tempQuantityStepUp;
-
     private int _quantityAllStepUp;
-
     private WaitForSeconds _waitForSeconds;
-    
-
     public UnityAction<bool> StartFillng;
     public UnityAction CreateNewTrashBag;
     private int maxVolumeTrashBag;
@@ -62,7 +54,6 @@ public class GrabMashine : MonoBehaviour
         _tempQuantityUpSize = _quantityUpSize;
         _quantityStepUp = 4;
         StartCoroutine(CountParticle());
-
     }
 
    private IEnumerator ChangeSize()
@@ -115,7 +106,6 @@ public class GrabMashine : MonoBehaviour
         StopCoroutine(WaitQueue());
     }
 
-
     private void OnCatchAllParticle()
     {
         StartCoroutine(WaitQueue());
@@ -131,8 +121,6 @@ public class GrabMashine : MonoBehaviour
         CreateTrashBag();
     }
 
-
-
     private void CreateTrashBag()
     {
         TrashBag _newTrashBag = Instantiate(_trashBag, _createPoint.transform.localPosition, Quaternion.identity);
@@ -140,7 +128,6 @@ public class GrabMashine : MonoBehaviour
         _newTrashBag.GetComponent<TrashBagMover>().SetPaositionBeforTake(_finishPoint.transform.localPosition);
         CreateNewTrashBag?.Invoke();
     }
-
   
     private void OnEnable()
     {
@@ -153,8 +140,7 @@ public class GrabMashine : MonoBehaviour
     }
 
     public void OnGetParticle()
-    {
-        
+    {     
         _quantityCathcedParticle++;
 
         if (_quantityCathcedParticle == _tempQuantityUpSize)
@@ -167,6 +153,4 @@ public class GrabMashine : MonoBehaviour
             CreateTrashBag();
         }
     }
-
- 
 }
