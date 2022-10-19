@@ -117,11 +117,11 @@ public class TrashBagPicker : MonoBehaviour
 
         Vector3  point= new Vector3( );
         point = _wayPoint[1];
-        Move(trashBag, point);
+        StartCoroutine(Move(trashBag, point));
       
     }
 
-    private void Move(TrashBag trashBag, Vector3 point)
+    private IEnumerator Move(TrashBag trashBag, Vector3 point)
     {
         isPositionChange = false;
         float time = 0.5f;
@@ -137,10 +137,14 @@ public class TrashBagPicker : MonoBehaviour
                      tween = trashBag.transform.DOLocalMove(point, time);
                     trashBag.transform.rotation = Quaternion.identity;
                 }
+
+                yield return null;
             }
+
 
         trashBag.transform.SetParent(transform, false);
 
+        StopCoroutine(Move(trashBag, point));
     }
 
 
