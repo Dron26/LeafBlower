@@ -18,7 +18,7 @@ public class TrashBagPicker : MonoBehaviour
     private List<Vector3> _wayPoint;
     private Vector3 _localPositionStorePoint;
     private Vector3 _localPositionMainPoint;
-    private Vector3 vector3;
+    private List<Vector3> _changePointStore;
 
 
     private int _quantityAllTrashBag;
@@ -50,6 +50,18 @@ public class TrashBagPicker : MonoBehaviour
         _localPositionMainPoint = _mainPoint.transform.localPosition;
         _wayPoint.Add(_localPositionMainPoint);
         _wayPoint.Add(_localPositionStorePoint);
+
+
+        _changePointStore = new List<Vector3>();
+
+        float stepInRow = 0.3f;
+        float stepinSecondRow = -0.4f;
+
+        _changePointStore.Add(new Vector3(_storePoint.transform.localPosition.x, _storePoint.transform.localPosition.y, _storePoint.transform.localPosition.z));
+        _changePointStore.Add(new Vector3(_storePoint.transform.localPosition.x + stepInRow, _storePoint.transform.localPosition.y, _storePoint.transform.localPosition.z));
+        _changePointStore.Add(new Vector3(_storePoint.transform.localPosition.x, _storePoint.transform.localPosition.y, _storePoint.transform.localPosition.z + stepinSecondRow));
+        _changePointStore.Add(new Vector3(_storePoint.transform.localPosition.x + stepInRow, _storePoint.transform.localPosition.y, _storePoint.transform.localPosition.z + stepinSecondRow));
+
     }
 
     private void OnTriggerEnter(Collider other)
@@ -60,7 +72,8 @@ public class TrashBagPicker : MonoBehaviour
             {
                 _pickedTrashBag.Push(trashBag);
                 trashBag.transform.SetParent(transform, true);
-                StartCoroutine(ChangeWay(trashBag));
+                
+                ChangeWay(trashBag);
                 TakeTrashBag?.Invoke();
             }
             else
@@ -76,60 +89,71 @@ public class TrashBagPicker : MonoBehaviour
         _maxQuantityPickedTrashBag = quantity;
     }
 
-    private IEnumerator ChangeWay(TrashBag trashBag)
+    private void ChangeWay(TrashBag trashBag)
     {
-        float stepInRow = 0.3f;
-        float stepinSecondrow = -0.4f;
-        float stepUpLevel = 1.17f;
 
-        if (_quantityInRow == 1)
-        {
-            _quantityInRow++;
-            _wayPoint[1] = new Vector3(_storePoint.transform.localPosition.x + stepInRow, _storePoint.transform.localPosition.y, _storePoint.transform.localPosition.z);
-        }
-        else if (_quantityInRow == 1 & _quantityRow < 2)
-        {
 
-            _quantityInRow--;
-            _wayPoint[1] = new Vector3(_storePoint.transform.localPosition.x - stepInRow, _storePoint.transform.localPosition.y, _storePoint.transform.localPosition.z - stepinSecondrow);
-        }
-        else if(_quantityRow == 2)
-        {
-            _quantityRow = 0;
-            _quantityInRow--;
-            _quantityLevel++;
-            _wayPoint[1] = new Vector3(_storePoint.transform.localPosition.x - stepInRow, _storePoint.transform.localPosition.y + stepUpLevel, _storePoint.transform.localPosition.z + stepinSecondrow);
-        }
+        int maxTrashBagInLevel = 4;
 
-        yield return null;
         _quantityInRow++;
-        StartCoroutine(Move(trashBag));
-        StopCoroutine(ChangeWay(trashBag));
+
+
+        
+
+        if (_quantityInRow>maxTrashBagInLevel)
+        {
+            float stepUpLevel = 0.6f;
+            _storePoint.transform.localPosition = new Vector3(_storePoint.transform.localPosition.x, _storePoint.transform.localPosition.y + stepUpLevel, _storePoint.transform.localPosition.z);
+            _changePointStore.Clear();
+            SetPoint();
+            _quantityInRow =1;
+            _wayPoint[1] = _changePointStore[_quantityInRow - 1];
+        }
+        else
+        {
+            _wayPoint[1] = _changePointStore[_quantityInRow - 1];
+        }
+
+
+        Vector3  point= new Vector3( );
+        point = _wayPoint[1];
+        Move(trashBag, point);
+      
     }
 
-    private IEnumerator Move(TrashBag trashBag)
+    private void Move(TrashBag trashBag, Vector3 point)
     {
-        float time = 1f;
-        _quantityRow++;
+        isPositionChange = false;
+        float time = 0.5f;
 
-        for (int i = 0; i < _wayPoint.Count; i++)
-        {
-            Tween tween = trashBag.transform.DOLocalMove(_wayPoint[i], time);
+
+            Tween tween = trashBag.transform.DOLocalMove(_wayPoint[0], time);
 
             while (isPositionChange == false)
             {
-                if (trashBag.transform.localPosition == _wayPoint[i])
+                if (trashBag.transform.localPosition == _wayPoint[0])
                 {
                     isPositionChange = true;
+                     tween = trashBag.transform.DOLocalMove(point, time);
+                    trashBag.transform.rotation = Quaternion.identity;
                 }
-
-                yield return null;
             }
-           
-        }
 
         trashBag.transform.SetParent(transform, false);
-        StopCoroutine(Move(trashBag));
+
+    }
+
+
+    private void SetPoint()
+    {
+
+        float stepInRow = 0.3f;
+        float stepinSecondRow = -0.4f;
+
+        _changePointStore.Add(new Vector3(_storePoint.transform.localPosition.x, _storePoint.transform.localPosition.y, _storePoint.transform.localPosition.z));
+        _changePointStore.Add(new Vector3(_storePoint.transform.localPosition.x + stepInRow, _storePoint.transform.localPosition.y, _storePoint.transform.localPosition.z));
+        _changePointStore.Add(new Vector3(_storePoint.transform.localPosition.x, _storePoint.transform.localPosition.y, _storePoint.transform.localPosition.z + stepinSecondRow));
+        _changePointStore.Add(new Vector3(_storePoint.transform.localPosition.x + stepInRow, _storePoint.transform.localPosition.y, _storePoint.transform.localPosition.z + stepinSecondRow));
     }
 }
 
