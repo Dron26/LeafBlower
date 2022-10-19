@@ -137,7 +137,7 @@ public class GrabMashine : MonoBehaviour
     {
         TrashBag _newTrashBag = Instantiate(_trashBag, _createPoint.transform.localPosition, Quaternion.identity);
         _newTrashBag.transform.SetParent(transform, false);
-        _newTrashBag.GetComponent<TrashBagMover>().Initialize(_finishPoint.transform.localPosition);
+        _newTrashBag.GetComponent<TrashBagMover>().SetPaositionBeforTake(_finishPoint.transform.localPosition);
         CreateNewTrashBag?.Invoke();
     }
 
