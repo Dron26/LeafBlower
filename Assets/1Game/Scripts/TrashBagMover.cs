@@ -28,8 +28,9 @@ public class TrashBagMover : MonoBehaviour
         int positionX = Random.Range(minPositionX, 0);
         int positionZ = Random.Range(0, maxPositionZ);
         float time = 1f;
-
-         _startTween = transform.DOLocalMove(new Vector3(_endPoint.x+ positionX, _endPoint.y, _endPoint.z+ positionZ), time);
+        _endPoint = new Vector3(_endPoint.x + positionX, _endPoint.y, _endPoint.z + positionZ);
+         _startTween = transform.DOLocalMove(_endPoint, time);
+        StartCoroutine(TurnOnCollider()); 
     }
 
     public void SetPaositionBeforTake(Vector3 vector3)
@@ -66,19 +67,20 @@ public class TrashBagMover : MonoBehaviour
     }
 
 
-    private IEnumerator ChangeParent()
+    private IEnumerator TurnOnCollider()
     {
-        while (transform.localPosition != _endPoint)
+        while (transform.position != _endPoint)
         {
             if (transform.localPosition == _endPoint)
             {
                 _collider.enabled = true;
+                StopCoroutine(TurnOnCollider());
             }
            
             yield return null;
         }
 
-        StopCoroutine(MoveAfterTake());
+       
     }
 }
 
