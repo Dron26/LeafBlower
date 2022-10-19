@@ -10,12 +10,15 @@ public class TrashBagMover : MonoBehaviour
     private bool _isPositionChange;
     private Vector3 _mainPoint;
     private Tween _startTween;
+    private Collider _collider;
 
     private void Start()
     {
         _point = new Vector3();
         _mainPoint = new Vector3();
         MoveBeforTake();
+        _collider = GetComponent<Collider>();
+        _collider.enabled = false;
     }
 
     private void MoveBeforTake()
@@ -36,7 +39,6 @@ public class TrashBagMover : MonoBehaviour
 
     public void SetPaositionAfterTake(Vector3 point, Vector3 mainPoint)
     {
-        _startTween.Kill(true);
         _point = point;
         _mainPoint = mainPoint;
         StartCoroutine(MoveAfterTake());
@@ -57,6 +59,22 @@ public class TrashBagMover : MonoBehaviour
                 transform.rotation = Quaternion.identity;
             }
 
+            yield return null;
+        }
+
+        StopCoroutine(MoveAfterTake());
+    }
+
+
+    private IEnumerator ChangeParent()
+    {
+        while (transform.localPosition != _endPoint)
+        {
+            if (transform.localPosition == _endPoint)
+            {
+                _collider.enabled = true;
+            }
+           
             yield return null;
         }
 
