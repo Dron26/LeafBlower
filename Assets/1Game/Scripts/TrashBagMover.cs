@@ -57,7 +57,8 @@ public class TrashBagMover : MonoBehaviour
             {
                 _isPositionChange = true;
                 tween = transform.DOLocalMove(Point, time);
-                transform.rotation = Quaternion.identity;
+
+                
             }
 
             yield return null;

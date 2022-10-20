@@ -13,7 +13,7 @@ public class CartTrashBagPicker : MonoBehaviour
     private Stack<TrashBag> _pickedTrashBags;
     private int _quantityInRow;
     private int _maxQuantityInRow;
-
+    private  float stepInRow;
     private TrashBagStorePoint _storePoint;
     private MainPointForTrashBag _mainPointForTrashBag;
     private TrashBagMover _trashBagMover;
@@ -37,14 +37,11 @@ public class CartTrashBagPicker : MonoBehaviour
         _mainPointForTrashBag = _storePoint.GetComponentInChildren<MainPointForTrashBag>();
         _startPositionStorePoint = _storePoint.transform.localPosition;
         _mainPoint = _mainPointForTrashBag.transform.localPosition;
-        float stepInRow = 0.3f;
+        stepInRow = 0.6f;
         float stepinSecondRow = -0.4f;
 
         _changePointStore.Add(new Vector3(_storePoint.transform.localPosition.x, _storePoint.transform.localPosition.y, _storePoint.transform.localPosition.z));
         _changePointStore.Add(new Vector3(_storePoint.transform.localPosition.x + stepInRow, _storePoint.transform.localPosition.y, _storePoint.transform.localPosition.z));
-        _changePointStore.Add(new Vector3(_storePoint.transform.localPosition.x, _storePoint.transform.localPosition.y, _storePoint.transform.localPosition.z + stepinSecondRow));
-        _changePointStore.Add(new Vector3(_storePoint.transform.localPosition.x + stepInRow, _storePoint.transform.localPosition.y, _storePoint.transform.localPosition.z + stepinSecondRow));
-
     }
 
 
@@ -68,9 +65,7 @@ public class CartTrashBagPicker : MonoBehaviour
         }
 
         if (_quantityPickedTrashBag <= _maxQuantityPickedTrashBag)
-        {
-
-            _pickedTrashBags.Push(trashBag);
+        {         
             trashBag.transform.SetParent(transform, true);
             _trashBagMover = trashBag.GetComponent<TrashBagMover>();
 
@@ -101,12 +96,20 @@ public class CartTrashBagPicker : MonoBehaviour
         else if (_quantityInRow == _maxQuantityInRow)
         {
             _storePoint.transform.localPosition = new Vector3(_storePoint.transform.localPosition.x, _storePoint.transform.localPosition.y, _storePoint.transform.localPosition.z + stepinSecondRow);
+            SetPoint();
             _quantityInRow = 1;
         }
 
             point = _changePointStore[_quantityInRow - 1];
 
         _trashBagMover.SetSecondPosition(point, _mainPoint);
+    }
+
+    private void SetPoint()
+    {
+        _changePointStore.Clear();
+        _changePointStore.Add(new Vector3(_storePoint.transform.localPosition.x, _storePoint.transform.localPosition.y, _storePoint.transform.localPosition.z));
+        _changePointStore.Add(new Vector3(_storePoint.transform.localPosition.x + stepInRow, _storePoint.transform.localPosition.y, _storePoint.transform.localPosition.z));
     }
 
     private void SetMaxTrashBagInLevel(int quantity)
