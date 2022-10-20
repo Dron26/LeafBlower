@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class TrashBagMover : MonoBehaviour
 {
-    public Vector3 Point { get => _point; set { } }  
-    private Vector3 _endPoint =new Vector3();
-    private Vector3 _point;
+    public Vector3 Point { get => _firstPoint; set { } }
+    private Vector3 _endPoint = new Vector3();
+    private Vector3 _firstPoint;
     private bool _isPositionChange;
     private Vector3 _mainPoint;
     private Tween _startTween;
@@ -14,38 +14,38 @@ public class TrashBagMover : MonoBehaviour
 
     private void Start()
     {
-        _point = new Vector3();
+        _firstPoint = new Vector3();
         _mainPoint = new Vector3();
-        MoveBeforTake();
+        MoveFirstPosition();
         _collider = GetComponent<Collider>();
         _collider.enabled = false;
     }
 
-    private void MoveBeforTake()
+    public void SetFirstPosition(Vector3 vector3)
     {
+        _endPoint = vector3;
         int minPositionX = -4;
         int maxPositionZ = 5;
         int positionX = Random.Range(minPositionX, 0);
-        int positionZ = Random.Range(0, maxPositionZ);
-        float time = 1f;
+        int positionZ = Random.Range(0, maxPositionZ);      
         _endPoint = new Vector3(_endPoint.x + positionX, _endPoint.y, _endPoint.z + positionZ);
-         _startTween = transform.DOLocalMove(_endPoint, time);
-        StartCoroutine(TurnOnCollider()); 
     }
 
-    public void SetPaositionBeforTake(Vector3 vector3)
+    private void MoveFirstPosition()
     {
-        _endPoint = vector3;
+        float time = 1f;
+        _startTween = transform.DOLocalMove(_endPoint, time);
+        StartCoroutine(TurnOnCollider());
     }
 
-    public void SetPaositionAfterTake(Vector3 point, Vector3 mainPoint)
+    public void SetSecondPosition(Vector3 firstPoint, Vector3 mainPoint)
     {
-        _point = point;
+        _firstPoint = firstPoint;
         _mainPoint = mainPoint;
-        StartCoroutine(MoveAfterTake());
+        StartCoroutine(MoveSecondPosition());
     }
 
-    private IEnumerator MoveAfterTake()
+    private IEnumerator MoveSecondPosition()
     {
         _isPositionChange = false;
         float time = 0.5f;
@@ -63,9 +63,8 @@ public class TrashBagMover : MonoBehaviour
             yield return null;
         }
 
-        StopCoroutine(MoveAfterTake());
+        StopCoroutine(MoveSecondPosition());
     }
-
 
     private IEnumerator TurnOnCollider()
     {
@@ -76,11 +75,11 @@ public class TrashBagMover : MonoBehaviour
                 _collider.enabled = true;
                 StopCoroutine(TurnOnCollider());
             }
-           
+
             yield return null;
         }
-
-       
     }
+
+
 }
 
