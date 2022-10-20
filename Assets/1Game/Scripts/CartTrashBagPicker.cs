@@ -5,7 +5,7 @@ using UnityEngine.Events;
 
 public class CartTrashBagPicker : MonoBehaviour
 {
-    private CharacterTrashBagPicker _trashBagPicker;
+   [SerializeField] private CharacterTrashBagPicker _trashBagPicker;
     private TrashBag _trashBag;
     private int _quantityPickedTrashBag;
     private int _maxQuantityPickedTrashBag;
@@ -29,7 +29,6 @@ public class CartTrashBagPicker : MonoBehaviour
     private void Start()
     {
         _maxQuantityInRow = 3;
-
         _maxQuantityPickedTrashBag = 8;
         _maxQuantityTrashBagInLevel = 8;
         _pickedTrashBags = new Stack<TrashBag>();

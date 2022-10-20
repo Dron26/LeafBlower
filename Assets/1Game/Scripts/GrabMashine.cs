@@ -94,11 +94,12 @@ public class GrabMashine : MonoBehaviour
 
     private IEnumerator WaitQueue()
     {
-        while (_quantityAllStepUp >0)
+        while (_isWork==true)
         {
             if (_quantityAllStepUp == 0 & isFilling == false)
             {
                 EndFill();
+                _isWork = false;
             }
             yield return null;
         }
