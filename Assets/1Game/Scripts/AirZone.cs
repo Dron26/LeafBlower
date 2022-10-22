@@ -1,25 +1,28 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using static UnityEngine.ParticleSystem;
 
 public class AirZone : MonoBehaviour
 {
-    ParticleSystem ps;
+    //private ItemContainer _itemContainer;
 
-    private void OnCollisionEnter()
-    {
-        Debug.Log("sada");
-    }
 
-    //private void OnParticleCollision(ParticleSystem particle)
+    //private void Awake()
+    //{
+    //    _itemContainer = GetComponentInParent<ItemContainer>();
+    //}
+
+    //private void OnEnable()
+    //{
+    //    _itemContainer.EnterPlace += OnEnterPlace;
+    //}
+
+    //private void OnDisable()
+    //{
+    //    _itemContainer.EnterPlace -= OnEnterPlace;
+    //}
+
+    //private void OnEnterPlace()
     //{
 
-    //    ps = particle;
-
-
-    //    List<ParticleSystem.Particle> enter = new List<ParticleSystem.Particle>();
-    //    int numEnter = ps.GetTriggerParticles(ParticleSystemTriggerEventType.Enter, enter);
-
     //}
+
 }

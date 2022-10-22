@@ -18,6 +18,7 @@ public class ParticleSystemController : MonoBehaviour
 
     public UnityAction<ParticleSystem.Particle> CatchParticle;
     public UnityAction CatchAllParticle;
+    public UnityAction<bool> ContactAirZone;
 
     private List<Collider> _leavesTanks;
 
@@ -57,6 +58,16 @@ public class ParticleSystemController : MonoBehaviour
     private void OnParticleCollision(GameObject other)
     {
 
+
+        if (other.TryGetComponent(out AirZone airZone))
+        {
+            ContactAirZone?.Invoke(true);
+        }
+        else
+        {
+            ContactAirZone?.Invoke(false);
+        }
+
         _allQuantityParticles = _particleSystem.particleCount;
 
         List<ParticleSystem.Particle> inside = new List<ParticleSystem.Particle>();
@@ -84,6 +95,9 @@ public class ParticleSystemController : MonoBehaviour
             }
             _particleSystem.SetTriggerParticles(ParticleSystemTriggerEventType.Inside, inside);
         }
+
+
+
 
         if (_allQuantityParticles <= minQuantityAllPsrticles)
         {
