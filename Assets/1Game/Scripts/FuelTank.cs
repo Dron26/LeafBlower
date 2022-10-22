@@ -41,7 +41,7 @@ public class FuelTank : MonoBehaviour
         _fuelLevel = _maxFuelLevel;
         _stepChangeLevel = 0.2f;
         StartCoroutine(ChangeFuelLevel());
-        float waiteTime = 0.3f;
+        float waiteTime = 0.1f;
         _waitForSeconds = new WaitForSeconds(waiteTime);
     }
 
@@ -77,6 +77,7 @@ public class FuelTank : MonoBehaviour
         if (other.TryGetComponent(out Character character))
         {
             StartCoroutine(StartRefueling());
+
         }
     }
 
@@ -122,9 +123,11 @@ public class FuelTank : MonoBehaviour
 
     private IEnumerator StartRefueling()
     {
+        _isExiteFuelPlace = false;
+
         while (_isExiteFuelPlace==false)
         {
-            if (_fuelLevel <= _maxFuelLevel)
+            if (_fuelLevel < _maxFuelLevel)
             {
                 _fuelLevel = +_stepChangeLevel;
                 _fuelLevel = Mathf.Clamp(_fuelLevel, 0, _maxFuelLevel);
@@ -132,6 +135,8 @@ public class FuelTank : MonoBehaviour
 
             yield return _waitForSeconds;
         }
+
+        StopCoroutine(StartRefueling());
     }
 
 

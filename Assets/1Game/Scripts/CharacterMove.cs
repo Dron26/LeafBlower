@@ -1,20 +1,24 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class CharacterMove : MonoBehaviour
 {
     [SerializeField]private DynamicJoystick _dynamicJoystick;
+    public float Speed { get => _speed; set { } }
+
 
     private bool _isMoving;
     private bool _isCollidingWithObstacle;
     private Vector3 _collisionVector;
     private Animator _animator;
-    [SerializeField] private float speed = 0.4f;
+    private float _speed ;
+    private float _maxSpeed ;
+
     private int IsWalkHashName;
 
     private void Start()
     {
+        _maxSpeed = 1;
+        _speed = Mathf.Clamp( _dynamicJoystick.Magnitude,0, _maxSpeed);
         _animator = GetComponent<Animator>();
         IsWalkHashName = Animator.StringToHash("IsWalk");
     }
@@ -36,7 +40,7 @@ public class CharacterMove : MonoBehaviour
     {
 
         LookAt(moveVector);
-        transform.Translate(moveVector * speed * Time.deltaTime, Space.World);
+        transform.Translate(moveVector * _speed * Time.deltaTime, Space.World);
 
         SetState();
         _isMoving = true;

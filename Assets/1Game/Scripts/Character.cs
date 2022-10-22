@@ -1,18 +1,23 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+
+[RequireComponent(typeof(Animator))]
 
 public class Character : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    private CharacterMove _characterMove;
+    private float _speed;
+    private Animator _animator;
+
+    private void Awake()
     {
-        
+        _animator = GetComponent<Animator>();
+        _characterMove = GetComponent<CharacterMove>();
     }
 
-    // Update is called once per frame
-    void Update()
+    private void Update()
     {
-        
+            
     }
+
+
 }
