@@ -6,6 +6,8 @@ using UnityEngine.Events;
 public class CartTrashBagPicker : MonoBehaviour
 {
    [SerializeField] private CharacterTrashBagPicker _trashBagPicker;
+    [SerializeField] private ParkPlace _parkPlace;
+
     private TrashBag _trashBag;
     private int _quantityPickedTrashBag;
     private int _maxQuantityPickedTrashBag;
@@ -28,6 +30,7 @@ public class CartTrashBagPicker : MonoBehaviour
 
     private void Start()
     {
+
         _maxQuantityInRow = 3;
         _maxQuantityPickedTrashBag = 8;
         _maxQuantityTrashBagInLevel = 8;
@@ -48,6 +51,7 @@ public class CartTrashBagPicker : MonoBehaviour
     private void OnEnable()
     {
         _trashBagPicker.SallTrashBag += OnSallTrashBag;
+
     }
 
     private void OnDisable()
@@ -55,27 +59,32 @@ public class CartTrashBagPicker : MonoBehaviour
         _trashBagPicker.SallTrashBag -= OnSallTrashBag;
     }
 
+
+
     private void OnSallTrashBag(TrashBag trashBag)
     {
         _trashBag = trashBag;
 
-        if (_pickedTrashBags.Count <= _maxQuantityPickedTrashBag)
-        {
-            _quantityPickedTrashBag++;
-        }
 
-        if (_quantityPickedTrashBag <= _maxQuantityPickedTrashBag)
-        {         
-            trashBag.transform.SetParent(transform, true);
-            _trashBagMover = trashBag.GetComponent<TrashBagMover>();
+            if (_pickedTrashBags.Count <= _maxQuantityPickedTrashBag)
+            {
+                _pickedTrashBags.Push(trashBag);
+                _quantityPickedTrashBag++;
+            }
 
-            ChangeWay();
-            TakeTrashBag?.Invoke();
-        }
-        else
-        {
-            TakeMaxQuantityTrashBag?.Invoke();
-        }
+            if (_quantityPickedTrashBag <= _maxQuantityPickedTrashBag)
+            {
+                trashBag.transform.SetParent(transform, true);
+                _trashBagMover = trashBag.GetComponent<TrashBagMover>();
+
+                ChangeWay();
+                TakeTrashBag?.Invoke();
+            }
+            else
+            {
+                TakeMaxQuantityTrashBag?.Invoke();
+
+            }
     }
 
 
@@ -84,6 +93,7 @@ public class CartTrashBagPicker : MonoBehaviour
         float stepUpLevel = 0.4f;
         float stepinSecondRow = -0.4f;
         Vector3 point = new Vector3();
+
         _quantityInRow++;
 
         if (_quantityInRow == _maxQuantityTrashBagInLevel)
@@ -91,7 +101,7 @@ public class CartTrashBagPicker : MonoBehaviour
             _storePoint.transform.localPosition = _startPositionStorePoint;
             _storePoint.transform.localPosition = new Vector3(_storePoint.transform.localPosition.x, _storePoint.transform.localPosition.y + stepUpLevel, _storePoint.transform.localPosition.z );
             _startPositionStorePoint = _storePoint.transform.localPosition;
-             _quantityInRow = 1;
+            _quantityInRow = 1;
         }
         else if (_quantityInRow == _maxQuantityInRow)
         {
@@ -121,4 +131,17 @@ public class CartTrashBagPicker : MonoBehaviour
     {
         _maxQuantityPickedTrashBag = quantity;
     }
+
+
+
+    public void ClearCart()
+    {
+        foreach (TrashBag trashBag in _pickedTrashBags)
+        {
+            Destroy(trashBag.gameObject);
+        }
+
+        _pickedTrashBags.Clear();
+    }
+
 }

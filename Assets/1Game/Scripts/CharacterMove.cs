@@ -11,6 +11,7 @@ public class CharacterMove : MonoBehaviour
     private Vector3 _collisionVector;
     private Animator _animator;
     private float _speed ;
+
     private float _maxSpeed ;
 
     private int IsWalkHashName;
@@ -18,21 +19,31 @@ public class CharacterMove : MonoBehaviour
     private void Start()
     {
         _maxSpeed = 1;
-        _speed = Mathf.Clamp( _dynamicJoystick.Magnitude,0, _maxSpeed);
+       
         _animator = GetComponent<Animator>();
         IsWalkHashName = Animator.StringToHash("IsWalk");
     }
 
     private void Update()
     {
-            if (_dynamicJoystick.Horizontal != 0 || _dynamicJoystick.Vertical != 0)
+        float magnitude = _dynamicJoystick.Magnitude;
+
+        
+
+        if (_dynamicJoystick.Horizontal != 0 || _dynamicJoystick.Vertical != 0)
             {
                 Vector3 moveVector = (Vector3.right * _dynamicJoystick.Horizontal + Vector3.forward * _dynamicJoystick.Vertical);
                 moveVector.Normalize();
-                Move(moveVector);
+            
+            Move(moveVector);
             }
-            else
-                StopMove();
+        else
+        {
+            StopMove();
+            magnitude = 0;
+        }
+
+        _speed = Mathf.Clamp(magnitude, 0, _maxSpeed)*2;
     }
 
 

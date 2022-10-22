@@ -57,8 +57,6 @@ public class TrashBagMover : MonoBehaviour
             {
                 _isPositionChange = true;
                 tween = transform.DOLocalMove(Point, time);
-
-                
             }
 
             yield return null;

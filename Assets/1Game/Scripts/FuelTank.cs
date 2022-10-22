@@ -9,18 +9,13 @@ public class FuelTank : MonoBehaviour
     [SerializeField] private List<WorkPlace> _workPlaces;
     [SerializeField] private Character _character;
 
-
     public float MaxFueLevell { get => _maxFuelLevel; private set { } }
     public float FuelLevel { get => _fuelLevel; private set { } }
-
-
-
+    
     private WaitForSeconds _waitForSeconds;
-
     private bool _isContact;
     private bool _isEnterWorkPlace;
     private bool _isExiteFuelPlace;
-
     private float _fuelLevel;
     private float _maxFuelLevel;
     private float _stepChangeLevel;
@@ -98,11 +93,11 @@ public class FuelTank : MonoBehaviour
     {
         while (_isWrk)
         {
-            while (_isEnterWorkPlace)
+            while (_isEnterWorkPlace& _isContact)
             {
                 if (_fuelLevel > 0)
                 {
-                    _fuelLevel = -_stepChangeLevel;
+                    _fuelLevel -= _stepChangeLevel;
                     _fuelLevel = Mathf.Clamp(_fuelLevel, 0, _maxFuelLevel);
                 }
 
@@ -111,9 +106,7 @@ public class FuelTank : MonoBehaviour
                 yield return _waitForSeconds;
             }
             yield return _waitForSeconds;
-        }
-
-       
+        }       
     }
 
     private void OnEnterWorkPlacek(bool isWork)
@@ -129,7 +122,7 @@ public class FuelTank : MonoBehaviour
         {
             if (_fuelLevel < _maxFuelLevel)
             {
-                _fuelLevel = +_stepChangeLevel;
+                _fuelLevel += _stepChangeLevel;
                 _fuelLevel = Mathf.Clamp(_fuelLevel, 0, _maxFuelLevel);
             }
 

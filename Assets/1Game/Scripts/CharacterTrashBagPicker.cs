@@ -6,9 +6,13 @@ using UnityEngine.Events;
 
 public class CharacterTrashBagPicker : MonoBehaviour
 {
+
+    [SerializeField] private ParkPlace _parkPlace;
+
     private TrashBagStorePoint _storePoint;
     private MainPointForTrashBag _mainPointForTrashBag;
     private TrashBagMover _trashBagMover;
+
     public UnityAction TakeTrashBag;
     public UnityAction<TrashBag> SallTrashBag;
     public UnityAction TakeMaxQuantityTrashBag;
@@ -30,6 +34,7 @@ public class CharacterTrashBagPicker : MonoBehaviour
     private int _maxQuantityLevel;
     private bool _isPositionChange;
     private bool _isTakedMaxQuantity;
+    private bool _canSell;
 
     private void Start()
     {
@@ -37,7 +42,7 @@ public class CharacterTrashBagPicker : MonoBehaviour
         _mainPointForTrashBag = _storePoint.GetComponentInChildren<MainPointForTrashBag>();
         _pickedTrashBags = new Stack<TrashBag>();
         _changePointStore = new List<Vector3>();
-
+        _canSell = true;
         float stepInRow = 0.3f;
         float stepinSecondRow = -0.4f;
 
@@ -82,11 +87,10 @@ public class CharacterTrashBagPicker : MonoBehaviour
             }
         }
 
-        if (other.TryGetComponent(out Cart cart))
+        if (other.TryGetComponent(out Cart cart)&_canSell==true)
         {
-            SellTrashBag();
+            SellTrashBags();
         }
-
     }
 
     private void UpPickUpQuantity(int quantity)
@@ -133,10 +137,30 @@ public class CharacterTrashBagPicker : MonoBehaviour
         _maxQuantityLevel = quantity;
     }
 
-    private void SellTrashBag()
+    private void SellTrashBags()
     {
-        _pickedTrashBags.TryPop(out TrashBag trashBag);
-        SallTrashBag?.Invoke(trashBag);
+        for (int i = 0; i < _pickedTrashBags.Count; i++)
+        {
+            _pickedTrashBags.TryPop(out TrashBag trashBag);
+            SallTrashBag?.Invoke(trashBag);
+        }        
+    }
+
+    private void OnCartEnter()
+    {
+        _canSell = true;
+    }
+
+
+
+    private void OnEnable()
+    {
+        _parkPlace.CartEnter += OnCartEnter;
+    }
+
+    private void OnDisable()
+    {
+        _parkPlace.CartEnter -= OnCartEnter;
     }
 }
 
