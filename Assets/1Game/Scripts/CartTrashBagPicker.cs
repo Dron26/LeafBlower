@@ -27,6 +27,7 @@ public class CartTrashBagPicker : MonoBehaviour
     private Vector3 _mainPoint;
     private Vector3 _startPositionStorePoint;
     private List<Vector3> _changePointStore;
+    private Collider _collider;
 
     private void Start()
     {
@@ -72,6 +73,8 @@ public class CartTrashBagPicker : MonoBehaviour
             _pickedTrashBags.Push(trashBag);
             _quantityPickedTrashBag++;
             trashBag.transform.SetParent(transform, true);
+            _collider = trashBag.GetComponent<Collider>();
+            _collider.enabled = false;
             _trashBagMover = trashBag.GetComponent<TrashBagMover>();
 
             ChangeWay();

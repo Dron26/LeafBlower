@@ -5288,7 +5288,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 21ad7ea79a5ee8a47a6a2a476890cd7e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _fuelChanger: {fileID: 0}
+  _fuelChanger: {fileID: 2060846536}
 --- !u!1 &1866508470
 GameObject:
   m_ObjectHideFlags: 0
@@ -6044,7 +6044,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1e28ba73715b1d04c9e3f47563891af1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _fuelTank: {fileID: 1789719174}
 --- !u!114 &2060846536
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6061,7 +6060,6 @@ MonoBehaviour:
   - {fileID: 7272451829893885235}
   _workPlaces:
   - {fileID: 1638824142}
-  _character: {fileID: 0}
 --- !u!1 &2073819041
 GameObject:
   m_ObjectHideFlags: 0
@@ -12358,7 +12356,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 21ad7ea79a5ee8a47a6a2a476890cd7e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _fuelChanger: {fileID: 0}
+  _fuelChanger: {fileID: 2060846536}
 --- !u!4 &5418244687590566960
 Transform:
   m_ObjectHideFlags: 0

@@ -64,12 +64,11 @@ public class CharacterTrashBagPicker : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.TryGetComponent(out TrashBag trashBag))
+        if (other.TryGetComponent(out TrashBag trashBag)& _pickedTrashBags.Count !=_maxQuantityPickedTrashBag)
         {
-            if (_pickedTrashBags.Count<= _maxQuantityPickedTrashBag)
-            {
+
                 _quantityPickedTrashBag++;
-            } 
+            
 
             if (_quantityPickedTrashBag <= _maxQuantityPickedTrashBag)
             {               
@@ -149,23 +148,25 @@ public class CharacterTrashBagPicker : MonoBehaviour
 
         if (_pickedTrashBags.Count==0)
         {
-            _canSell = false;
+            
+            _quantityPickedTrashBag = 0;
+            _storePoint.transform.localPosition = _localPositionStorePoint;
         }    
     }
 
-    private void OnCartEnter()
+    private void OnCartRemove()
     {
         _canSell = true;
     }
 
     private void OnEnable()
     {
-        _parkPlace.CartEnter += OnCartEnter;
+        _parkPlace.CartEnter += OnCartRemove;
     }
 
     private void OnDisable()
     {
-        _parkPlace.CartEnter -= OnCartEnter;
+        _parkPlace.CartEnter -= OnCartRemove;
     }
 }
 

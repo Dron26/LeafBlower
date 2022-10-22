@@ -83,14 +83,7 @@ public class FuelChanger : MonoBehaviour
                 _fuelLevel -= _stepChangeLevel;
                 _fuelLevel = Mathf.Clamp(_fuelLevel, 0, _maxFuelLevel);
 
-                if (_fuelLevel == 0)
-                {
-                    EndFuel?.Invoke();
-                }
-                else
-                {
                     ChangeFuel?.Invoke(_fuelLevel);
-                }
             }
             yield return _waitForSeconds;
         }

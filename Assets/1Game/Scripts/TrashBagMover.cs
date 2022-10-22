@@ -11,14 +11,17 @@ public class TrashBagMover : MonoBehaviour
     private Vector3 _mainPoint;
     private Tween _startTween;
     private Collider _collider;
+    private ParticleSystem _particleSystem;
 
     private void Start()
     {
+        _collider = GetComponent<Collider>();
+        _collider.enabled = false;
+        _particleSystem =GetComponent<ParticleSystem>();
         _firstPoint = new Vector3();
         _mainPoint = new Vector3();
         MoveFirstPosition();
-        _collider = GetComponent<Collider>();
-        _collider.enabled = false;
+        
     }
 
     public void SetFirstPosition(Vector3 vector3)
@@ -57,6 +60,10 @@ public class TrashBagMover : MonoBehaviour
             {
                 _isPositionChange = true;
                 tween = transform.DOLocalMove(Point, time);
+            }
+            else if (transform.localPosition == Point)
+            {
+                _particleSystem.Play();
             }
 
             yield return null;
