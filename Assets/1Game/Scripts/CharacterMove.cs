@@ -21,7 +21,6 @@ public class CharacterMove : MonoBehaviour
         _maxSpeed = 1;
        
         _animator = GetComponent<Animator>();
-        IsWalkHashName = Animator.StringToHash("IsWalk");
     }
 
     private void Update()
@@ -39,7 +38,6 @@ public class CharacterMove : MonoBehaviour
             }
         else
         {
-            StopMove();
             magnitude = 0;
         }
 
@@ -53,26 +51,13 @@ public class CharacterMove : MonoBehaviour
         LookAt(moveVector);
         transform.Translate(moveVector * _speed * Time.deltaTime, Space.World);
 
-        SetState();
-        _isMoving = true;
     }
 
-    public void StopMove()
-    {
-        if (_isMoving)
-        {
-            _isMoving = false;
-            SetState();
-        }
-    }
 
     public void LookAt(Vector3 direction)
     {
         transform.rotation = Quaternion.LookRotation(direction);
     }
 
-    public void SetState()
-    {
-        _animator.SetBool(IsWalkHashName, _isMoving);
-    }
+
 }

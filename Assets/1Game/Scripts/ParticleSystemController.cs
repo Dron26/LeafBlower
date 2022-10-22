@@ -58,16 +58,6 @@ public class ParticleSystemController : MonoBehaviour
     private void OnParticleCollision(GameObject other)
     {
 
-
-        if (other.TryGetComponent(out AirZone airZone))
-        {
-            ContactAirZone?.Invoke(true);
-        }
-        else
-        {
-            ContactAirZone?.Invoke(false);
-        }
-
         _allQuantityParticles = _particleSystem.particleCount;
 
         List<ParticleSystem.Particle> inside = new List<ParticleSystem.Particle>();

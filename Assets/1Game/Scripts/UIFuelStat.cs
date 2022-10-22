@@ -4,9 +4,11 @@ using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
 
+[RequireComponent(typeof(Animator))]
+
 public class UIFuelStat : MonoBehaviour
 {
-    [SerializeField] private FuelTank _fuelTank;
+    [SerializeField] private FuelChanger _fuelChanger;
 
     private float _valueCurrent = 50;
     private float _maxValue;
@@ -16,12 +18,22 @@ public class UIFuelStat : MonoBehaviour
     private bool _isWork;
     private WaitForSeconds _waitForSeconds;
 
+    private Animator _animator;
+    private int _startAlarmHashName;
+
+    private void Awake()
+    {
+       _animator = GetComponent<Animator>();
+        _startAlarmHashName = Animator.StringToHash("StartAlarm");
+        _slider = GetComponentInChildren<Slider>();
+    }
+
     private void Start()
     {
-        _slider = GetComponent<Slider>();
+        
         _isWork = true;
-        _maxValue = _fuelTank.MaxFueLevell;
-        _currentValue = _fuelTank.FuelLevel;
+        _maxValue = _fuelChanger.MaxFueLevell;
+        _currentValue = _fuelChanger.FuelLevel;
         _slider.maxValue = _maxValue;
         _slider.minValue = _minValue;
         _slider.value = _currentValue;
@@ -29,19 +41,34 @@ public class UIFuelStat : MonoBehaviour
 
     public void OnEnable()
     {
-        _fuelTank.ChangeFuel += OnChangeLevel;
+        _fuelChanger.ChangeFuel += OnChangeLevel;
     }
 
     public void OnDisable()
     {
-        _fuelTank.ChangeFuel -= OnChangeLevel;
+        _fuelChanger.ChangeFuel -= OnChangeLevel;
     }
 
 
     private void OnChangeLevel(float currentValue)
     {
         _slider.value = Mathf.Clamp( currentValue, _minValue, _maxValue);
+        
+        if (_slider.value==0)
+        {
+            Alarm(true);
+        }
+        else
+        {
+            Alarm(false);
+        }
     }
+
+    private void Alarm(bool isWork)
+    {
+        _animator.SetBool(_startAlarmHashName, isWork);
+    }
+
 
 
 }

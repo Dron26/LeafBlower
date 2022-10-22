@@ -87,7 +87,12 @@ public class CharacterTrashBagPicker : MonoBehaviour
             }
         }
 
-        if (other.TryGetComponent(out Cart cart)&_canSell==true)
+       
+    }
+
+    private void OnTriggerStay(Collider other)
+    {
+        if (other.TryGetComponent(out Cart cart) & _canSell == true)
         {
             SellTrashBags();
         }
@@ -139,19 +144,19 @@ public class CharacterTrashBagPicker : MonoBehaviour
 
     private void SellTrashBags()
     {
-        for (int i = 0; i < _pickedTrashBags.Count; i++)
-        {
             _pickedTrashBags.TryPop(out TrashBag trashBag);
             SallTrashBag?.Invoke(trashBag);
-        }        
+
+        if (_pickedTrashBags.Count==0)
+        {
+            _canSell = false;
+        }    
     }
 
     private void OnCartEnter()
     {
         _canSell = true;
     }
-
-
 
     private void OnEnable()
     {

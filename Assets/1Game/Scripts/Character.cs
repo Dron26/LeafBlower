@@ -4,10 +4,13 @@ using UnityEngine;
 
 public class Character : MonoBehaviour
 {
+
     private CharacterMove _characterMove;
     private float _speed;
     private Animator _animator;
     private int SpeedHashName;
+
+
 
     private void Awake()
     {

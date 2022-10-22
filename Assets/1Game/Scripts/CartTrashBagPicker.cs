@@ -5,7 +5,7 @@ using UnityEngine.Events;
 
 public class CartTrashBagPicker : MonoBehaviour
 {
-   [SerializeField] private CharacterTrashBagPicker _trashBagPicker;
+    [SerializeField] private CharacterTrashBagPicker _trashBagPicker;
     [SerializeField] private ParkPlace _parkPlace;
 
     private TrashBag _trashBag;
@@ -15,7 +15,7 @@ public class CartTrashBagPicker : MonoBehaviour
     private Stack<TrashBag> _pickedTrashBags;
     private int _quantityInRow;
     private int _maxQuantityInRow;
-    private  float stepInRow;
+    private float stepInRow;
     private TrashBagStorePoint _storePoint;
     private MainPointForTrashBag _mainPointForTrashBag;
     private TrashBagMover _trashBagMover;
@@ -23,7 +23,7 @@ public class CartTrashBagPicker : MonoBehaviour
     public UnityAction SallAllTrashBag;
     public UnityAction TakeMaxQuantityTrashBag;
     public UnityAction<Vector3> SetPosition;
-
+    private WaitForSeconds _waitForSeconds;
     private Vector3 _mainPoint;
     private Vector3 _startPositionStorePoint;
     private List<Vector3> _changePointStore;
@@ -65,26 +65,24 @@ public class CartTrashBagPicker : MonoBehaviour
     {
         _trashBag = trashBag;
 
+        float waiteTime = 2f;
+        _waitForSeconds = new WaitForSeconds(waiteTime);
+        if (_pickedTrashBags.Count <= _maxQuantityPickedTrashBag)
+        {
+            _pickedTrashBags.Push(trashBag);
+            _quantityPickedTrashBag++;
+            trashBag.transform.SetParent(transform, true);
+            _trashBagMover = trashBag.GetComponent<TrashBagMover>();
 
-            if (_pickedTrashBags.Count <= _maxQuantityPickedTrashBag)
-            {
-                _pickedTrashBags.Push(trashBag);
-                _quantityPickedTrashBag++;
-            }
+            ChangeWay();
+            TakeTrashBag?.Invoke();
+        }
 
-            if (_quantityPickedTrashBag <= _maxQuantityPickedTrashBag)
-            {
-                trashBag.transform.SetParent(transform, true);
-                _trashBagMover = trashBag.GetComponent<TrashBagMover>();
+        if (_quantityPickedTrashBag == _maxQuantityPickedTrashBag)
+        {
+            StartCoroutine(TurnOnCollider());
+        }
 
-                ChangeWay();
-                TakeTrashBag?.Invoke();
-            }
-            else
-            {
-                TakeMaxQuantityTrashBag?.Invoke();
-
-            }
     }
 
 
@@ -99,7 +97,7 @@ public class CartTrashBagPicker : MonoBehaviour
         if (_quantityInRow == _maxQuantityTrashBagInLevel)
         {
             _storePoint.transform.localPosition = _startPositionStorePoint;
-            _storePoint.transform.localPosition = new Vector3(_storePoint.transform.localPosition.x, _storePoint.transform.localPosition.y + stepUpLevel, _storePoint.transform.localPosition.z );
+            _storePoint.transform.localPosition = new Vector3(_storePoint.transform.localPosition.x, _storePoint.transform.localPosition.y + stepUpLevel, _storePoint.transform.localPosition.z);
             _startPositionStorePoint = _storePoint.transform.localPosition;
             _quantityInRow = 1;
         }
@@ -110,7 +108,7 @@ public class CartTrashBagPicker : MonoBehaviour
             _quantityInRow = 1;
         }
 
-            point = _changePointStore[_quantityInRow - 1];
+        point = _changePointStore[_quantityInRow - 1];
 
         _trashBagMover.SetSecondPosition(point, _mainPoint);
     }
@@ -132,8 +130,6 @@ public class CartTrashBagPicker : MonoBehaviour
         _maxQuantityPickedTrashBag = quantity;
     }
 
-
-
     public void ClearCart()
     {
         foreach (TrashBag trashBag in _pickedTrashBags)
@@ -142,6 +138,13 @@ public class CartTrashBagPicker : MonoBehaviour
         }
 
         _pickedTrashBags.Clear();
+    }
+
+    private IEnumerator TurnOnCollider()
+    {
+            yield return _waitForSeconds;
+        TakeMaxQuantityTrashBag?.Invoke();
+
     }
 
 }

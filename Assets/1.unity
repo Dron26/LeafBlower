@@ -312,7 +312,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 153389387}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 4.7199993, y: 1.652821, z: 102.457016}
+  m_LocalPosition: {x: 4.7199993, y: 1.652821, z: 14.92}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2011,6 +2011,64 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 784893909}
   m_Mesh: {fileID: -798613621640728851, guid: 110958e99d32fbe4da269ee2b3c105b6, type: 3}
+--- !u!1 &801814048
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 801814049}
+  - component: {fileID: 801814050}
+  - component: {fileID: 801814051}
+  m_Layer: 31
+  m_Name: AirZoneContact
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!4 &801814049
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 801814048}
+  m_LocalRotation: {x: -0.0708552, y: 0.12381861, z: -0.84385747, w: 0.5172554}
+  m_LocalPosition: {x: 1.6999547, y: -0.7999646, z: 6.379987}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1273725256}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 7.797, y: 14.477, z: -115.994}
+--- !u!65 &801814050
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 801814048}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 7.58, y: 4.74, z: 10.78}
+  m_Center: {x: 0.02, y: 0.48, z: 0}
+--- !u!114 &801814051
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 801814048}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3ce676e25e8e36b43a980fa380cf9041, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &813808195
 GameObject:
   m_ObjectHideFlags: 0
@@ -3492,6 +3550,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3ce676e25e8e36b43a980fa380cf9041, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!4 &1273725256 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 2294598581903983802, guid: cc022eba4e058594d8b0e041487e2d31,
+    type: 3}
+  m_PrefabInstance: {fileID: 1262065029}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1275186058
 GameObject:
   m_ObjectHideFlags: 0
@@ -5139,11 +5203,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8ff2b79e1edd0154f9aeb46c76f8c9c5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _particleSystemControllers:
-  - {fileID: 7272451829893885235}
-  _workPlaces:
-  - {fileID: 1638824142}
-  _character: {fileID: 2060846531}
 --- !u!135 &1789719175
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -5166,6 +5225,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1825448449}
+  - component: {fileID: 1825448451}
+  - component: {fileID: 1825448450}
   m_Layer: 5
   m_Name: FuelStat (1)
   m_TagString: Untagged
@@ -5195,6 +5256,39 @@ RectTransform:
   m_AnchoredPosition: {x: -0.7977295, y: -0.0154418945}
   m_SizeDelta: {x: 1.59552, y: 3.38562}
   m_Pivot: {x: 0, y: 0.5}
+--- !u!95 &1825448450
+Animator:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1825448448}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: d5799edf04bafcd4eaf1f44399439ca6, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &1825448451
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1825448448}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 21ad7ea79a5ee8a47a6a2a476890cd7e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _fuelChanger: {fileID: 0}
 --- !u!1 &1866508470
 GameObject:
   m_ObjectHideFlags: 0
@@ -5283,7 +5377,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1895250076}
   - component: {fileID: 1895250077}
-  - component: {fileID: 1895250078}
   m_Layer: 5
   m_Name: Slider
   m_TagString: Untagged
@@ -5364,19 +5457,6 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
---- !u!114 &1895250078
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1895250075}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 21ad7ea79a5ee8a47a6a2a476890cd7e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _fuelTank: {fileID: 1789719174}
 --- !u!1 &1901175026
 GameObject:
   m_ObjectHideFlags: 0
@@ -5964,6 +6044,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1e28ba73715b1d04c9e3f47563891af1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _fuelTank: {fileID: 1789719174}
+--- !u!114 &2060846536
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1262065030}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 294c4689a71b6fd43bf4b71cb55ab442, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _particleSystemControllers:
+  - {fileID: 7272451829893885235}
+  _workPlaces:
+  - {fileID: 1638824142}
+  _character: {fileID: 0}
 --- !u!1 &2073819041
 GameObject:
   m_ObjectHideFlags: 0
@@ -12006,7 +12104,6 @@ GameObject:
   - component: {fileID: 5300001013639658548}
   - component: {fileID: 5300001013639658550}
   - component: {fileID: 5300001013639658551}
-  - component: {fileID: 5300001013639658552}
   m_Layer: 0
   m_Name: Slider
   m_TagString: Untagged
@@ -12073,19 +12170,6 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
---- !u!114 &5300001013639658552
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5300001013639658549}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 21ad7ea79a5ee8a47a6a2a476890cd7e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _fuelTank: {fileID: 1789719174}
 --- !u!224 &5300001013872745052
 RectTransform:
   m_ObjectHideFlags: 0
@@ -12181,6 +12265,8 @@ GameObject:
   - component: {fileID: 5300001014081245263}
   - component: {fileID: 5300001014081245249}
   - component: {fileID: 5300001014081245262}
+  - component: {fileID: 5300001014081245265}
+  - component: {fileID: 5300001014081245264}
   m_Layer: 0
   m_Name: FuelLevel
   m_TagString: Untagged
@@ -12240,6 +12326,39 @@ RectTransform:
   m_AnchoredPosition: {x: 0.000016748905, y: -0.0000030994415}
   m_SizeDelta: {x: 1113.3, y: 1178.6}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!95 &5300001014081245264
+Animator:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5300001014081245260}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 95638ce8536d6c4439c34edd4248c532, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &5300001014081245265
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5300001014081245260}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 21ad7ea79a5ee8a47a6a2a476890cd7e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _fuelChanger: {fileID: 0}
 --- !u!4 &5418244687590566960
 Transform:
   m_ObjectHideFlags: 0
@@ -13639,7 +13758,7 @@ ParticleSystem:
     donutRadius: 0.2
     m_Position: {x: 0, y: 0, z: 0}
     m_Rotation: {x: 0, y: 0, z: 0}
-    m_Scale: {x: 1, y: 1, z: 0}
+    m_Scale: {x: 19, y: 6, z: 0}
     placementMode: 0
     m_MeshMaterialIndex: 0
     m_MeshNormalOffset: 0
@@ -17850,7 +17969,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7272451829893885234}
   m_LocalRotation: {x: -0.70476276, y: -0.057528008, z: -0.05752797, w: 0.70476276}
-  m_LocalPosition: {x: -72.24, y: 0.61, z: 16.85}
+  m_LocalPosition: {x: -63.15, y: 0.61, z: 13.55}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

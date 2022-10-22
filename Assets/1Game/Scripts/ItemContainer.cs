@@ -5,9 +5,10 @@ public class ItemContainer : MonoBehaviour
 {
     private AirZone _airZone;
     private WorkPlace _workPlace;
-
+    private FuelChanger fuelChanger;
     private void Awake()
     {
+        fuelChanger = GetComponentInParent<FuelChanger>();
         _airZone = GetComponentInChildren<AirZone>();
         _airZone.gameObject.SetActive(false);
     }
@@ -17,6 +18,7 @@ public class ItemContainer : MonoBehaviour
         if (other.TryGetComponent(out WorkPlace workPlace))
         {
             _airZone.gameObject.SetActive(true);
+            
         }
     }
 
