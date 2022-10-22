@@ -19,6 +19,7 @@ public class FuelTank : MonoBehaviour
 
     private bool _isContact;
     private bool _isEnterWorkPlace;
+    private bool _isExiteFuelPlace;
 
     private float _fuelLevel;
     private float _maxFuelLevel;
@@ -29,6 +30,7 @@ public class FuelTank : MonoBehaviour
 
     public void Awake()
     {
+        _isExiteFuelPlace = true;
         _maxFuelLevel = 100;
         _fuelLevel = _maxFuelLevel;
     }
@@ -71,6 +73,22 @@ public class FuelTank : MonoBehaviour
         }
     }
 
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.TryGetComponent(out Character character))
+        {
+            StartCoroutine(StartRefueling());
+        }
+    }
+
+    private void OnTriggerExite(Collider other)
+    {
+        if (other.TryGetComponent(out Character character))
+        {
+            _isExiteFuelPlace = true;
+        }
+    }
+
     private void OnContactAirZone(bool isContact)
     {
         _isContact = isContact;
@@ -102,6 +120,21 @@ public class FuelTank : MonoBehaviour
     {
         _isEnterWorkPlace = isWork;
     }
+
+    private IEnumerator StartRefueling()
+    {
+        while (_isExiteFuelPlace==false)
+        {
+            if (_fuelLevel <= _maxFuelLevel)
+            {
+                _fuelLevel = +_stepChangeLevel;
+                _fuelLevel = Mathf.Clamp(_fuelLevel, 0, _maxFuelLevel);
+            }
+
+            yield return _waitForSeconds;
+        }
+    }
+
 
     public void Inotialize()
     {

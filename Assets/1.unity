@@ -3374,6 +3374,102 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cc022eba4e058594d8b0e041487e2d31, type: 3}
+--- !u!1 &1262065030 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 455756259544823586, guid: cc022eba4e058594d8b0e041487e2d31,
+    type: 3}
+  m_PrefabInstance: {fileID: 1262065029}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1262065031 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2294598582359888499, guid: cc022eba4e058594d8b0e041487e2d31,
+    type: 3}
+  m_PrefabInstance: {fileID: 1262065029}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1262065032 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4759526288526119372, guid: cc022eba4e058594d8b0e041487e2d31,
+    type: 3}
+  m_PrefabInstance: {fileID: 1262065029}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1262065033 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4759526288401048075, guid: cc022eba4e058594d8b0e041487e2d31,
+    type: 3}
+  m_PrefabInstance: {fileID: 1262065029}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1262065034 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4759526288769466912, guid: cc022eba4e058594d8b0e041487e2d31,
+    type: 3}
+  m_PrefabInstance: {fileID: 1262065029}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1262065035 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2294598581346498831, guid: cc022eba4e058594d8b0e041487e2d31,
+    type: 3}
+  m_PrefabInstance: {fileID: 1262065029}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1262065036
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1262065031}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3ce676e25e8e36b43a980fa380cf9041, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1262065037
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1262065032}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3ce676e25e8e36b43a980fa380cf9041, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1262065038
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1262065033}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3ce676e25e8e36b43a980fa380cf9041, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1262065039
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1262065034}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3ce676e25e8e36b43a980fa380cf9041, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1262065040
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1262065035}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 73ebc1b13b04602479f3ebb2d31ac2df, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1275186058
 GameObject:
   m_ObjectHideFlags: 0
@@ -4414,6 +4510,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1638824140}
   - component: {fileID: 1638824141}
+  - component: {fileID: 1638824142}
   m_Layer: 0
   m_Name: WorkPlace
   m_TagString: Untagged
@@ -4447,11 +4544,23 @@ BoxCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1638824139}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 11.53, y: 7.59, z: 21.65}
   m_Center: {x: 0, y: 4.86, z: 0.7}
+--- !u!114 &1638824142
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1638824139}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 57d0bc2f1c2ed8844aa068d128338b8c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1673982299
 GameObject:
   m_ObjectHideFlags: 0
@@ -4966,6 +5075,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1789719173}
+  - component: {fileID: 1789719174}
   m_Layer: 0
   m_Name: FuelTank
   m_TagString: Untagged
@@ -4994,6 +5104,21 @@ Transform:
   m_Father: {fileID: 704405913}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1789719174
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1789719172}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8ff2b79e1edd0154f9aeb46c76f8c9c5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _particleSystemControllers: []
+  _workPlaces: []
+  _character: {fileID: 2060846531}
 --- !u!1 &1825448448
 GameObject:
   m_ObjectHideFlags: 0
@@ -5120,6 +5245,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1895250076}
   - component: {fileID: 1895250077}
+  - component: {fileID: 1895250078}
   m_Layer: 5
   m_Name: Slider
   m_TagString: Untagged
@@ -5200,6 +5326,19 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &1895250078
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1895250075}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 21ad7ea79a5ee8a47a6a2a476890cd7e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _fuelTank: {fileID: 1789719174}
 --- !u!1 &1901175026
 GameObject:
   m_ObjectHideFlags: 0
@@ -5741,10 +5880,22 @@ MonoBehaviour:
     type: 3}
   m_PrefabInstance: {fileID: 1262065029}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 1262065030}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 62885e158b60dce4997c32bb712fb80c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &2060846531
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1262065030}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1e28ba73715b1d04c9e3f47563891af1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &2073819041
@@ -11770,6 +11921,7 @@ GameObject:
   - component: {fileID: 5300001013639658548}
   - component: {fileID: 5300001013639658550}
   - component: {fileID: 5300001013639658551}
+  - component: {fileID: 5300001013639658552}
   m_Layer: 0
   m_Name: Slider
   m_TagString: Untagged
@@ -11836,6 +11988,19 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &5300001013639658552
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5300001013639658549}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 21ad7ea79a5ee8a47a6a2a476890cd7e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _fuelTank: {fileID: 1789719174}
 --- !u!224 &5300001013872745052
 RectTransform:
   m_ObjectHideFlags: 0
@@ -11932,7 +12097,7 @@ GameObject:
   - component: {fileID: 5300001014081245249}
   - component: {fileID: 5300001014081245262}
   m_Layer: 0
-  m_Name: Skill (2)
+  m_Name: FuelLevel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -13747,8 +13912,8 @@ ParticleSystem:
           m_PreInfinity: 2
           m_PostInfinity: 2
           m_RotationOrder: 4
-      cycleCount: 1
-      repeatInterval: 0.01
+      cycleCount: 3
+      repeatInterval: 0.1
       probability: 1
   SizeModule:
     enabled: 0
@@ -17564,7 +17729,7 @@ ParticleSystemRenderer:
   m_SortingOrder: 0
   m_RenderMode: 4
   m_MeshDistribution: 1
-  m_SortMode: 0
+  m_SortMode: 1
   m_MinParticleSize: 0
   m_MaxParticleSize: 0.5
   m_CameraVelocityScale: 0
