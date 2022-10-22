@@ -12,16 +12,16 @@ public class WorkPlace : MonoBehaviour
         
     }
 
-    private void OnTriggerStay(Collider other)
+    private void OnTriggerEnter(Collider other)
     {
-        if (other.TryGetComponent(out AirZone airZone))
+        if (other.TryGetComponent(out ItemContainer container))
         {
             EnterWorkPlace?.Invoke(true);
         }
     }
-    private void OnTriggerExite(Collider other)
+    private void OnTriggerExit(Collider other)
     {
-        if (other.TryGetComponent(out WorkPlace workPlace))
+        if (other.TryGetComponent(out ItemContainer container))
         {
             EnterWorkPlace?.Invoke(false);
         }

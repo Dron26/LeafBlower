@@ -38,7 +38,6 @@ public class FuelTank : MonoBehaviour
     private void Start()
     {
         _isWrk = true;
-        Inotialize();
         _fuelLevel = _maxFuelLevel;
         _stepChangeLevel = 0.2f;
         StartCoroutine(ChangeFuelLevel());
@@ -81,7 +80,7 @@ public class FuelTank : MonoBehaviour
         }
     }
 
-    private void OnTriggerExite(Collider other)
+    private void OnTriggerExit(Collider other)
     {
         if (other.TryGetComponent(out Character character))
         {
@@ -136,7 +135,7 @@ public class FuelTank : MonoBehaviour
     }
 
 
-    public void Inotialize()
+    public void Initialize()
     {
         _maxFuelLevel = 100;
     }

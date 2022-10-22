@@ -1591,7 +1591,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 704405913}
-  - component: {fileID: 704405914}
   m_Layer: 0
   m_Name: FuelPlace
   m_TagString: Untagged
@@ -1616,20 +1615,6 @@ Transform:
   m_Father: {fileID: 7781945193974234519}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: -90, z: 0}
---- !u!136 &704405914
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 704405912}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  m_Radius: 0.95
-  m_Height: 2.88
-  m_Direction: 1
-  m_Center: {x: -1.25, y: 0.86, z: -0.17}
 --- !u!1 &704853615
 GameObject:
   m_ObjectHideFlags: 0
@@ -3272,6 +3257,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Character_Roadworker_01
       objectReference: {fileID: 0}
+    - target: {fileID: 2294598581903983803, guid: cc022eba4e058594d8b0e041487e2d31,
+        type: 3}
+      propertyPath: m_Name
+      value: AirZone
+      objectReference: {fileID: 0}
     - target: {fileID: 4102367319841983174, guid: cc022eba4e058594d8b0e041487e2d31,
         type: 3}
       propertyPath: m_LocalScale.x
@@ -3380,84 +3370,12 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 1262065029}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &1262065031 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 2294598582359888499, guid: cc022eba4e058594d8b0e041487e2d31,
-    type: 3}
-  m_PrefabInstance: {fileID: 1262065029}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &1262065032 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 4759526288526119372, guid: cc022eba4e058594d8b0e041487e2d31,
-    type: 3}
-  m_PrefabInstance: {fileID: 1262065029}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &1262065033 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 4759526288401048075, guid: cc022eba4e058594d8b0e041487e2d31,
-    type: 3}
-  m_PrefabInstance: {fileID: 1262065029}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &1262065034 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 4759526288769466912, guid: cc022eba4e058594d8b0e041487e2d31,
-    type: 3}
-  m_PrefabInstance: {fileID: 1262065029}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1262065035 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 2294598581346498831, guid: cc022eba4e058594d8b0e041487e2d31,
     type: 3}
   m_PrefabInstance: {fileID: 1262065029}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1262065036
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1262065031}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3ce676e25e8e36b43a980fa380cf9041, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &1262065037
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1262065032}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3ce676e25e8e36b43a980fa380cf9041, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &1262065038
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1262065033}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3ce676e25e8e36b43a980fa380cf9041, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &1262065039
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1262065034}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3ce676e25e8e36b43a980fa380cf9041, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &1262065040
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3468,6 +3386,37 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 73ebc1b13b04602479f3ebb2d31ac2df, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!135 &1262065046
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1262065035}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.5
+  m_Center: {x: 0, y: 1.65, z: 0}
+--- !u!1 &1273725253 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2294598581903983803, guid: cc022eba4e058594d8b0e041487e2d31,
+    type: 3}
+  m_PrefabInstance: {fileID: 1262065029}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1273725255
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1273725253}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3ce676e25e8e36b43a980fa380cf9041, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &1275186058
@@ -5076,6 +5025,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1789719173}
   - component: {fileID: 1789719174}
+  - component: {fileID: 1789719175}
   m_Layer: 0
   m_Name: FuelTank
   m_TagString: Untagged
@@ -5116,9 +5066,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8ff2b79e1edd0154f9aeb46c76f8c9c5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _particleSystemControllers: []
-  _workPlaces: []
+  _particleSystemControllers:
+  - {fileID: 7272451829893885235}
+  _workPlaces:
+  - {fileID: 1638824142}
   _character: {fileID: 2060846531}
+--- !u!135 &1789719175
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1789719172}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.86
+  m_Center: {x: 4.3, y: -1.79, z: 0.48}
 --- !u!1 &1825448448
 GameObject:
   m_ObjectHideFlags: 0
