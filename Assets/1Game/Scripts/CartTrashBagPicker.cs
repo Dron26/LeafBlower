@@ -30,11 +30,12 @@ public class CartTrashBagPicker : MonoBehaviour
     private Collider _collider;
     private bool _canTake;
     private Cart _cart;
-
+    private float _time;
 
     private void Awake()
     {
         _cart = GetComponent<Cart>();
+        _time = 1f;
     }
     private void Start()
     {
@@ -91,8 +92,8 @@ public class CartTrashBagPicker : MonoBehaviour
             
             if (_pickedTrashBags.Count == _maxQuantityPickedTrashBag)
             {
-                TakeMaxQuantityTrashBag?.Invoke();
                 _canTake = false;
+                StartCoroutine(WaitFillingAll());              
             }
             
         }
@@ -123,7 +124,7 @@ public class CartTrashBagPicker : MonoBehaviour
 
         point = _changePointStore[_quantityInRow - 1];
 
-        _trashBagMover.SetSecondPosition(point, _mainPoint);
+        _trashBagMover.SetSecondPosition(point, _mainPoint, _time);
     }
 
     private void SetPoint()
@@ -161,6 +162,13 @@ public class CartTrashBagPicker : MonoBehaviour
     private void OnFinishMove()
     {
         _canTake = true;
+    }
+
+    private IEnumerator WaitFillingAll()
+    {
+        yield return _waitForSeconds;
+        TakeMaxQuantityTrashBag?.Invoke();
+        StopCoroutine(WaitFillingAll());
     }
 
 }

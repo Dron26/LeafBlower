@@ -50,7 +50,7 @@ public class GrabMashine : MonoBehaviour
         _maxSize = 1.13f;
         _maxStepUp=0.2f;
         _stepUpSize = 0.05f;
-           _quantityUpSize = 50;
+         _quantityUpSize = 50;
         _tempQuantityUpSize = _quantityUpSize;
         _quantityStepUp = 4;
         StartCoroutine(CountParticle());
@@ -96,11 +96,16 @@ public class GrabMashine : MonoBehaviour
     {
         while (_isWork==true)
         {
-            if (_quantityAllStepUp == 0 & isFilling == false)
+            if (_quantityAllStepUp == 0 & isFilling == false& _quantityCathcedParticle >= _quantityUpSize)
             {
                 EndFill();
                 _isWork = false;
             }
+            else if (_quantityCathcedParticle < _quantityUpSize)
+            {
+                _isWork = false;
+            }
+
             yield return null;
         }
 

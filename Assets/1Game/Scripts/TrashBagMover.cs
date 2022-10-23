@@ -12,16 +12,24 @@ public class TrashBagMover : MonoBehaviour
     private Tween _startTween;
     private Collider _collider;
     private ParticleSystem _particleSystem;
+    private ParticleSystem _particleSystemText;
     float _time;
+    private int numberFinishPoint;
+    private int finishPoint;
+    private WaitForSeconds _waitForSeconds;
+
     private void Start()
     {
+        finishPoint = 2;
         _collider = GetComponent<Collider>();
         _collider.enabled = false;
-        _particleSystem =GetComponent<ParticleSystem>();
+        _particleSystem = GetComponent<ParticleSystem>();
+        _particleSystemText = GetComponentInChildren<ParticleSystem>();
         _firstPoint = new Vector3();
         _mainPoint = new Vector3();
         MoveFirstPosition();
-        
+
+       
     }
 
     public void SetFirstPosition(Vector3 vector3)
@@ -30,7 +38,7 @@ public class TrashBagMover : MonoBehaviour
         int minPositionX = -4;
         int maxPositionZ = 5;
         int positionX = Random.Range(minPositionX, 0);
-        int positionZ = Random.Range(0, maxPositionZ);      
+        int positionZ = Random.Range(0, maxPositionZ);
         _endPoint = new Vector3(_endPoint.x + positionX, _endPoint.y, _endPoint.z + positionZ);
     }
 
@@ -41,31 +49,35 @@ public class TrashBagMover : MonoBehaviour
         StartCoroutine(TurnOnCollider());
     }
 
-    public void SetSecondPosition(Vector3 firstPoint, Vector3 mainPoint,float time)
+    public void SetSecondPosition(Vector3 firstPoint, Vector3 mainPoint, float time)
     {
         _firstPoint = firstPoint;
         _mainPoint = mainPoint;
-        time = time;
+        _time = time;
         StartCoroutine(MoveSecondPosition());
     }
 
     private IEnumerator MoveSecondPosition()
     {
+        numberFinishPoint++;
         _isPositionChange = false;
-        float time = 0.5f;
-        Tween tween = transform.DOLocalMove(_mainPoint, time);
+        Tween tween = transform.DOLocalMove(_mainPoint, _time);
 
         while (_isPositionChange == false)
         {
             if (transform.localPosition == _mainPoint)
             {
                 _isPositionChange = true;
-                tween = transform.DOLocalMove(Point, time);
+                tween = transform.DOLocalMove(Point, _time);
+
+                if (numberFinishPoint==finishPoint)
+                {
+                    _waitForSeconds = new WaitForSeconds(_time);
+                    StartCoroutine(ParticlePlay());
+                }
+               
             }
-            else if (transform.localPosition == Point)
-            {
-                _particleSystem.Play();
-            }
+            
 
             yield return null;
         }
@@ -86,7 +98,16 @@ public class TrashBagMover : MonoBehaviour
             yield return null;
         }
     }
+    private IEnumerator ParticlePlay()
+    {
 
+        yield return _waitForSeconds;
+        _particleSystem.Play();
+        _particleSystemText.Play();
 
+    }
 }
+
+
+
 
