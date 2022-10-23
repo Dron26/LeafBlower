@@ -1,4 +1,6 @@
 using DG.Tweening;
+using System;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -12,16 +14,20 @@ public class Cart : MonoBehaviour
     private Vector3 _finishPoint;
     private Tween _tween;
     private Collider _collider;
-    private CartTrashBagPicker _trashBagPicker;
-
+    private CartTrashBagPicker _cartTrashBagPicker;
+    private WaitForSeconds _waitForSeconds;
     private float _time;
 
     public UnityAction StartMove;
+    public UnityAction FinishMove;
 
     private void Awake()
     {
-        _trashBagPicker = GetComponent<CartTrashBagPicker>();
+        float waiteTime = 2f;
+        _waitForSeconds = new WaitForSeconds(waiteTime);
+        _cartTrashBagPicker = GetComponent<CartTrashBagPicker>();
         _time = 5f;
+
     }
 
 
@@ -34,15 +40,19 @@ public class Cart : MonoBehaviour
 
     private void OnEnable()
     {
-        _trashBagPicker.TakeMaxQuantityTrashBag += OnTakeMaxQuantityTrashBag;
+        _cartTrashBagPicker.TakeMaxQuantityTrashBag += OnTakeMaxQuantityTrashBag;
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.TryGetComponent( out FinishPointCart finish))
+        if (other.TryGetComponent(out FinishPointCart finish))
         {
             SetSecondPosition();
-            _trashBagPicker.ClearCart();
+            _cartTrashBagPicker.ClearCart();
+        }
+        else if (other.TryGetComponent(out ParkPlace parkPlace))
+        {
+            FinishMove?.Invoke();
         }
     }
 
@@ -50,14 +60,12 @@ public class Cart : MonoBehaviour
 
     private void OnDisable()
     {
-        _trashBagPicker.TakeMaxQuantityTrashBag -= OnTakeMaxQuantityTrashBag;
+        _cartTrashBagPicker.TakeMaxQuantityTrashBag -= OnTakeMaxQuantityTrashBag;
     }
 
     private void OnTakeMaxQuantityTrashBag()
     {
-        StartMove?.Invoke();
-        Vector3 point = _finishPoint;
-        MovePosition(point);
+        StartCoroutine(Wait());
     }
 
     private void MovePosition(Vector3 point)
@@ -72,8 +80,24 @@ public class Cart : MonoBehaviour
         MovePosition(point);
     }
 
-    private void OnCartEnter()
-    {
 
+    private IEnumerator Wait()
+    {
+        yield return _waitForSeconds;
+        _collider.enabled = false;
+        StartMove?.Invoke();
+        Vector3 point = _finishPoint;
+        MovePosition(point);
+       
+        StartCoroutine(TempOffCollider());
+        StopCoroutine(Wait());
+
+    }
+
+    private IEnumerator TempOffCollider()
+    {
+        yield return _waitForSeconds;
+        _collider.enabled = true ;
+        StopCoroutine(TempOffCollider());
     }
 }

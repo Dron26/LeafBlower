@@ -12,7 +12,7 @@ public class TrashBagMover : MonoBehaviour
     private Tween _startTween;
     private Collider _collider;
     private ParticleSystem _particleSystem;
-
+    float _time;
     private void Start()
     {
         _collider = GetComponent<Collider>();
@@ -41,10 +41,11 @@ public class TrashBagMover : MonoBehaviour
         StartCoroutine(TurnOnCollider());
     }
 
-    public void SetSecondPosition(Vector3 firstPoint, Vector3 mainPoint)
+    public void SetSecondPosition(Vector3 firstPoint, Vector3 mainPoint,float time)
     {
         _firstPoint = firstPoint;
         _mainPoint = mainPoint;
+        time = time;
         StartCoroutine(MoveSecondPosition());
     }
 

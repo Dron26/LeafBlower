@@ -35,9 +35,10 @@ public class CharacterTrashBagPicker : MonoBehaviour
     private bool _isPositionChange;
     private bool _isTakedMaxQuantity;
     private bool _canSell;
-
+    private float _time;
     private void Start()
     {
+        _time = 0.5f;
         _storePoint = GetComponentInChildren<TrashBagStorePoint>();
         _mainPointForTrashBag = _storePoint.GetComponentInChildren<MainPointForTrashBag>();
         _pickedTrashBags = new Stack<TrashBag>();
@@ -52,10 +53,11 @@ public class CharacterTrashBagPicker : MonoBehaviour
         _isPositionChange = false;
         _maxQuantityPickedTrashBag = 8;
 
-        _localPositionStorePoint = _storePoint.transform.localPosition;
+         
         _mainPoint = _mainPointForTrashBag.transform.localPosition;
 
         _changePointStore.Add(new Vector3(_storePoint.transform.localPosition.x, _storePoint.transform.localPosition.y, _storePoint.transform.localPosition.z));
+        _localPositionStorePoint = _changePointStore[0];
         _changePointStore.Add(new Vector3(_storePoint.transform.localPosition.x + stepInRow, _storePoint.transform.localPosition.y, _storePoint.transform.localPosition.z));
         _changePointStore.Add(new Vector3(_storePoint.transform.localPosition.x, _storePoint.transform.localPosition.y, _storePoint.transform.localPosition.z + stepinSecondRow));
         _changePointStore.Add(new Vector3(_storePoint.transform.localPosition.x + stepInRow, _storePoint.transform.localPosition.y, _storePoint.transform.localPosition.z + stepinSecondRow));
@@ -91,7 +93,7 @@ public class CharacterTrashBagPicker : MonoBehaviour
 
     private void OnTriggerStay(Collider other)
     {
-        if (other.TryGetComponent(out Cart cart) & _canSell == true)
+        if (other.TryGetComponent(out Cart cart) & _pickedTrashBags.Count != 0)
         {
             SellTrashBags();
         }
@@ -111,8 +113,7 @@ public class CharacterTrashBagPicker : MonoBehaviour
         if (_quantityInRow > maxTrashBagInLevel)
         {
             float stepUpLevel = 0.4f;
-            _storePoint.transform.localPosition = new Vector3(_storePoint.transform.localPosition.x, _storePoint.transform.localPosition.y + stepUpLevel, _storePoint.transform.localPosition.z);
-            _changePointStore.Clear();
+            _storePoint.transform.localPosition = new Vector3(_storePoint.transform.localPosition.x, _storePoint.transform.localPosition.y + stepUpLevel, _storePoint.transform.localPosition.z);           
             SetPoint();
             _quantityInRow = 1;
             point = _changePointStore[_quantityInRow - 1];
@@ -122,14 +123,14 @@ public class CharacterTrashBagPicker : MonoBehaviour
             point = _changePointStore[_quantityInRow - 1];
         }
 
-        _trashBagMover.SetSecondPosition(point, _mainPoint);
+        _trashBagMover.SetSecondPosition(point, _mainPoint,_time);
     }
 
     private void SetPoint()
     {
         float stepInRow = 0.3f;
         float stepinSecondRow = -0.4f;
-
+        _changePointStore.Clear();
         _changePointStore.Add(new Vector3(_storePoint.transform.localPosition.x, _storePoint.transform.localPosition.y, _storePoint.transform.localPosition.z));
         _changePointStore.Add(new Vector3(_storePoint.transform.localPosition.x + stepInRow, _storePoint.transform.localPosition.y, _storePoint.transform.localPosition.z));
         _changePointStore.Add(new Vector3(_storePoint.transform.localPosition.x, _storePoint.transform.localPosition.y, _storePoint.transform.localPosition.z + stepinSecondRow));
@@ -147,10 +148,11 @@ public class CharacterTrashBagPicker : MonoBehaviour
             SallTrashBag?.Invoke(trashBag);
 
         if (_pickedTrashBags.Count==0)
-        {
-            
+        {           
             _quantityPickedTrashBag = 0;
+            _quantityInRow = 0;
             _storePoint.transform.localPosition = _localPositionStorePoint;
+            SetPoint();
         }    
     }
 
