@@ -19,12 +19,12 @@ public class UIFuelStat : MonoBehaviour
     private WaitForSeconds _waitForSeconds;
 
     private Animator _animator;
-    private int _startAlarmHashName;
+    private int _levelName;
 
     private void Awake()
     {
        _animator = GetComponent<Animator>();
-        _startAlarmHashName = Animator.StringToHash("StartAlarm");
+        _levelName = Animator.StringToHash("Level");
         _slider = GetComponentInChildren<Slider>();
     }
 
@@ -37,6 +37,7 @@ public class UIFuelStat : MonoBehaviour
         _slider.maxValue = _maxValue;
         _slider.minValue = _minValue;
         _slider.value = _currentValue;
+        _animator.SetFloat(_levelName, _slider.value);
     }
 
     public void OnEnable()
@@ -53,22 +54,9 @@ public class UIFuelStat : MonoBehaviour
     private void OnChangeLevel(float currentValue)
     {
         _slider.value = Mathf.Clamp( currentValue, _minValue, _maxValue);
-        
-        if (_slider.value==0)
-        {
-            Alarm(true);
-        }
-        else
-        {
-            Alarm(false);
-        }
-    }
 
-    private void Alarm(bool isWork)
-    {
-        _animator.SetBool(_startAlarmHashName, isWork);
+        _animator.SetFloat(_levelName, _slider.value);
     }
-
 
 
 }

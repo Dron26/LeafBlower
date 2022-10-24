@@ -29,10 +29,8 @@ public class CharacterTrashBagPicker : MonoBehaviour
     private int _maxQuantityPickedTrashBag;
 
     private int _quantityInRow;
-    private int _quantityRow;
     private int _quantityLevel;
     private int _maxQuantityLevel;
-    private bool _isPositionChange;
     private bool _isTakedMaxQuantity;
     private bool _canSell;
     private float _time;
@@ -48,9 +46,7 @@ public class CharacterTrashBagPicker : MonoBehaviour
         float stepinSecondRow = -0.4f;
 
         _quantityLevel = 0;
-        _quantityRow = 0;
         _maxQuantityLevel = 8;
-        _isPositionChange = false;
         _maxQuantityPickedTrashBag = 8;
 
          

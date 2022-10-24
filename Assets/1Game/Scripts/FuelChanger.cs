@@ -12,6 +12,7 @@ public class FuelChanger : MonoBehaviour
     public float FuelLevel { get => _fuelLevel; private set { } }
 
     private WaitForSeconds _waitForSeconds;
+    private WaitForSeconds _waitForRefuelSeconds;
     private bool _isContact;
     private bool _isEnterWorkPlace;
     private bool _isExiteFuelPlace;
@@ -23,7 +24,6 @@ public class FuelChanger : MonoBehaviour
 
     public UnityAction<float> ChangeFuel;
     public UnityAction EndFuel;
-
 
     public void Awake()
     {
@@ -37,10 +37,13 @@ public class FuelChanger : MonoBehaviour
         _isWrk = true;
         _fuelLevel = _maxFuelLevel;
         _stepChangeLevel = 0.5f;
-        _stepRefuelingLevel = 2;
+        _stepRefuelingLevel = 1;
         StartCoroutine(ChangeFuelLevel());
         float waiteTime = 0.1f;
+        float waiteRefuelTime = 0.3f;
+
         _waitForSeconds = new WaitForSeconds(waiteTime);
+        _waitForRefuelSeconds= new WaitForSeconds(waiteRefuelTime);
     }
 
 
@@ -107,9 +110,10 @@ public class FuelChanger : MonoBehaviour
                 ChangeFuel?.Invoke(_fuelLevel);
             }
 
-            yield return _waitForSeconds;
+            yield return _waitForRefuelSeconds;
 
         }
+        
     }
 
 

@@ -40,25 +40,30 @@ public class CamController : MonoBehaviour
     private void ChangePosition(bool isChange)
     {
 
-        if (isChange==true)
-        {
-            positionX = -6.218289f;
-            positionY = 5.813742f;
-            positionZ = -2.65985f;
 
-            _transposer.m_FollowOffset.x = positionX;
-            _transposer.m_FollowOffset.y = positionY;
-            _transposer.m_FollowOffset.z = positionZ;
-        }
-        else
-        {
-            positionX = -4.848286f;
-            positionY = 5.951f;
-            positionZ = -2.06985f;
+        //Vector3(-68.5199966, 6.03000021, -0.359999299)
 
-            _transposer.m_FollowOffset.x = positionX;
-            _transposer.m_FollowOffset.y = positionY;
-            _transposer.m_FollowOffset.z = positionZ;
-        }
+
+
+        //if (isChange==true)
+        //{
+        //    positionX = -6.218289f;
+        //    positionY = 5.813742f;
+        //    positionZ = -2.65985f;
+
+        //    _transposer.m_FollowOffset.x = positionX;
+        //    _transposer.m_FollowOffset.y = positionY;
+        //    _transposer.m_FollowOffset.z = positionZ;
+        //}
+        //else
+        //{
+        //    positionX = -4.848286f;
+        //    positionY = 5.951f;
+        //    positionZ = -2.06985f;
+
+        //    _transposer.m_FollowOffset.x = positionX;
+        //    _transposer.m_FollowOffset.y = positionY;
+        //    _transposer.m_FollowOffset.z = positionZ;
+        //}
     }
 }

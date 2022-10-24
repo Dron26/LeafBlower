@@ -8,6 +8,7 @@ public class GrabMashine : MonoBehaviour
     [SerializeField]  private ParticleSystemController _particleSystem;
     [SerializeField]  private TrashBag _trashBag;
      private FinishPointForTrashBag _finishPoint;
+    private LeaveInGrab leaveInGrab;
     private GrabMashine _grabMashine;
      private TrashBagIdle _trashBagIdle;
     private CreatePoint _createPoint;   
@@ -35,7 +36,8 @@ public class GrabMashine : MonoBehaviour
 
     private void Start()
     {
-        _isWork = true;
+        leaveInGrab = GetComponent<LeaveInGrab>();
+           _isWork = true;
         _finishPoint = GetComponentInChildren<FinishPointForTrashBag>();
         _createPoint = GetComponentInChildren<CreatePoint>();
         maxVolumeTrashBag = 200;
@@ -159,4 +161,6 @@ public class GrabMashine : MonoBehaviour
             CreateTrashBag();
         }
     }
+
+    
 }
