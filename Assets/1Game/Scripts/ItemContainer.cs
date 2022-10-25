@@ -33,8 +33,7 @@ public class ItemContainer : MonoBehaviour
     {
         if (other.TryGetComponent(out WorkPlace workPlace)& isThereFuel==true)
         {
-            _airZone.gameObject.SetActive(true);
-            
+            _airZone.gameObject.SetActive(true);           
         }
     }
 

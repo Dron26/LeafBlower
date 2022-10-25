@@ -44,7 +44,7 @@ public class TrashBagMover : MonoBehaviour
 
     private void MoveFirstPosition()
     {
-        float time = 1f;
+        float time = 0.5f;
         _startTween = transform.DOLocalMove(_endPoint, time);
         StartCoroutine(TurnOnCollider());
     }
@@ -104,7 +104,6 @@ public class TrashBagMover : MonoBehaviour
         yield return _waitForSeconds;
         _particleSystem.Play();
         _particleSystemText.Play();
-
     }
 }
 

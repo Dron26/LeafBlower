@@ -74,7 +74,7 @@ public class CharacterTrashBagPicker : MonoBehaviour
                 _pickedTrashBags.Push(trashBag);
                 trashBag.transform.SetParent(transform, true);
                 _trashBagMover = trashBag.GetComponent<TrashBagMover>();
-
+                trashBag.ChangeMaterial();
                 ChangeWay(trashBag);
                 TakeTrashBag?.Invoke();
             }
