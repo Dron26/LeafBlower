@@ -5430,6 +5430,7 @@ GameObject:
   - component: {fileID: 3415646645612194859}
   - component: {fileID: 3415646645612194857}
   - component: {fileID: 3415646645612194856}
+  - component: {fileID: 935273749}
   m_Layer: 0
   m_Name: WindlinesSpeedy (2)
   m_TagString: Untagged
@@ -5446,7 +5447,7 @@ Transform:
   m_GameObject: {fileID: 3415646645612194858}
   m_LocalRotation: {x: 0.16355996, y: 0.69468176, z: 0.68248445, w: -0.15773515}
   m_LocalPosition: {x: -0.462, y: -0.162, z: 0.325}
-  m_LocalScale: {x: 1.4129072, y: 1.1162645, z: 0.02282309}
+  m_LocalScale: {x: 2.21, y: 1.48, z: 0.29}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 8035466406645854357}
@@ -5704,7 +5705,7 @@ ParticleSystem:
     startSize:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 1.8
+      scalar: 3.98
       minScalar: 1
       maxCurve:
         serializedVersion: 2
@@ -10181,7 +10182,7 @@ ParticleSystemRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: b150071b958b0481ca53626d433f864b, type: 2}
+  - {fileID: 898183945976393606, guid: 8e01430d16352a14a8d35f13cbf4ec20, type: 3}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -10223,7 +10224,7 @@ ParticleSystemRenderer:
   m_FreeformStretching: 0
   m_RotateWithStretchDirection: 1
   m_VertexStreams: 00010304
-  m_Mesh: {fileID: 4300000, guid: 6458e1759d1ff854e858ffa9149495e9, type: 3}
+  m_Mesh: {fileID: 3817939737693544113, guid: 8e01430d16352a14a8d35f13cbf4ec20, type: 3}
   m_Mesh1: {fileID: 0}
   m_Mesh2: {fileID: 0}
   m_Mesh3: {fileID: 0}
@@ -10232,6 +10233,18 @@ ParticleSystemRenderer:
   m_MeshWeighting2: 1
   m_MeshWeighting3: 1
   m_MaskInteraction: 0
+--- !u!114 &935273749
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3415646645612194858}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 922c36581b31b7647bb0145b62e9fc56, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &4394132267268455562
 GameObject:
   m_ObjectHideFlags: 0
@@ -10261,7 +10274,7 @@ Transform:
   m_GameObject: {fileID: 4394132267268455562}
   m_LocalRotation: {x: 0.5371205, y: -0.48703295, z: -0.012974506, w: 0.6885725}
   m_LocalPosition: {x: 0.491, y: 1.754, z: -1.118}
-  m_LocalScale: {x: 0.7, y: 1.3, z: 0.7}
+  m_LocalScale: {x: 0.77832997, y: 1.3, z: 0.7}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 8035466406645854357}
@@ -10676,7 +10689,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _particleSystem: {fileID: 0}
-  _trashBag: {fileID: 8230712461786708018, guid: d1a075ba09006ef4e92056fb58a9966b,
+  _trashBag: {fileID: -5479627070531232122, guid: 012ced539bf9cce46b512ee20411f32c,
     type: 3}
 --- !u!1 &8035466406793390397
 GameObject:

@@ -29,7 +29,7 @@ TagManager:
   - 
   - 
   - 
-  - 
+  - Leave2
   - NotShadow
   - Background
   - InsideWall
@@ -41,4 +41,10 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: New Layer 1
+    uniqueID: 3623121007
+    locked: 0
+  - name: New Layer 2
+    uniqueID: 904420955
     locked: 0
