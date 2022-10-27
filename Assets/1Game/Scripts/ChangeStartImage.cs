@@ -17,11 +17,6 @@ public class ChangeStartImage : MonoBehaviour
         _color = _screenDim.color;
     }
 
-    private void Start()
-    {
-        _panel.gameObject.SetActive(false);
-    }
-
     public void ChangeScene(int index)
     {
         StartCoroutine(ChangeColorExitScene(index));

@@ -1,3 +1,4 @@
+using DG.Tweening;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -36,14 +37,14 @@ public class FuelChanger : MonoBehaviour
     {
         _isWrk = true;
         _fuelLevel = _maxFuelLevel;
-        _stepChangeLevel = 0.5f;
-        _stepRefuelingLevel = 1;
+        _stepChangeLevel = 0.1f;
+        _stepRefuelingLevel = 0.2f;
         StartCoroutine(ChangeFuelLevel());
-        float waiteTime = 0.1f;
-        float waiteRefuelTime = 0.3f;
+        float waiteTime = Time.fixedDeltaTime;
+        float waiteRefuelTime = Time.fixedDeltaTime;
 
         _waitForSeconds = new WaitForSeconds(waiteTime);
-        _waitForRefuelSeconds= new WaitForSeconds(waiteRefuelTime);
+        _waitForRefuelSeconds = new WaitForSeconds(waiteRefuelTime);
     }
 
 
@@ -86,7 +87,7 @@ public class FuelChanger : MonoBehaviour
                 _fuelLevel -= _stepChangeLevel;
                 _fuelLevel = Mathf.Clamp(_fuelLevel, 0, _maxFuelLevel);
 
-                    ChangeFuel?.Invoke(_fuelLevel);
+                ChangeFuel?.Invoke(_fuelLevel);
             }
             yield return _waitForSeconds;
         }
@@ -113,7 +114,7 @@ public class FuelChanger : MonoBehaviour
             yield return _waitForRefuelSeconds;
 
         }
-        
+
     }
 
 

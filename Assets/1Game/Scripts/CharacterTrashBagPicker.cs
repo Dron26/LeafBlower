@@ -34,9 +34,11 @@ public class CharacterTrashBagPicker : MonoBehaviour
     private bool _isTakedMaxQuantity;
     private bool _canSell;
     private float _time;
+
+    private WaitForSeconds _waitForSeconds;
     private void Start()
     {
-        _time = 0.5f;
+        _time = 0.2f;
         _storePoint = GetComponentInChildren<TrashBagStorePoint>();
         _mainPointForTrashBag = _storePoint.GetComponentInChildren<MainPointForTrashBag>();
         _pickedTrashBags = new Stack<TrashBag>();
@@ -44,7 +46,7 @@ public class CharacterTrashBagPicker : MonoBehaviour
         _canSell = true;
         float stepInRow = 0.3f;
         float stepinSecondRow = -0.4f;
-
+        _waitForSeconds = new WaitForSeconds(_time);
         _quantityLevel = 0;
         _maxQuantityLevel = 8;
         _maxQuantityPickedTrashBag = 8;
@@ -140,16 +142,10 @@ public class CharacterTrashBagPicker : MonoBehaviour
 
     private void SellTrashBags()
     {
-            _pickedTrashBags.TryPop(out TrashBag trashBag);
-            SallTrashBag?.Invoke(trashBag);
-
-        if (_pickedTrashBags.Count==0)
-        {           
-            _quantityPickedTrashBag = 0;
-            _quantityInRow = 0;
-            _storePoint.transform.localPosition = _localPositionStorePoint;
-            SetPoint();
-        }    
+        if (_canSell == true)
+        {
+            StartCoroutine(SellBags());
+        }
     }
 
     private void OnCartRemove()
@@ -165,6 +161,25 @@ public class CharacterTrashBagPicker : MonoBehaviour
     private void OnDisable()
     {
         _parkPlace.CartEnter -= OnCartRemove;
+    }
+
+    private IEnumerator SellBags()
+    {
+        _canSell = false;
+        yield return _waitForSeconds;
+
+        _pickedTrashBags.TryPop(out TrashBag trashBag);
+        SallTrashBag?.Invoke(trashBag);
+
+        if (_pickedTrashBags.Count == 0)
+        {
+            _quantityPickedTrashBag = 0;
+            _quantityInRow = 0;
+            _storePoint.transform.localPosition = _localPositionStorePoint;
+            SetPoint();
+        }
+
+        _canSell = true;
     }
 }
 
