@@ -16,6 +16,7 @@ public class CharacterTrashBagPicker : MonoBehaviour
     public UnityAction TakeTrashBag;
     public UnityAction<TrashBag> SallTrashBag;
     public UnityAction TakeMaxQuantityTrashBag;
+    public UnityAction SellTrashBag;
     public UnityAction <Vector3> SetPosition;
 
     private Stack<TrashBag> _pickedTrashBags;
@@ -64,29 +65,28 @@ public class CharacterTrashBagPicker : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.TryGetComponent(out TrashBag trashBag)& _pickedTrashBags.Count !=_maxQuantityPickedTrashBag)
+        if (other.TryGetComponent(out TrashBag trashBag))
         {
-
+            if (_pickedTrashBags.Count != _maxQuantityPickedTrashBag)
+            {
                 _quantityPickedTrashBag++;
-            
 
-            if (_quantityPickedTrashBag <= _maxQuantityPickedTrashBag)
-            {               
+                if (_quantityPickedTrashBag <= _maxQuantityPickedTrashBag)
+                {
 
-                _pickedTrashBags.Push(trashBag);
-                trashBag.transform.SetParent(transform, true);
-                _trashBagMover = trashBag.GetComponent<TrashBagMover>();
-                trashBag.ChangeMaterial();
-                ChangeWay(trashBag);
-                TakeTrashBag?.Invoke();
-            }
+                    _pickedTrashBags.Push(trashBag);
+                    trashBag.transform.SetParent(transform, true);
+                    _trashBagMover = trashBag.GetComponent<TrashBagMover>();
+                    trashBag.ChangeMaterial();
+                    ChangeWay(trashBag);
+                    TakeTrashBag?.Invoke();
+                }
+            }           
             else
             {
                 TakeMaxQuantityTrashBag?.Invoke();
             }
-        }
-
-       
+        }     
     }
 
     private void OnTriggerStay(Collider other)
@@ -111,7 +111,7 @@ public class CharacterTrashBagPicker : MonoBehaviour
         if (_quantityInRow > maxTrashBagInLevel)
         {
             float stepUpLevel = 0.4f;
-            _storePoint.transform.localPosition = new Vector3(_storePoint.transform.localPosition.x, _storePoint.transform.localPosition.y + stepUpLevel, _storePoint.transform.localPosition.z);           
+            _storePoint.transform.localPosition = new Vector3(_storePoint.transform.localPosition.x, _storePoint.transform.localPosition.y + stepUpLevel, _storePoint.transform.localPosition.z);             
             SetPoint();
             _quantityInRow = 1;
             point = _changePointStore[_quantityInRow - 1];
@@ -176,6 +176,7 @@ public class CharacterTrashBagPicker : MonoBehaviour
             _quantityPickedTrashBag = 0;
             _quantityInRow = 0;
             _storePoint.transform.localPosition = _localPositionStorePoint;
+            SellTrashBag?.Invoke();
             SetPoint();
         }
 

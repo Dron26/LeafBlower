@@ -5,16 +5,24 @@ using UnityEngine.UI;
 public class ChangeStartImage : MonoBehaviour
 {
     [SerializeField] private Image _screenDim;
+    [SerializeField] private Image _logoNameImage;
     [SerializeField] private ScenePanel _panel;
     [SerializeField] private Button _button;
 
-    private Color _color;
+     private LogoPanel _logoPanel;
+
+    private Color _colorScreen;
+    private Color _colorLogo;
     private float _waitTime;
 
     private void Awake()
     {
-        _screenDim.gameObject.SetActive(true);
-        _color = _screenDim.color;
+        _logoPanel = GetComponentInChildren<LogoPanel>();
+        _logoPanel.gameObject.SetActive(true);
+        _panel.gameObject.SetActive(false);
+        _colorScreen = _screenDim.color;
+        _colorLogo = _logoNameImage.color;
+
     }
 
     public void ChangeScene(int index)
@@ -29,32 +37,33 @@ public class ChangeStartImage : MonoBehaviour
 
     private IEnumerator ChangeColorExitScene(int index)
     {
-        _panel.gameObject.SetActive(false);
-        _screenDim.gameObject.SetActive(true);
-
-        while (_color.a < 1)
+        while (_colorScreen.a < 1)
         {
             _waitTime = Time.fixedDeltaTime;
             yield return new WaitForSeconds(_waitTime);
-            _color.a += _waitTime;
-            _screenDim.color = _color;
+            _colorScreen.a += _waitTime;
+            _screenDim.color = _colorScreen;
+            _colorLogo.a += _waitTime;
+            _logoNameImage.color = _colorLogo;
         }
 
+        _logoPanel.gameObject.SetActive(false);
         StopCoroutine(ChangeColorExitScene(index));
     }
 
     private IEnumerator ChangeColorEnterScene()
     {
-        while (_color.a > 0)
+        while (_colorScreen.a > 0)
         {
             _waitTime = Time.fixedDeltaTime;
             yield return new WaitForSeconds(_waitTime);
-            _color.a -= _waitTime;
-            _screenDim.color = _color;
+            _colorScreen.a -= _waitTime;
+            _colorLogo.a -= _waitTime;
+            _screenDim.color = _colorScreen;
+            _logoNameImage.color = _colorLogo;
         }
 
-        _screenDim.gameObject.SetActive(false);
-        _panel.gameObject.SetActive(true);
+        _panel.gameObject.SetActive(true);      
 
         StopCoroutine(ChangeColorEnterScene());
     }
