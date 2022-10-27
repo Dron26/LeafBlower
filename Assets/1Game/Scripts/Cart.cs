@@ -17,6 +17,7 @@ public class Cart : MonoBehaviour
     private CartTrashBagPicker _cartTrashBagPicker;
     private WaitForSeconds _waitForSeconds;
     private float _time;
+    [SerializeField]private Wallet _wallet;
 
     public UnityAction StartMove;
     public UnityAction FinishMove;
@@ -41,6 +42,7 @@ public class Cart : MonoBehaviour
     private void OnEnable()
     {
         _cartTrashBagPicker.TakeMaxQuantityTrashBag += OnTakeMaxQuantityTrashBag;
+        _cartTrashBagPicker.BagReachedFinish += OnTrashBagReachedFinish;
     }
 
     private void OnTriggerEnter(Collider other)
@@ -56,11 +58,10 @@ public class Cart : MonoBehaviour
         }
     }
 
-
-
     private void OnDisable()
     {
         _cartTrashBagPicker.TakeMaxQuantityTrashBag -= OnTakeMaxQuantityTrashBag;
+        _cartTrashBagPicker.BagReachedFinish += OnTrashBagReachedFinish;
     }
 
     private void OnTakeMaxQuantityTrashBag()
@@ -80,7 +81,6 @@ public class Cart : MonoBehaviour
         MovePosition(point);
     }
 
-
     private IEnumerator Wait()
     {
         yield return _waitForSeconds;
@@ -99,5 +99,12 @@ public class Cart : MonoBehaviour
         yield return _waitForSeconds;
         _collider.enabled = true ;
         StopCoroutine(TempOffCollider());
+    }
+
+    private void OnTrashBagReachedFinish()
+    {
+        int price = 10;
+
+        _wallet.AddResource(price);
     }
 }

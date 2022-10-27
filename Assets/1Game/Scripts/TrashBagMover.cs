@@ -1,6 +1,7 @@
 using DG.Tweening;
 using System.Collections;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class TrashBagMover : MonoBehaviour
 {
@@ -11,20 +12,19 @@ public class TrashBagMover : MonoBehaviour
     private Vector3 _mainPoint;
     private Tween _startTween;
     private Collider _collider;
-    private ParticleSystem _particleSystem;
-    private ParticleSystem _particleSystemText;
     float _time;
     private int numberFinishPoint;
     private int finishPoint;
     private WaitForSeconds _waitForSeconds;
+
+    public UnityAction ReachedFinish;
 
     private void Start()
     {
         finishPoint = 2;
         _collider = GetComponent<Collider>();
         _collider.enabled = false;
-        _particleSystem = GetComponent<ParticleSystem>();
-        _particleSystemText = GetComponentInChildren<ParticleSystem>();
+
         _firstPoint = new Vector3();
         _mainPoint = new Vector3();
         MoveFirstPosition();
@@ -73,7 +73,7 @@ public class TrashBagMover : MonoBehaviour
                 if (numberFinishPoint==finishPoint)
                 {
                     _waitForSeconds = new WaitForSeconds(_time);
-                    StartCoroutine(ParticlePlay());
+                    StartCoroutine(ReachedFinishPoint());
                 }
                
             }
@@ -98,12 +98,10 @@ public class TrashBagMover : MonoBehaviour
             yield return null;
         }
     }
-    private IEnumerator ParticlePlay()
+    private IEnumerator ReachedFinishPoint()
     {
-
         yield return _waitForSeconds;
-        _particleSystem.Play();
-        _particleSystemText.Play();
+        ReachedFinish?.Invoke();
     }
 }
 

@@ -22,6 +22,7 @@ public class CartTrashBagPicker : MonoBehaviour
     public UnityAction SallAllTrashBag;
     public UnityAction TakeMaxQuantityTrashBag;
     public UnityAction<Vector3> SetPosition;
+    public UnityAction BagReachedFinish;
     private WaitForSeconds _waitForSeconds;
     private Vector3 _mainPoint;
     private Vector3 _startPositionStorePoint;
@@ -86,7 +87,7 @@ public class CartTrashBagPicker : MonoBehaviour
             _collider = trashBag.GetComponent<Collider>();
             _collider.enabled = false;
             _trashBagMover = trashBag.GetComponent<TrashBagMover>();
-
+            _trashBagMover.ReachedFinish += OnReachedFinish;
             ChangeWay();
             TakeTrashBag?.Invoke(); 
             
@@ -171,4 +172,9 @@ public class CartTrashBagPicker : MonoBehaviour
         StopCoroutine(WaitFillingAll());
     }
 
+
+    private void OnReachedFinish()
+    {
+        BagReachedFinish?.Invoke();
+    }
 }

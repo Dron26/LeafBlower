@@ -25,11 +25,11 @@ public class FuelPlace : MonoBehaviour
 
     private void OnAppearImageEnd()
     {
-        _tank.enabled = true;
+        _tank.gameObject.SetActive(true);
     }
 
     private void OnFadeImageEnd()
     {
-        _tank.enabled = false;
+        _tank.gameObject.SetActive(false);
     }
 }
