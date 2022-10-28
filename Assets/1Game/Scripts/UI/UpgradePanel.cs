@@ -8,17 +8,16 @@ namespace UI
     {
         [SerializeField] private UpgradePlace _upgradePlace;
 
-        private GameObject _gameObject;
+        private GameObject _panel;
 
         public UnityAction TapUpFuel;
         public UnityAction TapUpPower;
         public UnityAction TapUpCart;
 
-
         private void Start()
         {
-            _gameObject = GetComponentInChildren<Image>().gameObject;
-            _gameObject.SetActive(false);
+            _panel = GetComponentInChildren<Image>().gameObject;
+            _panel.SetActive(false);
         }
 
         private void OnEnable()
@@ -33,7 +32,7 @@ namespace UI
 
         private void OnChangeStatePanel()
         {
-            _gameObject.SetActive(true);
+            _panel.SetActive(true);
         }
 
         private void TapFuel()
@@ -50,6 +49,14 @@ namespace UI
         {
             TapUpCart?.Invoke();
         }
+
+        private void TapClose()
+        {
+            _panel.SetActive(false);
+        }
+
+
+
     }
 }
 
