@@ -12,6 +12,11 @@ public class Wallet : MonoBehaviour
 
     public UnityAction<int> ChangeResource;
 
+    private void Start()
+    {
+        _maxAmountResource = 1000000;
+    }
+
     public void Initialization(int money, int maxMoney)
     {
         _amountResource = money;

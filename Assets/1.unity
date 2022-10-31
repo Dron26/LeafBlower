@@ -808,8 +808,9 @@ GameObject:
   - component: {fileID: 88168447}
   - component: {fileID: 88168449}
   - component: {fileID: 88168448}
+  - component: {fileID: 88168450}
   m_Layer: 5
-  m_Name: Panel
+  m_Name: UpgradePanel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -879,6 +880,22 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 88168446}
   m_CullTransparentMesh: 0
+--- !u!114 &88168450
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 88168446}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f83a010c192719644ac45b58568d63bb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _upgradePlace: {fileID: 1170064281}
+  _fuelPrice: {fileID: 0}
+  _powerPrice: {fileID: 0}
+  _cartPrice: {fileID: 0}
 --- !u!1 &89314047
 GameObject:
   m_ObjectHideFlags: 0
@@ -1503,7 +1520,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 2147483647
+  m_StaticEditorFlags: 0
   m_IsActive: 1
 --- !u!4 &153389388
 Transform:
@@ -1513,12 +1530,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 153389387}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 4.7, y: 1.652821, z: 54.8}
+  m_LocalPosition: {x: 4.8, y: 1.652821, z: 59.4}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 7781945193974234519}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &153389389
 MonoBehaviour:
@@ -2096,9 +2113,9 @@ RectTransform:
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.27800003, y: 0}
-  m_AnchorMax: {x: 0.623, y: 1}
-  m_AnchoredPosition: {x: 52.852325, y: 0.00039672852}
-  m_SizeDelta: {x: 107.5186, y: -1.98}
+  m_AnchorMax: {x: 0.72, y: 1}
+  m_AnchoredPosition: {x: 0.35232544, y: 0.00039672852}
+  m_SizeDelta: {x: 2.5186005, y: -1.98}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &276414266
 GameObject:
@@ -3224,7 +3241,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 346152916}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 88168450}
+        m_TargetAssemblyTypeName: UI.UpgradePanel, Assembly-CSharp
+        m_MethodName: TapCart
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &346152916
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3535,7 +3564,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 062984e56a22a26438ea933c4c422aed, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _wallet: {fileID: 0}
+  _wallet: {fileID: 8917250909181568423}
 --- !u!1 &374742778
 GameObject:
   m_ObjectHideFlags: 0
@@ -3706,7 +3735,7 @@ GameObject:
   m_Component:
   - component: {fileID: 383660416}
   m_Layer: 5
-  m_Name: GameObject
+  m_Name: Close
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6146,7 +6175,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 579940126}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 88168450}
+        m_TargetAssemblyTypeName: UI.UpgradePanel, Assembly-CSharp
+        m_MethodName: TapClose
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &579940126
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12092,7 +12133,7 @@ Transform:
   - {fileID: 1291308602341443557}
   - {fileID: 7781945193110258199}
   m_Father: {fileID: 7781945193974234519}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &784893909
 GameObject:
@@ -19150,7 +19191,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1138504272}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 88168450}
+        m_TargetAssemblyTypeName: UI.UpgradePanel, Assembly-CSharp
+        m_MethodName: TapFuel
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1138504272
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -21840,7 +21893,7 @@ Transform:
   - {fileID: 1853849160}
   - {fileID: 867382719}
   m_Father: {fileID: 1638824140}
-  m_RootOrder: 7
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1354202102
 GameObject:
@@ -22332,9 +22385,9 @@ RectTransform:
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.27800003, y: 0}
-  m_AnchorMax: {x: 0.623, y: 1}
-  m_AnchoredPosition: {x: 52.852325, y: 0.00039672852}
-  m_SizeDelta: {x: 107.5186, y: -1.98}
+  m_AnchorMax: {x: 0.72024214, y: 1}
+  m_AnchoredPosition: {x: 0.35232544, y: 0.00039672852}
+  m_SizeDelta: {x: 2.5186005, y: -1.9799995}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1384789030
 GameObject:
@@ -24578,7 +24631,7 @@ RectTransform:
   m_AnchorMin: {x: 0.514, y: 0}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: -0.000091552734, y: -0.000022888184}
-  m_SizeDelta: {x: 146, y: 0}
+  m_SizeDelta: {x: 3.0896, y: 0}
   m_Pivot: {x: 1.0000001, y: 0.5}
 --- !u!114 &1595475871
 MonoBehaviour:
@@ -24663,7 +24716,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 145.44629, y: 0, z: 0, w: 0}
+  m_margin: {x: 1.4268799, y: 0, z: 0, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
@@ -25046,9 +25099,9 @@ Transform:
   - {fileID: 1170064279}
   - {fileID: 704405913}
   - {fileID: 1539940754}
+  - {fileID: 1351652991}
   - {fileID: 612387297981826010}
   - {fileID: 2144050303}
-  - {fileID: 1351652991}
   - {fileID: 1876339883}
   m_Father: {fileID: 7781945193974234519}
   m_RootOrder: 2
@@ -26103,10 +26156,10 @@ RectTransform:
   m_Father: {fileID: 1138504270}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.514, y: 0}
+  m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -0.000091552734, y: -0.000022888184}
-  m_SizeDelta: {x: 146, y: 0}
+  m_AnchoredPosition: {x: -0.00009191036, y: -0.000022888184}
+  m_SizeDelta: {x: 2.9566002, y: 0}
   m_Pivot: {x: 1.0000001, y: 0.5}
 --- !u!114 &1818146799
 MonoBehaviour:
@@ -26191,7 +26244,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 145.44629, y: 0, z: 0, w: 0}
+  m_margin: {x: -0.8465576, y: 0, z: 0, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
@@ -31996,7 +32049,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1917025490}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 88168450}
+        m_TargetAssemblyTypeName: UI.UpgradePanel, Assembly-CSharp
+        m_MethodName: TapPower
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1917025490
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -33046,9 +33111,9 @@ RectTransform:
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.27800003, y: 0}
-  m_AnchorMax: {x: 0.623, y: 1}
-  m_AnchoredPosition: {x: 52.852325, y: 0.00039672852}
-  m_SizeDelta: {x: 107.5186, y: -1.98}
+  m_AnchorMax: {x: 0.72277266, y: 1}
+  m_AnchoredPosition: {x: -1.1476746, y: 0.00039672852}
+  m_SizeDelta: {x: -0.48139954, y: -1.98}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &2001436012
 GameObject:
@@ -33143,9 +33208,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2012222178}
-  - component: {fileID: 2012222179}
   m_Layer: 5
-  m_Name: UpgradePanel
+  m_Name: Store
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -33172,19 +33236,6 @@ RectTransform:
   m_AnchoredPosition: {x: -0.50006104, y: 0.99993896}
   m_SizeDelta: {x: 1, y: -2}
   m_Pivot: {x: 0.5, y: 0}
---- !u!114 &2012222179
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2012222177}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f83a010c192719644ac45b58568d63bb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _upgradePlace: {fileID: 0}
 --- !u!1 &2027125011
 GameObject:
   m_ObjectHideFlags: 0
@@ -33716,7 +33767,7 @@ RectTransform:
   m_AnchorMin: {x: 0.514, y: 0}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: -0.000091552734, y: -0.000022888184}
-  m_SizeDelta: {x: 146, y: 0}
+  m_SizeDelta: {x: -0.00010681, y: 0}
   m_Pivot: {x: 1.0000001, y: 0.5}
 --- !u!114 &2112591504
 MonoBehaviour:
@@ -33801,7 +33852,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 145.44629, y: 0, z: 0, w: 0}
+  m_margin: {x: -0.7050171, y: 0, z: 0, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
@@ -33998,7 +34049,7 @@ PrefabInstance:
     - target: {fileID: 8035466406645854357, guid: 52dc733270aadd440aff5300fa6dd332,
         type: 3}
       propertyPath: m_RootOrder
-      value: 6
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 8035466406645854357, guid: 52dc733270aadd440aff5300fa6dd332,
         type: 3}
@@ -35806,6 +35857,7 @@ GameObject:
   - component: {fileID: 8917250909181568422}
   - component: {fileID: 2060846531}
   - component: {fileID: 2060846536}
+  - component: {fileID: 8917250909181568423}
   m_Layer: 31
   m_Name: Character_Roadworker_01
   m_TagString: Untagged
@@ -43981,7 +44033,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3445138504901570430}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 9.660001, y: 1.652821, z: 4.2579966}
+  m_LocalPosition: {x: 9.7, y: 1.652821, z: 3.96}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -44025,7 +44077,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _finishPointCart: {fileID: 153389389}
-  _wallet: {fileID: 0}
+  _wallet: {fileID: 8917250909181568423}
 --- !u!65 &3445138504901570432
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -47496,7 +47548,7 @@ PrefabInstance:
     - target: {fileID: 8035466406645854357, guid: 52dc733270aadd440aff5300fa6dd332,
         type: 3}
       propertyPath: m_RootOrder
-      value: 5
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 8035466406645854357, guid: 52dc733270aadd440aff5300fa6dd332,
         type: 3}
@@ -48002,8 +48054,8 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 783155782}
   - {fileID: 153389388}
+  - {fileID: 783155782}
   - {fileID: 1638824140}
   m_Father: {fileID: 0}
   m_RootOrder: 7
@@ -48697,6 +48749,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _parkPlace: {fileID: 2056861729}
+--- !u!114 &8917250909181568423
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 455756258590188199}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c07fc535ef3556a4a946c42437952554, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &9128534476564568206
 GameObject:
   m_ObjectHideFlags: 0

@@ -1,3 +1,4 @@
+using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
@@ -7,7 +8,13 @@ namespace UI
     public class UpgradePanel : MonoBehaviour
     {
         [SerializeField] private UpgradePlace _upgradePlace;
+        [SerializeField] private TMP_Text _fuelPrice;
+        [SerializeField] private TMP_Text _powerPrice;
+        [SerializeField] private TMP_Text _cartPrice;
 
+
+
+        private Store _store;
         private GameObject _panel;
 
         public UnityAction TapUpFuel;
@@ -16,8 +23,14 @@ namespace UI
 
         private void Start()
         {
+            _store = GetComponentInParent<Store>();
             _panel = GetComponentInChildren<Image>().gameObject;
             _panel.SetActive(false);
+
+            _fuelPrice.text = _store.FuelLevel.ToString();
+            _powerPrice.text = _store.PowerLevel.ToString();
+            _cartPrice.text = _store.CartLevel.ToString();
+
         }
 
         private void OnEnable()
@@ -35,28 +48,25 @@ namespace UI
             _panel.SetActive(true);
         }
 
-        private void TapFuel()
+        public void TapFuel()
         {
             TapUpFuel?.Invoke();
         }
 
-        private void TapPower()
+        public void TapPower()
         {
             TapUpPower?.Invoke();
         }
 
-        private void TapCart()
+        public void TapCart()
         {
             TapUpCart?.Invoke();
         }
 
-        private void TapClose()
+        public void TapClose()
         {
             _panel.SetActive(false);
         }
-
-
-
     }
 }
 

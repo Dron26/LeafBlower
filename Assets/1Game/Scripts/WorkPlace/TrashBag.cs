@@ -7,8 +7,9 @@ public class TrashBag : MonoBehaviour
     private ParticleSystem _particleSystemText;
     private TrashBagMover _mover;
 
-    private void Start()
+    private void Awake()
     {
+
         _particleSystem = GetComponent<ParticleSystem>();
         _particleSystemText = GetComponentInChildren<ParticleSystem>();
         _meshRenderer = GetComponent<MeshRenderer>();

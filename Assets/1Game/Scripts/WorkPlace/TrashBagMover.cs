@@ -102,6 +102,7 @@ public class TrashBagMover : MonoBehaviour
     {
         yield return _waitForSeconds;
         ReachedFinish?.Invoke();
+        StopCoroutine(ReachedFinishPoint());
     }
 }
 

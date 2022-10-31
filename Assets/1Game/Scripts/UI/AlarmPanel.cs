@@ -1,4 +1,7 @@
 using UnityEngine;
 
-public class AlarmPanel : MonoBehaviour
-{}
+namespace UI
+{
+    public class AlarmPanel : MonoBehaviour
+    { }
+}

@@ -28,14 +28,13 @@ public class Cart : MonoBehaviour
         _waitForSeconds = new WaitForSeconds(waiteTime);
         _cartTrashBagPicker = GetComponent<CartTrashBagPicker>();
         _time = 5f;
-
     }
 
 
     private void Start()
     {
-        _finishPoint = _finishPointCart.transform.localPosition;
-        _startPoint = transform.localPosition;
+        _finishPoint = _finishPointCart.transform.position;
+        _startPoint = transform.position;
         _collider = GetComponent<Collider>();
     }
 
@@ -71,7 +70,7 @@ public class Cart : MonoBehaviour
 
     private void MovePosition(Vector3 point)
     {
-        _tween = transform.DOLocalMove(point, _time);
+        _tween = transform.DOMove(point, _time);
     }
 
     public void SetSecondPosition()
