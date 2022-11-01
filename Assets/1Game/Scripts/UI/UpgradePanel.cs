@@ -1,7 +1,6 @@
 using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
-using UnityEngine.UI;
 
 namespace UI
 {
@@ -12,40 +11,30 @@ namespace UI
         [SerializeField] private TMP_Text _powerPrice;
         [SerializeField] private TMP_Text _cartPrice;
 
-
-
         private Store _store;
-        private GameObject _panel;
-
         public UnityAction TapUpFuel;
         public UnityAction TapUpPower;
         public UnityAction TapUpCart;
+        public UnityAction Close;
 
-        private void Start()
+        private void Awake()
         {
             _store = GetComponentInParent<Store>();
-            _panel = GetComponentInChildren<Image>().gameObject;
-            _panel.SetActive(false);
-
-            _fuelPrice.text = _store.FuelLevel.ToString();
-            _powerPrice.text = _store.PowerLevel.ToString();
-            _cartPrice.text = _store.CartLevel.ToString();
-
         }
 
         private void OnEnable()
         {
-            _upgradePlace.EnterPlace += OnChangeStatePanel;
+            _store.BuyUpdate += SetUpdate;
+        }
+
+        private void Start()
+        {          
+            SetUpdate();
         }
 
         private void OnDisable()
         {
-            _upgradePlace.EnterPlace -= OnChangeStatePanel;
-        }
-
-        private void OnChangeStatePanel()
-        {
-            _panel.SetActive(true);
+            _store.BuyUpdate += SetUpdate;
         }
 
         public void TapFuel()
@@ -65,7 +54,14 @@ namespace UI
 
         public void TapClose()
         {
-            _panel.SetActive(false);
+            Close?.Invoke();
+        }
+
+        private void SetUpdate()
+        {
+            _fuelPrice.text = _store.FuelLevel.ToString();
+            _powerPrice.text = _store.PowerLevel.ToString();
+            _cartPrice.text = _store.CartLevel.ToString();
         }
     }
 }

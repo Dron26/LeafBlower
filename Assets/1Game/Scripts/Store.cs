@@ -1,21 +1,24 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UI;
+using UnityEngine.Events;
 
 public class Store : MonoBehaviour
 {
-    private UpgradePanel _upgradePanel;
+    [SerializeField] private UpgradePlace _upgradePlace;
     [SerializeField] private Wallet _wallet;
 
     public int FuelLevel{get=>currentFuelLevel;set{;}}
     public int PowerLevel{get=>currentPowerLevel;set{;}}
     public int CartLevel{get=>currentCartLevel;set{;}}
+    
+    private UpgradePanel _upgradePanel;
 
     private List<Level> _fuelLevels;
     private List<Level> _powerLevels;
     private List<Level> _cartLevels;
 
-    
+    public UnityAction BuyUpdate;
 
     private int maxFuelLevel;
     private int currentFuelLevel;
@@ -29,8 +32,6 @@ public class Store : MonoBehaviour
     private int currentCartLevel;
     private int minCartLevel;
 
-
-
     private int maxLevel;
     private int minLevel;
     private int stepUp;
@@ -40,6 +41,7 @@ public class Store : MonoBehaviour
     private void Awake()
     {
         _upgradePanel = GetComponentInChildren<UpgradePanel>();
+        _upgradePanel.gameObject.SetActive(false);
         _fuelLevels = new List<Level>();
         _powerLevels = new List<Level>();
         _cartLevels = new List<Level>();
@@ -76,16 +78,22 @@ public class Store : MonoBehaviour
 
     private void OnEnable()
     {
+        _upgradePlace.EnterPlace += OnEnterPlace;
+        _upgradePlace.ExitPlace += OnTapClose;
         _upgradePanel.TapUpFuel += OnTapUpFuel;
         _upgradePanel.TapUpPower += OnTapUpPower;
         _upgradePanel.TapUpCart += OnTapUpCart;
+        _upgradePanel.Close += OnTapClose;
     }
 
     private void OnDisable()
     {
+        _upgradePlace.EnterPlace -= OnEnterPlace;
+        _upgradePlace.ExitPlace -= OnTapClose;
         _upgradePanel.TapUpFuel -= OnTapUpFuel;
         _upgradePanel.TapUpPower -= OnTapUpPower;
         _upgradePanel.TapUpCart -= OnTapUpCart;
+        _upgradePanel.Close -= OnTapClose;
     }
 
     private void OnTapUpFuel()
@@ -103,6 +111,25 @@ public class Store : MonoBehaviour
         OnTapUp(_cartLevels, ref currentCartLevel);
     }
 
+    private void OnTapClose()
+    {
+        _upgradePanel.gameObject.SetActive(false);
+    }
+    
+    private void OnEnterPlace()
+    {
+        _upgradePanel.gameObject.SetActive(true);
+    }
+    
+    private void OnTapUp(List<Level> _levels, ref int currentLevel)
+    {
+        if (_levels[currentLevel + 1].price <= _wallet.Money)
+        {
+            _wallet.RemoveResource(_levels[currentLevel + 1].price);
+            currentLevel++;
+        }
+    }
+
     private void InitializeLevels(Level level)
     {
         for (int i = 0; i < maxLevel; i++)
@@ -112,7 +139,6 @@ public class Store : MonoBehaviour
             level.price = _price;
 
             _fuelLevels.Add(level);
-
             currentValue += stepUp;
             _price *= 2;
         }
@@ -123,15 +149,6 @@ public class Store : MonoBehaviour
         currentFuelLevel=0;
         currentPowerLevel=0;
         currentCartLevel=0;
-    }
-
-    private void OnTapUp(List<Level> _levels, ref int currentLevel)
-    {
-        if (_levels[currentLevel + 1].price <= _wallet.Money)
-        {
-            _wallet.RemoveResource(_levels[currentLevel + 1].price);
-            currentLevel++;
-        }
     }
 }
 
