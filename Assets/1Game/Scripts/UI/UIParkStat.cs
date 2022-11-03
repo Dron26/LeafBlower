@@ -35,6 +35,7 @@ public class UIParkStat : MonoBehaviour
 
     private void OnStartMove()
     {
+        StartCoroutine(WaiteEndMove());
         _slider.DOValue(_maxValue, (_maxValue+ _maxValue), false);
     }
 
