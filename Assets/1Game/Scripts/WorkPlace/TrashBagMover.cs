@@ -8,8 +8,8 @@ public class TrashBagMover : MonoBehaviour
     public Vector3 Point { get => _firstPoint; set { } }
     private Vector3 _endPoint = new Vector3();
     private Vector3 _firstPoint;
+    private Vector3 _transitPoint;
     private bool _isPositionChange;
-    private Vector3 _mainPoint;
     private Tween _startTween;
     private Collider _collider;
     float _time;
@@ -26,10 +26,8 @@ public class TrashBagMover : MonoBehaviour
         _collider.enabled = false;
 
         _firstPoint = new Vector3();
-        _mainPoint = new Vector3();
-        MoveFirstPosition();
-
-       
+        _transitPoint = new Vector3();
+        MoveFirstPosition();     
     }
 
     public void SetFirstPosition(Vector3 vector3)
@@ -49,10 +47,11 @@ public class TrashBagMover : MonoBehaviour
         StartCoroutine(TurnOnCollider());
     }
 
-    public void SetSecondPosition(Vector3 firstPoint, Vector3 mainPoint, float time)
+    public void SetSecondPosition(Vector3 firstPoint, Vector3 transitPoint, float time)
     {
+        _collider.enabled = false;
         _firstPoint = firstPoint;
-        _mainPoint = mainPoint;
+        _transitPoint = transitPoint;
         _time = time;
         StartCoroutine(MoveSecondPosition());
     }
@@ -60,12 +59,17 @@ public class TrashBagMover : MonoBehaviour
     private IEnumerator MoveSecondPosition()
     {
         numberFinishPoint++;
+
+        if (numberFinishPoint==2)
+        {
+            Debug.Log("");
+        }
         _isPositionChange = false;
-        Tween tween = transform.DOLocalMove(_mainPoint, _time);
+        Tween tween = transform.DOLocalMove(_transitPoint, _time);
 
         while (_isPositionChange == false)
         {
-            if (transform.localPosition == _mainPoint)
+            if (transform.localPosition == _transitPoint)
             {
                 _isPositionChange = true;
                 tween = transform.DOLocalMove(Point, _time);
@@ -77,7 +81,6 @@ public class TrashBagMover : MonoBehaviour
                 }
                
             }
-            
 
             yield return null;
         }
@@ -98,6 +101,7 @@ public class TrashBagMover : MonoBehaviour
             yield return null;
         }
     }
+
     private IEnumerator ReachedFinishPoint()
     {
         yield return _waitForSeconds;

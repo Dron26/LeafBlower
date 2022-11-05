@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class ChangrColorWorkPlace : MonoBehaviour
+public class ChangerColorWorkPlace : MonoBehaviour
 {
     [SerializeField] private List<ParticleSystemController> _particleSystems;
 
@@ -11,8 +11,9 @@ public class ChangrColorWorkPlace : MonoBehaviour
     private int _numberWorkplace;
     private void Awake()
     {
+        _numberWorkplace = 0;
         //_images = new List<Image>();
-       
+
         //foreach (Transform child in transform)
         //{
         //    _images.Add(child.GetComponent<Image>());
@@ -21,14 +22,11 @@ public class ChangrColorWorkPlace : MonoBehaviour
 
     private void Start()
     {
-        Color color;
         float alfa = 0.5f;
 
-        foreach (Image image in _images)
+        for (int i = 0; i < _images.Count; i++)
         {
-            color = image.color;
-            color.a = alfa;
-            image.color = color;
+            Tween tween = _images[i].DOFade(alfa, 1f);
         }
     }
 
