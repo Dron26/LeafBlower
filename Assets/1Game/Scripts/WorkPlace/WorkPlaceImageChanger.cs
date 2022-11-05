@@ -22,7 +22,7 @@ public class WorkPlaceImageChanger : MonoBehaviour
         {
             FadeImageEnd?.Invoke();
         }
-        float duration = 1f;
+        float duration = 3f;
 
         for (int i = 0; i < _images.Count; i++)
         {

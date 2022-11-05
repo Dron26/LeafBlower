@@ -12,9 +12,7 @@ public class UIParkStat : MonoBehaviour
     private Slider _slider;
 
     private void Start()
-    {
-        
-
+    {       
         _minValue = 0;
         _slider = GetComponent<Slider>();
         _maxValue = _cart.Time;

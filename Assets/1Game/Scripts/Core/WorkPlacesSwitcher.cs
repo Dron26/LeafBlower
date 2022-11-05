@@ -12,7 +12,8 @@ public class WorkPlacesSwitcher : MonoBehaviour
     [HideInInspector] private List<WorkPlaceImageChanger> _workPlaceImageChangers;
     [HideInInspector] private List<Vector3> _stayPoint;
 
-    public UnityAction<Vector3> ChangeWorkPlace;
+    public UnityAction<Vector3> ChangeStayPoint;
+    private int firstStart = 1;
 
     private void Awake()
     {
@@ -28,7 +29,7 @@ public class WorkPlacesSwitcher : MonoBehaviour
 
             _insideControllers.Add(insideController = _workPlaces[i].GetComponentInChildren<InsideController>());
             _workPlaceImageChangers.Add(workPlaceImageChange = _workPlaces[i].GetComponent<WorkPlaceImageChanger>());
-            _stayPoint.Add(stayPoint= _workPlaces[i].GetComponentInChildren<ParkPlace>().GetComponentInChildren<StayPoint>().transform.localPosition);
+            _stayPoint.Add(stayPoint= _workPlaces[i].GetComponentInChildren<ParkPlace>().GetComponentInChildren<StayPoint>().transform.position);
         }
     }
 
@@ -60,7 +61,12 @@ public class WorkPlacesSwitcher : MonoBehaviour
     {
         FadeImage(isInside, numberPlace);
 
-        ChangeWorkPlace?.Invoke(_stayPoint[numberPlace]);
+        if (isInside==true& firstStart==0)
+        {
+            ChangeStayPoint?.Invoke(_stayPoint[numberPlace]);
+        }
+
+        firstStart=0;
     }
 
     private void FadeImage(bool isInside, int numberPlace)
