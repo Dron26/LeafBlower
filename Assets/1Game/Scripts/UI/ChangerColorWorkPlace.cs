@@ -12,6 +12,7 @@ public class ChangerColorWorkPlace : MonoBehaviour
     private void Awake()
     {
         _numberWorkplace = 0;
+
         //_images = new List<Image>();
 
         //foreach (Transform child in transform)
