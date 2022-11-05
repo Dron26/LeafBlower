@@ -7,7 +7,7 @@ using UnityEngine.Events;
 public class CharacterTrashBagPicker : MonoBehaviour
 {
 
-    [SerializeField] private ParkPlace _parkPlace;
+    [SerializeField] private List<ParkPlace> _parkPlaces;
 
     private TrashBagStorePoint _storePoint;
     private MainPointForTrashBag _mainPointForTrashBag;
@@ -155,12 +155,18 @@ public class CharacterTrashBagPicker : MonoBehaviour
 
     private void OnEnable()
     {
-        _parkPlace.CartEnter += OnCartRemove;
+        for (int i = 0; i < _parkPlaces.Count; i++)
+        {
+            _parkPlaces[i].CartEnter += OnCartRemove;
+        }  
     }
 
     private void OnDisable()
     {
-        _parkPlace.CartEnter -= OnCartRemove;
+        for (int i = 0; i < _parkPlaces.Count; i++)
+        {
+            _parkPlaces[i].CartEnter -= OnCartRemove;
+        }
     }
 
     private IEnumerator SellBags()

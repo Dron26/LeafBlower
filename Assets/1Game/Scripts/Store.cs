@@ -5,7 +5,7 @@ using UnityEngine.Events;
 
 public class Store : MonoBehaviour
 {
-    [SerializeField] private UpgradePlace _upgradePlace;
+    [SerializeField] private List< UpgradePlace> _upgradePlaces;
     [SerializeField] private Wallet _wallet;
 
     public int FuelLevel{get=>currentFuelLevel;set{;}}
@@ -78,22 +78,21 @@ public class Store : MonoBehaviour
 
     private void OnEnable()
     {
-        _upgradePlace.EnterPlace += OnEnterPlace;
-        _upgradePlace.ExitPlace += OnTapClose;
+        for (int i = 0; i < _upgradePlaces.Count; i++)
+        {
+            _upgradePlaces[i].EnterPlace += OnEnterPlace;
+            _upgradePlaces[i].ExitPlace += OnTapClose;
+        }
+        
         _upgradePanel.TapUpFuel += OnTapUpFuel;
         _upgradePanel.TapUpPower += OnTapUpPower;
         _upgradePanel.TapUpCart += OnTapUpCart;
         _upgradePanel.Close += OnTapClose;
     }
 
-    private void OnDisable()
+    private void OnEnterPlace()
     {
-        _upgradePlace.EnterPlace -= OnEnterPlace;
-        _upgradePlace.ExitPlace -= OnTapClose;
-        _upgradePanel.TapUpFuel -= OnTapUpFuel;
-        _upgradePanel.TapUpPower -= OnTapUpPower;
-        _upgradePanel.TapUpCart -= OnTapUpCart;
-        _upgradePanel.Close -= OnTapClose;
+        _upgradePanel.gameObject.SetActive(true);
     }
 
     private void OnTapUpFuel()
@@ -114,11 +113,6 @@ public class Store : MonoBehaviour
     private void OnTapClose()
     {
         _upgradePanel.gameObject.SetActive(false);
-    }
-    
-    private void OnEnterPlace()
-    {
-        _upgradePanel.gameObject.SetActive(true);
     }
     
     private void OnTapUp(List<Level> _levels, ref int currentLevel)
@@ -149,6 +143,20 @@ public class Store : MonoBehaviour
         currentFuelLevel=0;
         currentPowerLevel=0;
         currentCartLevel=0;
+    }
+
+    private void OnDisable()
+    {
+        for (int i = 0; i < _upgradePlaces.Count; i++)
+        {
+            _upgradePlaces[i].EnterPlace -= OnEnterPlace;
+            _upgradePlaces[i].ExitPlace -= OnTapClose;
+        }
+
+        _upgradePanel.TapUpFuel -= OnTapUpFuel;
+        _upgradePanel.TapUpPower -= OnTapUpPower;
+        _upgradePanel.TapUpCart -= OnTapUpCart;
+        _upgradePanel.Close -= OnTapClose;
     }
 }
 

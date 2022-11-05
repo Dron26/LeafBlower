@@ -107,7 +107,7 @@ public class Cart : MonoBehaviour
         _wallet.AddResource(price);
     }
 
-    private void OnChangeWorkPlace(Vector3 currentPoint)
+    private void OnChangeWorkPlace(Vector3 currentPoint,int number)
     {
 
         StartCoroutine(WaitMoveFinish(currentPoint));

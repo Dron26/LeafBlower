@@ -12,7 +12,7 @@ public class WorkPlacesSwitcher : MonoBehaviour
     [HideInInspector] private List<WorkPlaceImageChanger> _workPlaceImageChangers;
     [HideInInspector] private List<Vector3> _stayPoint;
 
-    public UnityAction<Vector3> ChangeStayPoint;
+    public UnityAction<Vector3,int> ChangeStayPoint;
     private int firstStart = 1;
 
     private void Awake()
@@ -63,7 +63,7 @@ public class WorkPlacesSwitcher : MonoBehaviour
 
         if (isInside==true& firstStart==0)
         {
-            ChangeStayPoint?.Invoke(_stayPoint[numberPlace]);
+            ChangeStayPoint?.Invoke(_stayPoint[numberPlace], numberPlace);
         }
 
         firstStart=0;

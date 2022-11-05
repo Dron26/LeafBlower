@@ -6,7 +6,6 @@ using UnityEngine.Events;
 public class CartTrashBagPicker : MonoBehaviour
 {
     [SerializeField] private CharacterTrashBagPicker _trashBagPicker;
-    [SerializeField] private ParkPlace _parkPlace;
 
     private int _quantityPickedTrashBag;
     private int _maxQuantityPickedTrashBag;

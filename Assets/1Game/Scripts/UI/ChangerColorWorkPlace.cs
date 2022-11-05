@@ -12,13 +12,6 @@ public class ChangerColorWorkPlace : MonoBehaviour
     private void Awake()
     {
         _numberWorkplace = 0;
-
-        //_images = new List<Image>();
-
-        //foreach (Transform child in transform)
-        //{
-        //    _images.Add(child.GetComponent<Image>());
-        //}
     }
 
     private void Start()
@@ -54,6 +47,5 @@ public class ChangerColorWorkPlace : MonoBehaviour
             Tween tween = _images[_numberWorkplace].DOFade(alfa, 1f);
 
         _numberWorkplace++;
-
     }     
 }

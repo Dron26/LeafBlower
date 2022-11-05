@@ -92,7 +92,7 @@ public class ParticleSystemController : MonoBehaviour
         if (_allQuantityParticles <= minQuantityAllPsrticles)
         {
             CatchAllParticle?.Invoke();
-            gameObject.SetActive(false);
+            Destroy(gameObject);
         }
     }
 }
