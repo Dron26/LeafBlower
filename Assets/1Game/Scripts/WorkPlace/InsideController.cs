@@ -3,13 +3,14 @@ using UnityEngine.Events;
 
 public class InsideController : MonoBehaviour
 {
-    public UnityAction<bool> CharacterInside;
+    [SerializeField] private int _numberPlace;
 
+    public UnityAction<bool,int> CharacterInside;
     private void OnTriggerEnter(Collider other)
     {
         if (other.TryGetComponent(out Character character))
         {
-            CharacterInside?.Invoke(true);
+            CharacterInside?.Invoke(true, _numberPlace);
         }
     }
 
@@ -17,7 +18,7 @@ public class InsideController : MonoBehaviour
     {
         if (other.TryGetComponent(out Character character))
         {
-            CharacterInside?.Invoke(false);
+            CharacterInside?.Invoke(false, _numberPlace);
         }
     }
 

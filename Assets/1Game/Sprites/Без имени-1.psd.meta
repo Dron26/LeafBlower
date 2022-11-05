@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: fb756e93e8cfd2342837928df74bdf9c
+guid: 6d44b0789263ecf4595ea2896636e7cc
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -47,12 +47,12 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 90
-  spriteBorder: {x: 185, y: 0, z: 176, w: 0}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
   alphaIsTransparency: 0
-  spriteTessellationDetail: 0
+  spriteTessellationDetail: -1
   textureType: 8
   textureShape: 1
   singleChannelComponent: 0
@@ -105,12 +105,12 @@ TextureImporter:
     buildTarget: Android
     maxTextureSize: 2048
     resizeAlgorithm: 0
-    textureFormat: 47
+    textureFormat: -1
     textureCompression: 1
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
-    overridden: 1
+    overridden: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
@@ -129,13 +129,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: png-transparent-red-euclidean-icon-bucket-rectangle-orange-car_0
+      name: "\u0411\u0435\u0437 \u0438\u043C\u0435\u043D\u0438-1_0"
       rect:
         serializedVersion: 2
-        x: 191
-        y: 132
-        width: 545
-        height: 761
+        x: 0
+        y: 202
+        width: 584
+        height: 598
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -143,31 +143,49 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 66abdf594ce17f84684dbf32f46f193c
-      internalID: -1805121189
+      spriteID: 1d1e3de9f939f874e8ed998a47a50c13
+      internalID: -1123974544
       vertices: []
       indices: 
       edges: []
       weights: []
-    outline:
-    - - {x: -282, y: -334}
-      - {x: -282, y: 444}
-      - {x: 284, y: 444}
-      - {x: 284, y: -334}
+    - serializedVersion: 2
+      name: "\u0411\u0435\u0437 \u0438\u043C\u0435\u043D\u0438-1_1"
+      rect:
+        serializedVersion: 2
+        x: 584
+        y: 202
+        width: 584
+        height: 598
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c4aa2a38988dd524c809dd04d246493c
+      internalID: -654063084
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
     physicsShape: []
     bones: []
-    spriteID: 5e97eb03825dee720800000000000000
-    internalID: 1537655665
+    spriteID: 8b97b92a0c272bb41bdbb4e903dbd7dc
+    internalID: 0
     vertices: []
     indices: 
     edges: []
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      png-transparent-red-euclidean-icon-bucket-rectangle-orange-car_0: -1805121189
+      "\u0411\u0435\u0437 \u0438\u043C\u0435\u043D\u0438-1_0": -1123974544
+      "\u0411\u0435\u0437 \u0438\u043C\u0435\u043D\u0438-1_1": -654063084
   spritePackingTag: 
   pSDRemoveMatte: 0
-  pSDShowRemoveMatteOption: 0
+  pSDShowRemoveMatteOption: 1
   userData: 
   assetBundleName: 
   assetBundleVariant: 

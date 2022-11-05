@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: fb756e93e8cfd2342837928df74bdf9c
+guid: 2866012e5a4fd5443be898a1970052e9
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -47,12 +47,12 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 90
-  spriteBorder: {x: 185, y: 0, z: 176, w: 0}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
   alphaIsTransparency: 0
-  spriteTessellationDetail: 0
+  spriteTessellationDetail: -1
   textureType: 8
   textureShape: 1
   singleChannelComponent: 0
@@ -105,12 +105,12 @@ TextureImporter:
     buildTarget: Android
     maxTextureSize: 2048
     resizeAlgorithm: 0
-    textureFormat: 47
+    textureFormat: -1
     textureCompression: 1
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
-    overridden: 1
+    overridden: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
@@ -129,13 +129,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: png-transparent-red-euclidean-icon-bucket-rectangle-orange-car_0
+      name: Color1_0
       rect:
         serializedVersion: 2
-        x: 191
-        y: 132
-        width: 545
-        height: 761
+        x: 0
+        y: 475
+        width: 381
+        height: 325
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -143,28 +143,134 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 66abdf594ce17f84684dbf32f46f193c
-      internalID: -1805121189
+      spriteID: c2889234c2e28dc4aa4c5facac524467
+      internalID: 1300766456
       vertices: []
       indices: 
       edges: []
       weights: []
-    outline:
-    - - {x: -282, y: -334}
-      - {x: -282, y: 444}
-      - {x: 284, y: 444}
-      - {x: 284, y: -334}
+    - serializedVersion: 2
+      name: Color1_1
+      rect:
+        serializedVersion: 2
+        x: 381
+        y: 475
+        width: 381
+        height: 325
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: eca7071a3c389e44a8ff2d6066138836
+      internalID: 1778967833
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Color1_2
+      rect:
+        serializedVersion: 2
+        x: 762
+        y: 475
+        width: 381
+        height: 325
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d1a7a94df1d2fb244910c7940ee59ac3
+      internalID: 1574606098
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Color1_3
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 150
+        width: 381
+        height: 325
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1907da30e0476574ebbf4a9323117be6
+      internalID: 1507222855
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Color1_4
+      rect:
+        serializedVersion: 2
+        x: 381
+        y: 150
+        width: 381
+        height: 325
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9ebc89c675f29594696bd4e7f861c44f
+      internalID: -1172371565
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Color1_5
+      rect:
+        serializedVersion: 2
+        x: 762
+        y: 150
+        width: 381
+        height: 325
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0541bf28ca03cb74a8f6be24692e321a
+      internalID: 274249688
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
     physicsShape: []
     bones: []
-    spriteID: 5e97eb03825dee720800000000000000
-    internalID: 1537655665
+    spriteID: 600eca1aae520934db8f6ad695013972
+    internalID: 0
     vertices: []
     indices: 
     edges: []
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      png-transparent-red-euclidean-icon-bucket-rectangle-orange-car_0: -1805121189
+      Color1_5: 274249688
+      Color1_3: 1507222855
+      Color1_0: 1300766456
+      Color1_4: -1172371565
+      Color1_2: 1574606098
+      Color1_1: 1778967833
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

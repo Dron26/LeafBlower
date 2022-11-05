@@ -6,11 +6,13 @@ using UnityEngine.Events;
 
 public class Cart : MonoBehaviour
 {
-    [SerializeField] private FinishPointCart _finishPointCart;
+     private FinishPointCart _finishPointCart;
+    private Scene _scene;
+    private WorkPlacesSwitcher _workPlacesSwitcher;
 
     public float Time { get => _time; set { } }
 
-    private Vector3 _startPoint;
+    private Vector3 _currentPoint;
     private Vector3 _finishPoint;
     private Tween _tween;
     private Collider _collider;
@@ -24,6 +26,9 @@ public class Cart : MonoBehaviour
 
     private void Awake()
     {
+        _workPlacesSwitcher= GetComponentInParent<WorkPlacesSwitcher>();
+        _scene = GetComponentInParent<Scene>();
+        _finishPointCart = _scene.GetComponentInChildren<FinishPointCart>();
         float waiteTime = 2f;
         _waitForSeconds = new WaitForSeconds(waiteTime);
         _cartTrashBagPicker = GetComponent<CartTrashBagPicker>();
@@ -34,7 +39,7 @@ public class Cart : MonoBehaviour
     private void Start()
     {
         _finishPoint = _finishPointCart.transform.position;
-        _startPoint = transform.position;
+        _currentPoint = transform.position;
         _collider = GetComponent<Collider>();
     }
 
@@ -42,6 +47,7 @@ public class Cart : MonoBehaviour
     {
         _cartTrashBagPicker.TakeMaxQuantityTrashBag += OnTakeMaxQuantityTrashBag;
         _cartTrashBagPicker.BagReachedFinish += OnTrashBagReachedFinish;
+        _workPlacesSwitcher.ChangeWorkPlace += OnChangeWorkPlace;
     }
 
     private void OnTriggerEnter(Collider other)
@@ -61,6 +67,7 @@ public class Cart : MonoBehaviour
     {
         _cartTrashBagPicker.TakeMaxQuantityTrashBag -= OnTakeMaxQuantityTrashBag;
         _cartTrashBagPicker.BagReachedFinish += OnTrashBagReachedFinish;
+        _workPlacesSwitcher.ChangeWorkPlace += OnChangeWorkPlace;
     }
 
     private void OnTakeMaxQuantityTrashBag()
@@ -76,7 +83,7 @@ public class Cart : MonoBehaviour
     public void SetSecondPosition()
     {
         _tween.Kill();
-        Vector3 point = _startPoint;
+        Vector3 point = _currentPoint;
         MovePosition(point);
     }
 
@@ -105,5 +112,10 @@ public class Cart : MonoBehaviour
         int price = 10;
 
         _wallet.AddResource(price);
+    }
+
+    private void OnChangeWorkPlace(Vector3 currentPoint)
+    {
+        _currentPoint = currentPoint;
     }
 }
