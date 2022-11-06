@@ -7,7 +7,7 @@ public class ChangerColorWorkPlace : MonoBehaviour
 {
     [SerializeField] private List<ParticleSystemController> _particleSystems;
 
-    [SerializeField]private List<Image> _images;
+    [SerializeField] private List<Image> _images;
     private int _numberWorkplace;
     private void Awake()
     {

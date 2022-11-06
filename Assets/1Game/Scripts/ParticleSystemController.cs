@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-[RequireComponent(typeof(ParticleSystem))]
 
 public class ParticleSystemController : MonoBehaviour
 {

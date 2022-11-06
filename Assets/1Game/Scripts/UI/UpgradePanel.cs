@@ -1,3 +1,4 @@
+using System;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
@@ -6,7 +7,6 @@ namespace UI
 {
     public class UpgradePanel : MonoBehaviour
     {
-        [SerializeField] private UpgradePlace _upgradePlace;
         [SerializeField] private TMP_Text _fuelPrice;
         [SerializeField] private TMP_Text _powerPrice;
         [SerializeField] private TMP_Text _cartPrice;
@@ -59,9 +59,9 @@ namespace UI
 
         private void SetUpdate()
         {
-            _fuelPrice.text = _store.FuelLevel.ToString();
-            _powerPrice.text = _store.PowerLevel.ToString();
-            _cartPrice.text = _store.CartLevel.ToString();
+            _fuelPrice.text = Convert.ToString(_store.FuelLevel);
+            _powerPrice.text = Convert.ToString(_store.PowerLevel);
+            _cartPrice.text = Convert.ToString(_store.CartLevel);
         }
     }
 }

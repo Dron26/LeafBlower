@@ -8,9 +8,9 @@ public class Store : MonoBehaviour
     [SerializeField] private List< UpgradePlace> _upgradePlaces;
     [SerializeField] private Wallet _wallet;
 
-    public int FuelLevel{get=>currentFuelLevel;set{;}}
-    public int PowerLevel{get=>currentPowerLevel;set{;}}
-    public int CartLevel{get=>currentCartLevel;set{;}}
+    public int FuelLevel{get=> _fuelLevels[currentFuelLevel].price;set{;}}
+    public int PowerLevel{get=> _powerLevels[currentPowerLevel].price; set{;}}
+    public int CartLevel{get=> _cartLevels[currentCartLevel].price ; set{;}}
     
     private UpgradePanel _upgradePanel;
 
@@ -19,6 +19,7 @@ public class Store : MonoBehaviour
     private List<Level> _cartLevels;
 
     public UnityAction BuyUpdate;
+    public UnityAction EmptyWallet;
 
     private int maxFuelLevel;
     private int currentFuelLevel;
@@ -42,6 +43,7 @@ public class Store : MonoBehaviour
     {
         _upgradePanel = GetComponentInChildren<UpgradePanel>();
         _upgradePanel.gameObject.SetActive(false);
+
         _fuelLevels = new List<Level>();
         _powerLevels = new List<Level>();
         _cartLevels = new List<Level>();
@@ -52,28 +54,29 @@ public class Store : MonoBehaviour
 
         LoadParametrs();
 
-        maxFuelLevel = 10;
-        minFuelLevel = 50;
+        maxLevel = 10;
+        minLevel = 50;
         stepUp = 20;
         currentValue = minLevel;
         _price = 100;
 
-        InitializeLevels(fuelLevel);
+        InitializeLevels(_fuelLevels);
 
         maxLevel = 24;
         minLevel = 1;
         stepUp = 1;
         currentValue = minLevel;
+        _price = 100;
 
-        InitializeLevels(powerLevel);
+        InitializeLevels(_powerLevels);
 
-        //maxLevel = 10;
-        //minLevel = 50;
-        //stepUp = 20;
-        //tempValue = minLevel;
-        //_price = 500;
+        maxLevel = 10;
+        minLevel = 50;
+        stepUp = 20;
+        currentValue = minLevel;
+        _price = 500;
 
-        //InitializeFuel(cartLevel);
+        InitializeLevels(_cartLevels);
     }
 
     private void OnEnable()
@@ -117,22 +120,27 @@ public class Store : MonoBehaviour
     
     private void OnTapUp(List<Level> _levels, ref int currentLevel)
     {
-        if (_levels[currentLevel + 1].price <= _wallet.Money)
+        if (_levels[currentLevel].price <= _wallet.Money)
         {
-            _wallet.RemoveResource(_levels[currentLevel + 1].price);
+            _wallet.RemoveResource(_levels[currentLevel].price);
             currentLevel++;
+        }
+        else
+        {
+            EmptyWallet?.Invoke();
         }
     }
 
-    private void InitializeLevels(Level level)
+    private void InitializeLevels(List<Level> levels)
     {
         for (int i = 0; i < maxLevel; i++)
         {
-            level.stepUp = stepUp;
-            level.tempValue = minLevel;
-            level.price = _price;
+            Level tempLevel = new Level();
+            tempLevel.stepUp = stepUp;
+            tempLevel.tempValue = minLevel;
+            tempLevel.price = _price;
 
-            _fuelLevels.Add(level);
+            levels.Add(tempLevel);
             currentValue += stepUp;
             _price *= 2;
         }
