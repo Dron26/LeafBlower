@@ -1,5 +1,8 @@
 using UnityEngine;
 
+
+namespace Service
+{
 public class FuelPlace : MonoBehaviour
 {
     private WorkPlaceImageChanger _workPlaceImage;
@@ -32,4 +35,5 @@ public class FuelPlace : MonoBehaviour
     {
         _tank.gameObject.SetActive(false);
     }
+}
 }

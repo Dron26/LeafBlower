@@ -2,14 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using Service;
 
 namespace Core
 {
     public class ParticleSystemController : MonoBehaviour
     {
-        [SerializeField] private List<GrabMashine> _grabMashines;
+        private List<GrabMashine> _grabMashines;
+        private WorkPlace _workPlace;
         private ParticleSystem _particleSystem;
-
         private Vector3 _velosityParticle;
         private float _stepSizeDown;
         private float _minSizeParticle;
@@ -29,30 +30,27 @@ namespace Core
         private int minQuantityAllPsrticles;
 
 
+        private void Awake()
+        {
+            _workPlace = GetComponentInParent<WorkPlace>();
+            _particleSystem = GetComponent<ParticleSystem>();
+            _quantityAllParticles = GetComponent<ParticleSystem>().maxParticles;
+        }
+
         private void Start()
         {
-            _quantityAllParticles = GetComponent<ParticleSystem>().maxParticles;
+            GetMashines();
             percentAll = 100;
             percent = 15;
             minQuantityAllPsrticles = (_quantityAllParticles / percentAll) * percent;
-
-
             float maxVelocity = 100f;
-            _particleSystem = GetComponent<ParticleSystem>();
-
             _leavesTanks = new List<Collider>();
             maxQuantityParticles = _particleSystem.maxParticles;
             _velosityParticle = new Vector3(maxVelocity, maxVelocity, maxVelocity);
             _stepSizeDown = 0.05f;
             _minSizeParticle = 0.3f;
 
-
-            for (int i = 0; i < _grabMashines.Count; i++)
-            {
-                Collider colliderLeavesTank = _grabMashines[i].GetComponentInChildren<LeavesTank>().GetComponent<Collider>();
-                _leavesTanks.Add(colliderLeavesTank);
-            }
-
+            GetLeavesTanks();
         }
 
         private void OnParticleCollision(GameObject other)
@@ -95,6 +93,24 @@ namespace Core
                 Destroy(gameObject);
             }
         }
+
+        private void  GetMashines()
+        {
+            foreach (GrabMashine mashine in _workPlace.GetComponentsInChildren<GrabMashine>())
+            {
+                _grabMashines.Add(mashine);
+            }
+        }
+
+        private void GetLeavesTanks()
+        {
+            for (int i = 0; i < _grabMashines.Count; i++)
+            {
+                Collider colliderLeavesTank = _grabMashines[i].GetComponentInChildren<LeavesTank>().GetComponent<Collider>();
+                _leavesTanks.Add(colliderLeavesTank);
+            }
+        }
+
     }
 
 }

@@ -1,6 +1,8 @@
 using UnityEngine;
 using UnityEngine.Events;
 
+namespace Service 
+{
 public class UpgradePlace : MonoBehaviour
 {
     public UnityAction EnterPlace;
@@ -21,4 +23,5 @@ public class UpgradePlace : MonoBehaviour
             ExitPlace?.Invoke();
         }
     }
+}
 }

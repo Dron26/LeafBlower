@@ -52,5 +52,7 @@ public class StageController : MonoBehaviour
                 stage.SetActive(false);
             }
         }
+
+
     }
 }
