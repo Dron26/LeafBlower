@@ -2,10 +2,14 @@ using UnityEngine;
 using UnityEngine.UI;
 using DG.Tweening;
 using System.Collections;
+using Core;
 
+namespace UI
+{
 public class UIParkStat : MonoBehaviour
 { 
     [SerializeField]private Cart _cart;
+
     private WaitForSeconds _waitForSeconds;
     private float _maxValue;
     private float _minValue;
@@ -52,4 +56,5 @@ public class UIParkStat : MonoBehaviour
         _slider.value = 0;
         StopCoroutine(WaiteEndMove());
     }
+}
 }

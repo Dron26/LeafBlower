@@ -1,5 +1,7 @@
 using UnityEngine;
 
+namespace Core
+{
 public class TrashBag : MonoBehaviour
 {
     private MeshRenderer _meshRenderer;
@@ -36,4 +38,5 @@ public class TrashBag : MonoBehaviour
         _particleSystem.Play();
         _particleSystemText.Play();
     }
+}
 }

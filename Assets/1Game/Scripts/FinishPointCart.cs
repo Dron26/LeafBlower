@@ -1,6 +1,9 @@
 using System.Collections.Generic;
 using UnityEngine;
+using Core;
 
+namespace Service
+{
 public class FinishPointCart : MonoBehaviour
 {
     [SerializeField] private List<FinishPoint> _points;
@@ -28,4 +31,5 @@ public class FinishPointCart : MonoBehaviour
     {
         _workPlacesSwitcher.ChangeStayPoint += OnChangeWorkPlace;
     }
+}
 }

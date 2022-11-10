@@ -1,11 +1,15 @@
 using UnityEngine;
-using System.Timers;
+using Service;
+using Core;
 
 namespace UI
 {
     public class UIAlarmMessager : MonoBehaviour
     {
-        [SerializeField] private CharacterTrashBagPicker _characterTrashBag;
+        private CharacterTrashBagPicker _characterTrashBag;
+
+
+        [SerializeField] private StageController _stageController;
         private bool _isSend;
         private AlarmPanel _alarmPanel;
 
@@ -17,12 +21,13 @@ namespace UI
 
         private void OnEnable()
         {
-            _characterTrashBag.TakeMaxQuantityTrashBag += OnTakeMaxQuantityTrashBag;
-            _characterTrashBag.SellTrashBag += OnSellTrashBag;
+            _stageController.SetCharacter += OSetCharacter;
+            
         }
 
         private void OnDisable()
         {
+            _stageController.SetCharacter -= OSetCharacter;
             _characterTrashBag.SellTrashBag += OnSellTrashBag;
         }
 
@@ -39,6 +44,13 @@ namespace UI
         {
             _alarmPanel.gameObject.SetActive(false);
             _isSend = false;
+        }
+
+        private void OSetCharacter(Character character)
+        {
+            _characterTrashBag = character.GetComponent<CharacterTrashBagPicker>();
+            _characterTrashBag.TakeMaxQuantityTrashBag += OnTakeMaxQuantityTrashBag;
+            _characterTrashBag.SellTrashBag += OnSellTrashBag;
         }
     }
 }

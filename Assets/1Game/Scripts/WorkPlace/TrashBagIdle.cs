@@ -1,7 +1,8 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using Core;
 
+namespace Service
+{
 public class TrashBagIdle : MonoBehaviour
 {
     private MeshRenderer _meshRenderer;
@@ -27,4 +28,5 @@ public class TrashBagIdle : MonoBehaviour
     {
         _meshRenderer.enabled = isWork;
     }
+}
 }

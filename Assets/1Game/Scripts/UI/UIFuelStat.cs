@@ -3,7 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
+using Service;
 
+namespace UI
+{
 [RequireComponent(typeof(Animator))]
 
 public class UIFuelStat : MonoBehaviour
@@ -60,3 +63,5 @@ public class UIFuelStat : MonoBehaviour
 
 
 }
+}
+

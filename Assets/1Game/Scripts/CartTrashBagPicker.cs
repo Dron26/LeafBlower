@@ -2,11 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using Core;
 
+namespace Service
+{
 public class CartTrashBagPicker : MonoBehaviour
 {
-    [SerializeField] private CharacterTrashBagPicker _trashBagPicker;
-
+    private CharacterTrashBagPicker _trashBagPicker;
+        private StageController _stageController;
     private int _quantityPickedTrashBag;
     private int _maxQuantityPickedTrashBag;
     private int _maxQuantityTrashBagInLevel;
@@ -39,8 +42,8 @@ public class CartTrashBagPicker : MonoBehaviour
     }
     private void Start()
     {
-        
-        _maxQuantityInRow = 3;
+            
+            _maxQuantityInRow = 3;
         _maxQuantityPickedTrashBag = 8;
         _maxQuantityTrashBagInLevel = 8;
         _pickedTrashBags = new Stack<TrashBag>();
@@ -61,13 +64,15 @@ public class CartTrashBagPicker : MonoBehaviour
 
     private void OnEnable()
     {
+            _stageController.SetCharacter += OnSetCharacter;
         _trashBagPicker.SallTrashBag += OnSallTrashBag;
         _cart.FinishMove += OnFinishMove;
     }
 
     private void OnDisable()
     {
-        _trashBagPicker.SallTrashBag -= OnSallTrashBag;
+            _stageController.SetCharacter -= OnSetCharacter;
+            _trashBagPicker.SallTrashBag -= OnSallTrashBag;
         _cart.FinishMove -= OnFinishMove;
     }
 
@@ -176,4 +181,10 @@ public class CartTrashBagPicker : MonoBehaviour
     {
         BagReachedFinish?.Invoke();
     }
+
+        private void OnSetCharacter(Character character)
+        {
+            _trashBagPicker = character.gameObject.GetComponent<CharacterTrashBagPicker>();
+        }
+}
 }

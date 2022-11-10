@@ -1,6 +1,8 @@
 using UnityEngine;
 using UnityEngine.Events;
+namespace Service
 
+{
 public class ItemContainer : MonoBehaviour
 {
     private AirZone _airZone;
@@ -57,4 +59,5 @@ public class ItemContainer : MonoBehaviour
             isThereFuel = true;
         }
     }
+}
 }

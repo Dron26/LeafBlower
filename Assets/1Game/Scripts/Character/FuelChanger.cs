@@ -3,11 +3,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using Core;
 
-public class FuelChanger : MonoBehaviour
-{
-    [SerializeField] private List<ParticleSystemController> _particleSystemControllers;
-    [SerializeField] private List<WorkPlace> _workPlaces;
+namespace Service
+{ 
+    public class FuelChanger : MonoBehaviour
+    { 
 
     public float MaxFueLevell { get => _maxFuelLevel; private set { } }
     public float FuelLevel { get => _fuelLevel; private set { } }
@@ -114,18 +115,12 @@ public class FuelChanger : MonoBehaviour
             yield return _waitForRefuelSeconds;
 
         }
-
     }
 
-
-    public void Initialize()
+        public void Initialize()
     {
         _maxFuelLevel = 20;
     }
 
-    public void LoadParametr(int countReelsKilledZombi)
-    {
-
-    }
-
+}
 }

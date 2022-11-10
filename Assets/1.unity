@@ -993,7 +993,7 @@ PrefabInstance:
     - target: {fileID: 4076745215784136932, guid: 872b6cc8550d5cc40b230672b3e68bd7,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -71.298996
+      value: -72.17899
       objectReference: {fileID: 0}
     - target: {fileID: 4076745215784136932, guid: 872b6cc8550d5cc40b230672b3e68bd7,
         type: 3}
@@ -1003,7 +1003,7 @@ PrefabInstance:
     - target: {fileID: 4076745215784136932, guid: 872b6cc8550d5cc40b230672b3e68bd7,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 10.068069
+      value: 1.0280695
       objectReference: {fileID: 0}
     - target: {fileID: 4076745215784136932, guid: 872b6cc8550d5cc40b230672b3e68bd7,
         type: 3}
@@ -1058,7 +1058,7 @@ PrefabInstance:
     - target: {fileID: 4076745215784136939, guid: 872b6cc8550d5cc40b230672b3e68bd7,
         type: 3}
       propertyPath: field of view
-      value: 62.01
+      value: 78.22
       objectReference: {fileID: 0}
     - target: {fileID: 4076745215784136939, guid: 872b6cc8550d5cc40b230672b3e68bd7,
         type: 3}
@@ -9740,7 +9740,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 727865164}
   m_LocalRotation: {x: -0.7071068, y: -0, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: -0.14, y: 1.43, z: -8.28}
+  m_LocalPosition: {x: 1.87, y: 1.43, z: -2.24}
   m_LocalScale: {x: 2.5000002, y: 2.5000005, z: 2.5}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -10472,7 +10472,7 @@ ParticleSystem:
     donutRadius: 0.2
     m_Position: {x: 0, y: 0, z: 0}
     m_Rotation: {x: 0, y: 0, z: 0}
-    m_Scale: {x: 1, y: 1, z: 0}
+    m_Scale: {x: 2.5, y: 5.6, z: 0}
     placementMode: 0
     m_MeshMaterialIndex: 0
     m_MeshNormalOffset: 0
@@ -24089,7 +24089,7 @@ MonoBehaviour:
   m_LookAt: {fileID: 455756258589861521}
   m_Follow: {fileID: 276414267}
   m_Lens:
-    FieldOfView: 62.01
+    FieldOfView: 78.22
     OrthographicSize: 5
     NearClipPlane: 0.001
     FarClipPlane: 1000
@@ -24114,7 +24114,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1517403466}
   m_LocalRotation: {x: 0.4047134, y: -0, z: -0, w: 0.9144436}
-  m_LocalPosition: {x: -71.298996, y: 6.48, z: 10.068069}
+  m_LocalPosition: {x: -72.17899, y: 6.48, z: 1.0280695}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -28651,7 +28651,7 @@ ParticleSystem:
     donutRadius: 0.2
     m_Position: {x: 0, y: 0, z: 0}
     m_Rotation: {x: 0, y: 0, z: 0}
-    m_Scale: {x: 1, y: 1, z: 0}
+    m_Scale: {x: 2.5, y: 8, z: 0}
     placementMode: 0
     m_MeshMaterialIndex: 0
     m_MeshNormalOffset: 0
@@ -32792,7 +32792,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1822086515}
   m_LocalRotation: {x: -0.7071068, y: -0, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: 0.2, y: 1.4, z: -8.1}
+  m_LocalPosition: {x: 1.7, y: 1.4, z: 1.35}
   m_LocalScale: {x: 2.5000002, y: 2.5000005, z: 2.5}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -38281,7 +38281,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 455756258590188199}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -71.43, y: 0.078999996, z: 12.46}
+  m_LocalPosition: {x: -72.31, y: 0.078999996, z: 3.42}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -40321,7 +40321,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1263341973455787056}
   m_LocalRotation: {x: -0.7071068, y: -0, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: 0.7, y: 1.4, z: -8}
+  m_LocalPosition: {x: 1.74, y: 1.4, z: 3.88}
   m_LocalScale: {x: 2.5000002, y: 2.5000005, z: 2.5}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -40964,7 +40964,7 @@ ParticleSystem:
     donutRadius: 0.2
     m_Position: {x: 0, y: 0, z: 0}
     m_Rotation: {x: 0, y: 0, z: 0}
-    m_Scale: {x: 1, y: 1, z: 0}
+    m_Scale: {x: 2.6, y: 10, z: 0}
     placementMode: 0
     m_MeshMaterialIndex: 0
     m_MeshNormalOffset: 0
@@ -46358,7 +46358,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 57.7
+  m_fontSize: 61.2
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1

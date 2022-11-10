@@ -9,7 +9,7 @@ public class Character : MonoBehaviour
     private float _speed;
     private Animator _animator;
     private int SpeedHashName;
-
+    private GameObject _currentStage;
 
 
     private void Awake()
@@ -20,10 +20,6 @@ public class Character : MonoBehaviour
 
     }
 
-    private void Start()
-    {
-        
-    }
 
     private void Update()
     {
@@ -32,4 +28,8 @@ public class Character : MonoBehaviour
     }
 
 
+    public void SetStage(GameObject currentStage)
+    {
+        _currentStage = currentStage;
+    }
 }

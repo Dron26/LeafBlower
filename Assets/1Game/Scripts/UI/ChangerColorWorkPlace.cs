@@ -2,7 +2,10 @@ using DG.Tweening;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using Core;
 
+namespace Service
+{
 public class ChangerColorWorkPlace : MonoBehaviour
 {
     [SerializeField] private List<ParticleSystemController> _particleSystems;
@@ -48,4 +51,5 @@ public class ChangerColorWorkPlace : MonoBehaviour
 
         _numberWorkplace++;
     }     
+}
 }

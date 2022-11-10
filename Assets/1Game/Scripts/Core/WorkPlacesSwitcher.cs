@@ -4,10 +4,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
+using Service;
 
+namespace Core
+{
 public class WorkPlacesSwitcher : MonoBehaviour
 {
-    [SerializeField] private List<WorkPlace> _workPlaces;
+    private List<WorkPlace> _workPlaces;
     [HideInInspector] private List<InsideController> _insideControllers;
     [HideInInspector] private List<WorkPlaceImageChanger> _workPlaceImageChangers;
     [HideInInspector] private List<Vector3> _stayPoint;
@@ -17,6 +20,11 @@ public class WorkPlacesSwitcher : MonoBehaviour
 
     private void Awake()
     {
+        foreach (WorkPlace place in transform.GetComponentsInChildren<WorkPlace>())
+        {         
+                _workPlaces.Add(place.GetComponent<WorkPlace>());
+        }
+
            _insideControllers = new List<InsideController>();
         _workPlaceImageChangers = new List<WorkPlaceImageChanger>();
         _stayPoint = new List<Vector3>();
@@ -32,6 +40,13 @@ public class WorkPlacesSwitcher : MonoBehaviour
             _stayPoint.Add(stayPoint= _workPlaces[i].GetComponentInChildren<ParkPlace>().GetComponentInChildren<StayPoint>().transform.position);
         }
     }
+    private void OnEnable()
+    {
+        for (int i = 0; i < _workPlaces.Count; i++)
+        {
+            _insideControllers[i].CharacterInside += OnCharacterInside;
+        }
+    }
 
     private void Start()
     {
@@ -41,19 +56,12 @@ public class WorkPlacesSwitcher : MonoBehaviour
         }
     }
 
-    private void OnEnable()
-    {
-        for (int i = 0; i < _workPlaces.Count; i++)
-        {
-            _insideControllers[i].CharacterInside += OnCharacterInside;
-        }
-    }
 
     private void OnDisable()
     {
         for (int i = 0; i < _workPlaces.Count; i++)
         {
-            _insideControllers[i].CharacterInside += OnCharacterInside;
+            _insideControllers[i].CharacterInside -= OnCharacterInside;
         }
     }
 
@@ -84,4 +92,17 @@ public class WorkPlacesSwitcher : MonoBehaviour
 
         _workPlaceImageChangers[numberPlace].ChangeImage(volume);
     }
+
+    public List<WorkPlace> GetWorkPlaces()
+    {
+        List<WorkPlace> tempPlaces = new List<WorkPlace>();
+
+        foreach (WorkPlace place in _workPlaces)
+        {
+            tempPlaces.Add(place);
+        }
+
+        return tempPlaces;
+    }
+}
 }

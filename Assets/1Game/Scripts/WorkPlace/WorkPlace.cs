@@ -3,14 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
+namespace Service
+{
 public class WorkPlace : MonoBehaviour
 { 
     public UnityAction<bool> EnterWorkPlace;
-    
-    void Start()
-    {
-        
-    }
 
     private void OnTriggerEnter(Collider other)
     {
@@ -27,4 +24,5 @@ public class WorkPlace : MonoBehaviour
         }
     }
 
+}
 }

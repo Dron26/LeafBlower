@@ -1,7 +1,10 @@
 using System;
 using TMPro;
 using UnityEngine;
+using Service;
 
+namespace UI
+{
 [RequireComponent(typeof(Animator))]
 
 public class UIMoneyStatus : MonoBehaviour
@@ -14,7 +17,6 @@ public class UIMoneyStatus : MonoBehaviour
     private int isWorkHashName;
     private void Awake()
     {
-
         _animator = GetComponent<Animator>();
         isWorkHashName= Animator.StringToHash("IsWork");
         _amount = gameObject.GetComponentInChildren<TMP_Text>();
@@ -46,4 +48,5 @@ public class UIMoneyStatus : MonoBehaviour
     {
         _animator.SetBool(isWorkHashName, true);
     }
+}
 }
