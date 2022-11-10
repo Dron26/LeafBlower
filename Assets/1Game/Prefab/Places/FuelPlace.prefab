@@ -900,7 +900,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 21ad7ea79a5ee8a47a6a2a476890cd7e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _fuelChanger: {fileID: 0}
+  _fuelChanger: {fileID: 5640446297639033977, guid: 0c4c0112feaaf2a4db2b407df9993cca,
+    type: 3}
 --- !u!95 &7475755720278719712
 Animator:
   serializedVersion: 4

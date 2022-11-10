@@ -38,19 +38,23 @@ namespace Core
         private int maxVolumeTrashBag;
         private bool isFilling;
 
-        private void Start()
+        private void Awake()
         {
             _workPlace = GetComponentInParent<WorkPlace>();
-            _particleSystem= _workPlace.GetComponentInChildren<ParticleSystemController>();
+            _particleSystem = _workPlace.GetComponentInChildren<ParticleSystemController>();
             leaveInGrab = GetComponent<LeaveInGrab>();
-            _isWork = true;
             _finishPoint = GetComponentInChildren<FinishPointForTrashBag>();
             _createPoint = GetComponentInChildren<CreatePoint>();
-            maxVolumeTrashBag = 200;
             _grabMashine = GetComponentInParent<GrabMashine>();
+            _trashBagIdle = GetComponentInChildren<TrashBagIdle>();
+        }
+
+        private void Start()
+        {
+            _isWork = true;
+            maxVolumeTrashBag = 200;
             float waiteTime = 0.2f;
             _waitForSeconds = new WaitForSeconds(waiteTime);
-            _trashBagIdle = GetComponentInChildren<TrashBagIdle>();
             _rotationTrashBagIdle = _trashBagIdle.transform.localRotation;
             _trashBagStartSize = _trashBagIdle.transform.localScale;
             _trashBagStartPosition = _trashBagIdle.transform.localPosition;

@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.Events;
+using Core;
 
 namespace Service
 {
@@ -9,7 +10,7 @@ public class ParkPlace : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.TryGetComponent(out FinishPointCart finishPoint))
+        if (other.TryGetComponent(out Cart cart))
         {
             CartEnter?.Invoke();
         }

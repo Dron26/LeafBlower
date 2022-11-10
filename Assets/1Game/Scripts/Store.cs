@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UI;
 using UnityEngine.Events;
-
+using Service;
 public class Store : MonoBehaviour
 {
     [SerializeField] private List< UpgradePlace> _upgradePlaces;

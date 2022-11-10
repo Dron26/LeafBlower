@@ -33,12 +33,16 @@ public class CartTrashBagPicker : MonoBehaviour
     private Collider _collider;
     private bool _canTake;
     private Cart _cart;
-    private float _time;
+    private float _time = 1f;
 
     private void Awake()
     {
+
         _cart = GetComponent<Cart>();
-        _time = 1f;
+            _stageController = GetComponentInParent<StageController>();
+            _trashBagPicker= _stageController.GetComponentInChildren<CharacterTrashBagPicker>();
+            _storePoint = GetComponentInChildren<TrashBagStorePoint>();
+            _mainPointForTrashBag = _storePoint.GetComponentInChildren<MainPointForTrashBag>();
     }
     private void Start()
     {
@@ -48,8 +52,7 @@ public class CartTrashBagPicker : MonoBehaviour
         _maxQuantityTrashBagInLevel = 8;
         _pickedTrashBags = new Stack<TrashBag>();
         _changePointStore = new List<Vector3>();
-        _storePoint = GetComponentInChildren<TrashBagStorePoint>();
-        _mainPointForTrashBag = _storePoint.GetComponentInChildren<MainPointForTrashBag>();
+
         _startPositionStorePoint = _storePoint.transform.localPosition;
         _mainPoint = _mainPointForTrashBag.transform.localPosition;
         stepInRow = 0.6f;
