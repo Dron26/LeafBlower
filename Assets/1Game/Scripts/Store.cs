@@ -5,7 +5,7 @@ using UnityEngine.Events;
 using Service;
 public class Store : MonoBehaviour
 {
-    [SerializeField] private List< UpgradePlace> _upgradePlaces;
+    [SerializeField] private UpgradePlace _upgradePlace;
     [SerializeField] private Wallet _wallet;
 
     public int FuelLevel{get=> _fuelLevels[currentFuelLevel].price;set{;}}
@@ -81,12 +81,8 @@ public class Store : MonoBehaviour
 
     private void OnEnable()
     {
-        for (int i = 0; i < _upgradePlaces.Count; i++)
-        {
-            _upgradePlaces[i].EnterPlace += OnEnterPlace;
-            _upgradePlaces[i].ExitPlace += OnTapClose;
-        }
-        
+            _upgradePlace.EnterPlace += OnEnterPlace;
+            _upgradePlace.ExitPlace += OnTapClose;
         _upgradePanel.TapUpFuel += OnTapUpFuel;
         _upgradePanel.TapUpPower += OnTapUpPower;
         _upgradePanel.TapUpCart += OnTapUpCart;
@@ -155,12 +151,8 @@ public class Store : MonoBehaviour
 
     private void OnDisable()
     {
-        for (int i = 0; i < _upgradePlaces.Count; i++)
-        {
-            _upgradePlaces[i].EnterPlace -= OnEnterPlace;
-            _upgradePlaces[i].ExitPlace -= OnTapClose;
-        }
-
+            _upgradePlace.EnterPlace -= OnEnterPlace;
+            _upgradePlace.ExitPlace -= OnTapClose;
         _upgradePanel.TapUpFuel -= OnTapUpFuel;
         _upgradePanel.TapUpPower -= OnTapUpPower;
         _upgradePanel.TapUpCart -= OnTapUpCart;

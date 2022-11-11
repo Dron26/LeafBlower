@@ -10,7 +10,7 @@ namespace Service
     public class CharacterTrashBagPicker : MonoBehaviour
     {
 
-        private List<ParkPlace> _parkPlaces;
+        [SerializeField] private ParkPlace _parkPlace;
 
         private TrashBagStorePoint _storePoint;
         private MainPointForTrashBag _mainPointForTrashBag;
@@ -45,6 +45,7 @@ namespace Service
 
         private void Awake()
         {
+
             _stageController = GetComponentInParent<StageController>();
             _storePoint = GetComponentInChildren<TrashBagStorePoint>();
 
@@ -169,27 +170,13 @@ namespace Service
         private void OnEnable()
         {
             _stageController.SetStage += OnSetStage;
-
-            if (_parkPlaces != null)
-            {
-                for (int i = 0; i < _parkPlaces.Count; i++)
-                {
-                    _parkPlaces[i].CartEnter += OnCartRemove;
-                }
-            }
+            _parkPlace.CartEnter += OnCartRemove;
         }
 
         private void OnDisable()
         {
             _stageController.SetStage -= OnSetStage;
-
-            if (_parkPlaces != null)
-            {
-                for (int i = 0; i < _parkPlaces.Count; i++)
-                {
-                    _parkPlaces[i].CartEnter -= OnCartRemove;
-                }
-            }
+            _parkPlace.CartEnter -= OnCartRemove;
         }
 
         private IEnumerator SellBags()
@@ -216,13 +203,7 @@ namespace Service
         {
             _workPlacesSwitcher = stage.GetComponent<WorkPlacesSwitcher>();
             _workPlaces = _workPlacesSwitcher.GetWorkPlaces();
-
-            for (int i = 0; i < _workPlaces.Count; i++)
-            {
-                _parkPlaces.Add(_workPlaces[i].GetComponentInChildren<ParkPlace>());
-            }
         }
-
     }
 }
 

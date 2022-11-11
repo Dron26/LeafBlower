@@ -8,7 +8,7 @@ namespace Core
 {
     public class ParticleSystemController : MonoBehaviour
     {
-        private List<GrabMashine> _grabMashines;
+        private List<GrabMashine> _grabMashines=new List<GrabMashine>();
         private WorkPlace _workPlace;
         private ParticleSystem _particleSystem;
         private Vector3 _velosityParticle;

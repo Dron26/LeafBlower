@@ -111,7 +111,7 @@ namespace Core
         private void OnChangeWorkPlace(GameObject insideControllers)
         {
             _finishPoint = insideControllers.GetComponentInChildren<FinishPoint>();
-            Vector3 currentPoint = insideControllers.GetComponentInChildren<ParkPlace>().transform.position;
+            Vector3 currentPoint = insideControllers.GetComponentInChildren<ParkPlacePoint>().transform.position;
             StartCoroutine(WaitMoveFinish(currentPoint));
         }
 

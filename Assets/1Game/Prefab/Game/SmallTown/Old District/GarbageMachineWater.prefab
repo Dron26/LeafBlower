@@ -10052,9 +10052,9 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7058855952123417381}
-  m_LocalRotation: {x: -0, y: -1, z: -0, w: 0}
+  m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
   m_LocalPosition: {x: 0.82, y: -0.68404, z: 10.36}
-  m_LocalScale: {x: 1.3780572, y: 1.3780572, z: 1.3949082}
+  m_LocalScale: {x: 0.96463996, y: 0.9646401, z: 0.9764356}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 8924086885319074061}
@@ -10073,7 +10073,7 @@ Transform:
   - {fileID: 103004546904722525}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
 --- !u!65 &1897434818410852697
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -10099,7 +10099,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e8fdf1cdc107b044b8cd82b532b7e72e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _particleSystem: {fileID: 0}
   _trashBag: {fileID: -5479627070531232122, guid: 012ced539bf9cce46b512ee20411f32c,
     type: 3}
 --- !u!1 &7903156286170905669

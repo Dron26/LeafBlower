@@ -12,8 +12,8 @@ namespace Core
     {
         private List<WorkPlace> _workPlaces=new List<WorkPlace>();
         [HideInInspector] private List<InsideController> _insideControllers = new List<InsideController>();
-        [HideInInspector] private List<WorkPlaceImageChanger> _workPlaceImageChangers = new List<WorkPlaceImageChanger>();
-        [HideInInspector] private List<Vector3> _stayPoint;
+        //[HideInInspector] private List<WorkPlaceImageChanger> _workPlaceImageChangers = new List<WorkPlaceImageChanger>();
+        //[HideInInspector] private List<Vector3> _stayPoint;
 
         public UnityAction<GameObject> ChangeWorkPlace;
         private int firstStart = 1;
@@ -23,20 +23,7 @@ namespace Core
         {
             InitializeWorkPlace();
         }
-        private void Start()
-        {
 
-            for (int i = 0; i < _workPlaces.Count; i++)
-            {
-                InsideController insideController = new InsideController();
-                WorkPlaceImageChanger workPlaceImageChange = new WorkPlaceImageChanger();
-                Vector3 stayPoint = new Vector3();
-
-                _insideControllers.Add(insideController = _workPlaces[i].GetComponentInChildren<InsideController>());
-                _workPlaceImageChangers.Add(workPlaceImageChange = _workPlaces[i].GetComponent<WorkPlaceImageChanger>());
-                _stayPoint.Add(stayPoint = _workPlaces[i].GetComponentInChildren<ParkPlace>().GetComponentInChildren<StayPoint>().transform.position);
-            }
-        }
         private void OnEnable()
         {
             for (int i = 0; i < _workPlaces.Count; i++)
@@ -103,6 +90,17 @@ namespace Core
             foreach (WorkPlace place in transform.GetComponentsInChildren<WorkPlace>())
             {
                 _workPlaces.Add(place);
+            }
+
+            for (int i = 0; i < _workPlaces.Count; i++)
+            {
+                InsideController insideController = new InsideController();
+                WorkPlaceImageChanger workPlaceImageChange = new WorkPlaceImageChanger();
+                Vector3 stayPoint = new Vector3();
+
+                _insideControllers.Add(insideController = _workPlaces[i].GetComponentInChildren<InsideController>());
+                //_workPlaceImageChangers.Add(workPlaceImageChange = _workPlaces[i].GetComponent<WorkPlaceImageChanger>());
+                //_stayPoint.Add(stayPoint = _workPlaces[i].GetComponentInChildren<ParkPlace>().GetComponentInChildren<StayPoint>().transform.position);
             }
         }
 

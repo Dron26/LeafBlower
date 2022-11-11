@@ -1700,7 +1700,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5194286317139852054}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -6.109131, y: -5.1175456, z: -8.5242815}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -1787,10 +1787,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 62885e158b60dce4997c32bb712fb80c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _parkPlaces:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  _parkPlace: {fileID: 4420791256783529119, guid: af9203b4dee62f44ca991c4be3c8d806,
+    type: 3}
 --- !u!114 &5640446297639033970
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1815,14 +1813,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 294c4689a71b6fd43bf4b71cb55ab442, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _particleSystemControllers:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  _workPlaces:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
 --- !u!114 &3856933345240611862
 MonoBehaviour:
   m_ObjectHideFlags: 0
