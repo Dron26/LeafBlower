@@ -4,11 +4,14 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.Events;
 using Service;
+using UI;
 
 namespace Core
 {
     public class Cart : MonoBehaviour
     {
+        [SerializeField] private Wallet _wallet;
+        [SerializeField] private UIParkStat _uIParkStat;
         private FinishPoint _finishPoint;
         private WorkPlacesSwitcher _workPlacesSwitcher;
         private StageController _stageController;
@@ -21,17 +24,18 @@ namespace Core
         private CartTrashBagPicker _cartTrashBagPicker;
         private WaitForSeconds _waitForSeconds;
         private const float _time = 5f;
-        [SerializeField] private Wallet _wallet;
         private bool isMoveFinish;
+
         public UnityAction StartMove;
         public UnityAction FinishMove;
 
         private void Awake()
         {
+            _collider = GetComponent<Collider>();
             _stageController = GetComponentInParent<StageController>();
             isMoveFinish = false;
-            _workPlacesSwitcher = _stageController.GetComponentInChildren<WorkPlacesSwitcher>();
-            
+
+
             float waiteTime = 2f;
             _waitForSeconds = new WaitForSeconds(waiteTime);
             _cartTrashBagPicker = GetComponent<CartTrashBagPicker>();
@@ -39,15 +43,15 @@ namespace Core
 
         private void OnEnable()
         {
+            _stageController.SetStage += OnSetStage;
             _cartTrashBagPicker.TakeMaxQuantityTrashBag += OnTakeMaxQuantityTrashBag;
             _cartTrashBagPicker.BagReachedFinish += OnTrashBagReachedFinish;
-            _workPlacesSwitcher.ChangeWorkPlace += OnChangeWorkPlace;
         }
 
         private void Start()
         {
             _currentPoint = transform.position;
-            _collider = GetComponent<Collider>();
+            InitializeUIStat();
         }
 
         private void OnTriggerEnter(Collider other)
@@ -63,6 +67,10 @@ namespace Core
             }
         }
 
+        private void InitializeUIStat()
+        {
+            _uIParkStat.Initialize(_time);
+        }
 
         private void OnTakeMaxQuantityTrashBag()
         {
@@ -110,20 +118,24 @@ namespace Core
 
         private void OnChangeWorkPlace(GameObject insideControllers)
         {
-            _finishPoint = insideControllers.GetComponentInChildren<FinishPoint>();
-            Vector3 currentPoint = insideControllers.GetComponentInChildren<ParkPlacePoint>().transform.position;
-            StartCoroutine(WaitMoveFinish(currentPoint));
+            StartCoroutine(WaitMoveFinish(insideControllers));
         }
 
         private void OnDisable()
         {
             _cartTrashBagPicker.TakeMaxQuantityTrashBag -= OnTakeMaxQuantityTrashBag;
             _cartTrashBagPicker.BagReachedFinish -= OnTrashBagReachedFinish;
-            _workPlacesSwitcher.ChangeWorkPlace -= OnChangeWorkPlace;
+
+            if (_workPlacesSwitcher != null)
+            {
+                _workPlacesSwitcher.ChangeWorkPlace -= OnChangeWorkPlace;
+            }
         }
 
-        private IEnumerator WaitMoveFinish(Vector3 currentPoint)
+        private IEnumerator WaitMoveFinish(GameObject insideControllers)
         {
+            _finishPoint = insideControllers.GetComponentInChildren<FinishPoint>();
+            Vector3 currentPoint = insideControllers.GetComponentInChildren<ParkPlacePoint>().transform.position;
 
             if (isMoveFinish == true)
             {
@@ -131,14 +143,18 @@ namespace Core
                 point = _finishPoint.transform.position;
                 MovePosition();
             }
-
-            while (isMoveFinish == true)
+            else
             {
-                yield return null;
+                _currentPoint = currentPoint;
+                SetSecondPosition();
             }
+            yield return null;
+        }
 
-            _currentPoint = currentPoint;
-            SetSecondPosition();
+        private void OnSetStage(GameObject stage)
+        {
+            _workPlacesSwitcher = stage.GetComponentInChildren<WorkPlacesSwitcher>();
+            _workPlacesSwitcher.ChangeWorkPlace += OnChangeWorkPlace;
         }
     }
 }

@@ -3,26 +3,35 @@ using UnityEngine;
 
 namespace Core
 {
-    public class GameInitializator : MonoBehaviour
-    {
+    public class GameInitializator:MonoBehaviour
+    { 
         [SerializeField] private Wallet _wallet;
-        [SerializeField] private Save _save;
+        public bool IsFirstStart { get => _isFirstStart;set { } }
 
-        private string _filePath;
+        private bool _isFirstStart;
+        private Load _load;
+        private Save _save;
 
-        private void Start()
+        private void Awake()
         {
-            var directory = Application.persistentDataPath + "/saves";
-            _filePath = directory + "/GameSave.save";
-
-            if (!File.Exists(_filePath))
+            if (_isFirstStart == false)
             {
-                Initialize();
+                Debug.Log("StartSecondGame");
+                _isFirstStart = true;
             }
             else
             {
-                _save.SetSecondStart();
+                Initialize();
+                SetFirstStart();
             }
+
+        }
+
+        private void InitializeWallet()
+        {
+            int amountMoney = 0;
+            int maxAmountMoney = 100000000;
+            _wallet.Initialization(amountMoney, maxAmountMoney);
         }
 
         private void Initialize()
@@ -30,12 +39,10 @@ namespace Core
             InitializeWallet();
         }
 
-        private void InitializeWallet()
+        private void SetFirstStart()
         {
-            int amountMoney = 5;
-            int maxAmountMoney = 1000;
-            _wallet.Initialization(amountMoney, maxAmountMoney);
-        }
 
+        }
     }
+    
 }

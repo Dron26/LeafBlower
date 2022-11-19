@@ -14,19 +14,7 @@ public class Wallet : MonoBehaviour
 
     private void Start()
     {
-        _maxAmountResource = 1000000;
-    }
-
-    public void Initialization(int money, int maxMoney)
-    {
-        _amountResource = money;
-        _maxAmountResource = maxMoney;
-    }
-
-    public void LoadParametr(int money, int maxMoney)
-    {
-        _amountResource = money;
-        _maxAmountResource = maxMoney;
+        _maxAmountResource = 100000000;
     }
 
     public bool RemoveResource(int purchasePrice)
@@ -57,5 +45,17 @@ public class Wallet : MonoBehaviour
 
             ChangeResource?.Invoke(_amountResource);
         }
+    }
+
+    public void Initialization(int money, int maxMoney)
+    {
+        _amountResource = money;
+        _maxAmountResource = maxMoney;
+    }
+
+    public void LoadParametr(int money, int maxMoney)
+    {
+        _amountResource = money;
+        _maxAmountResource = maxMoney;
     }
 }

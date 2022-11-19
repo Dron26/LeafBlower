@@ -18,7 +18,7 @@ public class CharacterMove : MonoBehaviour
 
     private void Start()
     {
-        _maxSpeed = 1.3f;
+        _maxSpeed = 1f;
        
         _animator = GetComponent<Animator>();
     }

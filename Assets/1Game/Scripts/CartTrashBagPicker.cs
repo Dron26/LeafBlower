@@ -33,7 +33,7 @@ public class CartTrashBagPicker : MonoBehaviour
     private Collider _collider;
     private bool _canTake;
     private Cart _cart;
-    private float _time = 1f;
+    private float _time = 0.5f;
 
     private void Awake()
     {

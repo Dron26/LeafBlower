@@ -1,63 +1,31 @@
 using UnityEngine;
 using UnityEngine.Events;
+using Core; 
+
 namespace Service
 
 {
-public class ItemContainer : MonoBehaviour
-{
-    private AirZone _airZone;
-    private WorkPlace _workPlace;
-    private FuelChanger fuelChanger;
-    private bool isThereFuel;
-
-    private void Awake()
+    public class ItemContainer : MonoBehaviour
     {
-        isThereFuel = true;
-        fuelChanger = GetComponentInParent<FuelChanger>();
-        _airZone = GetComponentInChildren<AirZone>();
-        _airZone.gameObject.SetActive(false);
+    //    //[SerializeField] private LeaveBlowerAdvanced _blowerAdvanced;
+    //    //[SerializeField] private Store _store;
+
+    //private WorkPlace _workPlace;
+    //private FuelChanger fuelChanger;
+
+
+    //private void Awake()
+    //{
+
+    //    fuelChanger = GetComponent<FuelChanger>();
+
+    //}
+
+    //private void SetBlowerAdvanced()
+    //    {
+    //        LeaveBlowerAdvanced blowerAdvanced = Instantiate(_blowerAdvanced, transform.position, Quaternion.identity);
+    //        blowerAdvanced.transform.SetParent(transform);
+    //        blowerAdvanced.SetStore(_store);
+    //    }
     }
-
-
-    private void OnEnable()
-    {
-        fuelChanger.ChangeFuel += OnChangeFuel;
-    }
-
-    private void OnDisable()
-    {
-        fuelChanger.ChangeFuel -= OnChangeFuel;
-    }
-
-
-
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.TryGetComponent(out WorkPlace workPlace)& isThereFuel==true)
-        {
-            _airZone.gameObject.SetActive(true);           
-        }
-    }
-
-    private void OnTriggerExit(Collider other)
-    {
-        if (other.TryGetComponent(out WorkPlace workPlace))
-        {
-            _airZone.gameObject.SetActive(false);
-        }
-    }
-
-    private void OnChangeFuel(float fuelLevel)
-    {
-        if (fuelLevel==0)
-        {
-            isThereFuel = false;
-            _airZone.gameObject.SetActive(false);
-        }
-        else
-        {
-            isThereFuel = true;
-        }
-    }
-}
 }

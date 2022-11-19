@@ -6,49 +6,46 @@ using Core;
 
 namespace Service
 {
-    public class ChangerColorWorkPlace : MonoBehaviour {}}
-//{
-//    [SerializeField] private List<ParticleSystemController> _particleSystems;
+    public class ChangerColorWorkPlace : MonoBehaviour
+    {        
+        [SerializeField] private List<Image> _images;
+        [SerializeField] private StageController _stage;
 
-//    [SerializeField] private List<Image> _images;
-//    private int _numberWorkplace;
-//    private void Awake()
-//    {
-//        _numberWorkplace = 0;
-//    }
+        private int _numberWorkplace;
 
-//    private void Start()
-//    {
-//        float alfa = 0.5f;
+        private void Awake()
+        {
+            _numberWorkplace = 0;
+        }
 
-//        for (int i = 0; i < _images.Count; i++)
-//        {
-//            Tween tween = _images[i].DOFade(alfa, 1f);
-//        }
-//    }
+        private void Start()
+        {
+            float alfa = 0.5f;
 
-//    private void OnEnable()
-//    {
-//        for (int i = 0; i < _particleSystems.Count; i++)
-//        {
-//            _particleSystems[i].CatchAllParticle += OnCatchAllParticle;
-//        }
-//    }
+            for (int i = 0; i < _images.Count; i++)
+            {
+                Tween tween = _images[i].DOFade(alfa, 1f);
+            }
+        }
 
-//    private void OnDisable()
-//    {
-//        for (int i = 0; i < _particleSystems.Count; i++)
-//        {
-//            _particleSystems[i].CatchAllParticle -= OnCatchAllParticle;
-//        }
-//    }
+        private void OnEnable()
+        {
+            _stage.CatchAllParticle += OnCatchAllParticle;
+        }
 
-//    private void OnCatchAllParticle()
-//    {
-//        float alfa = 1f;
+        private void OnDisable()
+        {
+            _stage.CatchAllParticle -= OnCatchAllParticle;
+        }
 
-//            Tween tween = _images[_numberWorkplace].DOFade(alfa, 1f);
+        private void OnCatchAllParticle()
+        {
+            float alfa = 1f;
 
-//        _numberWorkplace++;
-//    }     
+            Tween tween = _images[_numberWorkplace].DOFade(alfa, 1f);
+
+            _numberWorkplace++;
+        }
+    }
+}
 

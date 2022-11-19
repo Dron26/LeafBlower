@@ -6,86 +6,102 @@ namespace Core
 {
     public class PlacesMover : MonoBehaviour
     {
-        [SerializeField] private UpgradePlace _upgradePlace;
-        [SerializeField] private ParkPlace _parkPlace;
-        [SerializeField] private FuelPlace _fuelPlace;
+        private UpgradePlace _upgradePlace;
+        private ParkPlace _parkPlace;
+        private FuelPlace _fuelPlace;
+        private ExitPlace _exitPlace;
 
-
+        private StageController _stageController;
         private WorkPlacesSwitcher _switcher;
+
         private Vector3 _parkPoint;
         private Vector3 _upgradePoint;
         private Vector3 _fuelPoint;
-
-        private UpgradePlace _currentUpgradePlace;
-        private ParkPlace _currentParkPlace;
-        private FuelPlace _currentFuelPlace;
-
-
+        private Vector3 _exitPoint;
 
         private InsideController _inside;
-        private List<WorkPlace> _workPlaces;
+        private List<WorkPlace> _workPlaces = new List<WorkPlace>();
 
         private void Awake()
         {
-            _switcher = GetComponent<WorkPlacesSwitcher>();
+            _stageController = GetComponentInParent<StageController>();
+            _upgradePlace = GetComponentInChildren<UpgradePlace>();
+            _parkPlace = GetComponentInChildren < ParkPlace > ();
+            _fuelPlace = GetComponentInChildren<FuelPlace>();
+            _exitPlace = GetComponentInChildren<ExitPlace>();
         }
 
         private void OnEnable()
         {
-            _switcher.ChangeWorkPlace += OnChangePlace;
+            _stageController.SetStage += OnSetStage;
         }
+
         private void OnDisable()
         {
-            _switcher.ChangeWorkPlace -= OnChangePlace;
-        }
-
-        private void Start()
-        {
-            Initialize();
-            CreatePlace();
-        }
-        private void Initialize()
-        {
-            List<WorkPlace> _tempPlaces;
-
-            _tempPlaces = _switcher.GetWorkPlaces();
-
-            for (int i = 0; i < _tempPlaces.Count; i++)
+            if (_switcher!=null)
             {
-                _workPlaces.Add(_tempPlaces[i]);
-            }
+                _switcher.ChangeWorkPlace -= OnChangePlace;
+                //_switcher.InitializeWorkPlace -= OnChangePlace;
+            }     
         }
 
-        private void CreatePlace()
-        {
-            int number = 0;
+        //private void InitializeWorkPlaces()
+        //{
+        //    List<WorkPlace> _tempPlaces;
 
-            for (int i = 0; i < _workPlaces.Count; i++)
-            {
-                _inside = _workPlaces[i].GetComponentInChildren<InsideController>();
+        //    _tempPlaces = _switcher.GetWorkPlaces();
 
-                if (_inside._numberPlace == number)
-                {
-                    _upgradePoint = _workPlaces[i].GetComponentInChildren<UpgradePlacePoint>().transform.position;
-                    _currentUpgradePlace = Instantiate(_upgradePlace, _upgradePoint, Quaternion.identity);
+        //    for (int i = 0; i < _tempPlaces.Count; i++)
+        //    {
+        //        _workPlaces.Add(_tempPlaces[i]);
+        //    }
+        //}
 
-                    _parkPoint = _workPlaces[i].GetComponentInChildren<ParkPlacePoint>().transform.position;
-                    _currentParkPlace = Instantiate(_parkPlace, _parkPoint, Quaternion.identity);
+        //private void CreatePlace()
+        //{
+        //    Character character = Instantiate(_character, _character.transform.position, Quaternion.identity);
+        //    character.transform.SetParent(transform);
 
-                    _fuelPoint = _workPlaces[i].GetComponentInChildren<FuelPlacePoint>().transform.position;
-                    _currentFuelPlace = Instantiate(_fuelPlace, _fuelPoint, Quaternion.identity);              
-                }
-            }
-        }
+        //    int number = 0;
+
+        //    for (int i = 0; i < _workPlaces.Count; i++)
+        //    {
+        //        _inside = _workPlaces[i].GetComponentInChildren<InsideController>();
+
+        //        if (_inside._numberPlace == number)
+        //        {
+        //            _upgradePoint = _workPlaces[i].GetComponentInChildren<UpgradePlacePoint>().transform.position;
+        //            _currentUpgradePlace = Instantiate(_upgradePlace, _upgradePoint, Quaternion.identity);
+        //            _currentUpgradePlace.transform.SetParent(transform);
+
+        //            _parkPoint = _workPlaces[i].GetComponentInChildren<ParkPlacePoint>().transform.position;
+        //            _currentParkPlace = Instantiate(_parkPlace, _parkPoint, Quaternion.identity);
+        //            _currentParkPlace.transform.SetParent(transform);
+
+
+        //            _fuelPoint = _workPlaces[i].GetComponentInChildren<FuelPlacePoint>().transform.position;
+        //            _currentFuelPlace = Instantiate(_fuelPlace, _fuelPoint, Quaternion.identity);
+        //            _currentFuelPlace.transform.SetParent(transform);
+        //        }
+        //    }
+        //}
 
         private void OnChangePlace(GameObject insideControllers)
         {
             Vector3 currentPoint = insideControllers.GetComponentInChildren<UpgradePlacePoint>().transform.position;
-            _currentUpgradePlace.transform.position = currentPoint;
+            _upgradePlace.transform.position = currentPoint;
             currentPoint = insideControllers.GetComponentInChildren<ParkPlacePoint>().transform.position;
-            _currentParkPlace.transform.position = currentPoint;
+            _parkPlace.transform.position = currentPoint;
             currentPoint = insideControllers.GetComponentInChildren<FuelPlacePoint>().transform.position;
-            _currentFuelPlace.transform.position = currentPoint;
+            _fuelPlace.transform.position = currentPoint;
+            currentPoint = insideControllers.GetComponentInChildren<ExitPlacePoint>().transform.position;
+            _exitPlace.transform.position = currentPoint;
+        }
+
+        private void OnSetStage(GameObject stage)
+        {
+            _switcher = stage.GetComponent<WorkPlacesSwitcher>();
+            _switcher.ChangeWorkPlace += OnChangePlace;
         }
     }
 }

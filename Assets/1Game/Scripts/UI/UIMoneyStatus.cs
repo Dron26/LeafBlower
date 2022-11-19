@@ -2,6 +2,7 @@ using System;
 using TMPro;
 using UnityEngine;
 using Service;
+using Core;
 
 namespace UI
 {

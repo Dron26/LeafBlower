@@ -35,11 +35,11 @@ namespace Core
             _workPlace = GetComponentInParent<WorkPlace>();
             _particleSystem = GetComponent<ParticleSystem>();
             _quantityAllParticles = GetComponent<ParticleSystem>().maxParticles;
+            
         }
 
         private void Start()
-        {
-            GetMashines();
+        {           
             percentAll = 100;
             percent = 15;
             minQuantityAllPsrticles = (_quantityAllParticles / percentAll) * percent;
@@ -49,13 +49,12 @@ namespace Core
             _velosityParticle = new Vector3(maxVelocity, maxVelocity, maxVelocity);
             _stepSizeDown = 0.05f;
             _minSizeParticle = 0.3f;
-
+            GetMashines();
             GetLeavesTanks();
         }
 
         private void OnParticleCollision(GameObject other)
         {
-
             _allQuantityParticles = _particleSystem.particleCount;
 
             List<ParticleSystem.Particle> inside = new List<ParticleSystem.Particle>();
@@ -84,13 +83,11 @@ namespace Core
                 _particleSystem.SetTriggerParticles(ParticleSystemTriggerEventType.Inside, inside);
             }
 
-
-
-
             if (_allQuantityParticles <= minQuantityAllPsrticles)
             {
                 CatchAllParticle?.Invoke();
-                Destroy(gameObject);
+                _particleSystem.Stop();
+                gameObject.SetActive(false);
             }
         }
 

@@ -41,7 +41,7 @@ public class UIParkStat : MonoBehaviour
         _slider.DOValue(_maxValue, (_maxValue+ _maxValue), false);
     }
 
-    public void Initialization(float time)
+    public void Initialize(float time)
     {
         _maxValue = time;
     }

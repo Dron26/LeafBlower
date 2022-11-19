@@ -7,14 +7,20 @@ namespace Core
 
     public class GameData : MonoBehaviour
     {
-        public bool IsEnterGame { get; private set; }
+        public bool IsFirstGame { get; private set; }
         public int Money { get; private set; }
         public int MaxMoney { get; private set; }
+        public int LeaveBlowerStandartLevel { get; private set; }
+        public int LeaveBlowerlHardLevel { get; private set; }
+        public int TrashBagLevel { get; private set; }
+        public int CartLevel { get; private set; }
+        
 
-        public void FirstUpdateDate(Wallet wallet)
+        public void FirstUpdateDate(Wallet wallet, GameInitializator gameInitializator )
         {
             Money = wallet.Money;
             MaxMoney = wallet.MaxMoney;
+            IsFirstGame = gameInitializator.IsFirstStart;
         }
     }
 }

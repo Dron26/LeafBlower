@@ -30,11 +30,15 @@ public class UIFuelStat : MonoBehaviour
         _levelName = Animator.StringToHash("Level");
         _slider = GetComponentInChildren<Slider>();
     }
+    public void OnEnable()
+    {
+        _fuelChanger.ChangeFuel += OnChangeLevel;
+    }
 
     private void Start()
     {
-        
-        _isWork = true;
+            _minValue = 0;
+            _isWork = true;
         _maxValue = _fuelChanger.MaxFueLevell;
         _currentValue = _fuelChanger.FuelLevel;
         _slider.maxValue = _maxValue;
@@ -43,10 +47,7 @@ public class UIFuelStat : MonoBehaviour
         _animator.SetFloat(_levelName, _slider.value);
     }
 
-    public void OnEnable()
-    {
-        _fuelChanger.ChangeFuel += OnChangeLevel;
-    }
+
 
     public void OnDisable()
     {
