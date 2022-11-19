@@ -3,22 +3,22 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-public class ExitePanel : MonoBehaviour
+public class ExitPanelUI : MonoBehaviour
 {
     [SerializeField] private ExitPlace _exitPlaceOnStage;
    
-    private ExitePanel _exitePanel;
+    private Panel _panel;
 
     private UnityAction SetNextLevel;
 
     private void Awake()
     {
-        _exitePanel.GetComponent<ExitePanel>();
+        _panel=GetComponentInChildren<Panel>();
     }
 
     private void Start()
     {
-        _exitePanel.gameObject.SetActive(false);
+        OnEnterPlace(false);
     }
     private void OnEnable()
     {
@@ -33,7 +33,7 @@ public class ExitePanel : MonoBehaviour
 
     private void OnEnterPlace(bool isEnterPlace)
     {
-        _exitePanel.gameObject.SetActive(isEnterPlace);
+        _panel.gameObject.SetActive(isEnterPlace);
     }
 
     public void OnTapBattonYes()

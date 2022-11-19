@@ -1271,7 +1271,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5288805996678750757}
   m_LocalRotation: {x: -0.7071068, y: -0, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: 2.5, y: 1.43, z: -1.92}
+  m_LocalPosition: {x: 2.22, y: 1.43, z: -2.52}
   m_LocalScale: {x: 2.5000002, y: 2.5000005, z: 2.5}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1914,7 +1914,7 @@ ParticleSystem:
     donutRadius: 0.2
     m_Position: {x: 0, y: 0, z: 0}
     m_Rotation: {x: 0, y: 0, z: 0}
-    m_Scale: {x: 1.7, y: 4.67, z: 0}
+    m_Scale: {x: 1, y: 1, z: 0}
     placementMode: 0
     m_MeshMaterialIndex: 0
     m_MeshNormalOffset: 0

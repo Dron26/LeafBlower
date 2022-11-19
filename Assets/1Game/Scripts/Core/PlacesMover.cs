@@ -21,7 +21,7 @@ namespace Core
 
         private InsideController _inside;
         private List<WorkPlace> _workPlaces = new List<WorkPlace>();
-
+        private bool _isFirstSet;
         private void Awake()
         {
             _stageController = GetComponentInParent<StageController>();
@@ -34,6 +34,7 @@ namespace Core
         private void OnEnable()
         {
             _stageController.SetStage += OnSetStage;
+            _isFirstSet = true;
         }
 
         private void OnDisable()
@@ -94,14 +95,26 @@ namespace Core
             _parkPlace.transform.position = currentPoint;
             currentPoint = insideControllers.GetComponentInChildren<FuelPlacePoint>().transform.position;
             _fuelPlace.transform.position = currentPoint;
-            currentPoint = insideControllers.GetComponentInChildren<ExitPlacePoint>().transform.position;
-            _exitPlace.transform.position = currentPoint;
+
+            SetExitPlace(insideControllers, currentPoint);          
         }
 
         private void OnSetStage(GameObject stage)
         {
             _switcher = stage.GetComponent<WorkPlacesSwitcher>();
             _switcher.ChangeWorkPlace += OnChangePlace;
+        }
+
+        private void SetExitPlace( GameObject insideControllers,Vector3 currentPoint )
+        {
+            if (_isFirstSet==true)
+            {
+                Stage stage = insideControllers.GetComponentInParent<Stage>();
+                currentPoint = stage.GetComponentInChildren<ExitPlacePoint>().transform.position;
+                _exitPlace.transform.position = currentPoint;
+                Destroy(stage);
+                _isFirstSet = false;
+            }           
         }
     }
 }

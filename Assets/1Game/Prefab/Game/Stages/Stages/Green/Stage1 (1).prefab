@@ -251,6 +251,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7862745814100817719}
+  - component: {fileID: 8628829055863391924}
   m_Layer: 0
   m_Name: ExitPlacePoint
   m_TagString: Untagged
@@ -273,6 +274,18 @@ Transform:
   m_Father: {fileID: 7862745813889929951}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8628829055863391924
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7862745814100817718}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7dc720a1cc78a3a428c1c6d1118f08a4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1796972154387558813
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -995,26 +1008,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: GreenWorkPlaceJunior
-      objectReference: {fileID: 0}
-    - target: {fileID: 5288805996678750752, guid: 5d30d3e3e4956c44eb28011f49ba0af1,
-        type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -1.61
-      objectReference: {fileID: 0}
-    - target: {fileID: 5288805996678750752, guid: 5d30d3e3e4956c44eb28011f49ba0af1,
-        type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -2.52
-      objectReference: {fileID: 0}
-    - target: {fileID: 5288805996678750753, guid: 5d30d3e3e4956c44eb28011f49ba0af1,
-        type: 3}
-      propertyPath: ShapeModule.m_Scale.x
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5288805996678750753, guid: 5d30d3e3e4956c44eb28011f49ba0af1,
-        type: 3}
-      propertyPath: ShapeModule.m_Scale.y
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5d30d3e3e4956c44eb28011f49ba0af1, type: 3}
