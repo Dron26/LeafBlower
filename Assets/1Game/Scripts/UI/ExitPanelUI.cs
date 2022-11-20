@@ -9,7 +9,7 @@ public class ExitPanelUI : MonoBehaviour
    
     private Panel _panel;
 
-    private UnityAction SetNextLevel;
+    public UnityAction SetNextLevel;
 
     private void Awake()
     {

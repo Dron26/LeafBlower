@@ -32,6 +32,8 @@ namespace UI
         private LanguagePanel _language;
         private GameObject _languagePanel;
 
+        private ExitPanelUI _exitPanel;
+
         private Color _colorScreen;
         private float _waitTime;
 
@@ -69,11 +71,17 @@ namespace UI
             _languagePanel = _language.gameObject;
             _languagePanel.SetActive(false);
 
+            _exitPanel = GetComponentInChildren<ExitPanelUI>();
+
             _colorScreen = _screenDim.color;
             _screenDim.raycastTarget = false;
 
         }
 
+        private void OnEnable()
+        {
+            _exitPanel.SetNextLevel += OnSetNextLevel;
+        }
 
         private void Start()
         {
@@ -85,8 +93,6 @@ namespace UI
             StartCoroutine(ChangeColorEnter(_logoPanel));
         }
 
-
-
         public void Exit()
         {
             Application.Quit();
@@ -95,6 +101,12 @@ namespace UI
         private IEnumerator ChangeColorExit(GameObject panelEnter, GameObject panelExit)
         {
             _screenDim.raycastTarget = true;
+
+            if(_isExitStartMenu == false)
+            {
+                _backGround.gameObject.SetActive(true);
+                _screenDim.gameObject.SetActive(true);
+            }
 
             while (_colorScreen.a < 1)
             {
@@ -117,6 +129,7 @@ namespace UI
             {
                 _backGround.gameObject.SetActive(false);
             }
+            
 
             while (_colorScreen.a > 0)
             {
@@ -129,7 +142,6 @@ namespace UI
             if (_isExitStartMenu == true)
             {
                 _screenDim.gameObject.SetActive(false);
-                _backGround.gameObject.SetActive(false);
             }
 
             _screenDim.raycastTarget = false;
@@ -174,7 +186,15 @@ namespace UI
             _isPushAlarmWork = !_isPushAlarmWork;
             PushAlarm?.Invoke(_isPushAlarmWork);
         }
+        private void OnDisable()
+        {
+            
+        }
+
+        private void OnSetNextLevel()
+        {
+            _isExitStartMenu = false;
+            StartCoroutine(ChangeColorExit(_locationsPanel,_statsPanel));
+        }
     }
-
-
 }

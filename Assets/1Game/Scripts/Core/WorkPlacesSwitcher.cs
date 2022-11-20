@@ -63,7 +63,5 @@ namespace Core
                 _insideControllers[i].CharacterInside += OnCharacterInside;
             }
         }
-
-        
     }
 }

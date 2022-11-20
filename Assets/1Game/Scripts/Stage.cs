@@ -8,6 +8,8 @@ namespace Service
     {
         [SerializeField] private List<ParticleSystemController> _particleSystems;
 
+        private ExitPanelUI _exitPanel;
+            
         public List<ParticleSystemController> GetParticleList()
         {
             List<ParticleSystemController> tempSystems = new();
@@ -18,6 +20,22 @@ namespace Service
             }
 
             return tempSystems;
+        }
+
+        private void OnSetNextLevel()
+        {
+            Destroy(this.gameObject);
+        }
+
+        public void SetExitPanel(ExitPanelUI exitPanelUI)
+        {
+            _exitPanel = exitPanelUI;
+            _exitPanel.SetNextLevel += OnSetNextLevel;
+        }
+
+        private void OnDisable()
+        {
+            _exitPanel.SetNextLevel -= OnSetNextLevel;
         }
     }
 }

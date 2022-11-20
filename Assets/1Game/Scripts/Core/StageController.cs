@@ -10,6 +10,8 @@ namespace Core
     {
         [SerializeField] private ChangerPanel _changerPanel;
         [SerializeField] private List<Stage> _stages;
+        [SerializeField] private ExitPanelUI _exitPanel;
+
         private List<ParticleSystemController> _particleSystems;
 
         private Character _character;
@@ -20,18 +22,20 @@ namespace Core
 
         private void Awake()
         {
-            _character = GetComponentInChildren<Character>();
+            _character = GetComponentInChildren<Character>();            
             SetCharacter?.Invoke(_character);
         }
 
         private void OnEnable()
         {
             _changerPanel.SelectSmallTownStage += OnSelectSmallTownStage;
+            _exitPanel.SetNextLevel += OnSetNextLevel;
         }
 
         private void OnDisable()
         {
             _changerPanel.SelectSmallTownStage -= OnSelectSmallTownStage;
+            _exitPanel.SetNextLevel += OnSetNextLevel;
 
             for (int i = 0; i < _particleSystems.Count; i++)
             {
@@ -53,6 +57,7 @@ namespace Core
         {
             Stage newStage = Instantiate(_stages[number], _stages[number].transform.position, Quaternion.identity);
             newStage.transform.SetParent(transform);
+            newStage.SetExitPanel(_exitPanel);
             SetStage?.Invoke(newStage.gameObject);
             GetParticleSystems(newStage);
         }
@@ -67,6 +72,11 @@ namespace Core
                 _particleSystems.Add(_tempSystems[i]);
                 _particleSystems[i].CatchAllParticle += OnCatchAllParticle;
             }
+        }
+
+        private void OnSetNextLevel()
+        {
+
         }
     }
 }
