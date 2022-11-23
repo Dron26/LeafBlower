@@ -8,11 +8,12 @@ namespace Service
 public class Confetti : MonoBehaviour
 {
     [SerializeField] private ParticleSystemController _particleSystem;
-        private ParticleSystem particleSystem;
+        
+        private ParticleSystem _particleSystemComponent;
 
         private void Awake()
         {
-            particleSystem = GetComponent<ParticleSystem>();
+            _particleSystemComponent = GetComponent<ParticleSystem>();
         }
 
         private void OnEnable()
@@ -27,7 +28,7 @@ public class Confetti : MonoBehaviour
 
         private void OnCatchAllParticle()
         {
-            particleSystem.Play();
+            _particleSystemComponent.Play();
         }
     }
 }

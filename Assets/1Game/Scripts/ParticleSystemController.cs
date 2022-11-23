@@ -34,7 +34,7 @@ namespace Core
         {
             _workPlace = GetComponentInParent<WorkPlace>();
             _particleSystem = GetComponent<ParticleSystem>();
-            _quantityAllParticles = GetComponent<ParticleSystem>().maxParticles;
+            _quantityAllParticles = GetComponent<ParticleSystem>().main.maxParticles;
             
         }
 
@@ -45,7 +45,7 @@ namespace Core
             minQuantityAllPsrticles = (_quantityAllParticles / percentAll) * percent;
             float maxVelocity = 100f;
             _leavesTanks = new List<Collider>();
-            maxQuantityParticles = _particleSystem.maxParticles;
+            maxQuantityParticles = _particleSystem.main.maxParticles;
             _velosityParticle = new Vector3(maxVelocity, maxVelocity, maxVelocity);
             _stepSizeDown = 0.05f;
             _minSizeParticle = 0.3f;

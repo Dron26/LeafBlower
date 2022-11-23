@@ -8,7 +8,6 @@ public class Wallet : MonoBehaviour
 
     protected private int _amountResource;
     protected private int _maxAmountResource;
-    public virtual event UnityAction<int> ChangeAmountResource;
 
     public UnityAction<int> ChangeResource;
 

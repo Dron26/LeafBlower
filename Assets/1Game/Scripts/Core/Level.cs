@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Core
 {
-    public class Level : MonoBehaviour
+    public class Level
     {
         public int stepUp { get; set; }
         public int tempValue { get; set; }

@@ -20,6 +20,7 @@ public class ExitPanelUI : MonoBehaviour
     {
         OnEnterPlace(false);
     }
+
     private void OnEnable()
     {
         _exitPlaceOnStage.EnterPlace += OnEnterPlace;

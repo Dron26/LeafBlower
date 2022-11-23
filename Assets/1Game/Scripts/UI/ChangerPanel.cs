@@ -92,7 +92,6 @@ namespace UI
             _screenDim.raycastTarget = true;
             _backGround.gameObject.SetActive(true);
             _isPushAlarmWork = true;
-            _statsPanel.gameObject.SetActive(false);
             StartCoroutine(ChangeColorEnter(_logoPanel));
         }
 

@@ -43,8 +43,8 @@ public class UIFuelStat : MonoBehaviour
         _currentValue = _fuelChanger.FuelLevel;
         _slider.maxValue = _maxValue;
         _slider.minValue = _minValue;
-        _slider.value = _currentValue;
-        _animator.SetFloat(_levelName, _slider.value);
+        _slider.value = _slider.maxValue;
+            _animator.SetFloat(_levelName, _slider.value);
     }
 
 

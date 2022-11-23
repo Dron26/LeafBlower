@@ -56,7 +56,6 @@ public class CartTrashBagPicker : MonoBehaviour
         _startPositionStorePoint = _storePoint.transform.localPosition;
         _mainPoint = _mainPointForTrashBag.transform.localPosition;
         stepInRow = 0.6f;
-        float stepinSecondRow = -0.4f;
 
         _changePointStore.Add(new Vector3(_storePoint.transform.localPosition.x, _storePoint.transform.localPosition.y, _storePoint.transform.localPosition.z));
         _changePointStore.Add(new Vector3(_storePoint.transform.localPosition.x + stepInRow, _storePoint.transform.localPosition.y, _storePoint.transform.localPosition.z));

@@ -60,7 +60,6 @@ namespace Core
             for (int i = 0; i < _workPlaces.Count; i++)
             {
                 InsideController insideController = new InsideController();
-                Vector3 stayPoint = new Vector3();
 
                 _insideControllers.Add(insideController = _workPlaces[i].GetComponentInChildren<InsideController>());
                 _insideControllers[i].CharacterInside += OnCharacterInside;
