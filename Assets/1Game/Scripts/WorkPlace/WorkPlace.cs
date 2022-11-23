@@ -11,19 +11,22 @@ namespace Service
 
         public UnityAction<bool> EnterWorkPlace;
 
+        private void Start()
+        {
+            ChangeStateWorkPlaceObjects(false);
+        }
+
         private void OnTriggerEnter(Collider other)
         {
-            if (other.TryGetComponent(out ItemContainer container))
+            if (other.TryGetComponent(out Character character))
             {
                 EnterWorkPlace?.Invoke(true);
                 ChangeStateWorkPlaceObjects(true);
             }
-
-
         }
         private void OnTriggerExit(Collider other)
         {
-            if (other.TryGetComponent(out ItemContainer container))
+            if (other.TryGetComponent(out Character character))
             {
                 EnterWorkPlace?.Invoke(false);
                 ChangeStateWorkPlaceObjects(false);
