@@ -23,6 +23,7 @@ namespace Service
         private float _allMaxFuelLevel;
         private float _stepChangeLevel;
         private float _stepRefuelingLevel;
+        private float _minLevel = 15f;
 
         public UnityAction<float> ChangeFuel;
         public UnityAction EndFuel;
@@ -87,6 +88,11 @@ namespace Service
                     ChangeFuel?.Invoke(_fuelLevel);
                 }
 
+                if (_fuelLevel< _minLevel)
+                {
+                    EndFuel?.Invoke();
+                }
+
                 yield return _waitForSeconds;
             }
         }
@@ -110,7 +116,6 @@ namespace Service
 
         public void SetParametrs(float maxFuelLevel, float stepChangeLevel, float stepRefuelingLevel)
         {
-
             _maxFuelLevel = maxFuelLevel;
             _fuelLevel = _maxFuelLevel;
             _stepChangeLevel = stepChangeLevel;

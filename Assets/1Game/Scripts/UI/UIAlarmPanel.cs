@@ -4,45 +4,56 @@ using Core;
 
 namespace UI
 {
-    public class UIAlarmMessager : MonoBehaviour
+    public class UIAlarmPanel : MonoBehaviour
     {
         private CharacterTrashBagPicker _characterTrashBag;
 
 
         [SerializeField] private StageController _stageController;
+        [SerializeField] private FuelChanger _fuelChanger;
         private bool _isSend;
-        private AlarmPanel _alarmPanel;
+        private MaxTrashBagAlarm _alarmTrashBagPanel;
+        private MinFuelAlarm _minFuelAlarm;
 
         private void Awake()
         {
-            _alarmPanel = GetComponentInChildren<AlarmPanel>();
-            _alarmPanel.gameObject.SetActive(false);
+            _alarmTrashBagPanel = GetComponentInChildren<MaxTrashBagAlarm>();
+            _alarmTrashBagPanel.gameObject.SetActive(false);
+
+            _minFuelAlarm = GetComponentInChildren<MinFuelAlarm>();
+            _minFuelAlarm.gameObject.SetActive(false);
         }
 
         private void OnEnable()
         {
             _stageController.SetCharacter += OSetCharacter;
-            
+            _fuelChanger.EndFuel += OnEndFuel;
         }
 
         private void OnDisable()
         {
             _stageController.SetCharacter -= OSetCharacter;
-            _characterTrashBag.SellTrashBag += OnSellTrashBag;
+            _characterTrashBag.SellTrashBag -= OnSellTrashBag;
+            _fuelChanger.EndFuel -= OnEndFuel;
         }
 
         private void OnTakeMaxQuantityTrashBag()
         {
             if (_isSend == false)
             {
-                _alarmPanel.gameObject.SetActive(true);
+                _alarmTrashBagPanel.gameObject.SetActive(true);
                 _isSend = true;
             }
         }
 
+        private void OnEndFuel()
+        {
+            _minFuelAlarm.gameObject.SetActive(true);
+        }
+
         private void OnSellTrashBag()
         {
-            _alarmPanel.gameObject.SetActive(false);
+            _alarmTrashBagPanel.gameObject.SetActive(false);
             _isSend = false;
         }
 
