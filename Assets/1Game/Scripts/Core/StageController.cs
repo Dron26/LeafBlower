@@ -13,7 +13,7 @@ namespace Core
         [SerializeField] private ExitPanelUI _exitPanel;
 
         private List<ParticleSystemController> _particleSystems;
-
+        private List<WorkPlace> places;
         private Character _character;
 
         public UnityAction<GameObject> SetStage;
@@ -73,7 +73,6 @@ namespace Core
                 _particleSystems[i].CatchAllParticle += OnCatchAllParticle;
             }
         }
-
         private void OnSetNextLevel()
         {
 

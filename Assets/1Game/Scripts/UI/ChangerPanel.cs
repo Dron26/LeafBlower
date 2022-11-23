@@ -14,18 +14,11 @@ namespace UI
         private Button _enterPanelButton;
 
         private LogoPanel _logo;
-        private GameObject _logoPanel;
+        private Panel _logoPanel;
 
-        private Locations _locations;
-        private GameObject _locationsPanel;
-
-        private SmallTowm _smallTown;
-        private GameObject _smallTownPanel;
-
+   
         private StatsPanel _stats;
-        private GameObject _statsPanel;
-
-
+        private Panel _statsPanel;
         private SettingsPanel _settings;
         private GameObject _settingsPanel;
 
@@ -33,6 +26,9 @@ namespace UI
         private GameObject _languagePanel;
 
         private ExitPanelUI _exitPanel;
+
+        private StagesGroup _stagesGroup;
+        private Panel _stagesGroupPanel;
 
         private Color _colorScreen;
         private float _waitTime;
@@ -47,34 +43,40 @@ namespace UI
         private void Awake()
         {
             _logo = GetComponentInChildren<LogoPanel>();
-            _logoPanel = _logo.gameObject;
-            _logoPanel.SetActive(false);
+            _logoPanel = _logo.gameObject.GetComponent<Panel>();
+            _logo.gameObject.SetActive(true);
 
             _stats = GetComponentInChildren<StatsPanel>();
-            _statsPanel = _stats.gameObject;
-            _statsPanel.SetActive(false);
+            _statsPanel = _stats.gameObject.GetComponent<Panel>();
 
-            _locations = GetComponentInChildren<Locations>();
-            _locationsPanel = _locations.gameObject;
-            _locationsPanel.SetActive(false);
+            
+            //_statsPanel = _stats.gameObject;
+            //_statsPanel.SetActive(false);
 
-            _smallTown = GetComponentInChildren<SmallTowm>();
-            _smallTownPanel = _smallTown.gameObject;
-            _smallTownPanel.SetActive(false);
+            //_locations = GetComponentInChildren<Locations>();
+            //_locationsPanel = _locations.gameObject;
+            //_locationsPanel.SetActive(false);
+
+            //_smallTown = GetComponentInChildren<SmallTowm>();
+            //_smallTownPanel = _smallTown.gameObject;
+            //_smallTownPanel.SetActive(false);
 
 
-            _settings = GetComponentInChildren<SettingsPanel>();
-            _settingsPanel = _settings.gameObject;
-            _settingsPanel.SetActive(false);
+            //_settings = GetComponentInChildren<SettingsPanel>();
+            //_settingsPanel = _settings.gameObject;
+            //_settingsPanel.SetActive(false);
 
-            _language = GetComponentInChildren<LanguagePanel>();
-            _languagePanel = _language.gameObject;
-            _languagePanel.SetActive(false);
+            //_language = GetComponentInChildren<LanguagePanel>();
+            //_languagePanel = _language.gameObject;
+            //_languagePanel.SetActive(false);
 
             _exitPanel = GetComponentInChildren<ExitPanelUI>();
 
             _colorScreen = _screenDim.color;
             _screenDim.raycastTarget = false;
+
+            _stagesGroup = GetComponentInChildren<StagesGroup>();
+            _stagesGroupPanel= _stagesGroup.gameObject.GetComponent<Panel>();
 
         }
 
@@ -90,6 +92,7 @@ namespace UI
             _screenDim.raycastTarget = true;
             _backGround.gameObject.SetActive(true);
             _isPushAlarmWork = true;
+            _statsPanel.gameObject.SetActive(false);
             StartCoroutine(ChangeColorEnter(_logoPanel));
         }
 
@@ -98,8 +101,11 @@ namespace UI
             Application.Quit();
         }
 
-        private IEnumerator ChangeColorExit(GameObject panelEnter, GameObject panelExit)
+        private IEnumerator ChangeColorExit(Panel activated, Panel activ)
         {
+            
+            GameObject panelExit= activ.gameObject;
+
             _screenDim.raycastTarget = true;
 
             if(_isExitStartMenu == false)
@@ -117,12 +123,14 @@ namespace UI
             }
 
             panelExit.SetActive(false);
-            StartCoroutine(ChangeColorEnter(panelEnter));
-            StopCoroutine(ChangeColorExit(panelEnter, panelExit));
+            StartCoroutine(ChangeColorEnter(activated));
+            StopCoroutine(ChangeColorExit(activated, activ));
         }
 
-        private IEnumerator ChangeColorEnter(GameObject panelEnter)
-        {          
+        private IEnumerator ChangeColorEnter(Panel activated)
+        {
+            GameObject panelEnter = activated.gameObject;
+
             panelEnter.SetActive(true);
 
             if (_isExitStartMenu == true)
@@ -146,24 +154,39 @@ namespace UI
 
             _screenDim.raycastTarget = false;
 
-            StopCoroutine(ChangeColorEnter(panelEnter));
+            StopCoroutine(ChangeColorEnter(activated));
         }
 
-        public void OnClickStartButton()
+        //public void OnClickStartButton()
+        //{
+        //    StartCoroutine(ChangeColorExit(_locationsPanel, _logoPanel));
+        //}
+
+        //public void OnClickSmallTown()
+        //{
+        //    StartCoroutine(ChangeColorExit(_smallTownPanel, _locationsPanel));
+        //}
+
+        //public void OnClickSmallTownStage(int number)
+        //{
+        //    SelectSmallTownStage?.Invoke(number);
+        //    _isExitStartMenu = true;
+        //    StartCoroutine(ChangeColorExit(_statsPanel, _smallTownPanel));
+        //}
+
+        public void ClikNextPanel(GameObject panel)
         {
-            StartCoroutine(ChangeColorExit(_locationsPanel, _logoPanel));
+            Panel next = panel.GetComponent<Panel>().next;
+            Panel activ = panel.GetComponent<Panel>();
+            StartCoroutine(ChangeColorExit(next, activ));
         }
 
-        public void OnClickSmallTown()
-        {
-            StartCoroutine(ChangeColorExit(_smallTownPanel, _locationsPanel));
-        }
-
-        public void OnClickSmallTownStage(int number)
+        public void OnClickStages(int number)
         {
             SelectSmallTownStage?.Invoke(number);
             _isExitStartMenu = true;
-            StartCoroutine(ChangeColorExit(_statsPanel, _smallTownPanel));
+
+            StartCoroutine(ChangeColorExit(_statsPanel, _stagesGroupPanel));
         }
 
         //public void OnClickSettings()
@@ -176,9 +199,11 @@ namespace UI
         //    _languagePanel.SetActive(true);
         //}
 
-        public void OnClickBackSmallTown()
+        public void OnClickBackPanel(GameObject panel)
         {
-            StartCoroutine(ChangeColorExit(_locationsPanel,_smallTownPanel));
+            Panel next = panel.GetComponent<Panel>().back;
+            Panel activ = panel.GetComponent<Panel>();
+            StartCoroutine(ChangeColorExit(next, activ));
         }
 
         public void OnClickPushAlarm()
@@ -194,7 +219,7 @@ namespace UI
         private void OnSetNextLevel()
         {
             _isExitStartMenu = false;
-            StartCoroutine(ChangeColorExit(_locationsPanel,_statsPanel));
+            //StartCoroutine(ChangeColorExit(_locationsPanel,_statsPanel));
         }
     }
 }

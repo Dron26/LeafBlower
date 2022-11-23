@@ -5,24 +5,37 @@ using UnityEngine.Events;
 
 namespace Service
 {
-public class WorkPlace : MonoBehaviour
-{ 
-    public UnityAction<bool> EnterWorkPlace;
-
-    private void OnTriggerEnter(Collider other)
+    public class WorkPlace : MonoBehaviour
     {
-        if (other.TryGetComponent(out ItemContainer container))
+        [SerializeField] public List<WorkPlaceObject> _objects;
+
+        public UnityAction<bool> EnterWorkPlace;
+
+        private void OnTriggerEnter(Collider other)
         {
-            EnterWorkPlace?.Invoke(true);
+            if (other.TryGetComponent(out ItemContainer container))
+            {
+                EnterWorkPlace?.Invoke(true);
+                ChangeStateWorkPlaceObjects(true);
+            }
+
+
+        }
+        private void OnTriggerExit(Collider other)
+        {
+            if (other.TryGetComponent(out ItemContainer container))
+            {
+                EnterWorkPlace?.Invoke(false);
+                ChangeStateWorkPlaceObjects(false);
+            }
+        }
+
+        private void ChangeStateWorkPlaceObjects(bool isWork)
+        {
+            for (int i = 0; i < _objects.Count; i++)
+            {
+                _objects[i].gameObject.SetActive(isWork);
+            }
         }
     }
-    private void OnTriggerExit(Collider other)
-    {
-        if (other.TryGetComponent(out ItemContainer container))
-        {
-            EnterWorkPlace?.Invoke(false);
-        }
-    }
-
-}
 }

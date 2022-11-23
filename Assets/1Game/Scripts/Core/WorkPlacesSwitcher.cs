@@ -10,7 +10,10 @@ namespace Core
 {
     public class WorkPlacesSwitcher : MonoBehaviour
     {
+        
+
         private List<WorkPlace> _workPlaces=new List<WorkPlace>();
+
         [HideInInspector] private List<InsideController> _insideControllers = new List<InsideController>();
 
         public UnityAction<GameObject> ChangeWorkPlace;

@@ -169,13 +169,13 @@ namespace Service
 
         private void OnEnable()
         {
-            _stageController.SetStage += OnSetStage;
+            //_stageController.SetStage += OnSetStage;
             _parkPlace.CartEnter += OnCartRemove;
         }
 
         private void OnDisable()
         {
-            _stageController.SetStage -= OnSetStage;
+            //_stageController.SetStage -= OnSetStage;
             _parkPlace.CartEnter -= OnCartRemove;
         }
 
@@ -199,11 +199,11 @@ namespace Service
             _canSell = true;
         }
 
-        private void OnSetStage(GameObject stage)
-        {
-            _workPlacesSwitcher = stage.GetComponent<WorkPlacesSwitcher>();
-            _workPlaces = _workPlacesSwitcher.GetWorkPlaces();
-        }
+        //private void OnSetStage(GameObject stage)
+        //{
+        //    _workPlacesSwitcher = stage.GetComponent<WorkPlacesSwitcher>();
+        //    _workPlaces = _workPlacesSwitcher.GetWorkPlaces();
+        //}
     }
 }
 

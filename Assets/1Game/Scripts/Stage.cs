@@ -7,6 +7,7 @@ namespace Service
     public class Stage : MonoBehaviour
     {
         [SerializeField] private List<ParticleSystemController> _particleSystems;
+        
 
         private ExitPanelUI _exitPanel;
             
@@ -22,7 +23,7 @@ namespace Service
             return tempSystems;
         }
 
-        private void OnSetNextLevel()
+            private void OnSetNextLevel()
         {
             Destroy(this.gameObject);
         }
