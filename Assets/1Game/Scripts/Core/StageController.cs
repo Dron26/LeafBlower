@@ -20,6 +20,7 @@ namespace Core
         public UnityAction<Character> SetCharacter;
         public UnityAction CatchAllParticle;
 
+        private bool isGetParticles;
         private void Awake()
         {
             _character = GetComponentInChildren<Character>();            
@@ -37,10 +38,13 @@ namespace Core
             _changerPanel.SelectSmallTownStage -= OnSelectSmallTownStage;
             _exitPanel.SetNextLevel += OnSetNextLevel;
 
-            for (int i = 0; i < _particleSystems.Count; i++)
+            if (isGetParticles==true)
             {
-                _particleSystems[i].CatchAllParticle -= OnCatchAllParticle;
-            }
+                for (int i = 0; i < _particleSystems.Count; i++)
+                {
+                    _particleSystems[i].CatchAllParticle -= OnCatchAllParticle;
+                }
+            }           
         }
 
         private void OnCatchAllParticle()
@@ -72,6 +76,8 @@ namespace Core
                 _particleSystems.Add(_tempSystems[i]);
                 _particleSystems[i].CatchAllParticle += OnCatchAllParticle;
             }
+
+            isGetParticles = true;
         }
         private void OnSetNextLevel()
         {

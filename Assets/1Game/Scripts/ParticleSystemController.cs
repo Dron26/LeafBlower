@@ -47,7 +47,7 @@ namespace Core
             _leavesTanks = new List<Collider>();
             maxQuantityParticles = _particleSystem.main.maxParticles;
             _velosityParticle = new Vector3(maxVelocity, maxVelocity, maxVelocity);
-            _stepSizeDown = 0.05f;
+            _stepSizeDown = 0.08f;
             _minSizeParticle = 0.3f;
             GetMashines();
             GetLeavesTanks();

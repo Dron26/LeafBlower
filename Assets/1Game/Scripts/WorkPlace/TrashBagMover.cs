@@ -59,11 +59,6 @@ public class TrashBagMover : MonoBehaviour
     private IEnumerator MoveSecondPosition()
     {
         numberFinishPoint++;
-
-        if (numberFinishPoint==2)
-        {
-            Debug.Log("");
-        }
         _isPositionChange = false;
         Tween tween = transform.DOLocalMove(_transitPoint, _time);
 

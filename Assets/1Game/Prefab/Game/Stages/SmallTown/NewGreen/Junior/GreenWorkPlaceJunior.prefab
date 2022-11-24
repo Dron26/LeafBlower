@@ -1290,7 +1290,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5288805996678750757}
   m_LocalRotation: {x: -0.7071068, y: -0, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: 2.68, y: 1.43, z: -1.89}
+  m_LocalPosition: {x: 2.82, y: 1.43, z: -1.89}
   m_LocalScale: {x: 2.5000002, y: 2.5000005, z: 2.5}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -7620,6 +7620,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: GarbageMachineWater
       objectReference: {fileID: 0}
+    - target: {fileID: 8702229219945329080, guid: 40f57e401c705a14594fa74449ee6190,
+        type: 3}
+      propertyPath: m_Radius
+      value: 0.24
+      objectReference: {fileID: 0}
     - target: {fileID: 8702229220740325137, guid: 40f57e401c705a14594fa74449ee6190,
         type: 3}
       propertyPath: m_LocalPosition.y
@@ -7637,8 +7642,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8702229220740325142, guid: 40f57e401c705a14594fa74449ee6190,
         type: 3}
+      propertyPath: m_Parameters.m_StartRange
+      value: 0.28
+      objectReference: {fileID: 0}
+    - target: {fileID: 8702229220740325142, guid: 40f57e401c705a14594fa74449ee6190,
+        type: 3}
       propertyPath: m_Parameters.m_GravityCurve.scalar
-      value: 2
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8702229220740325142, guid: 40f57e401c705a14594fa74449ee6190,
+        type: 3}
+      propertyPath: m_Parameters.m_VectorFieldSpeedCurve.scalar
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 40f57e401c705a14594fa74449ee6190, type: 3}
@@ -7989,6 +8004,12 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4910543567745006669, guid: edd16d6363c49ed4ba2004bfa0012935,
+        type: 3}
+      propertyPath: m_Icon
+      value: 
+      objectReference: {fileID: 4422084297763085224, guid: 0000000000000000d000000000000000,
+        type: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: edd16d6363c49ed4ba2004bfa0012935, type: 3}
 --- !u!1 &5288805996985443032 stripped

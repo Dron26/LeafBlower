@@ -26,7 +26,7 @@ namespace Service
         private float _minLevel = 15f;
 
         public UnityAction<float> ChangeFuel;
-        public UnityAction EndFuel;
+        public UnityAction<bool> ReachedMinLevel;
 
         private void Start()
         {
@@ -90,7 +90,7 @@ namespace Service
 
                 if (_fuelLevel< _minLevel)
                 {
-                    EndFuel?.Invoke();
+                    ReachedMinLevel?.Invoke(true);
                 }
 
                 yield return _waitForSeconds;
@@ -100,6 +100,7 @@ namespace Service
         private IEnumerator StartRefueling()
         {
             _isExiteFuelPlace = false;
+            ReachedMinLevel?.Invoke(false);
 
             while (_isExiteFuelPlace == false)
             {
@@ -108,6 +109,11 @@ namespace Service
                     _fuelLevel += _stepRefuelingLevel;
                     _fuelLevel = Mathf.Clamp(_fuelLevel, 0, _maxFuelLevel);
                     ChangeFuel?.Invoke(_fuelLevel);
+                }
+
+                if (_fuelLevel > _minLevel)
+                {
+                    ReachedMinLevel?.Invoke(false);
                 }
 
                 yield return _waitForRefuelSeconds;

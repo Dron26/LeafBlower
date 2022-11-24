@@ -27,14 +27,14 @@ namespace UI
         private void OnEnable()
         {
             _stageController.SetCharacter += OSetCharacter;
-            _fuelChanger.EndFuel += OnEndFuel;
+            _fuelChanger.ReachedMinLevel += StartAlarm;
         }
 
         private void OnDisable()
         {
             _stageController.SetCharacter -= OSetCharacter;
             _characterTrashBag.SellTrashBag -= OnSellTrashBag;
-            _fuelChanger.EndFuel -= OnEndFuel;
+            _fuelChanger.ReachedMinLevel -= StartAlarm;
         }
 
         private void OnTakeMaxQuantityTrashBag()
@@ -46,10 +46,12 @@ namespace UI
             }
         }
 
-        private void OnEndFuel()
+        private void StartAlarm(bool isWork)
         {
             _minFuelAlarm.gameObject.SetActive(true);
         }
+
+        
 
         private void OnSellTrashBag()
         {
