@@ -33,7 +33,7 @@ namespace UI
         private void OnDisable()
         {
             _stageController.SetCharacter -= OSetCharacter;
-            _characterTrashBag.SellTrashBag -= OnSellTrashBag;
+            _characterTrashBag.SallAllTrashBag -= OnSellTrashBag;
             _fuelChanger.ReachedMinLevel -= StartAlarm;
         }
 
@@ -63,7 +63,7 @@ namespace UI
         {
             _characterTrashBag = character.GetComponent<CharacterTrashBagPicker>();
             _characterTrashBag.TakeMaxQuantityTrashBag += OnTakeMaxQuantityTrashBag;
-            _characterTrashBag.SellTrashBag += OnSellTrashBag;
+            _characterTrashBag.SallAllTrashBag += OnSellTrashBag;
         }
     }
 }

@@ -12,6 +12,9 @@ namespace Service
 
         [SerializeField] private ParkPlace _parkPlace;
 
+         private CartTrashBagPicker _cartPiker;
+        [SerializeField] private Cart _cart;
+
         private TrashBagStorePoint _storePoint;
         private MainPointForTrashBag _mainPointForTrashBag;
         private TrashBagMover _trashBagMover;
@@ -21,7 +24,7 @@ namespace Service
         public UnityAction TakeTrashBag;
         public UnityAction<TrashBag> SallTrashBag;
         public UnityAction TakeMaxQuantityTrashBag;
-        public UnityAction SellTrashBag;
+        public UnityAction SallAllTrashBag;
         public UnityAction<Vector3> SetPosition;
 
         private Stack<TrashBag> _pickedTrashBags;
@@ -29,7 +32,7 @@ namespace Service
         private Vector3 _localPositionStorePoint;
         private List<Vector3> _changePointStore;
         private List<Vector3> _changePointCart;
-
+        private int _cartTrashBagsReceivedCount;
         private int _quantityAllTrashBag;
         private int _quantityPickedTrashBag;
         private int _maxQuantityPickedTrashBag;
@@ -45,11 +48,17 @@ namespace Service
 
         private void Awake()
         {
-
+            _cartPiker = _cart.gameObject.GetComponent<CartTrashBagPicker>();
             _stageController = GetComponentInParent<StageController>();
             _storePoint = GetComponentInChildren<TrashBagStorePoint>();
-
         }
+
+        private void OnEnable()
+        {
+            //_stageController.SetStage += OnSetStage;
+            _cart.FinishMove += OnFinishCart;
+        }
+
         private void Start()
         {
 
@@ -61,11 +70,11 @@ namespace Service
             _canSell = true;
             float stepInRow = 0.3f;
             float stepinSecondRow = -0.4f;
-            _waitForSeconds = new WaitForSeconds(_time);
+            float _timeToSell = 0.1f;
+            _waitForSeconds = new WaitForSeconds(_timeToSell);
             _quantityLevel = 0;
             _maxQuantityLevel = 8;
             _maxQuantityPickedTrashBag = 8;
-
 
             _mainPoint = _mainPointForTrashBag.transform.localPosition;
 
@@ -81,30 +90,9 @@ namespace Service
         {
             if (other.TryGetComponent(out TrashBag trashBag))
             {
-                if (_pickedTrashBags.Count != _maxQuantityPickedTrashBag)
-                {
-                    _quantityPickedTrashBag++;
-
-                    if (_quantityPickedTrashBag <= _maxQuantityPickedTrashBag)
-                    {
-
-                        _pickedTrashBags.Push(trashBag);
-                        trashBag.transform.SetParent(transform, true);
-                        _trashBagMover = trashBag.GetComponent<TrashBagMover>();
-                        trashBag.ChangeMaterial();
-                        ChangeWay(trashBag);
-                        TakeTrashBag?.Invoke();
-                    }
-                }
-                else
-                {
-                    TakeMaxQuantityTrashBag?.Invoke();
-                }
+                PikedTrashBag(trashBag);
             }
-        }
 
-        private void OnTriggerStay(Collider other)
-        {
             if (other.TryGetComponent(out Cart cart) & _pickedTrashBags.Count != 0)
             {
                 SellTrashBags();
@@ -162,39 +150,49 @@ namespace Service
             }
         }
 
-        private void OnCartRemove()
+        private void OnFinishCart()
         {
             _canSell = true;
         }
 
-        private void OnEnable()
-        {
-            //_stageController.SetStage += OnSetStage;
-            _parkPlace.CartEnter += OnCartRemove;
-        }
 
         private void OnDisable()
         {
             //_stageController.SetStage -= OnSetStage;
-            _parkPlace.CartEnter -= OnCartRemove;
+            _parkPlace.CartEnter -= OnFinishCart;
         }
 
         private IEnumerator SellBags()
         {
             _canSell = false;
-            yield return _waitForSeconds;
+            _cartTrashBagsReceivedCount = _cartPiker.TrashBagsReceivedCount;
 
-            _pickedTrashBags.TryPop(out TrashBag trashBag);
-            SallTrashBag?.Invoke(trashBag);
-
-            if (_pickedTrashBags.Count == 0)
+            int quantity;           
+            if (_pickedTrashBags.Count> _cartTrashBagsReceivedCount)
             {
-                _quantityPickedTrashBag = 0;
-                _quantityInRow = 0;
-                _storePoint.transform.localPosition = _localPositionStorePoint;
-                SellTrashBag?.Invoke();
-                SetPoint();
+                quantity = _cartTrashBagsReceivedCount;
             }
+            else
+            {
+                quantity = _pickedTrashBags.Count;
+            }
+
+            for (int i = 0; i < quantity; i++)
+            {
+                yield return _waitForSeconds;
+
+                _pickedTrashBags.TryPop(out TrashBag trashBag);
+                SallTrashBag?.Invoke(trashBag);
+
+                if (_pickedTrashBags.Count == 0)
+                {
+                    _quantityPickedTrashBag = 0;
+                    _quantityInRow = 0;
+                    _storePoint.transform.localPosition = _localPositionStorePoint;
+                    SallAllTrashBag?.Invoke();
+                    SetPoint();
+                }
+            }                              
 
             _canSell = true;
         }
@@ -204,6 +202,29 @@ namespace Service
         //    _workPlacesSwitcher = stage.GetComponent<WorkPlacesSwitcher>();
         //    _workPlaces = _workPlacesSwitcher.GetWorkPlaces();
         //}
+
+        private void PikedTrashBag(TrashBag trashBag)
+        {
+            if (_pickedTrashBags.Count != _maxQuantityPickedTrashBag)
+            {
+                _quantityPickedTrashBag++;
+
+                if (_quantityPickedTrashBag <= _maxQuantityPickedTrashBag)
+                {
+
+                    _pickedTrashBags.Push(trashBag);
+                    trashBag.transform.SetParent(transform, true);
+                    _trashBagMover = trashBag.GetComponent<TrashBagMover>();
+                    trashBag.ChangeMaterial();
+                    ChangeWay(trashBag);
+                    TakeTrashBag?.Invoke();
+                }
+            }
+            else
+            {
+                TakeMaxQuantityTrashBag?.Invoke();
+            }
+        }
     }
 }
 

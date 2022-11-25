@@ -17,14 +17,15 @@ namespace Core
         private StageController _stageController;
         public float Time { get => _time; set { } }
 
-        private Vector3 _currentPoint;
-        private Vector3 point;
+        private Vector3 _parkPlacePoint;
+        private Vector3 _point;
         private Tween _tween;
         private Collider _collider;
         private CartTrashBagPicker _cartTrashBagPicker;
         private WaitForSeconds _waitForSeconds;
         private const float _time = 5f;
-        private bool isMoveFinish;
+        private bool _isMoveToFinish;
+
 
         public UnityAction StartMove;
         public UnityAction FinishMove;
@@ -33,8 +34,7 @@ namespace Core
         {
             _collider = GetComponent<Collider>();
             _stageController = GetComponentInParent<StageController>();
-            isMoveFinish = false;
-
+            _isMoveToFinish = false;
 
             float waiteTime = 2f;
             _waitForSeconds = new WaitForSeconds(waiteTime);
@@ -50,7 +50,8 @@ namespace Core
 
         private void Start()
         {
-            _currentPoint = transform.position;
+            _parkPlacePoint = transform.position;
+            _isMoveToFinish = false;
             InitializeUIStat();
         }
 
@@ -59,6 +60,7 @@ namespace Core
             if (other.TryGetComponent(out FinishPoint finish))
             {
                 _cartTrashBagPicker.ClearCart();
+                _isMoveToFinish = false;
                 SetSecondPosition();
             }
             else if (other.TryGetComponent(out ParkPlace parkPlace))
@@ -74,26 +76,26 @@ namespace Core
 
         private void OnTakeMaxQuantityTrashBag()
         {
-            point = _finishPoint.transform.position;
+            _parkPlacePoint = transform.position;
+            _point = _finishPoint.transform.position;
             StartCoroutine(WaitBeforMove());
         }
 
         private void MovePosition()
         {
-            _tween = transform.DOMove(point, _time);
+            _tween = transform.DOMove(_point, _time);
         }
 
         public void SetSecondPosition()
         {
-            isMoveFinish = false;
             _tween.Kill();
-            point = _currentPoint;
+            _point = _parkPlacePoint;
             MovePosition();
         }
 
         private IEnumerator WaitBeforMove()
         {
-            isMoveFinish = true;
+            _isMoveToFinish = true;
             yield return _waitForSeconds;
             StartMove?.Invoke();
             MovePosition();
@@ -118,7 +120,7 @@ namespace Core
 
         private void OnChangeWorkPlace(GameObject insideControllers)
         {
-            StartCoroutine(WaitMoveFinish(insideControllers));
+            WaitMoveFinish(insideControllers);
         }
 
         private void OnDisable()
@@ -132,23 +134,24 @@ namespace Core
             }
         }
 
-        private IEnumerator WaitMoveFinish(GameObject insideControllers)
+        private void WaitMoveFinish(GameObject insideControllers)
         {
             _finishPoint = insideControllers.GetComponentInChildren<FinishPoint>();
-            Vector3 currentPoint = insideControllers.GetComponentInChildren<ParkPlacePoint>().transform.position;
+            Vector3 parkPoint = insideControllers.GetComponentInChildren<ParkPlacePoint>().transform.position;
 
-            if (isMoveFinish == true)
+            if (_isMoveToFinish == true)
             {
-                _tween.Kill();
-                point = _finishPoint.transform.position;
-                MovePosition();
+                _point = _finishPoint.transform.position;
+                _parkPlacePoint = parkPoint;
             }
-            else
+            else 
             {
-                _currentPoint = currentPoint;
-                SetSecondPosition();
+                WaitBeforMove();
+                _point = parkPoint;
             }
-            yield return null;
+
+            _tween.Kill();
+            MovePosition();
         }
 
         private void OnSetStage(GameObject stage)
