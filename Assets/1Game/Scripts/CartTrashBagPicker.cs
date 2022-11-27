@@ -3,40 +3,53 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 using Core;
+using UI;
 
 namespace Service
 {
     public class CartTrashBagPicker : MonoBehaviour
     {
+        [SerializeField] private CartPanel _cartPanel;
+
         public int TrashBagsReceivedCount => _trashBagsReceivedCount;
+        public int MaxPickedBag => _maxPickedQuantity;
+
+        public int MaxBagInLevel => _maxQuantityInLevel;
+
+        public int Level => _level;
+        private List<int> _levels;
 
         private CharacterTrashBagPicker _trashBagPicker;
         private StageController _stageController;
-        private int _quantityPickedTrashBag;
-        private int _maxQuantityPickedTrashBag;
-        private int _maxQuantityTrashBagInLevel;
-        private Stack<TrashBag> _pickedTrashBags;
-        private int _quantityInRow;
-        private int _maxQuantityInRow;
-        private float stepInRow;
         private TrashBagStorePoint _storePoint;
         private MainPointForTrashBag _mainPointForTrashBag;
         private TrashBagMover _trashBagMover;
+        private Stack<TrashBag> _pickedTrashBags;
+        private WaitForSeconds _waitForSeconds;
+        private Cart _cart;
+        private List<Vector3> _changePointStore;
+        private Vector3 _mainPoint;
+        private Vector3 _startPositionStorePoint;
+        private Vector3 _removePositionStorePoint;
+        private Collider _collider;
+
+        private int _level;
+
+        private int _quantityPickedTrashBag;
+        private int _maxPickedQuantity;
+        private int _maxQuantityInLevel;
+        private int _count;
+        private int _maxQuantityInRow;
+        private int _trashBagsReceivedCount;
+        private float stepInRow;
+        private float _time = 0.5f;
+        private bool _canTake;
+
         public UnityAction TakeTrashBag;
         public UnityAction SallAllTrashBag;
         public UnityAction TakeMaxQuantityTrashBag;
         public UnityAction<Vector3> SetPosition;
         public UnityAction BagReachedFinish;
-        private WaitForSeconds _waitForSeconds;
-        private Vector3 _mainPoint;
-        private Vector3 _startPositionStorePoint;
-        private Vector3 _removePositionStorePoint;
-        private List<Vector3> _changePointStore;
-        private Collider _collider;
-        private bool _canTake;
-        private Cart _cart;
-        private float _time = 0.5f;
-        private int _trashBagsReceivedCount;
 
         private void Awake()
         {
@@ -47,15 +60,14 @@ namespace Service
             _storePoint = GetComponentInChildren<TrashBagStorePoint>();
             _mainPointForTrashBag = _storePoint.GetComponentInChildren<MainPointForTrashBag>();
         }
+
         private void Start()
         {
 
             _maxQuantityInRow = 3;
-            _maxQuantityPickedTrashBag = 8;
-            _maxQuantityTrashBagInLevel = 8;
             _pickedTrashBags = new Stack<TrashBag>();
             _changePointStore = new List<Vector3>();
-
+            Initialize();
             _startPositionStorePoint = _storePoint.transform.localPosition;
             _mainPoint = _mainPointForTrashBag.transform.localPosition;
             stepInRow = 0.6f;
@@ -64,15 +76,16 @@ namespace Service
             _changePointStore.Add(new Vector3(_storePoint.transform.localPosition.x + stepInRow, _storePoint.transform.localPosition.y, _storePoint.transform.localPosition.z));
             _removePositionStorePoint = _storePoint.transform.localPosition;
 
-            _trashBagsReceivedCount = _maxQuantityPickedTrashBag - _pickedTrashBags.Count;
-        }
+            _trashBagsReceivedCount = _maxPickedQuantity - _pickedTrashBags.Count;
 
+        }
 
         private void OnEnable()
         {
             _stageController.SetCharacter += OnSetCharacter;
             _trashBagPicker.SallTrashBag += OnSallTrashBag;
             _cart.FinishMove += OnFinishMove;
+            _cartPanel.UpCart += OnUpLevel;
         }
 
         private void OnDisable()
@@ -80,15 +93,14 @@ namespace Service
             _stageController.SetCharacter -= OnSetCharacter;
             _trashBagPicker.SallTrashBag -= OnSallTrashBag;
             _cart.FinishMove -= OnFinishMove;
+            _cartPanel.UpCart -= OnUpLevel;
         }
-
-
 
         private void OnSallTrashBag(TrashBag trashBag)
         {
            
 
-            if (_pickedTrashBags.Count != _maxQuantityPickedTrashBag & _canTake == true)
+            if (_pickedTrashBags.Count != _maxPickedQuantity & _canTake == true)
             {               
                 _quantityPickedTrashBag++;
                 float waiteTime = 2f;
@@ -102,9 +114,9 @@ namespace Service
                 _trashBagMover.ReachedFinish += OnReachedFinish;
                 ChangeWay();
                 TakeTrashBag?.Invoke();
-                _trashBagsReceivedCount = _maxQuantityPickedTrashBag - _pickedTrashBags.Count;
+                _trashBagsReceivedCount = _maxPickedQuantity - _pickedTrashBags.Count;
 
-                if (_pickedTrashBags.Count == _maxQuantityPickedTrashBag)
+                if (_pickedTrashBags.Count == _maxPickedQuantity)
                 {
                     _canTake = false;
                     StartCoroutine(WaitFillingAll());
@@ -113,30 +125,29 @@ namespace Service
             }
         }
 
-
         private void ChangeWay()
         {
             float stepUpLevel = 0.4f;
             float stepinSecondRow = -0.4f;
             Vector3 point = new Vector3();
 
-            _quantityInRow++;
+            _count++;
 
-            if (_quantityInRow == _maxQuantityTrashBagInLevel)
+            if (_count == _maxQuantityInLevel)
             {
                 _storePoint.transform.localPosition = _startPositionStorePoint;
                 _storePoint.transform.localPosition = new Vector3(_storePoint.transform.localPosition.x, _storePoint.transform.localPosition.y + stepUpLevel, _storePoint.transform.localPosition.z);
                 _startPositionStorePoint = _storePoint.transform.localPosition;
-                _quantityInRow = 1;
+                _count = 1;
             }
-            else if (_quantityInRow == _maxQuantityInRow)
+            else if (_count == _maxQuantityInRow)
             {
                 _storePoint.transform.localPosition = new Vector3(_storePoint.transform.localPosition.x, _storePoint.transform.localPosition.y, _storePoint.transform.localPosition.z + stepinSecondRow);
                 SetPoint();
-                _quantityInRow = 1;
+                _count = 1;
             }
 
-            point = _changePointStore[_quantityInRow - 1];
+            point = _changePointStore[_count - 1];
 
             _trashBagMover.SetSecondPosition(point, _mainPoint, _time);
         }
@@ -148,14 +159,9 @@ namespace Service
             _changePointStore.Add(new Vector3(_storePoint.transform.localPosition.x + stepInRow, _storePoint.transform.localPosition.y, _storePoint.transform.localPosition.z));
         }
 
-        private void SetMaxTrashBagInLevel(int quantity)
+        private void OnUpLevel()
         {
-            _maxQuantityTrashBagInLevel = quantity;
-        }
-
-        private void UpPickUpQuantity(int quantity)
-        {
-            _maxQuantityPickedTrashBag = quantity;
+            _level++;
         }
 
         public void ClearCart()
@@ -166,11 +172,11 @@ namespace Service
             }
 
             _pickedTrashBags.Clear();
-            _quantityInRow = 0;
+            _count = 0;
             _quantityPickedTrashBag = 0;
             _storePoint.transform.localPosition = _removePositionStorePoint;
             _startPositionStorePoint = _storePoint.transform.localPosition;
-            _trashBagsReceivedCount = _maxQuantityPickedTrashBag;
+            _trashBagsReceivedCount = _maxPickedQuantity;
             SetPoint();
         }
 
@@ -186,7 +192,6 @@ namespace Service
             StopCoroutine(WaitFillingAll());
         }
 
-
         private void OnReachedFinish()
         {
             BagReachedFinish?.Invoke();
@@ -195,6 +200,37 @@ namespace Service
         private void OnSetCharacter(Character character)
         {
             _trashBagPicker = character.gameObject.GetComponent<CharacterTrashBagPicker>();
+        }
+
+        public void LoadData(int level)
+        {
+            _level = level;
+        }
+
+        public void Initialize()
+        {
+
+            const int maxUpStep = 10;
+            const int minQuantity = 6;
+            const int stepOnQuamtity = 2; 
+            int numberLevel=0;
+            const int maxlevel=5;
+            const int maxQuantityInLevel=10;
+
+            _maxQuantityInLevel = minQuantity;
+            _maxPickedQuantity = minQuantity;
+
+            for (int i = 0; i < maxUpStep; i++)
+            {
+                _maxQuantityInLevel += stepOnQuamtity;
+                _maxPickedQuantity += stepOnQuamtity;
+
+                if (_maxQuantityInLevel== maxQuantityInLevel)
+                {
+                    numberLevel++;
+                    _maxQuantityInLevel = 0;
+                }
+            }
         }
     }
 }

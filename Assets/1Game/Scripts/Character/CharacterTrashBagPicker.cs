@@ -4,47 +4,50 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 using Core;
-
+using UI;
 namespace Service
 {
     public class CharacterTrashBagPicker : MonoBehaviour
     {
 
         [SerializeField] private ParkPlace _parkPlace;
-
-         private CartTrashBagPicker _cartPiker;
         [SerializeField] private Cart _cart;
+        [SerializeField] private CharacterPanelUI _characterPanel;
+        public int MaxPickedBag => _maxPickedQuantity;
 
+        public int MaxBagInLevel => _maxQuantityInLevel;
+        public int Level => _level;
+
+        private CartTrashBagPicker _cartPiker;
         private TrashBagStorePoint _storePoint;
         private MainPointForTrashBag _mainPointForTrashBag;
         private TrashBagMover _trashBagMover;
         private WorkPlacesSwitcher _workPlacesSwitcher;
         private List<WorkPlace> _workPlaces;
         private StageController _stageController;
-        public UnityAction TakeTrashBag;
-        public UnityAction<TrashBag> SallTrashBag;
-        public UnityAction TakeMaxQuantityTrashBag;
-        public UnityAction SallAllTrashBag;
-        public UnityAction<Vector3> SetPosition;
-
         private Stack<TrashBag> _pickedTrashBags;
         private Vector3 _mainPoint;
         private Vector3 _localPositionStorePoint;
         private List<Vector3> _changePointStore;
         private List<Vector3> _changePointCart;
+        private WaitForSeconds _waitForSeconds;
+
         private int _cartTrashBagsReceivedCount;
         private int _quantityAllTrashBag;
         private int _quantityPickedTrashBag;
-        private int _maxQuantityPickedTrashBag;
-
+        private int _maxPickedQuantity;
         private int _quantityInRow;
-        private int _quantityLevel;
-        private int _maxQuantityLevel;
+        private int _maxQuantityInLevel;
+        private float _time;
         private bool _isTakedMaxQuantity;
         private bool _canSell;
-        private float _time;
+        private int _level;
 
-        private WaitForSeconds _waitForSeconds;
+        public UnityAction TakeTrashBag;
+        public UnityAction<TrashBag> SallTrashBag;
+        public UnityAction TakeMaxQuantityTrashBag;
+        public UnityAction SallAllTrashBag;
+        public UnityAction<Vector3> SetPosition;
 
         private void Awake()
         {
@@ -57,11 +60,12 @@ namespace Service
         {
             //_stageController.SetStage += OnSetStage;
             _cart.FinishMove += OnFinishCart;
+            _characterPanel.UpPower = OnUpLevel;
         }
 
         private void Start()
         {
-
+            Initialize();
             _time = 0.2f;
 
             _mainPointForTrashBag = _storePoint.GetComponentInChildren<MainPointForTrashBag>();
@@ -72,9 +76,6 @@ namespace Service
             float stepinSecondRow = -0.4f;
             float _timeToSell = 0.1f;
             _waitForSeconds = new WaitForSeconds(_timeToSell);
-            _quantityLevel = 0;
-            _maxQuantityLevel = 8;
-            _maxQuantityPickedTrashBag = 8;
 
             _mainPoint = _mainPointForTrashBag.transform.localPosition;
 
@@ -99,9 +100,9 @@ namespace Service
             }
         }
 
-        private void UpPickUpQuantity(int quantity)
+        private void OnUpLevel()
         {
-            _maxQuantityPickedTrashBag = quantity;
+            _level++;
         }
 
         private void ChangeWay(TrashBag trashBag)
@@ -137,11 +138,6 @@ namespace Service
             _changePointStore.Add(new Vector3(_storePoint.transform.localPosition.x + stepInRow, _storePoint.transform.localPosition.y, _storePoint.transform.localPosition.z + stepinSecondRow));
         }
 
-        private void SetMaxLevel(int quantity)
-        {
-            _maxQuantityLevel = quantity;
-        }
-
         private void SellTrashBags()
         {
             if (_canSell == true)
@@ -155,11 +151,11 @@ namespace Service
             _canSell = true;
         }
 
-
         private void OnDisable()
         {
             //_stageController.SetStage -= OnSetStage;
             _parkPlace.CartEnter -= OnFinishCart;
+            _characterPanel.UpPower = OnUpLevel;
         }
 
         private IEnumerator SellBags()
@@ -197,19 +193,13 @@ namespace Service
             _canSell = true;
         }
 
-        //private void OnSetStage(GameObject stage)
-        //{
-        //    _workPlacesSwitcher = stage.GetComponent<WorkPlacesSwitcher>();
-        //    _workPlaces = _workPlacesSwitcher.GetWorkPlaces();
-        //}
-
         private void PikedTrashBag(TrashBag trashBag)
         {
-            if (_pickedTrashBags.Count != _maxQuantityPickedTrashBag)
+            if (_pickedTrashBags.Count != _maxPickedQuantity)
             {
                 _quantityPickedTrashBag++;
 
-                if (_quantityPickedTrashBag <= _maxQuantityPickedTrashBag)
+                if (_quantityPickedTrashBag <= _maxPickedQuantity)
                 {
 
                     _pickedTrashBags.Push(trashBag);
@@ -223,6 +213,37 @@ namespace Service
             else
             {
                 TakeMaxQuantityTrashBag?.Invoke();
+            }
+        }
+
+        public void LoadData(int level)
+        {
+            _level = level;
+        }
+
+        public void Initialize()
+        {
+
+            const int maxUpStep = 10;
+            const int minQuantity = 4;
+            const int stepOnQuamtity = 2;
+            int numberLevel = 0;
+            const int maxlevel = 5;
+            const int maxQuantityInLevel = 4;
+
+            _maxQuantityInLevel = minQuantity;
+            _maxPickedQuantity = minQuantity;
+
+            for (int i = 0; i < maxUpStep; i++)
+            {
+                _maxQuantityInLevel += stepOnQuamtity;
+                _maxPickedQuantity += stepOnQuamtity;
+
+                if (_maxQuantityInLevel == maxQuantityInLevel)
+                {
+                    numberLevel++;
+                    _maxQuantityInLevel = 0;
+                }
             }
         }
     }

@@ -10,11 +10,15 @@ public class Store : MonoBehaviour
 {
     [SerializeField] private UpgradePlace _upgradePlace;
     [SerializeField] private Wallet _wallet;
-
+        
     public int FuelLevel{get=> _fuelLevels[currentFuelLevel].price;set{;}}
     public int PowerLevel{get=> _powerLevels[currentPowerLevel].price; set{;}}
     public int CartLevel{get=> _cartLevels[currentCartLevel].price ; set{;}}
-    
+
+        private CartPanel _cartPanel;
+        private CharacterPanelUI _characterPanel;
+        private FuelPanel _fuelPanel;
+
     private UpgradePanel _upgradePanel;
 
     private List<Level> _fuelLevels;
@@ -58,10 +62,9 @@ public class Store : MonoBehaviour
     {
             _upgradePlace.EnterPlace += OnEnterPlace;
             _upgradePlace.ExitPlace += OnTapClose;
-        _upgradePanel.TapUpFuel += OnTapUpFuel;
-        _upgradePanel.TapUpPower += OnTapUpPower;
-        _upgradePanel.TapUpCart += OnTapUpCart;
-        _upgradePanel.Close += OnTapClose;
+            _fuelPanel.UpFuel += OnTapUpFuel;
+            _characterPanel.UpPower += OnTapUpPower;
+            _cartPanel.UpCart += OnTapUpCart;
     }
 
     private void OnEnterPlace()
@@ -136,11 +139,10 @@ public class Store : MonoBehaviour
     {
             _upgradePlace.EnterPlace -= OnEnterPlace;
             _upgradePlace.ExitPlace -= OnTapClose;
-        _upgradePanel.TapUpFuel -= OnTapUpFuel;
-        _upgradePanel.TapUpPower -= OnTapUpPower;
-        _upgradePanel.TapUpCart -= OnTapUpCart;
-        _upgradePanel.Close -= OnTapClose;
-    }
+            _fuelPanel.UpFuel -= OnTapUpFuel;
+            _characterPanel.UpPower -= OnTapUpPower;
+            _cartPanel.UpCart -= OnTapUpCart;
+        }
 
     private void CreateLevel()
     {

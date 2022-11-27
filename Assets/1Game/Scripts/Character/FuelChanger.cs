@@ -120,12 +120,16 @@ namespace Service
             }
         }
 
-        public void SetParametrs(float maxFuelLevel, float stepChangeLevel, float stepRefuelingLevel)
+        public void SetItemParametrs( float stepChangeLevel, float stepRefuelingLevel)
+        {
+            _stepChangeLevel = stepChangeLevel;
+            _stepRefuelingLevel = stepRefuelingLevel;
+        }
+
+        public void SetFuelParametrs(float maxFuelLevel)
         {
             _maxFuelLevel = maxFuelLevel;
             _fuelLevel = _maxFuelLevel;
-            _stepChangeLevel = stepChangeLevel;
-            _stepRefuelingLevel = stepRefuelingLevel;
         }
     }
 }

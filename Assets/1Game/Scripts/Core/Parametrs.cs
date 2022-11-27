@@ -6,8 +6,6 @@ namespace Core
 {
 public class Parametrs : MonoBehaviour
 {
-    public float FuelLevel;
-    public float MaxFuelLevel;
     public float StepChangeLevel;
     public float StepRefuelingLevel;
 
@@ -16,10 +14,8 @@ public class Parametrs : MonoBehaviour
     public float DirectionZ;
     public float EndRang;
 
-    public Parametrs(float maxFuelLevel, float stepChangeLevel, float stepRefuelingLevel, float directionX, float directionY, float directionZ, float endRang)
+    public Parametrs( float stepChangeLevel, float stepRefuelingLevel, float directionX, float directionY, float directionZ, float endRang)
     {
-        MaxFuelLevel = maxFuelLevel;
-        FuelLevel = MaxFuelLevel;
         StepChangeLevel = stepChangeLevel;
         StepRefuelingLevel = stepRefuelingLevel;
 

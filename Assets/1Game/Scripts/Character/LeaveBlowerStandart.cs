@@ -10,12 +10,10 @@ namespace Service
 
         List<Parametrs> _parametrs = new List<Parametrs>();
         public int Level { get => _level; private set { } }
-        public float MaxFueLevell { get => _maxFuelLevel; private set { } }
 
         private ParticleSystemForceField _forceField;
         private FuelChanger _fuelChanger;
         private int _level;
-        private float _maxFuelLevel;
         private float _stepChangeLevel;
         private float _stepRefuelingLevel;
 
@@ -38,26 +36,18 @@ namespace Service
 
         private void OnEnable()
         {
-            _store.UpFuel += OnUpFuel;
+            _store.UpFuel += OnUpLevel;
             _fuelChanger.ChangeFuel += OnChangeFuel;
 
         }
 
-        private void OnUpFuel()
+        private void OnUpLevel()
         {
             _level++;
         }
 
-        public void LoadParametr()
-        {
-            _level = 0;
-
-            SetParametrs(_level);
-        }
-
         private void SetParametrs(int _level)
         {            
-            _maxFuelLevel= _parametrs[_level].MaxFuelLevel;
             _stepChangeLevel= _parametrs[_level].StepChangeLevel;
             _stepRefuelingLevel = _parametrs[_level].StepRefuelingLevel;
 
@@ -66,14 +56,13 @@ namespace Service
             _forceField.directionZ = _parametrs[_level].DirectionZ;
             _forceField.endRange= _parametrs[_level].EndRang;
 
-            InitializeFuelChanger();
+            _fuelChanger.SetItemParametrs(_stepChangeLevel, _stepRefuelingLevel);
         }
 
         private void Initialize()
         {
             int maxUpdateLevels = 10;
 
-            _maxFuelLevel = 100;
             _stepChangeLevel = 0.1f;
             _stepRefuelingLevel = 0.2f;
 
@@ -82,16 +71,14 @@ namespace Service
             _directionZ = 10;
             _endRang = 0.05f;
 
-            float _stepUpFuelLevel = 20;
             float _stepUpChangeLevel = 0.17f;
             float _stepUpDirection = 1;
             float _stepUpEndRange = 1;
 
             for (int i = 0; i < maxUpdateLevels; i++)
             {
-                _parametrs.Add(new Parametrs(_maxFuelLevel, _stepChangeLevel, _stepRefuelingLevel, _directionX, _directionY, _directionZ, _endRang));
+                _parametrs.Add(new Parametrs( _stepChangeLevel, _stepRefuelingLevel, _directionX, _directionY, _directionZ, _endRang));
 
-                _maxFuelLevel += _stepUpFuelLevel;
                 _stepChangeLevel += _stepUpChangeLevel;
                 _stepRefuelingLevel++;
                 _directionX += _stepUpDirection;
@@ -99,17 +86,6 @@ namespace Service
                 _directionZ += _stepUpDirection;
                 _endRang += _stepUpEndRange;
             }
-        }
-
-        private void OnDisable()
-        {
-            _store.UpFuel -= OnUpFuel;
-            _fuelChanger.ChangeFuel -= OnChangeFuel;
-        }
-
-        private void InitializeFuelChanger()
-        {
-            _fuelChanger.SetParametrs(_maxFuelLevel, _stepChangeLevel, _stepRefuelingLevel);
         }
 
         private void OnTriggerEnter(Collider other)
@@ -139,6 +115,17 @@ namespace Service
             {
                 _isThereFuel = true;
             }
+        }
+        private void OnDisable()
+        {
+            _store.UpFuel -= OnUpLevel;
+            _fuelChanger.ChangeFuel -= OnChangeFuel;
+        }
+
+        public void LoadData(int level)
+        {
+            Level=level;           
+            SetParametrs(_level);
         }
     }
 }

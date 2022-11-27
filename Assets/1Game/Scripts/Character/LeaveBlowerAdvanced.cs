@@ -50,7 +50,6 @@ namespace Service
 
         private void SetParametrs(int _level)
         {
-            _maxFuelLevel = _parametrs[_level].MaxFuelLevel;
             _stepChangeLevel = _parametrs[_level].StepChangeLevel;
             _stepRefuelingLevel = _parametrs[_level].StepRefuelingLevel;
 
@@ -59,14 +58,13 @@ namespace Service
             _forceField.directionZ = _parametrs[_level].DirectionZ;
             _forceField.endRange = _parametrs[_level].EndRang;
 
-            InitializeFuelChanger();
+            _fuelChanger.SetItemParametrs( _stepChangeLevel, _stepRefuelingLevel);
         }
 
         private void Initialize()
         {
             int maxUpdateLevels = 20;
 
-            _maxFuelLevel = 200;
             _stepChangeLevel = 0.2f;
             _stepRefuelingLevel = 0.4f;
 
@@ -75,16 +73,14 @@ namespace Service
             _directionZ = 20f;
             _endRang = 1.5f;
 
-            float _stepUpFuelLevel = 40f;
             float _stepUpChangeLevel = 0.27f;
             float _stepUpDirection = 1f;
             float _stepUpEndRange = 0.2f;
 
             for (int i = 0; i < maxUpdateLevels; i++)
             {
-                _parametrs.Add(new Parametrs(_maxFuelLevel, _stepChangeLevel, _stepRefuelingLevel, _directionX, _directionY, _directionZ, _endRang));
+                _parametrs.Add(new Parametrs( _stepChangeLevel, _stepRefuelingLevel, _directionX, _directionY, _directionZ, _endRang));
 
-                _maxFuelLevel += _stepUpFuelLevel;
                 _stepChangeLevel += _stepUpChangeLevel;
                 _stepRefuelingLevel++;
                 _directionX += _stepUpDirection;
@@ -99,14 +95,15 @@ namespace Service
             _store.UpFuel -= OnUpFuel;
         }
 
-        private void InitializeFuelChanger()
-        {
-            _fuelChanger.SetParametrs(_maxFuelLevel, _stepChangeLevel, _stepRefuelingLevel);
-        }
-
         public void SetStore(Store store)
         {
             _store = store;
+        }
+
+        public void LoadData(int level)
+        {
+            Level = level;
+            SetParametrs(_level);
         }
     }
 }
