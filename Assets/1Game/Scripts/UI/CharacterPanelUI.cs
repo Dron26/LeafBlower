@@ -12,7 +12,7 @@ namespace UI
     public class CharacterPanelUI : MonoBehaviour
     {
         [SerializeField] private TMP_Text _powerPrice;
-        [SerializeField] private CharacterTrashBagPicker _character;
+        [SerializeField] private Store _store;
 
         public UnityAction UpPower;
 
@@ -20,14 +20,15 @@ namespace UI
         {
             SetUpdate();
         }
-        public void TapFuel()
+
+        public void TapPower()
         {
             UpPower?.Invoke();
         }
 
         private void SetUpdate()
         {
-            _powerPrice.text = Convert.ToString(_character.Level);
+            _powerPrice.text = Convert.ToString(_store.PowerPrice);
         }
     }
 }

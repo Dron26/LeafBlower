@@ -33,7 +33,7 @@ namespace Service
 
         private void OnEnable()
         {
-            _store.UpFuel += OnUpFuel;
+            //_store.UpFuel += OnUpFuel;
         }
 
         private void OnUpFuel()
@@ -92,7 +92,7 @@ namespace Service
 
         private void OnDisable()
         {
-            _store.UpFuel -= OnUpFuel;
+            //_store.UpFuel -= OnUpFuel;
         }
 
         public void SetStore(Store store)

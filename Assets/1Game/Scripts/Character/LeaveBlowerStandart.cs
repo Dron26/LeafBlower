@@ -36,7 +36,7 @@ namespace Service
 
         private void OnEnable()
         {
-            _store.UpFuel += OnUpLevel;
+            //_store.UpFuel += OnUpLevel;
             _fuelChanger.ChangeFuel += OnChangeFuel;
 
         }
@@ -118,7 +118,7 @@ namespace Service
         }
         private void OnDisable()
         {
-            _store.UpFuel -= OnUpLevel;
+            //_store.UpFuel -= OnUpLevel;
             _fuelChanger.ChangeFuel -= OnChangeFuel;
         }
 

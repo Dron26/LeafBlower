@@ -10,13 +10,13 @@ namespace Service
     public class CartTrashBagPicker : MonoBehaviour
     {
         [SerializeField] private CartPanel _cartPanel;
+        [SerializeField] private Store _store;
 
         public int TrashBagsReceivedCount => _trashBagsReceivedCount;
         public int MaxPickedBag => _maxPickedQuantity;
 
         public int MaxBagInLevel => _maxQuantityInLevel;
 
-        public int Level => _level;
         private List<int> _levels;
 
         private CharacterTrashBagPicker _trashBagPicker;
@@ -32,8 +32,6 @@ namespace Service
         private Vector3 _startPositionStorePoint;
         private Vector3 _removePositionStorePoint;
         private Collider _collider;
-
-        private int _level;
 
         private int _quantityPickedTrashBag;
         private int _maxPickedQuantity;
@@ -63,7 +61,6 @@ namespace Service
 
         private void Start()
         {
-
             _maxQuantityInRow = 3;
             _pickedTrashBags = new Stack<TrashBag>();
             _changePointStore = new List<Vector3>();
@@ -77,7 +74,6 @@ namespace Service
             _removePositionStorePoint = _storePoint.transform.localPosition;
 
             _trashBagsReceivedCount = _maxPickedQuantity - _pickedTrashBags.Count;
-
         }
 
         private void OnEnable()
@@ -85,7 +81,7 @@ namespace Service
             _stageController.SetCharacter += OnSetCharacter;
             _trashBagPicker.SallTrashBag += OnSallTrashBag;
             _cart.FinishMove += OnFinishMove;
-            _cartPanel.UpCart += OnUpLevel;
+            _store.UpCart += OnUpLevel;
         }
 
         private void OnDisable()
@@ -93,13 +89,11 @@ namespace Service
             _stageController.SetCharacter -= OnSetCharacter;
             _trashBagPicker.SallTrashBag -= OnSallTrashBag;
             _cart.FinishMove -= OnFinishMove;
-            _cartPanel.UpCart -= OnUpLevel;
+            _store.UpFuel -= OnUpLevel;
         }
 
         private void OnSallTrashBag(TrashBag trashBag)
-        {
-           
-
+        {           
             if (_pickedTrashBags.Count != _maxPickedQuantity & _canTake == true)
             {               
                 _quantityPickedTrashBag++;
@@ -121,7 +115,6 @@ namespace Service
                     _canTake = false;
                     StartCoroutine(WaitFillingAll());
                 }
-
             }
         }
 
@@ -146,9 +139,7 @@ namespace Service
                 SetPoint();
                 _count = 1;
             }
-
             point = _changePointStore[_count - 1];
-
             _trashBagMover.SetSecondPosition(point, _mainPoint, _time);
         }
 
@@ -159,9 +150,9 @@ namespace Service
             _changePointStore.Add(new Vector3(_storePoint.transform.localPosition.x + stepInRow, _storePoint.transform.localPosition.y, _storePoint.transform.localPosition.z));
         }
 
-        private void OnUpLevel()
+        private void OnUpLevel(int valume,int level)
         {
-            _level++;
+            _maxPickedQuantity = valume;
         }
 
         public void ClearCart()
@@ -202,14 +193,13 @@ namespace Service
             _trashBagPicker = character.gameObject.GetComponent<CharacterTrashBagPicker>();
         }
 
-        public void LoadData(int level)
+        public void LoadData()
         {
-            _level = level;
+            
         }
 
         public void Initialize()
         {
-
             const int maxUpStep = 10;
             const int minQuantity = 6;
             const int stepOnQuamtity = 2; 

@@ -10,7 +10,7 @@ namespace Core
 {
     public class WorkPlacesSwitcher : MonoBehaviour
     {
-        
+        public int WorkPlaceCount => _workPlaces.Count;
 
         private List<WorkPlace> _workPlaces=new List<WorkPlace>();
         [HideInInspector] private List<InsideController> _insideControllers = new List<InsideController>();

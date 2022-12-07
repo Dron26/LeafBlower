@@ -26,7 +26,6 @@ namespace Core
         private const float _time = 5f;
         private bool _isMoveToFinish;
 
-
         public UnityAction StartMove;
         public UnityAction FinishMove;
 
@@ -114,7 +113,6 @@ namespace Core
         private void OnTrashBagReachedFinish()
         {
             int price = 10;
-
             _wallet.AddResource(price);
         }
 

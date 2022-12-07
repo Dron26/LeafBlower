@@ -2,13 +2,18 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using Core;
 
 namespace Service
 {
     public class FuelChanger : MonoBehaviour
     {
-        public float MaxFueLevell { get => _maxFuelLevel; private set { } }
-        public float FuelLevel { get => _fuelLevel; private set { } }
+        [SerializeField] private Store _store;
+        public int MaxFueLevel => _maxFuelLevel; 
+        public float FuelLevel => _fuelLevel;
+        
+        public int Level => _level;
+        
 
         private WaitForSeconds _waitForSeconds;
         private WaitForSeconds _waitForRefuelSeconds;
@@ -18,8 +23,9 @@ namespace Service
         private bool _isExiteFuelPlace;
         private bool _isWork;
 
+        private int _level;
         private float _fuelLevel;
-        private float _maxFuelLevel = 100;
+        private int _maxFuelLevel=100;
         private float _allMaxFuelLevel;
         private float _stepChangeLevel;
         private float _stepRefuelingLevel;
@@ -27,6 +33,13 @@ namespace Service
 
         public UnityAction<float> ChangeFuel;
         public UnityAction<bool> ReachedMinLevel;
+
+        public UnityAction<float> UpVolumeFuel;
+
+        private void OnEnable()
+        {
+            _store.UpFuel += OnUpLevel;
+        }
 
         private void Start()
         {
@@ -41,6 +54,12 @@ namespace Service
             _waitForRefuelSeconds = new WaitForSeconds(waiteRefuelTime);
 
             StartCoroutine(ChangeFuelLevel());
+        }
+
+        private void OnUpLevel(int value,int level)
+        {
+            _maxFuelLevel = value;
+            _level = level;
         }
 
         private void OnTriggerEnter(Collider other)
@@ -88,7 +107,7 @@ namespace Service
                     ChangeFuel?.Invoke(_fuelLevel);
                 }
 
-                if (_fuelLevel< _minLevel)
+                if ( _fuelLevel < _minLevel)
                 {
                     ReachedMinLevel?.Invoke(true);
                 }
@@ -126,10 +145,15 @@ namespace Service
             _stepRefuelingLevel = stepRefuelingLevel;
         }
 
-        public void SetFuelParametrs(float maxFuelLevel)
+        public void SetFuelParametrs(int maxFuelLevel)
         {
             _maxFuelLevel = maxFuelLevel;
             _fuelLevel = _maxFuelLevel;
+        }
+
+        private void OnDisable()
+        {
+            _store.UpFuel -= OnUpLevel;
         }
     }
 }

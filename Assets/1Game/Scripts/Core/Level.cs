@@ -7,7 +7,8 @@ namespace Core
     public class Level
     {
         public int stepUp { get; set; }
-        public int tempValue { get; set; }
+        public int value { get; set; }
         public int price { get; set; }
+
     }
 }

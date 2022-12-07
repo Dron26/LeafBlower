@@ -2,12 +2,8 @@ using System;
 using UnityEngine;
 using Service;
 
-
-
 namespace Core
 {
-    [Serializable]
-
     public class GameData : MonoBehaviour
     {
         public bool IsFirstGame { get; private set; }
@@ -17,16 +13,17 @@ namespace Core
         public int LeaveBlowerlHardLevel { get; private set; }
         public int CharacterLevel { get; private set; }
         public int CartLevel { get; private set; }
-
+        public int FuelChager { get; private set; }
         public float LevelStandartBlover { get; private set; }
         public float LevelAdvancedBlover { get; private set; }
+
 
         public void UpdateGameInitializator(GameInitializator gameInitializator)
         {
             IsFirstGame = gameInitializator.IsFirstStart;
         }
 
-        public void FirstUpdateDate(Wallet wallet, LeaveBlowerStandart standartBlower, LeaveBlowerAdvanced advancedBlower, CartTrashBagPicker cartTrashBagPicker, CharacterTrashBagPicker characterTrashBagPicker)
+        public void UpdateDate(Wallet wallet, LeaveBlowerStandart standartBlower, LeaveBlowerAdvanced advancedBlower, CartTrashBagPicker cartTrashBagPicker, CharacterTrashBagPicker characterTrashBagPicker, FuelChanger fuelChanger)
         {
             Money = wallet.Money;
             MaxMoney = wallet.MaxMoney;
@@ -34,9 +31,9 @@ namespace Core
             LevelStandartBlover = standartBlower.Level;
             LevelAdvancedBlover = advancedBlower.Level;
 
-            CartLevel= cartTrashBagPicker.Level;
-            CharacterLevel = characterTrashBagPicker.Level;
-
+            CartLevel= cartTrashBagPicker.MaxPickedBag;
+            CharacterLevel = characterTrashBagPicker.MaxPickedBag;
+            FuelChager = fuelChanger.MaxFueLevel;
         }
     }
 }

@@ -6,137 +6,183 @@ using Service;
 
 namespace Core
 {
-public class Store : MonoBehaviour
-{
-    [SerializeField] private UpgradePlace _upgradePlace;
-    [SerializeField] private Wallet _wallet;
-        
-    public int FuelLevel{get=> _fuelLevels[currentFuelLevel].price;set{;}}
-    public int PowerLevel{get=> _powerLevels[currentPowerLevel].price; set{;}}
-    public int CartLevel{get=> _cartLevels[currentCartLevel].price ; set{;}}
+    public class Store : MonoBehaviour
+    {
+        [SerializeField] private UpgradePlace _upgradePlace;
+        [SerializeField] private Wallet _wallet;
 
+        public int FuelPrice  => _fuelLevels[_currentFuelLevel].price;
+        public int PowerPrice  => _powerLevels[_currentPowerLevel].price; 
+        public int CartPrice => _cartLevels[_currentCartLevel].price; 
+        public int MaxFuelLevel   => _fuelLevels.Count; 
+        public int MaxCartLevel   => _cartLevels.Count; 
+        public int MaxPowerLewel  => _powerLevels.Count;
+        
+        
+
+        public UnityAction BuyUpdate;
+        public UnityAction EmptyWallet;
+
+        public UnityAction<int,int> UpFuel;
+        public UnityAction<int,int> UpPower;
+        public UnityAction<int,int> UpCart;
+        
+        
+        
         private CartPanel _cartPanel;
         private CharacterPanelUI _characterPanel;
         private FuelPanel _fuelPanel;
+        private UpgradePanel _upgradePanel;
 
-    private UpgradePanel _upgradePanel;
-
-    private List<Level> _fuelLevels;
-    private List<Level> _powerLevels;
-    private List<Level> _cartLevels;
-
-    public UnityAction BuyUpdate;
-    public UnityAction EmptyWallet;
-
-    public UnityAction UpFuel;
+        private List<Level> _fuelLevels;
+        private List<Level> _powerLevels;
+        private List<Level> _cartLevels;
 
 
-    private int maxFuelLevel;
-    private int currentFuelLevel;
-    private int minFuelLevel;
 
-    private int maxPowerLevel;
-    private int currentPowerLevel;
-    private int minPowerLevel;
+        private int _maxFuelLevel;
+        private int _currentFuelLevel=0;
 
-    private int maxCartLevel;
-    private int currentCartLevel;
-    private int minCartLevel;
+        private int _maxPowerLevel;
+        private int _currentPowerLevel=0;
 
-    private int maxLevel;
-    private int minLevel;
-    private int stepUp;
-    private int currentValue;
-    private int _price;
+        private int _maxCartLevel;
+        private int _currentCartLevel=0;
 
-    private void Awake()
-    {
-        _upgradePanel = GetComponentInChildren<UpgradePanel>();
-        _upgradePanel.gameObject.SetActive(false);
+        private int _maxLevel;
+        private int _stepUp;
+        private int _value;
+        private int _price;
 
-        CreateLevel();
-        FillLevels(_cartLevels);
-    }
+        private void Awake()
+        {
+            _upgradePanel = GetComponentInChildren<UpgradePanel>();
+            _upgradePanel.gameObject.SetActive(false);
+            _fuelPanel = _upgradePanel.GetComponentInChildren<FuelPanel>();
+            _characterPanel = _upgradePanel.GetComponentInChildren<CharacterPanelUI>();
+            _cartPanel= _upgradePanel.GetComponentInChildren<CartPanel>();
+            CreateLevel();
 
-    private void OnEnable()
-    {
+        }
+
+        private void OnEnable()
+        {
             _upgradePlace.EnterPlace += OnEnterPlace;
             _upgradePlace.ExitPlace += OnTapClose;
             _fuelPanel.UpFuel += OnTapUpFuel;
             _characterPanel.UpPower += OnTapUpPower;
             _cartPanel.UpCart += OnTapUpCart;
-    }
-
-    private void OnEnterPlace()
-    {
-        _upgradePanel.gameObject.SetActive(true);
-    }
-
-    private void OnTapUpFuel()
-    {
-        if (OnTapUp(_fuelLevels, ref currentFuelLevel, maxFuelLevel) ==true )
-        {
-            UpFuel?.Invoke();
-        }
-    }
-
-    private void OnTapUpPower()
-    {
-        //OnTapUp(_powerLevels, ref currentPowerLevel);
-    }
-
-    private void OnTapUpCart()
-    {
-        //OnTapUp(_cartLevels, ref currentCartLevel);
-    }
-
-    private void OnTapClose()
-    {
-        _upgradePanel.gameObject.SetActive(false);
-    }
-    
-    private bool OnTapUp(List<Level> _levels, ref int currentLevel,int maxLevel)
-    {
-        bool canBuy=false;
-
-        if (_levels[currentLevel].price <= _wallet.Money& currentLevel<=maxLevel)
-        {
-            _wallet.RemoveResource(_levels[currentLevel].price);
-            currentLevel++;
-            canBuy = true;
-        }
-        else
-        {
-            EmptyWallet?.Invoke();
         }
 
-        return canBuy;
-    }
-
-    private void FillLevels(List<Level> levels)
-    {
-        for (int i = 0; i < maxLevel; i++)
+        private void Start()
         {
-            Level tempLevel = new Level();
-            tempLevel.stepUp = stepUp;
-            tempLevel.tempValue = minLevel;
-            tempLevel.price = _price;
-
-            levels.Add(tempLevel);
-            currentValue += stepUp;
-            _price *= 2;
+            SetStartParametr();
         }
-    }
 
-    public void LoadParametrs()
-    {
-        currentFuelLevel=0;
-        currentPowerLevel=0;
-        currentCartLevel=0;
-    }
+        private void CreateLevel()
+        {
+            _fuelLevels = new List<Level>();
+            _powerLevels = new List<Level>();
+            _cartLevels = new List<Level>();
 
-    private void OnDisable()
-    {
+            Level fuelLevel = new Level();
+            Level powerLevel = new Level();
+            Level cartLevel = new Level();
+
+            LoadParametrs();
+
+            _maxLevel = 10;
+            _stepUp = 20;
+            _price = 100;
+            _value = 100;
+            _maxFuelLevel = _maxLevel;
+
+            FillLevel(_fuelLevels);
+
+            _maxLevel = 10;
+            _stepUp = 1;
+            _price = 300;
+            _value = 6;
+            _maxPowerLevel = _maxLevel;
+
+            FillLevel(_powerLevels);
+
+            _maxLevel = 10;
+            _stepUp = 1;
+            _price = 500;
+            _value = 6;
+            _maxCartLevel = _maxLevel;
+
+            FillLevel(_cartLevels);
+        }
+
+        private void FillLevel(List<Level> levels)
+        {
+
+            for (int i = 0; i < _maxLevel; i++)
+            {
+                Level tempLevel = new Level();
+                tempLevel.stepUp = _stepUp;
+                tempLevel.value = _value;
+                tempLevel.price = _price;
+
+
+                levels.Add(tempLevel);
+                _value += _stepUp;
+                _price *= 2;
+            }
+        }
+
+        private void OnEnterPlace()
+        {
+            _upgradePanel.gameObject.SetActive(true);
+        }
+
+        private void OnTapUpFuel()
+        {
+            OnTapUp(_fuelLevels, ref _currentFuelLevel, _maxFuelLevel, UpFuel);
+        }
+
+
+        private void OnTapUpPower()
+        {
+            OnTapUp(_powerLevels, ref _currentPowerLevel, _maxPowerLevel, UpPower);
+
+        }
+
+        private void OnTapUpCart()
+        {
+            OnTapUp(_cartLevels, ref _currentCartLevel, _maxCartLevel, UpCart);
+        }
+
+        private void OnTapClose()
+        {
+            _upgradePanel.gameObject.SetActive(false);
+        }
+        
+        private void OnTapUp(List<Level> levels, ref int currentLevel, int maxLevel,UnityAction<int,int> action)
+        {
+            if (levels[currentLevel].price <= _wallet.Money & currentLevel <= maxLevel)
+            {
+                _wallet.RemoveResource(levels[currentLevel].price);
+                currentLevel++;
+                action?.Invoke(levels[currentLevel].value,currentLevel);
+            }
+            else
+            {
+                EmptyWallet?.Invoke();
+            }
+        }
+
+        public void LoadParametrs()
+        {
+            _currentFuelLevel = 0;
+            _currentPowerLevel = 0;
+            _currentCartLevel = 0;
+        }
+
+        private void OnDisable()
+        {
             _upgradePlace.EnterPlace -= OnEnterPlace;
             _upgradePlace.ExitPlace -= OnTapClose;
             _fuelPanel.UpFuel -= OnTapUpFuel;
@@ -144,39 +190,11 @@ public class Store : MonoBehaviour
             _cartPanel.UpCart -= OnTapUpCart;
         }
 
-    private void CreateLevel()
-    {
-        _fuelLevels = new List<Level>();
-        _powerLevels = new List<Level>();
-        _cartLevels = new List<Level>();
-
-        Level fuelLevel = new Level();
-        Level powerLevel = new Level();
-        Level cartLevel = new Level();
-
-        LoadParametrs();
-
-        maxLevel = 10;
-        minLevel = 50;
-        stepUp = 20;
-        currentValue = minLevel;
-        _price = 100;
-
-        FillLevels(_fuelLevels);
-
-        maxLevel = 24;
-        minLevel = 1;
-        stepUp = 1;
-        currentValue = minLevel;
-        _price = 100;
-
-        FillLevels(_powerLevels);
-
-        maxLevel = 10;
-        minLevel = 50;
-        stepUp = 20;
-        currentValue = minLevel;
-        _price = 500;
+        private void SetStartParametr()
+        {
+            UpFuel?.Invoke(_fuelLevels[_currentFuelLevel].value,_currentCartLevel);
+            UpPower?.Invoke(_powerLevels[_currentPowerLevel].value,_currentCartLevel);
+            UpCart?.Invoke(_cartLevels[_currentCartLevel].value,_currentCartLevel);
+        }
     }
-}
 }

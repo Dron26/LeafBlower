@@ -13,10 +13,10 @@ namespace Service
         [SerializeField] private ParkPlace _parkPlace;
         [SerializeField] private Cart _cart;
         [SerializeField] private CharacterPanelUI _characterPanel;
+        [SerializeField] private Store _store;
         public int MaxPickedBag => _maxPickedQuantity;
 
         public int MaxBagInLevel => _maxQuantityInLevel;
-        public int Level => _level;
 
         private CartTrashBagPicker _cartPiker;
         private TrashBagStorePoint _storePoint;
@@ -36,12 +36,14 @@ namespace Service
         private int _quantityAllTrashBag;
         private int _quantityPickedTrashBag;
         private int _maxPickedQuantity;
-        private int _quantityInRow;
-        private int _maxQuantityInLevel;
+        private int _quantityInLevel;
+        private int _maxQuantityInLevel=4;
+        private int numberLevel;
         private float _time;
+        private float stepUpLevel = 0.4f;
         private bool _isTakedMaxQuantity;
         private bool _canSell;
-        private int _level;
+        
 
         public UnityAction TakeTrashBag;
         public UnityAction<TrashBag> SallTrashBag;
@@ -60,12 +62,11 @@ namespace Service
         {
             //_stageController.SetStage += OnSetStage;
             _cart.FinishMove += OnFinishCart;
-            _characterPanel.UpPower = OnUpLevel;
+            _store.UpPower += OnUpLevel;
         }
 
         private void Start()
         {
-            Initialize();
             _time = 0.2f;
 
             _mainPointForTrashBag = _storePoint.GetComponentInChildren<MainPointForTrashBag>();
@@ -85,6 +86,7 @@ namespace Service
             _changePointStore.Add(new Vector3(_storePoint.transform.localPosition.x, _storePoint.transform.localPosition.y, _storePoint.transform.localPosition.z + stepinSecondRow));
             _changePointStore.Add(new Vector3(_storePoint.transform.localPosition.x + stepInRow, _storePoint.transform.localPosition.y, _storePoint.transform.localPosition.z + stepinSecondRow));
 
+            //Initialize();
         }
 
         private void OnTriggerEnter(Collider other)
@@ -100,28 +102,23 @@ namespace Service
             }
         }
 
-        private void OnUpLevel()
-        {
-            _level++;
-        }
-
         private void ChangeWay(TrashBag trashBag)
         {
             int maxTrashBagInLevel = 4;
             Vector3 point = new Vector3();
-            _quantityInRow++;
+            _quantityInLevel++;
 
-            if (_quantityInRow > maxTrashBagInLevel)
+            if (_quantityInLevel > maxTrashBagInLevel)
             {
-                float stepUpLevel = 0.4f;
+                numberLevel++;
                 _storePoint.transform.localPosition = new Vector3(_storePoint.transform.localPosition.x, _storePoint.transform.localPosition.y + stepUpLevel, _storePoint.transform.localPosition.z);
                 SetPoint();
-                _quantityInRow = 1;
-                point = _changePointStore[_quantityInRow - 1];
+                _quantityInLevel = 1;
+                point = _changePointStore[_quantityInLevel - 1];
             }
             else
             {
-                point = _changePointStore[_quantityInRow - 1];
+                point = _changePointStore[_quantityInLevel - 1];
             }
 
             _trashBagMover.SetSecondPosition(point, _mainPoint, _time);
@@ -155,7 +152,7 @@ namespace Service
         {
             //_stageController.SetStage -= OnSetStage;
             _parkPlace.CartEnter -= OnFinishCart;
-            _characterPanel.UpPower = OnUpLevel;
+            _store.UpPower = OnUpLevel;
         }
 
         private IEnumerator SellBags()
@@ -179,11 +176,20 @@ namespace Service
 
                 _pickedTrashBags.TryPop(out TrashBag trashBag);
                 SallTrashBag?.Invoke(trashBag);
+                _quantityPickedTrashBag --;
+                _quantityInLevel--;
+
+                if (_quantityInLevel == 0&numberLevel>0)
+                {
+                    _storePoint.transform.localPosition = new Vector3(_storePoint.transform.localPosition.x, _storePoint.transform.localPosition.y - stepUpLevel, _storePoint.transform.localPosition.z);
+                    SetPoint();
+                    _quantityInLevel = 4;
+                }
 
                 if (_pickedTrashBags.Count == 0)
                 {
-                    _quantityPickedTrashBag = 0;
-                    _quantityInRow = 0;
+                    _quantityPickedTrashBag =0;
+                    _quantityInLevel = 0;
                     _storePoint.transform.localPosition = _localPositionStorePoint;
                     SallAllTrashBag?.Invoke();
                     SetPoint();
@@ -216,36 +222,36 @@ namespace Service
             }
         }
 
-        public void LoadData(int level)
+        public void OnUpLevel(int valume,int level)
         {
-            _level = level;
+            _maxPickedQuantity = valume;
         }
 
-        public void Initialize()
-        {
+        //public void Initialize()
+        //{
 
-            const int maxUpStep = 10;
-            const int minQuantity = 4;
-            const int stepOnQuamtity = 2;
-            int numberLevel = 0;
-            const int maxlevel = 5;
-            const int maxQuantityInLevel = 4;
+        //    const int maxUpStep = 10;
+        //    const int minQuantity = 4;
+        //    const int stepOnQuamtity = 2;
+        //    int numberLevel = 0;
+        //    const int maxlevel = 5;
+        //    const int maxQuantityInLevel = 4;
 
-            _maxQuantityInLevel = minQuantity;
-            _maxPickedQuantity = minQuantity;
+        //    _maxQuantityInLevel = minQuantity;
+        //    _maxPickedQuantity = minQuantity;
 
-            for (int i = 0; i < maxUpStep; i++)
-            {
-                _maxQuantityInLevel += stepOnQuamtity;
-                _maxPickedQuantity += stepOnQuamtity;
+        //    for (int i = 0; i < maxUpStep; i++)
+        //    {
+        //        _maxQuantityInLevel += stepOnQuamtity;
+        //        _maxPickedQuantity += stepOnQuamtity;
 
-                if (_maxQuantityInLevel == maxQuantityInLevel)
-                {
-                    numberLevel++;
-                    _maxQuantityInLevel = 0;
-                }
-            }
-        }
+        //        if (_maxQuantityInLevel == maxQuantityInLevel)
+        //        {
+        //            numberLevel++;
+        //            _maxQuantityInLevel = 0;
+        //        }
+        //    }
+        //}
     }
 }
 
