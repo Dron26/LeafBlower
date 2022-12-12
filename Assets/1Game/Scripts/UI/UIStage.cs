@@ -1,36 +1,50 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using Empty;
 using UnityEngine;
 using UnityEngine.UI;
 
 namespace UI
 {
-public class UIStage : MonoBehaviour
-{
-    public int number;
-    private List<Image> _images;
-    private int _starCount;
-    private StarGroup _starGroup;   
-    [SerializeField] private ChangerPanel _changerPanel;
-
-
-    private void Awake()
+    public class UIStage : MonoBehaviour
     {
-        _starGroup = GetComponentInChildren<StarGroup>();
-    }
+        [SerializeField] private ChangerPanel _changerPanel;
 
-    public void OnClickButton()
+        private int _number;
+        private StageLock _stageLock;
+        private bool _isLocked;
+        private GameObject _lock;
+        private Button  _button;
+
+        private void Awake()
         {
-            _changerPanel.OnClickStages(number);
+            _button=GetComponent<Button>();
+            _isLocked = true;
+            _stageLock = GetComponentInChildren<StageLock>();
         }
 
-        private void SetStars()
+        public void OnClickButton()
         {
+            _changerPanel.OnClickStages(_number);
+            Debug.Log(_number);
+        }
+
+        public void Initialize(int number)
+        {
+            _number = number;
             
+            if (_number==0)
+            {
+                _isLocked = false;
+            }
+
+            SetLock(_isLocked);
         }
-        
-        
-}
+
+        public void SetLock(bool value)
+        {
+            _isLocked = value;
+            _lock = _stageLock.gameObject;
+
+            _lock.SetActive(_isLocked);
+            _button.enabled = !_isLocked;
+        }
+    }
 }

@@ -11,7 +11,6 @@ namespace UI
         [SerializeField] private Button _button;
         [SerializeField] private Image _backGround;
 
-        private Button _enterPanelButton;
 
         private LogoPanel _logo;
         private Panel _logoPanel;
@@ -19,15 +18,10 @@ namespace UI
    
         private StatsPanel _stats;
         private Panel _statsPanel;
-        private SettingsPanel _settings;
-        private GameObject _settingsPanel;
-
-        private LanguagePanel _language;
-        private GameObject _languagePanel;
 
         private ExitPanelUI _exitPanel;
 
-        private StagesGroup _stagesGroup;
+        private StagesPanel _stagesPanel;
         private Panel _stagesGroupPanel;
 
         private Color _colorScreen;
@@ -38,8 +32,9 @@ namespace UI
 
         private bool _isExitStartMenu;
         private bool _isPushAlarmWork;
-        private float _speedChange = 0.5f;
+        private float _speedChange = 1.2f;
 
+        public UnityAction StagePanelActivated;
         private void Awake()
         {
             _logo = GetComponentInChildren<LogoPanel>();
@@ -75,8 +70,8 @@ namespace UI
             _colorScreen = _screenDim.color;
             _screenDim.raycastTarget = false;
 
-            _stagesGroup = GetComponentInChildren<StagesGroup>();
-            _stagesGroupPanel= _stagesGroup.gameObject.GetComponent<Panel>();
+            _stagesPanel = GetComponentInChildren<StagesPanel>();
+            _stagesGroupPanel= _stagesPanel.gameObject.GetComponent<Panel>();
 
         }
 
@@ -140,9 +135,9 @@ namespace UI
 
             while (_colorScreen.a > 0)
             {
-                _waitTime = Time.fixedDeltaTime * _speedChange;
+                _waitTime = Time.fixedDeltaTime;
                 yield return new WaitForSeconds(_waitTime);
-                _colorScreen.a -= _waitTime;
+                _colorScreen.a -= _waitTime*_speedChange;
                 _screenDim.color = _colorScreen;
             }
 
@@ -198,7 +193,7 @@ namespace UI
         //    _languagePanel.SetActive(true);
         //}
 
-        public void OnClickBackPanel(GameObject panel)
+        public void OnClickBack(GameObject panel)
         {
             Panel next = panel.GetComponent<Panel>().back;
             Panel activ = panel.GetComponent<Panel>();
@@ -218,7 +213,8 @@ namespace UI
         private void OnSetNextLevel()
         {
             _isExitStartMenu = false;
-            //StartCoroutine(ChangeColorExit(_locationsPanel,_statsPanel));
+            StagePanelActivated?.Invoke();  
+            StartCoroutine(ChangeColorExit(_stagesGroupPanel,_statsPanel));
         }
     }
 }

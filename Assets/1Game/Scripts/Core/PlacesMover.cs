@@ -10,7 +10,9 @@ namespace Core
         private ParkPlace _parkPlace;
         private FuelPlace _fuelPlace;
         private ExitPlace _exitPlace;
-
+        private CharacterStartPlace _characterPlace;
+        private Character _character;
+        
         private StageController _stageController;
         private WorkPlacesSwitcher _switcher;
 
@@ -29,6 +31,8 @@ namespace Core
             _parkPlace = GetComponentInChildren < ParkPlace > ();
             _fuelPlace = GetComponentInChildren<FuelPlace>();
             _exitPlace = GetComponentInChildren<ExitPlace>();
+            _characterPlace= GetComponentInChildren<CharacterStartPlace>();
+            _character = GetComponentInChildren<Character>();
         }
 
         private void OnEnable()
@@ -42,50 +46,8 @@ namespace Core
             if (_switcher!=null)
             {
                 _switcher.ChangeWorkPlace -= OnChangePlace;
-                //_switcher.InitializeWorkPlace -= OnChangePlace;
             }     
         }
-
-        //private void InitializeWorkPlaces()
-        //{
-        //    List<WorkPlace> _tempPlaces;
-
-        //    _tempPlaces = _switcher.GetWorkPlaces();
-
-        //    for (int i = 0; i < _tempPlaces.Count; i++)
-        //    {
-        //        _workPlaces.Add(_tempPlaces[i]);
-        //    }
-        //}
-
-        //private void CreatePlace()
-        //{
-        //    Character character = Instantiate(_character, _character.transform.position, Quaternion.identity);
-        //    character.transform.SetParent(transform);
-
-        //    int number = 0;
-
-        //    for (int i = 0; i < _workPlaces.Count; i++)
-        //    {
-        //        _inside = _workPlaces[i].GetComponentInChildren<InsideController>();
-
-        //        if (_inside._numberPlace == number)
-        //        {
-        //            _upgradePoint = _workPlaces[i].GetComponentInChildren<UpgradePlacePoint>().transform.position;
-        //            _currentUpgradePlace = Instantiate(_upgradePlace, _upgradePoint, Quaternion.identity);
-        //            _currentUpgradePlace.transform.SetParent(transform);
-
-        //            _parkPoint = _workPlaces[i].GetComponentInChildren<ParkPlacePoint>().transform.position;
-        //            _currentParkPlace = Instantiate(_parkPlace, _parkPoint, Quaternion.identity);
-        //            _currentParkPlace.transform.SetParent(transform);
-
-
-        //            _fuelPoint = _workPlaces[i].GetComponentInChildren<FuelPlacePoint>().transform.position;
-        //            _currentFuelPlace = Instantiate(_fuelPlace, _fuelPoint, Quaternion.identity);
-        //            _currentFuelPlace.transform.SetParent(transform);
-        //        }
-        //    }
-        //}
 
         private void OnChangePlace(GameObject insideControllers)
         {
@@ -96,25 +58,30 @@ namespace Core
             currentPoint = insideControllers.GetComponentInChildren<FuelPlacePoint>().transform.position;
             _fuelPlace.transform.position = currentPoint;
 
-            SetExitPlace(insideControllers, currentPoint);          
+            if (_isFirstSet == true)
+            {
+                SetExitPlace(insideControllers, currentPoint);
+            }
         }
 
         private void OnSetStage(GameObject stage)
         {
             _switcher = stage.GetComponent<WorkPlacesSwitcher>();
             _switcher.ChangeWorkPlace += OnChangePlace;
+            SetCharacterPlace();
         }
 
         private void SetExitPlace( GameObject insideControllers,Vector3 currentPoint )
         {
-            if (_isFirstSet==true)
-            {
-                Stage stage = insideControllers.GetComponentInParent<Stage>();
+            Stage stage = insideControllers.GetComponentInParent<Stage>();
                 currentPoint = stage.GetComponentInChildren<ExitPlacePoint>().transform.position;
                 _exitPlace.transform.position = currentPoint;
-                Destroy(stage);
                 _isFirstSet = false;
-            }           
+        }
+
+        private void SetCharacterPlace()
+        {
+            _character.transform.position = _characterPlace.transform.position;
         }
     }
 }

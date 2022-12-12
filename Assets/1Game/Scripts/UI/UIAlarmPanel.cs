@@ -26,29 +26,27 @@ namespace UI
 
         private void OnEnable()
         {
-            _stageController.SetCharacter += OSetCharacter;
+            _stageController.SetCharacter += OnSetCharacter;
             _fuelChanger.ReachedMinLevel += StartAlarm;
         }
 
         private void OnDisable()
         {
-            _stageController.SetCharacter -= OSetCharacter;
+            _stageController.SetCharacter -= OnSetCharacter;
             _characterTrashBag.SallAllTrashBag -= OnSellTrashBag;
             _fuelChanger.ReachedMinLevel -= StartAlarm;
         }
 
         private void OnTakeMaxQuantityTrashBag()
         {
-            if (_isSend == false)
-            {
-                _alarmTrashBagPanel.gameObject.SetActive(true);
-                _isSend = true;
-            }
+            if (_isSend != false) return;
+            _alarmTrashBagPanel.gameObject.SetActive(true);
+            _isSend = true;
         }
 
         private void StartAlarm(bool isWork)
         {
-            _minFuelAlarm.gameObject.SetActive(true);
+            _minFuelAlarm.gameObject.SetActive(isWork);
         }
 
         
@@ -59,7 +57,7 @@ namespace UI
             _isSend = false;
         }
 
-        private void OSetCharacter(Character character)
+        private void OnSetCharacter(Character character)
         {
             _characterTrashBag = character.GetComponent<CharacterTrashBagPicker>();
             _characterTrashBag.TakeMaxQuantityTrashBag += OnTakeMaxQuantityTrashBag;

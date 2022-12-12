@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -53,41 +54,47 @@ namespace Core
             GetLeavesTanks();
         }
 
-        private void OnParticleCollision(GameObject other)
+        private void Update()
         {
             _allQuantityParticles = _particleSystem.particleCount;
-
-            List<ParticleSystem.Particle> inside = new List<ParticleSystem.Particle>();
-            int numInside = _particleSystem.GetTriggerParticles(ParticleSystemTriggerEventType.Inside, inside);
-
-            for (int i = 0; i < _grabMashines.Count; i++)
-            {
-                for (int j = 0; j < numInside; j++)
-                {
-                    ParticleSystem.Particle particle = inside[j];
-                    if (_leavesTanks[i].bounds.Contains(particle.position))
-                    {
-                        if (particle.startSize < _minSizeParticle)
-                        {
-                            _grabMashines[i].OnGetParticle();
-                            particle.velocity = _velosityParticle;
-                        }
-                        else
-                        {
-                            particle.startSize -= _stepSizeDown;
-
-                        }
-                        inside[j] = particle;
-                    }
-                }
-                _particleSystem.SetTriggerParticles(ParticleSystemTriggerEventType.Inside, inside);
-            }
-
+            
             if (_allQuantityParticles <= minQuantityAllPsrticles)
             {
                 CatchAllParticle?.Invoke();
-                _particleSystem.Stop();
-                gameObject.SetActive(false);
+                //_particleSystem.Stop();
+                _particleSystem.gameObject.SetActive(false);
+            }
+        }
+
+        private void OnParticleCollision(GameObject other)
+        {
+            List<ParticleSystem.Particle> inside = new List<ParticleSystem.Particle>();
+                int numInside = _particleSystem.GetTriggerParticles(ParticleSystemTriggerEventType.Inside, inside);
+
+                for (int i = 0; i < _grabMashines.Count; i++)
+                {
+                    for (int j = 0; j < numInside; j++)
+                    {
+                        ParticleSystem.Particle particle = inside[j];
+                        if (_leavesTanks[i].bounds.Contains(particle.position))
+                        {
+                            if (particle.startSize < _minSizeParticle)
+                            {
+                                _grabMashines[i].OnGetParticle();
+                                particle.velocity = _velosityParticle;
+                            }
+                            else
+                            {
+                                particle.startSize -= _stepSizeDown;
+
+                            }
+
+                            inside[j] = particle;
+                        }
+                    }
+
+                    _particleSystem.SetTriggerParticles(ParticleSystemTriggerEventType.Inside, inside);
+                
             }
         }
 

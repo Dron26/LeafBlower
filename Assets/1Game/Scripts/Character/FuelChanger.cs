@@ -18,7 +18,6 @@ namespace Service
         private WaitForSeconds _waitForSeconds;
         private WaitForSeconds _waitForRefuelSeconds;
 
-        private bool _isContact;
         private bool _isEnterWorkPlace;
         private bool _isExiteFuelPlace;
         private bool _isWork;
@@ -26,13 +25,13 @@ namespace Service
         private int _level;
         private float _fuelLevel;
         private int _maxFuelLevel=100;
-        private float _allMaxFuelLevel;
         private float _stepChangeLevel;
         private float _stepRefuelingLevel;
         private float _minLevel = 15f;
 
         public UnityAction<float> ChangeFuel;
         public UnityAction<bool> ReachedMinLevel;
+        public UnityAction ReachedMaxLevel;
 
         public UnityAction<float> UpVolumeFuel;
 
@@ -118,6 +117,8 @@ namespace Service
 
         private IEnumerator StartRefueling()
         {
+            bool isLevelUp = false;
+            bool isFuelMax = false;
             _isExiteFuelPlace = false;
             ReachedMinLevel?.Invoke(false);
 
@@ -126,14 +127,23 @@ namespace Service
                 if (_fuelLevel < _maxFuelLevel)
                 {
                     _fuelLevel += _stepRefuelingLevel;
-                    _fuelLevel = Mathf.Clamp(_fuelLevel, 0, _maxFuelLevel);
-                    ChangeFuel?.Invoke(_fuelLevel);
                 }
+                
 
-                if (_fuelLevel > _minLevel)
+                if (_fuelLevel > _minLevel& isLevelUp==false)
                 {
                     ReachedMinLevel?.Invoke(false);
+                    isLevelUp = true;
                 }
+                
+                _fuelLevel = Mathf.Clamp(_fuelLevel, 0, _maxFuelLevel);
+                
+                if (_fuelLevel == _maxFuelLevel&isFuelMax==false)
+                {
+                    ReachedMaxLevel?.Invoke();
+                    isFuelMax = true;
+                }
+                ChangeFuel?.Invoke(_fuelLevel);
 
                 yield return _waitForRefuelSeconds;
             }

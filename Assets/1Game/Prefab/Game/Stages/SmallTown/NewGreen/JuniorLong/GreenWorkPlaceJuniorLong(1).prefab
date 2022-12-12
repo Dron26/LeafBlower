@@ -7573,7 +7573,7 @@ GameObject:
   - component: {fileID: 7378441452807038586}
   - component: {fileID: 7378441452807038589}
   m_Layer: 23
-  m_Name: Particle SystemJunior3set
+  m_Name: 2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -12617,8 +12617,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 11.53, y: 7.59, z: 16.78}
-  m_Center: {x: 0, y: 3.24, z: -1.8}
+  m_Size: {x: 16.25, y: 7.48, z: 12.15}
+  m_Center: {x: -3.2, y: 3.24, z: -2.1}
 --- !u!114 &7378441453737291749
 MonoBehaviour:
   m_ObjectHideFlags: 0

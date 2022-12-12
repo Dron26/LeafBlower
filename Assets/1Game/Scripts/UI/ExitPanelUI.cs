@@ -1,11 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
+using UI;
 using UnityEngine;
 using UnityEngine.Events;
 
 public class ExitPanelUI : MonoBehaviour
 {
     [SerializeField] private ExitPlace _exitPlaceOnStage;
+    [SerializeField] private GroupStages _groupStages;
    
     private Panel _panel;
 
@@ -18,7 +20,7 @@ public class ExitPanelUI : MonoBehaviour
 
     private void Start()
     {
-        OnEnterPlace(false);
+        _panel.gameObject.SetActive(false);
     }
 
     private void OnEnable()
@@ -39,6 +41,8 @@ public class ExitPanelUI : MonoBehaviour
 
     public void OnTapBattonYes()
     {
+        _groupStages.enabled = true;
         SetNextLevel?.Invoke();
+        
     }
 }

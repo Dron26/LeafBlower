@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Core;
 using DG.Tweening;
+using Empty;
 using UnityEngine;
 using UnityEngine.Timeline;
 using UnityEngine.UI;
@@ -9,21 +10,24 @@ using UnityEngine.UI;
 
 namespace UI
 {
-    public class StagesGroup : MonoBehaviour
+    public class StagesPanel : MonoBehaviour
     {
+        private ChangerPanel _changerPanel;
+        [SerializeField] private StageData _stageData;
+        
+        
         private List<GroupStages> _groups = new();
-        private WorkPlacesSwitcher _switcher;
+        private GroupContainer _container;
         
         private void Awake()
         {
+            _changerPanel = GetComponentInParent<ChangerPanel>();
+            _container = GetComponentInChildren<GroupContainer>();
             InitializeGroup();
         }
-
-        
         
         private void Start()
         {
-            SetActiveGroup();
             gameObject.SetActive(false);
         }
 
@@ -34,23 +38,15 @@ namespace UI
 
         private void InitializeGroup()
         {
-            foreach (GroupStages group in transform.GetComponentsInChildren<GroupStages>())
+            int numberGroup = 0;
+            foreach (GroupStages group in _container.GetComponentsInChildren<GroupStages>())
             {
+                group.Initialize(_changerPanel,_stageData,numberGroup);
+                group.gameObject.SetActive(false);
                 _groups.Add(group);
+                numberGroup++;
             }
         }
 
-        private void SetActiveGroup()
-        {
-            for (int i = 0; i < _groups.Count; i++)
-            {
-                _groups[i].gameObject.SetActive(false);
-            }
-        }
-        
-        private void SetStageStars()
-        {
-            
-        }
     }
 }

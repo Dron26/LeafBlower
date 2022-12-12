@@ -1181,7 +1181,6 @@ GameObject:
   - component: {fileID: 5288805995461323704}
   - component: {fileID: 5288805995461323705}
   - component: {fileID: 5288805995461323707}
-  - component: {fileID: 5288805995461323706}
   m_Layer: 0
   m_Name: GreenWorkPlaceJunior
   m_TagString: Untagged
@@ -1238,30 +1237,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _objects:
   - {fileID: 7868848891486975288}
-  - {fileID: 5253668774527908837}
-  - {fileID: 1978816768312498414}
   - {fileID: 3904104553114780105}
   - {fileID: 3909354739473142971}
   - {fileID: 6648133226043197535}
---- !u!114 &5288805995461323706
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5288805995461323708}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1ecd48d071d3d424db018a282e83cb28, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _images:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
 --- !u!1 &5288805996678750757
 GameObject:
   m_ObjectHideFlags: 0
@@ -1276,7 +1254,7 @@ GameObject:
   - component: {fileID: 5288805996678750756}
   - component: {fileID: 5288805996678750755}
   m_Layer: 23
-  m_Name: Particle SystemJunior3set
+  m_Name: 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1290,7 +1268,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5288805996678750757}
   m_LocalRotation: {x: -0.7071068, y: -0, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: 2.82, y: 1.43, z: -1.89}
+  m_LocalPosition: {x: -0.42, y: 1.43, z: -1.89}
   m_LocalScale: {x: 2.5000002, y: 2.5000005, z: 2.5}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1933,7 +1911,7 @@ ParticleSystem:
     donutRadius: 0.2
     m_Position: {x: 0, y: 0, z: 0}
     m_Rotation: {x: 0, y: 0, z: 0}
-    m_Scale: {x: 1.9, y: 4, z: 0}
+    m_Scale: {x: 1, y: 1, z: 0}
     placementMode: 0
     m_MeshMaterialIndex: 0
     m_MeshNormalOffset: 0
