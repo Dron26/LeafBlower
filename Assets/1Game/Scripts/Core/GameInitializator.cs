@@ -41,7 +41,6 @@ namespace Core
 
         private void SetFirstStart()
         {
-
         }
     }
     

@@ -12,7 +12,7 @@ namespace UI
     public class CharacterPanelUI : MonoBehaviour
     {
         [SerializeField] private TMP_Text _powerPrice;
-        [SerializeField] private Store _store;
+        [SerializeField] private UpgradeParametrs _upgradeParametrs;
 
         public UnityAction UpPower;
 
@@ -28,7 +28,7 @@ namespace UI
 
         private void SetUpdate()
         {
-            _powerPrice.text = Convert.ToString(_store.PowerPrice);
+            _powerPrice.text = Convert.ToString(_upgradeParametrs.PowerPrice);
         }
     }
 }

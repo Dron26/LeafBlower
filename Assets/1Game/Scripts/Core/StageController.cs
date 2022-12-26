@@ -22,7 +22,6 @@ namespace Core
         public int CountSecondStages => _SecondStagesGroup.Count;
         
         private List<ParticleSystemController> _particleSystems;
-        private List<WorkPlace> places;
         private Character _character;
 
         private Stage newStage;
@@ -54,11 +53,10 @@ namespace Core
             CatchAllParticle?.Invoke();
         }
 
-        private void OnSelectSmallTownStage(int number)
+        private void OnSelectSmallTownStage(int numberStage,int numberGroup )
         {
-            int numberGroup = 0;
-            
-            CreateStage(number,numberGroup);
+
+            CreateStage(numberStage,numberGroup);
         }
 
         private void CreateStage(int numberStage,int numberGroup)
@@ -78,7 +76,7 @@ namespace Core
             newStage.transform.SetParent(transform);
             newStage.SetExitPanel(_exitPanel);
             GetParticleSystems(newStage);
-            _selectNumberStage = numberStage;
+            _selectNumberStage = numberStage; 
             _selectNumberGroup = numberGroup;
             SetStage?.Invoke(newStage.gameObject);
         }
@@ -108,7 +106,7 @@ namespace Core
             _changerPanel.SelectSmallTownStage -= OnSelectSmallTownStage;
 
             
-            _exitPanel.SetNextLevel += OnSetNextLevel;
+            _exitPanel.SetNextLevel -= OnSetNextLevel;
 
             if (isGetParticles==true)
             {

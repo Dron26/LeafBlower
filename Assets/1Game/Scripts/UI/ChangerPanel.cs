@@ -1,4 +1,5 @@
 using System.Collections;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
@@ -22,19 +23,19 @@ namespace UI
         private ExitPanelUI _exitPanel;
 
         private StagesPanel _stagesPanel;
+        private GroupStages _groupStages;
         private Panel _stagesGroupPanel;
 
         private Color _colorScreen;
         private float _waitTime;
 
-        public UnityAction<int> SelectSmallTownStage;
+        public UnityAction<int,int> SelectSmallTownStage;
         public UnityAction<bool> PushAlarm;
 
         private bool _isExitStartMenu;
         private bool _isPushAlarmWork;
         private float _speedChange = 1.2f;
 
-        public UnityAction StagePanelActivated;
         private void Awake()
         {
             _logo = GetComponentInChildren<LogoPanel>();
@@ -44,7 +45,7 @@ namespace UI
             _stats = GetComponentInChildren<StatsPanel>();
             _statsPanel = _stats.gameObject.GetComponent<Panel>();
 
-            
+
             //_statsPanel = _stats.gameObject;
             //_statsPanel.SetActive(false);
 
@@ -72,7 +73,7 @@ namespace UI
 
             _stagesPanel = GetComponentInChildren<StagesPanel>();
             _stagesGroupPanel= _stagesPanel.gameObject.GetComponent<Panel>();
-
+            _groupStages = _stagesPanel.GetComponentInChildren<GroupStages>();
         }
 
         private void OnEnable()
@@ -123,9 +124,8 @@ namespace UI
 
         private IEnumerator ChangeColorEnter(Panel activated)
         {
-            GameObject panelEnter = activated.gameObject;
 
-            panelEnter.SetActive(true);
+            activated.gameObject.SetActive(true);
 
             if (_isExitStartMenu == true)
             {
@@ -151,22 +151,7 @@ namespace UI
             StopCoroutine(ChangeColorEnter(activated));
         }
 
-        //public void OnClickStartButton()
-        //{
-        //    StartCoroutine(ChangeColorExit(_locationsPanel, _logoPanel));
-        //}
 
-        //public void OnClickSmallTown()
-        //{
-        //    StartCoroutine(ChangeColorExit(_smallTownPanel, _locationsPanel));
-        //}
-
-        //public void OnClickSmallTownStage(int number)
-        //{
-        //    SelectSmallTownStage?.Invoke(number);
-        //    _isExitStartMenu = true;
-        //    StartCoroutine(ChangeColorExit(_statsPanel, _smallTownPanel));
-        //}
 
         public void ClikNextPanel(GameObject panel)
         {
@@ -175,9 +160,9 @@ namespace UI
             StartCoroutine(ChangeColorExit(next, activ));
         }
 
-        public void OnClickStages(int number)
+        public void OnClickStages(int numberStage,int numberGroup)
         {
-            SelectSmallTownStage?.Invoke(number);
+            SelectSmallTownStage?.Invoke(numberStage,numberGroup);
             _isExitStartMenu = true;
 
             StartCoroutine(ChangeColorExit(_statsPanel, _stagesGroupPanel));
@@ -207,14 +192,16 @@ namespace UI
         }
         private void OnDisable()
         {
-            
+            _exitPanel.SetNextLevel -= OnSetNextLevel;
         }
 
         private void OnSetNextLevel()
         {
             _isExitStartMenu = false;
-            StagePanelActivated?.Invoke();  
             StartCoroutine(ChangeColorExit(_stagesGroupPanel,_statsPanel));
+            _groupStages.SetStars();
         }
+
+
     }
 }

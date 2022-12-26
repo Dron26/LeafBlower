@@ -13,7 +13,8 @@ namespace Service
         [SerializeField] private ParkPlace _parkPlace;
         [SerializeField] private Cart _cart;
         [SerializeField] private CharacterPanelUI _characterPanel;
-        [SerializeField] private Store _store;
+        
+        private UpgradeParametrs _upgradeParametrs;
         public int MaxPickedBag => _maxPickedQuantity;
 
         public int MaxBagInLevel => _maxQuantityInLevel;
@@ -53,6 +54,7 @@ namespace Service
 
         private void Awake()
         {
+            _upgradeParametrs= GetComponentInParent<UpgradeParametrs>();
             _cartPiker = _cart.gameObject.GetComponent<CartTrashBagPicker>();
             _stageController = GetComponentInParent<StageController>();
             _storePoint = GetComponentInChildren<TrashBagStorePoint>();
@@ -62,7 +64,7 @@ namespace Service
         {
             //_stageController.SetStage += OnSetStage;
             _cart.FinishMove += OnFinishCart;
-            _store.UpPower += OnUpLevel;
+            _upgradeParametrs.UpPower += OnUpLevel;
         }
 
         private void Start()
@@ -152,7 +154,7 @@ namespace Service
         {
             //_stageController.SetStage -= OnSetStage;
             _parkPlace.CartEnter -= OnFinishCart;
-            _store.UpPower = OnUpLevel;
+            _upgradeParametrs.UpPower -= OnUpLevel;
         }
 
         private IEnumerator SellBags()
@@ -222,9 +224,9 @@ namespace Service
             }
         }
 
-        public void OnUpLevel(int valume,int level)
+        private void OnUpLevel(int value)
         {
-            _maxPickedQuantity = valume;
+            _maxPickedQuantity = value;
         }
 
         //public void Initialize()

@@ -7,28 +7,33 @@ namespace UI
     {
         [SerializeField] private ChangerPanel _changerPanel;
 
+        
         private int _number;
-        private StageLock _stageLock;
+        private int _numberGroup;
+        
+        private Lock _lock;
         private bool _isLocked;
-        private GameObject _lock;
+        private GameObject _stageLock;
         private Button  _button;
 
         private void Awake()
         {
             _button=GetComponent<Button>();
             _isLocked = true;
-            _stageLock = GetComponentInChildren<StageLock>();
+            _lock = GetComponentInChildren<Lock>();
         }
 
         public void OnClickButton()
         {
-            _changerPanel.OnClickStages(_number);
+            _changerPanel.OnClickStages(_number,_numberGroup);
             Debug.Log(_number);
+            Debug.Log(_numberGroup);
         }
 
-        public void Initialize(int number)
+        public void Initialize(int number,int numberGroup)
         {
             _number = number;
+            _numberGroup = numberGroup;
             
             if (_number==0)
             {
@@ -36,14 +41,15 @@ namespace UI
             }
 
             SetLock(_isLocked);
+            Debug.Log(_number);
+            Debug.Log(_numberGroup);
         }
 
         public void SetLock(bool value)
         {
             _isLocked = value;
-            _lock = _stageLock.gameObject;
-
-            _lock.SetActive(_isLocked);
+            _stageLock = _lock.gameObject;
+            _stageLock.SetActive(_isLocked);
             _button.enabled = !_isLocked;
         }
     }

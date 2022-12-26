@@ -8,21 +8,20 @@ namespace Service
 {
     public class FuelChanger : MonoBehaviour
     {
-        [SerializeField] private Store _store;
+        [SerializeField] private UpgradeParametrs _upgradeParametrs;
+        [SerializeField] private StageController _stageController;
         public int MaxFueLevel => _maxFuelLevel; 
         public float FuelLevel => _fuelLevel;
         
-        public int Level => _level;
         
 
         private WaitForSeconds _waitForSeconds;
         private WaitForSeconds _waitForRefuelSeconds;
 
-        private bool _isEnterWorkPlace;
         private bool _isExiteFuelPlace;
         private bool _isWork;
-
-        private int _level;
+        private bool _isStartRefuil;
+        
         private float _fuelLevel;
         private int _maxFuelLevel=100;
         private float _stepChangeLevel;
@@ -37,11 +36,12 @@ namespace Service
 
         private void OnEnable()
         {
-            _store.UpFuel += OnUpLevel;
+            _upgradeParametrs.UpFuel += OnUpLevel;
         }
 
         private void Start()
         {
+            _isStartRefuil = false;
             _isExiteFuelPlace = true;
             _fuelLevel = _maxFuelLevel;
             _isWork = true;
@@ -52,13 +52,12 @@ namespace Service
             _waitForSeconds = new WaitForSeconds(waiteTime);
             _waitForRefuelSeconds = new WaitForSeconds(waiteRefuelTime);
 
-            StartCoroutine(ChangeFuelLevel());
+            
         }
 
-        private void OnUpLevel(int value,int level)
+        private void OnUpLevel(int value)
         {
             _maxFuelLevel = value;
-            _level = level;
         }
 
         private void OnTriggerEnter(Collider other)
@@ -72,7 +71,7 @@ namespace Service
             }
             else if (other.TryGetComponent(out WorkPlace workPlace))
             {
-                OnEnterWorkPlace(true);
+                StartCoroutine(ChangeFuelLevel());
             }
         }
 
@@ -81,24 +80,20 @@ namespace Service
             if (other.TryGetComponent(out FuelTank fuelTank))
             {
                 _isExiteFuelPlace = true;
-                StopCoroutine(StartRefueling());
             }
             else if (other.TryGetComponent(out WorkPlace workPlace))
             {
-                OnEnterWorkPlace(false);
+                _isWork = false;
             }
-        }
-
-        private void OnEnterWorkPlace(bool isWork)
-        {
-            _isEnterWorkPlace = isWork;
         }
 
         private IEnumerator ChangeFuelLevel()
         {
+            _isWork = true;
+            
             while (_isWork)
             {
-                if (_isEnterWorkPlace & _fuelLevel > 0)
+                if (_fuelLevel > 0)
                 {
                     _fuelLevel -= _stepChangeLevel;
                     _fuelLevel = Mathf.Clamp(_fuelLevel, 0, _maxFuelLevel);
@@ -111,16 +106,24 @@ namespace Service
                     ReachedMinLevel?.Invoke(true);
                 }
 
+                if (_fuelLevel==0)
+                {
+                    _isWork = false;
+                }
+
                 yield return _waitForSeconds;
             }
+            
+            StopCoroutine(ChangeFuelLevel());
         }
 
         private IEnumerator StartRefueling()
         {
             bool isLevelUp = false;
             bool isFuelMax = false;
+            
+            _isStartRefuil=true;
             _isExiteFuelPlace = false;
-            ReachedMinLevel?.Invoke(false);
 
             while (_isExiteFuelPlace == false)
             {
@@ -147,6 +150,9 @@ namespace Service
 
                 yield return _waitForRefuelSeconds;
             }
+
+            _isStartRefuil = false;
+            StopCoroutine(StartRefueling());
         }
 
         public void SetItemParametrs( float stepChangeLevel, float stepRefuelingLevel)
@@ -163,7 +169,7 @@ namespace Service
 
         private void OnDisable()
         {
-            _store.UpFuel -= OnUpLevel;
+            _upgradeParametrs.UpFuel -= OnUpLevel;
         }
     }
 }

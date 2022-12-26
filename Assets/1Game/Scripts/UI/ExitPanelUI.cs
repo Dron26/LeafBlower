@@ -7,11 +7,11 @@ using UnityEngine.Events;
 public class ExitPanelUI : MonoBehaviour
 {
     [SerializeField] private ExitPlace _exitPlaceOnStage;
-    [SerializeField] private GroupStages _groupStages;
    
     private Panel _panel;
 
     public UnityAction SetNextLevel;
+    public UnityAction UpdateData;
 
     private void Awake()
     {
@@ -41,8 +41,8 @@ public class ExitPanelUI : MonoBehaviour
 
     public void OnTapBattonYes()
     {
-        _groupStages.enabled = true;
+        UpdateData?.Invoke();
         SetNextLevel?.Invoke();
-        
     }
 }
+

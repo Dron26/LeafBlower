@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 5890335636769608780}
   - component: {fileID: 5890335636769608779}
   m_Layer: 23
-  m_Name: Particle SystemMiddle
+  m_Name: 2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1542,8 +1542,8 @@ ParticleSystem:
     uvChannelMask: -1
     rowMode: 1
     sprites:
-    - sprite: {fileID: 1300766456, guid: 2866012e5a4fd5443be898a1970052e9, type: 3}
-    - sprite: {fileID: 1778967833, guid: 2866012e5a4fd5443be898a1970052e9, type: 3}
+    - sprite: {fileID: -1172371565, guid: 2866012e5a4fd5443be898a1970052e9, type: 3}
+    - sprite: {fileID: 274249688, guid: 2866012e5a4fd5443be898a1970052e9, type: 3}
     - sprite: {fileID: 1507222855, guid: 2866012e5a4fd5443be898a1970052e9, type: 3}
     flipU: 0
     flipV: 0
@@ -5381,6 +5381,25 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e6f90e7fc34aa8e4cbef9ca570517fb0, type: 3}
+--- !u!1 &643481643475459590 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4829374206216830278, guid: e6f90e7fc34aa8e4cbef9ca570517fb0,
+    type: 3}
+  m_PrefabInstance: {fileID: 5470599650730451776}
+  m_PrefabAsset: {fileID: 0}
+--- !u!65 &7828982717116073646
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 643481643475459590}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!4 &5890335636178622502 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1897656362631592806, guid: e6f90e7fc34aa8e4cbef9ca570517fb0,

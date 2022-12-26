@@ -8,12 +8,11 @@ namespace UI
     public class UIFuelStat : MonoBehaviour
     {
         [SerializeField] private FuelChanger _fuelChanger;
-        [SerializeField] private Store _store;
+        [SerializeField] private UpgradeParametrs _upgradeParametrs;
         
         private float _maxValue;
         private float _minValue;
         private Slider _slider;
-        private WaitForSeconds _waitForSeconds;
 
         private void Awake()
         {
@@ -23,7 +22,7 @@ namespace UI
         public void OnEnable()
         {
             _fuelChanger.ChangeFuel += OnChangeLevel;
-            _store.UpFuel += OnUpLevel;
+            _upgradeParametrs.UpFuel += OnUpLevel;
         }
 
         private void Start()
@@ -38,7 +37,7 @@ namespace UI
         public void OnDisable()
         {
             _fuelChanger.ChangeFuel -= OnChangeLevel;
-            _store.UpFuel -= OnUpLevel;
+            _upgradeParametrs.UpFuel -= OnUpLevel;
         }
 
         private void OnChangeLevel(float currentValue)
@@ -47,7 +46,7 @@ namespace UI
             _slider.value = Mathf.Clamp(currentValue, _minValue, _maxValue);
         }
         
-        private void OnUpLevel(int value,int level)
+        private void OnUpLevel(int value)
         {
             _maxValue = value;
         }

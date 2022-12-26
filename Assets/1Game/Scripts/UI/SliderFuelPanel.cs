@@ -6,7 +6,7 @@ namespace UI
 {
     public class SliderFuelPanel : MonoBehaviour
     {
-        [SerializeField] private Store _store;
+        [SerializeField] private UpgradeParametrs _upgradeParametrs;
 
         private float _maxValue;
         private float _minValue;
@@ -18,26 +18,26 @@ namespace UI
         }
         public void OnEnable()
         {
-            _store.UpFuel += OnUpLevel;
+            _upgradeParametrs.UpFuel += OnUpLevel;
         }
 
         private void Start()
         {
             _minValue = 0;
-            _maxValue = _store.MaxFuelLevel;
+            _maxValue = _upgradeParametrs.MaxFuelLevel;
             _slider.maxValue = _maxValue;
             _slider.minValue = _minValue;
             _slider.value = _slider.minValue;
         }
         
-        private void OnUpLevel(int value,int level)
+        private void OnUpLevel(int value)
         {
-            _slider.value = Mathf.Clamp(level, _minValue, _maxValue);
+            _slider.value = Mathf.Clamp(value, _minValue, _maxValue);
         }
 
         public void OnDisable()
         {
-            _store.UpFuel -= OnUpLevel;
+            _upgradeParametrs.UpFuel -= OnUpLevel;
         }
     }
 }

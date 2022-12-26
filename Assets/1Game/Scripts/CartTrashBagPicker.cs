@@ -10,14 +10,13 @@ namespace Service
     public class CartTrashBagPicker : MonoBehaviour
     {
         [SerializeField] private CartPanel _cartPanel;
-        [SerializeField] private Store _store;
+        
+         private UpgradeParametrs _upgradeParametrs;
 
         public int TrashBagsReceivedCount => _trashBagsReceivedCount;
         public int MaxPickedBag => _maxPickedQuantity;
 
         public int MaxBagInLevel => _maxQuantityInLevel;
-
-        private List<int> _levels;
 
         private CharacterTrashBagPicker _trashBagPicker;
         private StageController _stageController;
@@ -51,6 +50,7 @@ namespace Service
 
         private void Awake()
         {
+            _upgradeParametrs= GetComponentInParent<UpgradeParametrs>();
             _trashBagsReceivedCount = 0; 
             _cart = GetComponent<Cart>();
             _stageController = GetComponentInParent<StageController>();
@@ -81,7 +81,7 @@ namespace Service
             _stageController.SetCharacter += OnSetCharacter;
             _trashBagPicker.SallTrashBag += OnSallTrashBag;
             _cart.FinishMove += OnFinishMove;
-            _store.UpCart += OnUpLevel;
+            _upgradeParametrs.UpCart += OnUpLevel;
         }
 
         private void OnDisable()
@@ -89,7 +89,7 @@ namespace Service
             _stageController.SetCharacter -= OnSetCharacter;
             _trashBagPicker.SallTrashBag -= OnSallTrashBag;
             _cart.FinishMove -= OnFinishMove;
-            _store.UpFuel -= OnUpLevel;
+            _upgradeParametrs.UpCart -= OnUpLevel;
         }
 
         private void OnSallTrashBag(TrashBag trashBag)
@@ -150,7 +150,7 @@ namespace Service
             _changePointStore.Add(new Vector3(_storePoint.transform.localPosition.x + stepInRow, _storePoint.transform.localPosition.y, _storePoint.transform.localPosition.z));
         }
 
-        private void OnUpLevel(int valume,int level)
+        private void OnUpLevel(int valume)
         {
             _maxPickedQuantity = valume;
         }
@@ -205,7 +205,7 @@ namespace Service
             const int stepOnQuamtity = 2; 
             int numberLevel=0;
             const int maxlevel=5;
-            const int maxQuantityInLevel=10;
+            const int maxQuantityInLevel=12;
 
             _maxQuantityInLevel = minQuantity;
             _maxPickedQuantity = minQuantity;
@@ -219,6 +219,7 @@ namespace Service
                 {
                     numberLevel++;
                     _maxQuantityInLevel = 0;
+                    _maxPickedQuantity = minQuantity;
                 }
             }
         }

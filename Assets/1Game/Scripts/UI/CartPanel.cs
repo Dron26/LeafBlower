@@ -12,7 +12,7 @@ namespace UI
     public class CartPanel : MonoBehaviour
     {
         [SerializeField] private TMP_Text _cartPrice;
-        [SerializeField] private Store   _store;
+        [SerializeField] private UpgradeParametrs _upgradeParametrs;
         public UnityAction UpCart;
 
         private void Start()
@@ -26,7 +26,7 @@ namespace UI
 
         private void SetUpdate()
         {
-            _cartPrice.text = Convert.ToString(_store.CartPrice);
+            _cartPrice.text = Convert.ToString(_upgradeParametrs.CartPrice);
         }
     }
 }

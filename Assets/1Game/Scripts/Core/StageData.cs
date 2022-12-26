@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Core;
 using Empty;
+using UI;
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -37,7 +38,7 @@ public class StageData : MonoBehaviour
 
     private void OnEnable()
     {
-        _exitPanel.SetNextLevel += OnSetNextLevel;
+        _exitPanel.UpdateData += OnSetNextLevel;
     }
 
     private void Start()
@@ -49,11 +50,6 @@ public class StageData : MonoBehaviour
 
         _starGroup.Add(_firstStarGroup);
         _starGroup.Add(_secondStarGroup);
-    }
-
-    private void OnDisable()
-    {
-        _exitPanel.SetNextLevel -= OnSetNextLevel;
     }
 
     private void OnSetNextLevel()
@@ -82,5 +78,10 @@ public class StageData : MonoBehaviour
         int countStars = _starGroup[numberGroup][numberStage];
 
         return countStars;
+    }
+    
+    private void OnDisable()
+    {
+        _exitPanel.UpdateData -= OnSetNextLevel;
     }
 }

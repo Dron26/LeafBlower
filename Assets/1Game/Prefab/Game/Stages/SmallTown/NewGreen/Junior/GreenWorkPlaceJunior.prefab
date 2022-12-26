@@ -1254,7 +1254,7 @@ GameObject:
   - component: {fileID: 5288805996678750756}
   - component: {fileID: 5288805996678750755}
   m_Layer: 23
-  m_Name: 1
+  m_Name: 2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1268,7 +1268,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5288805996678750757}
   m_LocalRotation: {x: -0.7071068, y: -0, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: -0.42, y: 1.43, z: -1.89}
+  m_LocalPosition: {x: 2.84, y: 1.43, z: -1.89}
   m_LocalScale: {x: 2.5000002, y: 2.5000005, z: 2.5}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1911,7 +1911,7 @@ ParticleSystem:
     donutRadius: 0.2
     m_Position: {x: 0, y: 0, z: 0}
     m_Rotation: {x: 0, y: 0, z: 0}
-    m_Scale: {x: 1, y: 1, z: 0}
+    m_Scale: {x: 1.66, y: 4.5, z: 0}
     placementMode: 0
     m_MeshMaterialIndex: 0
     m_MeshNormalOffset: 0
@@ -8130,6 +8130,11 @@ PrefabInstance:
     - target: {fileID: 6895329257486338342, guid: b6448a1eb593c39459e43bdb5ec8488c,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7334640684786024775, guid: b6448a1eb593c39459e43bdb5ec8488c,
+        type: 3}
+      propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 9161334717794163743, guid: b6448a1eb593c39459e43bdb5ec8488c,

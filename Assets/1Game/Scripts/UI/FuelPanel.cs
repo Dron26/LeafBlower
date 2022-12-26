@@ -11,7 +11,7 @@ namespace UI
     public class FuelPanel : MonoBehaviour
     {
         [SerializeField] private TMP_Text _fuelPrice;
-        [SerializeField] private Store _store;
+        [SerializeField] private UpgradeParametrs _upgradeParametrs;
 
 
         public UnityAction UpFuel;
@@ -29,7 +29,7 @@ namespace UI
 
         private void SetUpdate()
         {
-            _fuelPrice.text = Convert.ToString(_store.FuelPrice);
+            _fuelPrice.text = Convert.ToString(_upgradeParametrs.FuelPrice);
         }
     }
 }
