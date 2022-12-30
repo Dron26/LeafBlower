@@ -29,11 +29,13 @@ MonoBehaviour:
     referenceMode: 2
     serializationDepthLimit: 64
     assemblyNames:
+    - Agava.WebUtility.Samples.Playtesting
     - Assembly-CSharp
     - Assembly-CSharp-firstpass
     - Cinemachine
-    - Tayx.Graphy
-    - Tayx.Graphy.Editor
+    - Agava.YandexGames.Samples.Playtesting
+    - Agava.YandexGames
+    - Agava.WebUtility
     showAdvancedSettings: 1
   addMgrToSceneAutomatically: 0
   autoUpdateReferences: 1

@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using _1Game.Scripts.Empty;
 using UnityEngine;
 
 public class JoystickPlayerExample : MonoBehaviour

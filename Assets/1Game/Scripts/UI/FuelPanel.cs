@@ -1,18 +1,15 @@
-using System.Collections;
-using System.Collections.Generic;
+using System;
+using _1Game.Scripts.Core;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
-using Service;
-using System;
-using Core;
-namespace UI
+
+namespace _1Game.Scripts.UI
 {
     public class FuelPanel : MonoBehaviour
     {
         [SerializeField] private TMP_Text _fuelPrice;
-        [SerializeField] private Store _store;
-
+        [SerializeField] private UpgradeParametrs _upgradeParametrs;
 
         public UnityAction UpFuel;
 
@@ -29,8 +26,7 @@ namespace UI
 
         private void SetUpdate()
         {
-            _fuelPrice.text = Convert.ToString(_store.FuelPrice);
+            _fuelPrice.text = Convert.ToString(_upgradeParametrs.FuelPrice);
         }
     }
 }
-

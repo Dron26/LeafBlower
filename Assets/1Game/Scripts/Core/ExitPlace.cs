@@ -1,25 +1,26 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-public class ExitPlace : MonoBehaviour
+namespace _1Game.Scripts.Core
 {
-    public UnityAction<bool> EnterPlace;
-
-    private void OnTriggerEnter(Collider other)
+    public class ExitPlace : MonoBehaviour
     {
-        if (other.TryGetComponent(out Character character))
+        public UnityAction<bool> EnterPlace;
+
+        private void OnTriggerEnter(Collider other)
         {
-            EnterPlace?.Invoke(true);
+            if (other.TryGetComponent(out Character character))
+            {
+                EnterPlace?.Invoke(true);
+            }
         }
-    }
 
-    private void OnTriggerExit(Collider other)
-    {
-        if (other.TryGetComponent(out Character character))
+        private void OnTriggerExit(Collider other)
         {
-            EnterPlace?.Invoke(false);
+            if (other.TryGetComponent(out Character character))
+            {
+                EnterPlace?.Invoke(false);
+            }
         }
     }
 }

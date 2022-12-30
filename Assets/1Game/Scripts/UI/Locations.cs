@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace UI
+namespace _1Game.Scripts.UI
 {
 public class Locations : MonoBehaviour
     {

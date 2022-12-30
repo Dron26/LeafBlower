@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using _1Game.Scripts.Joystick;
+using UnityEngine;
 using UnityEngine.EventSystems;
 
 public class DynamicJoystick : Joystick
