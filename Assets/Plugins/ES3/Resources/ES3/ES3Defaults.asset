@@ -33,11 +33,9 @@ MonoBehaviour:
     - Assembly-CSharp
     - Assembly-CSharp-firstpass
     - Cinemachine
-    - Tayx.Graphy
     - Agava.YandexGames.Samples.Playtesting
     - Agava.YandexGames
     - Agava.WebUtility
-    - Tayx.Graphy.Editor
     showAdvancedSettings: 1
   addMgrToSceneAutomatically: 0
   autoUpdateReferences: 1

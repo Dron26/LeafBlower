@@ -1,22 +1,20 @@
-using DG.Tweening;
-using System.Collections;
 using System.Collections.Generic;
+using _1Game.Scripts.WorkPlaces;
 using UnityEngine;
 using UnityEngine.Events;
-using UnityEngine.UI;
-using Service;
 
-namespace Core
+namespace _1Game.Scripts.Core
 {
     public class WorkPlacesSwitcher : MonoBehaviour
     {
         public int WorkPlaceCount => _workPlaces.Count;
+        private List<WorkPlace> _workPlaces = new List<WorkPlace>();
 
-        private List<WorkPlace> _workPlaces=new List<WorkPlace>();
         [HideInInspector] private List<InsideController> _insideControllers = new List<InsideController>();
 
-        public UnityAction<GameObject> ChangeWorkPlace;
         private int firstStart = 1;
+
+        public UnityAction<GameObject> ChangeWorkPlace;
 
         private void Start()
         {
@@ -50,7 +48,6 @@ namespace Core
 
         private void InitializeWorkPlaces()
         {
-
             foreach (WorkPlace place in transform.GetComponentsInChildren<WorkPlace>())
             {
                 _workPlaces.Add(place);

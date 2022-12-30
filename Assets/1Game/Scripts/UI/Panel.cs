@@ -1,9 +1,10 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class Panel : MonoBehaviour
+namespace _1Game.Scripts.UI
 {
-    public Panel next;
-    public Panel back;
+    public class Panel : MonoBehaviour
+    {
+        public Panel next;
+        public Panel back;
+    }
 }

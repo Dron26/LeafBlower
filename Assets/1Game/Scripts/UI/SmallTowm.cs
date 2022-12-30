@@ -1,33 +1,29 @@
-using System;
 using System.Collections.Generic;
+using _1Game.Scripts.Empty;
 using UnityEngine;
 
-namespace UI
+namespace _1Game.Scripts.UI
 {
     public class SmallTowm : MonoBehaviour
     {
-        [SerializeField]private GroupContainer _groupContainer;
-        private ChangerPanel _changerPanel;
+        [SerializeField] private GroupContainer _groupContainer;
+
         private List<District> _districts = new();
-        private List<GroupStages> _groupsStages = new List<GroupStages>();
-        private int _countStars;
+        private List<GroupStages> _groupsStages = new();
 
         private void Awake()
         {
-            _changerPanel=GetComponentInParent<ChangerPanel>();
-
             foreach (GroupStages groupStages in _groupContainer.GetComponentsInChildren<GroupStages>())
             {
                 _groupsStages.Add(groupStages);
             }
-            
         }
 
         private void OnEnable()
         {
             foreach (GroupStages groupStages in _groupsStages)
             {
-                groupStages.EndStage+=OnEndStage;
+                groupStages.EndStage += OnEndStage;
             }
         }
 
@@ -39,10 +35,9 @@ namespace UI
             }
 
             InitializeDistrict();
-
             gameObject.SetActive(false);
         }
-        
+
         private void InitializeDistrict()
         {
             for (int i = 0; i < _districts.Count; i++)
@@ -50,7 +45,7 @@ namespace UI
                 _districts[i].Initialize(i);
             }
         }
-        
+
         private void UnLockStage(int numberGroup)
         {
             if (numberGroup < _districts.Count)

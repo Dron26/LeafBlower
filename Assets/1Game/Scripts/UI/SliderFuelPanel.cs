@@ -1,21 +1,23 @@
-using Core;
+using _1Game.Scripts.Core;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace UI
+namespace _1Game.Scripts.UI
 {
     public class SliderFuelPanel : MonoBehaviour
     {
         [SerializeField] private UpgradeParametrs _upgradeParametrs;
+        
+        private Slider _slider;
 
         private float _maxValue;
         private float _minValue;
-        private Slider _slider;
 
         private void Awake()
         {
             _slider = GetComponentInChildren<Slider>();
         }
+
         public void OnEnable()
         {
             _upgradeParametrs.UpFuel += OnUpLevel;
@@ -29,7 +31,7 @@ namespace UI
             _slider.minValue = _minValue;
             _slider.value = _slider.minValue;
         }
-        
+
         private void OnUpLevel(int value)
         {
             _slider.value = Mathf.Clamp(value, _minValue, _maxValue);

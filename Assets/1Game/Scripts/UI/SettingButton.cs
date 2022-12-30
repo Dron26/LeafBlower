@@ -1,32 +1,22 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-namespace UI
+namespace _1Game.Scripts.UI
 {
-public class SettingButton : MonoBehaviour
-{
-    [SerializeField] private SettingsPanel _settingPanel;
-
-    float angularVelocity = 5;
-    
-    private void Update()
+    public class SettingButton : MonoBehaviour
     {
-        RectTransform  transformParent = GetComponentInParent<RectTransform>();
-        transformParent.Rotate(Vector3.forward*Time.deltaTime*angularVelocity);
-    }
+        [SerializeField] private SettingsPanel _settingPanel;
 
-    public void OnClickButton()
-    {
-        if (_settingPanel.gameObject.activeInHierarchy==true)
+        float angularVelocity = 5;
+
+        private void Update()
         {
-            _settingPanel.gameObject.SetActive(false);
+            RectTransform transformParent = GetComponentInParent<RectTransform>();
+            transformParent.Rotate(Vector3.forward * Time.deltaTime * angularVelocity);
         }
-        else
+
+        public void OnClickButton()
         {
-            _settingPanel.gameObject.SetActive(true);
+            _settingPanel.gameObject.SetActive(_settingPanel.gameObject.activeInHierarchy != true);
         }
     }
-}
 }

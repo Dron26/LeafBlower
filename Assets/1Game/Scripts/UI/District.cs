@@ -1,44 +1,43 @@
-using System.Collections;
-using System.Collections.Generic;
+using _1Game.Scripts.Empty;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class District : MonoBehaviour
+namespace _1Game.Scripts.UI
 {
-    
-    private int _number;
-        
-    private Lock _lock;
-    private bool _isLocked;
-    private GameObject _districkLock;
-    private Button  _button;
-    // Start is called before the first frame update
-    private void Awake()
+    public class District : MonoBehaviour
     {
-        _button=GetComponent<Button>();
-        _isLocked = true;
-        _lock = GetComponentInChildren<Lock>();
-    }
-    
-    public void Initialize(int number)
-    {
-        _number = number;
-            
-        if (_number==0)
+        private Lock _lock;
+        private GameObject _districkLock;
+        private Button _button;
+
+        private bool _isLocked;
+        private int _number;
+
+        private void Awake()
         {
-            _isLocked = false;
+            _button = GetComponent<Button>();
+            _isLocked = true;
+            _lock = GetComponentInChildren<Lock>();
         }
 
-        SetLock(_isLocked);
-        Debug.Log(_number);
-    }
+        public void Initialize(int number)
+        {
+            _number = number;
 
-    public void SetLock(bool value)
-    {
-        _isLocked = value;
-        _districkLock = _lock.gameObject;
+            if (_number == 0)
+            {
+                _isLocked = false;
+            }
 
-        _districkLock.SetActive(_isLocked);
-        _button.enabled = !_isLocked;
+            SetLock(_isLocked);
+        }
+
+        public void SetLock(bool value)
+        {
+            _isLocked = value;
+            _districkLock = _lock.gameObject;
+            _districkLock.SetActive(_isLocked);
+            _button.enabled = !_isLocked;
+        }
     }
 }

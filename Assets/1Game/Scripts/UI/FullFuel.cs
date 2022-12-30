@@ -1,32 +1,33 @@
-using System;
-using Service;
+using _1Game.Scripts.Item;
 using UnityEngine;
 
-public class FullFuel : MonoBehaviour
+namespace _1Game.Scripts.UI
 {
-    [SerializeField] private FuelChanger _fuelChanger;
-
-    private ParticleSystem _particleSystem;
-
-    private void Awake()
+    public class FullFuel : MonoBehaviour
     {
-        _particleSystem = GetComponent<ParticleSystem>();
-        _particleSystem.Stop();
-    }
+        [SerializeField] private FuelChanger _fuelChanger;
 
-    private void OnEnable()
-    {
-        _fuelChanger.ReachedMaxLevel+=OnReachedMaxLevel;
-    }
+        private ParticleSystem _particleSystem;
 
-    private void OnDisable()
-    {
-        _fuelChanger.ReachedMaxLevel-=OnReachedMaxLevel;
-    }
+        private void Awake()
+        {
+            _particleSystem = GetComponent<ParticleSystem>();
+            _particleSystem.Stop();
+        }
 
-    private void OnReachedMaxLevel()
-    {
-        _particleSystem.Play();
+        private void OnEnable()
+        {
+            _fuelChanger.ReachedMaxLevel += OnReachedMaxLevel;
+        }
+
+        private void OnDisable()
+        {
+            _fuelChanger.ReachedMaxLevel -= OnReachedMaxLevel;
+        }
+
+        private void OnReachedMaxLevel()
+        {
+            _particleSystem.Play();
+        }
     }
-    
 }

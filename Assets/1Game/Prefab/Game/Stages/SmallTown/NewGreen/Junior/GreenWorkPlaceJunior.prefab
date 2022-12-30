@@ -674,7 +674,7 @@ ParticleSystemForceField:
   m_Parameters:
     m_Shape: 3
     m_StartRange: 0
-    m_EndRange: 5.09
+    m_EndRange: 5
     m_Length: 1
     m_GravityFocus: 0
     m_RotationRandomness: {x: 0, y: 0}
@@ -787,7 +787,7 @@ ParticleSystemForceField:
     m_DirectionCurveZ:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 15
+      scalar: 15.98
       minScalar: 0
       maxCurve:
         serializedVersion: 2
@@ -1240,6 +1240,7 @@ MonoBehaviour:
   - {fileID: 3904104553114780105}
   - {fileID: 3909354739473142971}
   - {fileID: 6648133226043197535}
+  - {fileID: 1978816768312498414}
 --- !u!1 &5288805996678750757
 GameObject:
   m_ObjectHideFlags: 0
@@ -1254,7 +1255,7 @@ GameObject:
   - component: {fileID: 5288805996678750756}
   - component: {fileID: 5288805996678750755}
   m_Layer: 23
-  m_Name: 2
+  m_Name: 4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1268,7 +1269,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5288805996678750757}
   m_LocalRotation: {x: -0.7071068, y: -0, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: 2.84, y: 1.43, z: -1.89}
+  m_LocalPosition: {x: 2.94, y: 1.43, z: -1.89}
   m_LocalScale: {x: 2.5000002, y: 2.5000005, z: 2.5}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -6733,7 +6734,7 @@ ParticleSystemForceField:
   m_Parameters:
     m_Shape: 3
     m_StartRange: 0
-    m_EndRange: 5.09
+    m_EndRange: 5
     m_Length: 1
     m_GravityFocus: 0
     m_RotationRandomness: {x: 0, y: 0}
@@ -8070,7 +8071,7 @@ PrefabInstance:
     - target: {fileID: 6092532081258092920, guid: b6448a1eb593c39459e43bdb5ec8488c,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.26
+      value: -0.273
       objectReference: {fileID: 0}
     - target: {fileID: 6092532081258092924, guid: b6448a1eb593c39459e43bdb5ec8488c,
         type: 3}
@@ -8132,10 +8133,15 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7334640684786024771, guid: b6448a1eb593c39459e43bdb5ec8488c,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.267
+      objectReference: {fileID: 0}
     - target: {fileID: 7334640684786024775, guid: b6448a1eb593c39459e43bdb5ec8488c,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 9161334717794163743, guid: b6448a1eb593c39459e43bdb5ec8488c,
         type: 3}

@@ -1,33 +1,38 @@
-using DG.Tweening;
-using System;
 using System.Collections;
+using _1Game.Scripts.Empty;
+using _1Game.Scripts.UI;
+using Core;
+using DG.Tweening;
 using UnityEngine;
 using UnityEngine.Events;
-using Service;
-using UI;
+using UnityEngine.Serialization;
 
-namespace Core
+namespace _1Game.Scripts.Core
 {
     public class Cart : MonoBehaviour
     {
         [SerializeField] private Wallet _wallet;
-        [SerializeField] private UIParkStat _uIParkStat;
+
+        [FormerlySerializedAs("_uIParkStat")] [SerializeField]
+        private ParkPlaceInfo _uIParkPlaceInfo;
+
         private FinishPoint _finishPoint;
         private WorkPlacesSwitcher _workPlacesSwitcher;
         private StageController _stageController;
-        public float Time { get => _time; set { } }
-
         private Vector3 _parkPlacePoint;
         private Vector3 _point;
         private Tween _tween;
         private Collider _collider;
         private CartTrashBagPicker _cartTrashBagPicker;
         private WaitForSeconds _waitForSeconds;
+
+        public float Time => _time;
         private const float _time = 5f;
         private bool _isMoveToFinish;
 
         public UnityAction StartMove;
         public UnityAction FinishMove;
+        private const int _trashBagPrice = 10;
 
         private void Awake()
         {
@@ -70,18 +75,20 @@ namespace Core
 
         private void InitializeUIStat()
         {
-            _uIParkStat.Initialize(_time);
+            _uIParkPlaceInfo.Initialize(_time);
         }
 
         private void OnTakeMaxQuantityTrashBag()
         {
             _parkPlacePoint = transform.position;
             _point = _finishPoint.transform.position;
-            StartCoroutine(WaitBeforMove());
+            StartCoroutine(WaitBeforeMove());
+            StartCoroutine(TempOffCollider());
         }
 
         private void MovePosition()
         {
+            StartMove?.Invoke();
             _tween = transform.DOMove(_point, _time);
         }
 
@@ -92,14 +99,12 @@ namespace Core
             MovePosition();
         }
 
-        private IEnumerator WaitBeforMove()
+        private IEnumerator WaitBeforeMove()
         {
             _isMoveToFinish = true;
             yield return _waitForSeconds;
-            StartMove?.Invoke();
             MovePosition();
-            StartCoroutine(TempOffCollider());
-            StopCoroutine(WaitBeforMove());
+            yield break;
         }
 
         private IEnumerator TempOffCollider()
@@ -107,13 +112,12 @@ namespace Core
             _collider.enabled = false;
             yield return _waitForSeconds;
             _collider.enabled = true;
-            StopCoroutine(TempOffCollider());
+            yield break;
         }
 
         private void OnTrashBagReachedFinish()
         {
-            int price = 10;
-            _wallet.AddResource(price);
+            _wallet.AddResource(_trashBagPrice);
         }
 
         private void OnChangeWorkPlace(GameObject insideControllers)
@@ -142,9 +146,9 @@ namespace Core
                 _point = _finishPoint.transform.position;
                 _parkPlacePoint = parkPoint;
             }
-            else 
+            else
             {
-                WaitBeforMove();
+                WaitBeforeMove();
                 _point = parkPoint;
             }
 

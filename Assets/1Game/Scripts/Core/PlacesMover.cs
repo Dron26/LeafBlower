@@ -1,8 +1,10 @@
-using UnityEngine;
-using Service;
 using System.Collections.Generic;
+using _1Game.Scripts.Empty;
+using _1Game.Scripts.WorkPlaces;
+using Core;
+using UnityEngine;
 
-namespace Core
+namespace _1Game.Scripts.Core
 {
     public class PlacesMover : MonoBehaviour
     {
@@ -12,26 +14,19 @@ namespace Core
         private ExitPlace _exitPlace;
         private CharacterStartPlace _characterPlace;
         private Character _character;
-        
         private StageController _stageController;
         private WorkPlacesSwitcher _switcher;
-
-        private Vector3 _parkPoint;
-        private Vector3 _upgradePoint;
-        private Vector3 _fuelPoint;
-        private Vector3 _exitPoint;
-
-        private InsideController _inside;
         private List<WorkPlace> _workPlaces = new List<WorkPlace>();
         private bool _isFirstSet;
+
         private void Awake()
         {
             _stageController = GetComponentInParent<StageController>();
             _upgradePlace = GetComponentInChildren<UpgradePlace>();
-            _parkPlace = GetComponentInChildren < ParkPlace > ();
+            _parkPlace = GetComponentInChildren<ParkPlace>();
             _fuelPlace = GetComponentInChildren<FuelPlace>();
             _exitPlace = GetComponentInChildren<ExitPlace>();
-            _characterPlace= GetComponentInChildren<CharacterStartPlace>();
+            _characterPlace = GetComponentInChildren<CharacterStartPlace>();
             _character = GetComponentInChildren<Character>();
         }
 
@@ -43,10 +38,10 @@ namespace Core
 
         private void OnDisable()
         {
-            if (_switcher!=null)
+            if (_switcher != null)
             {
                 _switcher.ChangeWorkPlace -= OnChangePlace;
-            }     
+            }
         }
 
         private void OnChangePlace(GameObject insideControllers)
@@ -60,7 +55,7 @@ namespace Core
 
             if (_isFirstSet == true)
             {
-                SetExitPlace(insideControllers, currentPoint);
+                SetExitPlace(insideControllers);
             }
         }
 
@@ -71,12 +66,12 @@ namespace Core
             SetCharacterPlace();
         }
 
-        private void SetExitPlace( GameObject insideControllers,Vector3 currentPoint )
+        private void SetExitPlace(GameObject insideControllers)
         {
             Stage stage = insideControllers.GetComponentInParent<Stage>();
-                currentPoint = stage.GetComponentInChildren<ExitPlacePoint>().transform.position;
-                _exitPlace.transform.position = currentPoint;
-                _isFirstSet = false;
+            Vector3 currentPoint = stage.GetComponentInChildren<ExitPlacePoint>().transform.position;
+            _exitPlace.transform.position = currentPoint;
+            _isFirstSet = false;
         }
 
         private void SetCharacterPlace()

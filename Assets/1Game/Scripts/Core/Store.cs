@@ -1,27 +1,25 @@
-using System.Collections.Generic;
+using _1Game.Scripts.Empty;
+using _1Game.Scripts.UI;
+using _1Game.Scripts.WorkPlaces;
 using UnityEngine;
-using UI;
 using UnityEngine.Events;
-using Service;
 
-namespace Core
+namespace _1Game.Scripts.Core
 {
     public class Store : MonoBehaviour
     {
         [SerializeField] private UpgradePlace _upgradePlace;
         [SerializeField] private Wallet _wallet;
         [SerializeField] private UpgradeParametrs _upgradeParametrs;
-        
+
+        private CartPanel _cartPanel;
+        private CharacterPanel _characterPanel;
+        private FuelPanel _fuelPanel;
+        private UpgradePanel _upgradePanel;
+
         public UnityAction BuyUpdate;
         public UnityAction EmptyWallet;
         public UnityAction UpLevel;
-
-
-
-        private CartPanel _cartPanel;
-        private CharacterPanelUI _characterPanel;
-        private FuelPanel _fuelPanel;
-        private UpgradePanel _upgradePanel;
 
         private int numberUpgrade;
 
@@ -30,7 +28,7 @@ namespace Core
             _upgradePanel = GetComponentInChildren<UpgradePanel>();
             _upgradePanel.gameObject.SetActive(false);
             _fuelPanel = _upgradePanel.GetComponentInChildren<FuelPanel>();
-            _characterPanel = _upgradePanel.GetComponentInChildren<CharacterPanelUI>();
+            _characterPanel = _upgradePanel.GetComponentInChildren<CharacterPanel>();
             _cartPanel = _upgradePanel.GetComponentInChildren<CartPanel>();
         }
 
@@ -43,8 +41,6 @@ namespace Core
             _cartPanel.UpCart += OnTapUpCart;
         }
 
-        
-
         private void OnEnterPlace()
         {
             _upgradePanel.gameObject.SetActive(true);
@@ -53,9 +49,7 @@ namespace Core
         private void OnTapUpFuel()
         {
             numberUpgrade = 0;
-
         }
-
 
         private void OnTapUpPower()
         {
@@ -73,8 +67,8 @@ namespace Core
         {
             int price = _upgradeParametrs.GetPrice(numberUpgrade);
             bool canUpLevel = _upgradeParametrs.CanUpLevel(numberUpgrade);
-            
-            if (price<= _wallet.Money & canUpLevel==true)
+
+            if (price <= _wallet.Money & canUpLevel == true)
             {
                 _wallet.RemoveResource(price);
                 _upgradeParametrs.OnTapUp(numberUpgrade);
@@ -89,10 +83,6 @@ namespace Core
         {
             _upgradePanel.gameObject.SetActive(false);
         }
-        
-       
-
-
 
         private void OnDisable()
         {
@@ -102,7 +92,5 @@ namespace Core
             _characterPanel.UpPower -= OnTapUpPower;
             _cartPanel.UpCart -= OnTapUpCart;
         }
-
-
     }
 }

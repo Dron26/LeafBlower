@@ -51,7 +51,7 @@ PlayerSettings:
   m_MTRendering: 1
   mipStripping: 0
   numberOfMipsStripped: 0
-  m_StackTraceTypes: 020000000200000002000000020000000200000001000000
+  m_StackTraceTypes: 010000000100000001000000010000000100000001000000
   iosShowActivityIndicatorOnLoading: -1
   androidShowActivityIndicatorOnLoading: -1
   iosUseCustomAppBackgroundBehavior: 0
@@ -783,9 +783,9 @@ PlayerSettings:
   spritePackerPolicy: 
   webGLMemorySize: 256
   webGLExceptionSupport: 1
-  webGLNameFilesAsHashes: 0
-  webGLDataCaching: 1
-  webGLDebugSymbols: 2
+  webGLNameFilesAsHashes: 1
+  webGLDataCaching: 0
+  webGLDebugSymbols: 0
   webGLEmscriptenArgs: 
   webGLModulesDirectory: 
   webGLTemplate: PROJECT:ResizeToFill
@@ -795,7 +795,7 @@ PlayerSettings:
   webGLWasmArithmeticExceptions: 0
   webGLLinkerTarget: 1
   webGLThreadsSupport: 0
-  webGLDecompressionFallback: 0
+  webGLDecompressionFallback: 1
   scriptingDefineSymbols:
     Android: UNITY_VISUAL_SCRIPTING;CROSS_PLATFORM_INPUT;MOBILE_INPUT
     EmbeddedLinux: UNITY_VISUAL_SCRIPTING

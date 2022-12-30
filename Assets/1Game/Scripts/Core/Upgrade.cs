@@ -1,10 +1,6 @@
-using System.Collections;
 using System.Collections.Generic;
-using TMPro.Examples;
-using UnityEngine;
-using UnityEngine.Events;
 
-namespace Core
+namespace _1Game.Scripts.Core
 {
     public class Upgrade
     {

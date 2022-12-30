@@ -1,4 +1,7 @@
 using UnityEngine;
 
-public class CharacterStartPlace : MonoBehaviour
-{}
+namespace _1Game.Scripts.Empty
+{
+    public class CharacterStartPlace : MonoBehaviour
+    {}
+}
