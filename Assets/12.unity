@@ -31577,7 +31577,17 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4367886632835336364, guid: 9bd5f67f38d479641adf7092064c7e83,
         type: 3}
+      propertyPath: _firstStagesGroup.Array.size
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4367886632835336364, guid: 9bd5f67f38d479641adf7092064c7e83,
+        type: 3}
       propertyPath: _SecondStagesGroup.Array.size
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4367886632835336364, guid: 9bd5f67f38d479641adf7092064c7e83,
+        type: 3}
+      propertyPath: _secondStagesGroup.Array.size
       value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 4367886632835336364, guid: 9bd5f67f38d479641adf7092064c7e83,
@@ -31612,6 +31622,36 @@ PrefabInstance:
         type: 3}
     - target: {fileID: 4367886632835336364, guid: 9bd5f67f38d479641adf7092064c7e83,
         type: 3}
+      propertyPath: _firstStagesGroup.Array.data[0]
+      value: 
+      objectReference: {fileID: 7862745813889929944, guid: b8e31edd5ce966843bff1b558e22ba91,
+        type: 3}
+    - target: {fileID: 4367886632835336364, guid: 9bd5f67f38d479641adf7092064c7e83,
+        type: 3}
+      propertyPath: _firstStagesGroup.Array.data[1]
+      value: 
+      objectReference: {fileID: 5538558660670760960, guid: b73ac1f3b4508ce42b9c72982606035b,
+        type: 3}
+    - target: {fileID: 4367886632835336364, guid: 9bd5f67f38d479641adf7092064c7e83,
+        type: 3}
+      propertyPath: _firstStagesGroup.Array.data[2]
+      value: 
+      objectReference: {fileID: 5919861659061396610, guid: f676456c386497d4a91631daff1f9cda,
+        type: 3}
+    - target: {fileID: 4367886632835336364, guid: 9bd5f67f38d479641adf7092064c7e83,
+        type: 3}
+      propertyPath: _firstStagesGroup.Array.data[3]
+      value: 
+      objectReference: {fileID: 7862745813889929944, guid: e8f52293cb5ccc64098c3dca6e89b762,
+        type: 3}
+    - target: {fileID: 4367886632835336364, guid: 9bd5f67f38d479641adf7092064c7e83,
+        type: 3}
+      propertyPath: _firstStagesGroup.Array.data[4]
+      value: 
+      objectReference: {fileID: 7862745813889929944, guid: 5b9b47f1007db8540ae3b02a6a8b7cc9,
+        type: 3}
+    - target: {fileID: 4367886632835336364, guid: 9bd5f67f38d479641adf7092064c7e83,
+        type: 3}
       propertyPath: _SecondStagesGroup.Array.data[0]
       value: 
       objectReference: {fileID: 7328067022005459968, guid: e5e4c6fa40ba80f46a40130539457f4e,
@@ -31637,6 +31677,36 @@ PrefabInstance:
     - target: {fileID: 4367886632835336364, guid: 9bd5f67f38d479641adf7092064c7e83,
         type: 3}
       propertyPath: _SecondStagesGroup.Array.data[4]
+      value: 
+      objectReference: {fileID: 6241664131101979751, guid: de88b484baaf40048b080f5e1646467f,
+        type: 3}
+    - target: {fileID: 4367886632835336364, guid: 9bd5f67f38d479641adf7092064c7e83,
+        type: 3}
+      propertyPath: _secondStagesGroup.Array.data[0]
+      value: 
+      objectReference: {fileID: 7328067022005459968, guid: e5e4c6fa40ba80f46a40130539457f4e,
+        type: 3}
+    - target: {fileID: 4367886632835336364, guid: 9bd5f67f38d479641adf7092064c7e83,
+        type: 3}
+      propertyPath: _secondStagesGroup.Array.data[1]
+      value: 
+      objectReference: {fileID: 1814965461873822764, guid: 423baa080368de249b2ccf939083cc80,
+        type: 3}
+    - target: {fileID: 4367886632835336364, guid: 9bd5f67f38d479641adf7092064c7e83,
+        type: 3}
+      propertyPath: _secondStagesGroup.Array.data[2]
+      value: 
+      objectReference: {fileID: 7895351735643413444, guid: 2aa58fe147e82824eb6098b2857072fe,
+        type: 3}
+    - target: {fileID: 4367886632835336364, guid: 9bd5f67f38d479641adf7092064c7e83,
+        type: 3}
+      propertyPath: _secondStagesGroup.Array.data[3]
+      value: 
+      objectReference: {fileID: 8081725642736907703, guid: d868f1c3b8f4ce747977ff2acaf5988b,
+        type: 3}
+    - target: {fileID: 4367886632835336364, guid: 9bd5f67f38d479641adf7092064c7e83,
+        type: 3}
+      propertyPath: _secondStagesGroup.Array.data[4]
       value: 
       objectReference: {fileID: 6241664131101979751, guid: de88b484baaf40048b080f5e1646467f,
         type: 3}

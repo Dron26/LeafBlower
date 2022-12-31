@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using _1Game.Scripts.Particle;
 using _1Game.Scripts.UI;
 using Core;
+using JetBrains.Annotations;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -13,12 +14,13 @@ namespace _1Game.Scripts.Core
         [SerializeField] private List<Stage> _firstStagesGroup;
         [SerializeField] private List<Stage> _secondStagesGroup;
         [SerializeField] public ExitPanel _exitPanel;
-
+        
+        private List<List<Stage>> _liststages = new List<List<Stage>>();
         public int CountParticleSystems => _particleSystems.Count;
         public int SelectNumberStage => _selectNumberStage;
         public int SelectNumberGroup => _selectNumberGroup;
-        public int CountFirstStages => _firstStagesGroup.Count;
-        public int CountSecondStages => _secondStagesGroup.Count;
+        public int CountGroup => _liststages.Count;
+        public int CountSecondStages => _liststages[1].Count;
 
         private List<ParticleSystemController> _particleSystems;
         private Character _character;
@@ -36,8 +38,19 @@ namespace _1Game.Scripts.Core
         {
             _character = GetComponentInChildren<Character>();
             SetCharacter?.Invoke(_character);
+            FillListStages();
         }
 
+        private void FillListStages()
+        {
+            _liststages.Add(_firstStagesGroup);
+            _liststages.Add(_secondStagesGroup);
+        }
+
+        public int GetCountStages(int numberStage)
+        {
+            return _liststages[numberStage].Count;
+        }
         private void OnEnable()
         {
             _changerPanel.SelectSmallTownStage += OnSelectSmallTownStage;
@@ -60,11 +73,11 @@ namespace _1Game.Scripts.Core
 
             if (numberGroup == 0)
             {
-                stagesGroup = _firstStagesGroup;
+                stagesGroup = _liststages[0];
             }
             else if (numberGroup == 1)
             {
-                stagesGroup = _secondStagesGroup;
+                stagesGroup = _liststages[1];
             }
 
             _newStage = Instantiate(stagesGroup[numberStage], stagesGroup[numberStage].transform.position,
