@@ -9,7 +9,15 @@ namespace _1Game.Scripts.Core
         public int FuelPrice => GetPrice(_numberFuelUpgrade);
         public int PowerPrice => GetPrice(_numberPowerUpgrade);
         public int CartPrice => GetPrice(_numberCartUpgrade);
-        public int MaxFuelLevel => GetLevelValue(_numberFuelUpgrade);
+        
+        public int FuelLevel => GetLevel(_numberFuelUpgrade);
+        public int PowerLevel => GetLevel(_numberPowerUpgrade);
+        public int CartLevel => GetLevel(_numberCartUpgrade);
+        
+        
+        public int MaxFuelLevel => GetMaxLevel(_numberFuelUpgrade);
+        public int MaxPowerLevel => GetMaxLevel(_numberPowerUpgrade);
+        public int MaxCartLevel => GetMaxLevel(_numberCartUpgrade);
 
         private List<Upgrade> _upgrades = new();
         public List<UnityAction<int>> Actions = new();
@@ -89,7 +97,7 @@ namespace _1Game.Scripts.Core
             List<Level> levels = new List<Level>();
             int currentLevel = 0;
 
-            for (int i = 0; i < _maxLevel; i++)
+            for (int i = 0; i <= _maxLevel; i++)
             {
                 Level tempLevel = new Level(_value, _price);
 
@@ -132,6 +140,7 @@ namespace _1Game.Scripts.Core
             _upgrades[numberUpgrade].UpLevel();
             int value = GetLevelValue(numberUpgrade);
             Actions[numberUpgrade]?.Invoke(value);
+            UpdateLevels();
         }
 
         public int GetPrice(int numberUpgrade)
@@ -144,11 +153,20 @@ namespace _1Game.Scripts.Core
             return _upgrades[numberUpgrade].CurrentLevel < _upgrades[numberUpgrade].MaxLevel;
         }
 
+        public int GetLevel(int numberUpgrade)
+        {
+            return _upgrades[numberUpgrade].CurrentLevel;
+        }
+        
         private int GetLevelValue(int numberUpgrade)
         {
             return _upgrades[numberUpgrade].Levels[_upgrades[numberUpgrade].CurrentLevel].Value;
         }
 
+        public int GetMaxLevel(int numberUpgrade)
+        {
+            return _upgrades[numberUpgrade].MaxLevel;
+        }
         private void UpdateLevels()
         {
             _currentFuelLevel = _upgrades[_numberFuelUpgrade].CurrentLevel;

@@ -16,6 +16,7 @@ namespace _1Game.Scripts.Core
         private void Start()
         {
             _maxAmountResource = 100000000;
+            _amountResource = 900000000;
         }
 
         public bool RemoveResource(int purchasePrice)

@@ -1,4 +1,5 @@
 using _1Game.Scripts.Core;
+using _1Game.Scripts.Empty;
 using _1Game.Scripts.Item;
 using UnityEngine;
 using UnityEngine.UI;
@@ -13,6 +14,8 @@ namespace _1Game.Scripts.UI
         private float _maxValue;
         private float _minValue;
         private Slider _slider;
+
+        
 
         private void Awake()
         {
@@ -49,6 +52,7 @@ namespace _1Game.Scripts.UI
         private void OnUpLevel(int value)
         {
             _maxValue = value;
+            _slider.maxValue = _maxValue;
         }
     }
 }

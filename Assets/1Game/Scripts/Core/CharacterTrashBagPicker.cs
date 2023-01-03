@@ -160,8 +160,8 @@ namespace _1Game.Scripts.Core
             _cartTrashBagsReceivedCount = _cartPiker.TrashBagsReceivedCount;
 
             int quantity = _pickedTrashBags.Count > _cartTrashBagsReceivedCount
-                ? _cartTrashBagsReceivedCount
-                : _pickedTrashBags.Count;
+                ? _pickedTrashBags.Count
+                :_cartTrashBagsReceivedCount ;
 
             for (int i = 0; i < quantity; i++)
             {

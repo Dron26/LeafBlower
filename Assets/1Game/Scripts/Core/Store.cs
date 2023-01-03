@@ -1,3 +1,5 @@
+using System;
+using System.Collections.Generic;
 using _1Game.Scripts.Empty;
 using _1Game.Scripts.UI;
 using _1Game.Scripts.WorkPlaces;
@@ -11,57 +13,77 @@ namespace _1Game.Scripts.Core
         [SerializeField] private UpgradePlace _upgradePlace;
         [SerializeField] private Wallet _wallet;
         [SerializeField] private UpgradeParametrs _upgradeParametrs;
+        
 
         private CartPanel _cartPanel;
         private CharacterPanel _characterPanel;
         private FuelPanel _fuelPanel;
-        private UpgradePanel _upgradePanel;
+        
+        private Panel _upgradePanelContainer;
 
-        public UnityAction BuyUpdate;
+
+        public UnityAction Update;
         public UnityAction EmptyWallet;
-        public UnityAction UpLevel;
+        public UnityAction<int> RachedMaxLevel;
 
-        private int numberUpgrade;
+        private List<UpgradePanel> _upgradePanels = new List<UpgradePanel>();
+        // private Action _function = () => {}; 
+        // private List<Action> _actions = new List<Action>();
+        private int _numberUpgrade;
 
         private void Awake()
         {
-            _upgradePanel = GetComponentInChildren<UpgradePanel>();
-            _upgradePanel.gameObject.SetActive(false);
-            _fuelPanel = _upgradePanel.GetComponentInChildren<FuelPanel>();
-            _characterPanel = _upgradePanel.GetComponentInChildren<CharacterPanel>();
-            _cartPanel = _upgradePanel.GetComponentInChildren<CartPanel>();
+                _upgradePanelContainer = GetComponentInChildren<Panel>();
+            _upgradePanelContainer.gameObject.SetActive(false);
+            InitializeUpgradePanels();
+            _fuelPanel = _upgradePanelContainer.GetComponentInChildren<FuelPanel>();
+            _characterPanel = _upgradePanelContainer.GetComponentInChildren<CharacterPanel>();
+            _cartPanel = _upgradePanelContainer.GetComponentInChildren<CartPanel>();
         }
+
 
         private void OnEnable()
         {
             _upgradePlace.EnterPlace += OnEnterPlace;
             _upgradePlace.ExitPlace += OnTapClose;
-            _fuelPanel.UpFuel += OnTapUpFuel;
-            _characterPanel.UpPower += OnTapUpPower;
-            _cartPanel.UpCart += OnTapUpCart;
+
+            for (int i = 0; i < _upgradePanels.Count; i++)
+            {
+                _upgradePanels[i].UpgradeParametr += OnTapUp;
+            }
+            
+            // _fuelPanel.UpFuel += OnTapUpFuel;
+            // _characterPanel.UpPower += OnTapUpPower;
+            // _cartPanel.UpCart += OnTapUpCart;
         }
+
+        // private void Start()
+        // {
+        //     _actions=new List<Action>(){OnTapUpFuel,OnTapUpPower,OnTapUpCart};
+        // }
 
         private void OnEnterPlace()
         {
-            _upgradePanel.gameObject.SetActive(true);
+            _upgradePanelContainer.gameObject.SetActive(true);
         }
-
-        private void OnTapUpFuel()
-        {
-            numberUpgrade = 0;
-        }
-
-        private void OnTapUpPower()
-        {
-            numberUpgrade = 1;
-            OnTapUp(numberUpgrade);
-        }
-
-        private void OnTapUpCart()
-        {
-            numberUpgrade = 2;
-            OnTapUp(numberUpgrade);
-        }
+        
+        // private void OnTapUpFuel()
+        // {
+        //     _numberUpgrade = 0;
+        //     OnTapUp(_numberUpgrade);
+        // }
+        //
+        // private void OnTapUpPower()
+        // {
+        //     _numberUpgrade = 1;
+        //     OnTapUp(_numberUpgrade);
+        // }
+        //
+        // private void OnTapUpCart()
+        // {
+        //     _numberUpgrade = 2;
+        //     OnTapUp(_numberUpgrade);
+        // }
 
         private void OnTapUp(int numberUpgrade)
         {
@@ -70,8 +92,16 @@ namespace _1Game.Scripts.Core
 
             if (price <= _wallet.Money & canUpLevel == true)
             {
-                _wallet.RemoveResource(price);
-                _upgradeParametrs.OnTapUp(numberUpgrade);
+                if (canUpLevel == true)
+                {
+                    _wallet.RemoveResource(price);
+                    _upgradeParametrs.OnTapUp(numberUpgrade);
+                }
+                else
+                {
+                    RachedMaxLevel?.Invoke(numberUpgrade);
+                }
+                
             }
             else
             {
@@ -81,16 +111,37 @@ namespace _1Game.Scripts.Core
 
         private void OnTapClose()
         {
-            _upgradePanel.gameObject.SetActive(false);
+            _upgradePanelContainer.gameObject.SetActive(false);
         }
 
+        private void InitializeUpgradePanels()
+        {
+            _numberUpgrade = 0;
+            
+            foreach (UpgradePanel upgradePanel in _upgradePanelContainer.GetComponentsInChildren<UpgradePanel>())
+            {
+
+                upgradePanel.Initialize(_numberUpgrade,_upgradeParametrs);
+                
+                _upgradePanels.Add(upgradePanel);
+
+                _numberUpgrade++;
+            }
+        }
+        
         private void OnDisable()
         {
             _upgradePlace.EnterPlace -= OnEnterPlace;
             _upgradePlace.ExitPlace -= OnTapClose;
-            _fuelPanel.UpFuel -= OnTapUpFuel;
-            _characterPanel.UpPower -= OnTapUpPower;
-            _cartPanel.UpCart -= OnTapUpCart;
+            
+            for (int i = 0; i < _upgradePanels.Count; i++)
+            {
+                _upgradePanels[i].UpgradeParametr -= OnTapUp;
+            }
+            
+            // _fuelPanel.UpFuel -= OnTapUpFuel;
+            // _characterPanel.UpPower -= OnTapUpPower;
+            // _cartPanel.UpCart -= OnTapUpCart;
         }
     }
 }
