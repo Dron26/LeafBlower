@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using _1Game.Scripts.Empty;
+using _1Game.Scripts.UI;
 using _1Game.Scripts.WorkPlaces;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -32,8 +33,7 @@ namespace _1Game.Scripts.Core
         private float _time;
         private readonly float _stepUpLevel = 0.4f;
         private bool _canSell;
-
-
+        
         public UnityAction TakeTrashBag;
         public UnityAction<TrashBag> SallTrashBag;
         public UnityAction TakeMaxQuantityTrashBag;

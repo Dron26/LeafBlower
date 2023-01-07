@@ -10,6 +10,8 @@ namespace _1Game.Scripts.Core
 {
     public class CartTrashBagPicker : MonoBehaviour
     {
+        [SerializeField] private ExitPanel _exitPanel;
+        
         private UpgradeParametrs _upgradeParametrs;
 
         public int TrashBagsReceivedCount => _trashBagsReceivedCount;
@@ -60,6 +62,15 @@ namespace _1Game.Scripts.Core
             _trashBagStore=GetComponentInChildren<TrashBagStore>();
         }
 
+        private void OnEnable()
+        {
+            _stageController.SetCharacter += OnSetCharacter;
+            _trashBagPicker.SallTrashBag += OnSallTrashBag;
+            _cart.FinishMove += OnFinishMove;
+            _upgradeParametrs.UpCart += OnUpLevel;
+            _exitPanel.SetNextLevel += ClearCart;
+        }
+        
         private void Start()
         {
             _maxQuantityInRow = 3;
@@ -77,21 +88,14 @@ namespace _1Game.Scripts.Core
 
             _trashBagsReceivedCount = _maxPickedQuantity - _pickedTrashBags.Count;
         }
-
-        private void OnEnable()
-        {
-            _stageController.SetCharacter += OnSetCharacter;
-            _trashBagPicker.SallTrashBag += OnSallTrashBag;
-            _cart.FinishMove += OnFinishMove;
-            _upgradeParametrs.UpCart += OnUpLevel;
-        }
-
+        
         private void OnDisable()
         {
             _stageController.SetCharacter -= OnSetCharacter;
             _trashBagPicker.SallTrashBag -= OnSallTrashBag;
             _cart.FinishMove -= OnFinishMove;
             _upgradeParametrs.UpCart -= OnUpLevel;
+            _exitPanel.SetNextLevel -= ClearCart;
         }
 
         private void OnSallTrashBag(TrashBag trashBag)
