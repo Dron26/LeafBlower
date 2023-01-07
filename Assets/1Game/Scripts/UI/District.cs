@@ -32,6 +32,7 @@ namespace _1Game.Scripts.UI
         {
             _countStages=countStages;
             _maxStarCount = _countStages;
+            _slider.maxValue = _countStages;
             _number = number;
 
             if (_number == 0)

@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using _1Game.Scripts.Empty;
 using _1Game.Scripts.WorkPlaces;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -159,17 +160,16 @@ namespace _1Game.Scripts.Core
             _canSell = false;
             _cartTrashBagsReceivedCount = _cartPiker.TrashBagsReceivedCount;
 
-            int quantity = _pickedTrashBags.Count > _cartTrashBagsReceivedCount
-                ? _pickedTrashBags.Count
-                :_cartTrashBagsReceivedCount ;
-
+           int quantity = _cartTrashBagsReceivedCount>=_pickedTrashBags.Count ?  _pickedTrashBags.Count:_cartTrashBagsReceivedCount ;
+            
             for (int i = 0; i < quantity; i++)
             {
+
                 yield return _waitForSeconds;
 
                 _pickedTrashBags.TryPop(out TrashBag trashBag);
                 SallTrashBag?.Invoke(trashBag);
-                _quantityPickedTrashBag--;
+                _quantityPickedTrashBag=_pickedTrashBags.Count;
                 _quantityInLevel--;
 
                 if (_quantityInLevel == 0 & _numberLevel > 0)
