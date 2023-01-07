@@ -14,7 +14,7 @@ namespace _1Game.Scripts.UI
 
         private LogoPanel _logo;
         private Panel _logoPanel;
-
+        private SmallTowm _smallTown;
         private StatsPanel _stats;
         private Panel _statsPanel;
         private ExitPanel _exitPanel;
@@ -49,6 +49,8 @@ namespace _1Game.Scripts.UI
             _stagesPanel = GetComponentInChildren<StagesPanel>();
             _stagesGroupPanel = _stagesPanel.gameObject.GetComponent<Panel>();
             _groupStages = _stagesPanel.GetComponentInChildren<GroupStages>();
+
+            _smallTown = GetComponentInChildren<SmallTowm>();
         }
 
         private void OnEnable()
@@ -160,6 +162,7 @@ namespace _1Game.Scripts.UI
             _isExitStartMenu = false;
             StartCoroutine(ChangeColorExit(_stagesGroupPanel, _statsPanel));
             _groupStages.SetStars();
+            _smallTown.SetStars();
         }
     }
 }

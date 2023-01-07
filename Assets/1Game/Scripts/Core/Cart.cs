@@ -1,7 +1,6 @@
 using System.Collections;
 using _1Game.Scripts.Empty;
 using _1Game.Scripts.UI;
-using Core;
 using DG.Tweening;
 using UnityEngine;
 using UnityEngine.Events;
@@ -9,6 +8,8 @@ using UnityEngine.Serialization;
 
 namespace _1Game.Scripts.Core
 {
+    [RequireComponent(typeof(CartTrashBagPicker))]
+    [RequireComponent(typeof(ChangerCartSize))]
     public class Cart : MonoBehaviour
     {
         [SerializeField] private Wallet _wallet;

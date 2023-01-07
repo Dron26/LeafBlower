@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using _1Game.Scripts.Core;
 using _1Game.Scripts.Empty;
@@ -19,6 +20,7 @@ namespace _1Game.Scripts.UI
             _container = GetComponentInChildren<GroupContainer>();
             InitializeGroup();
         }
+
 
         private void Start()
         {

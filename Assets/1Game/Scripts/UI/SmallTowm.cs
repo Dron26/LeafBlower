@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using _1Game.Scripts.Core;
 using _1Game.Scripts.Empty;
 using UnityEngine;
 
@@ -6,16 +7,18 @@ namespace _1Game.Scripts.UI
 {
     public class SmallTowm : MonoBehaviour
     {
-        [SerializeField] private GroupContainer _groupContainer;
+        [SerializeField] private List<GroupStages> _groupsStages;
+        [SerializeField] private GroupDistrict _groupDistrict;
 
         private List<District> _districts = new();
-        private List<GroupStages> _groupsStages = new();
-
+        private int _countDistrictStars;
+        [SerializeField] private StageData _stageData;
+        
         private void Awake()
         {
-            foreach (GroupStages groupStages in _groupContainer.GetComponentsInChildren<GroupStages>())
+            foreach (District district in _groupDistrict.GetComponentsInChildren<District>())
             {
-                _groupsStages.Add(groupStages);
+                _districts.Add(district);
             }
         }
 
@@ -29,11 +32,6 @@ namespace _1Game.Scripts.UI
 
         private void Start()
         {
-            foreach (District district in transform.GetComponentsInChildren<District>())
-            {
-                _districts.Add(district);
-            }
-
             InitializeDistrict();
             gameObject.SetActive(false);
         }
@@ -42,7 +40,7 @@ namespace _1Game.Scripts.UI
         {
             for (int i = 0; i < _districts.Count; i++)
             {
-                _districts[i].Initialize(i);
+                _districts[i].Initialize(i,_groupsStages[i].CountStages);
             }
         }
 
@@ -58,5 +56,28 @@ namespace _1Game.Scripts.UI
         {
             UnLockStage(numberGroup + 1);
         }
+
+        public void SetStars()
+        {
+            int maxCoumtStarsInStage = 3;
+            
+            for (int i = 0; i < _groupsStages.Count; i++)
+            {
+                _countDistrictStars = 0;
+                
+                for (int j = 0; j < _groupsStages[i].CountStages; j++)
+                {
+                    int _countStars = _stageData.GetStars(j, i);
+                    
+                    if (_countStars==maxCoumtStarsInStage)
+                    {
+                        _countDistrictStars++;
+                    }
+                }
+                
+                _districts[i].SetStars(_countDistrictStars);
+            }
+        }
+        
     }
 }

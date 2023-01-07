@@ -85,7 +85,7 @@ namespace _1Game.Scripts.Core
         public int GetStars(int numberStage, int numberGroup)
         {
             int countStars = _stagesStarGroup[numberGroup][numberStage];
-
+            
             return countStars;
         }
 

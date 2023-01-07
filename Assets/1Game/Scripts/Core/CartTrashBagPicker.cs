@@ -10,8 +10,6 @@ namespace _1Game.Scripts.Core
 {
     public class CartTrashBagPicker : MonoBehaviour
     {
-        [SerializeField] private CartPanel _cartPanel;
-
         private UpgradeParametrs _upgradeParametrs;
 
         public int TrashBagsReceivedCount => _trashBagsReceivedCount;
@@ -21,7 +19,9 @@ namespace _1Game.Scripts.Core
 
         private CharacterTrashBagPicker _trashBagPicker;
         private StageController _stageController;
+        
         private TrashBagStorePoint _storePoint;
+        private TrashBagStore _trashBagStore;
         private MainPointForTrashBag _mainPointForTrashBag;
         private TrashBagMover _trashBagMover;
         private Stack<TrashBag> _pickedTrashBags;
@@ -56,7 +56,8 @@ namespace _1Game.Scripts.Core
             _stageController = GetComponentInParent<StageController>();
             _trashBagPicker = _stageController.GetComponentInChildren<CharacterTrashBagPicker>();
             _storePoint = GetComponentInChildren<TrashBagStorePoint>();
-            _mainPointForTrashBag = _storePoint.GetComponentInChildren<MainPointForTrashBag>();
+            _mainPointForTrashBag = GetComponentInChildren<MainPointForTrashBag>();
+            _trashBagStore=GetComponentInChildren<TrashBagStore>();
         }
 
         private void Start()
@@ -102,7 +103,7 @@ namespace _1Game.Scripts.Core
                 _waitForSeconds = new WaitForSeconds(waiteTime);
                 _pickedTrashBags.Push(trashBag);
 
-                trashBag.transform.SetParent(transform, true);
+                trashBag.transform.SetParent(_trashBagStore.transform, true);
                 _collider = trashBag.GetComponent<Collider>();
                 _collider.enabled = false;
                 _trashBagMover = trashBag.GetComponent<TrashBagMover>();
@@ -161,6 +162,7 @@ namespace _1Game.Scripts.Core
         private void OnUpLevel(int valume)
         {
             _maxPickedQuantity = valume;
+            ChangeStorePosition();
         }
 
         public void ClearCart()
@@ -229,6 +231,15 @@ namespace _1Game.Scripts.Core
                     _maxPickedQuantity = minQuantity;
                 }
             }
+        }
+
+        private void ChangeStorePosition()
+        {
+
+            float upStep = 0.08f;
+                Vector3 localPosition =_trashBagStore.transform.localPosition;
+            localPosition = new Vector3(localPosition.x, localPosition.y , localPosition.z+upStep);
+            _trashBagStore.transform.localPosition = localPosition;
         }
     }
 }

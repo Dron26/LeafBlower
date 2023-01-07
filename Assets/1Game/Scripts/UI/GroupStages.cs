@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using _1Game.Scripts.Core;
@@ -11,15 +12,16 @@ namespace _1Game.Scripts.UI
         private ChangerPanel _changerPanel;
         private StageData _stageData;
         private List<StagePanel> _uIStages = new();
-        
+        public int CountStages => _uIStages.Count;
         private int _numberGroup;
         private int _countStars;
-
         public UnityAction<int> EndStage;
+
 
         private void Start()
         {
-            InitializeStages();
+            InitializeStage();
+            SetStars();
         }
 
         private List<StagePanel> GetStages()
@@ -32,6 +34,7 @@ namespace _1Game.Scripts.UI
             _changerPanel = changerPanel;
             _stageData = stageData;
             _numberGroup = number;
+            InitializeStages();
         }
 
         private void InitializeStages()
@@ -40,9 +43,6 @@ namespace _1Game.Scripts.UI
             {
                 _uIStages.Add(stage);
             }
-
-            InitializeStage();
-            SetStars();
         }
 
         private void InitializeStage()
