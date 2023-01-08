@@ -150,6 +150,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _numberPlace: 0
+  _objects:
+  - {fileID: 0}
 --- !u!1 &5695991241413881082
 GameObject:
   m_ObjectHideFlags: 0

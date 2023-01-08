@@ -10,7 +10,7 @@ namespace _1Game.Scripts.Core
         public int WorkPlaceCount => _workPlaces.Count;
         private List<WorkPlace> _workPlaces = new List<WorkPlace>();
 
-        [HideInInspector] private List<InsideController> _insideControllers = new List<InsideController>();
+        [HideInInspector] private List<LocationController> _insideControllers = new List<LocationController>();
 
         private int firstStart = 1;
 
@@ -55,9 +55,9 @@ namespace _1Game.Scripts.Core
 
             for (int i = 0; i < _workPlaces.Count; i++)
             {
-                InsideController insideController = new InsideController();
+                LocationController locationController = new LocationController();
 
-                _insideControllers.Add(insideController = _workPlaces[i].GetComponentInChildren<InsideController>());
+                _insideControllers.Add(locationController = _workPlaces[i].GetComponentInChildren<LocationController>());
                 _insideControllers[i].CharacterInside += OnCharacterInside;
             }
         }

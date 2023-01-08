@@ -74,6 +74,8 @@ namespace _1Game.Scripts.Core
         private void Start()
         {
             _maxQuantityInRow = 3;
+            _trashBagsReceivedCount = _maxQuantityInRow;
+            _maxPickedQuantity = 6;
             _pickedTrashBags = new Stack<TrashBag>();
             _changePointStore = new List<Vector3>();
 
@@ -85,8 +87,6 @@ namespace _1Game.Scripts.Core
             _changePointStore.Add(new Vector3(_storeLocalPosition.x + stepInRow, _storeLocalPosition.y,
                 _storeLocalPosition.z));
             _removePositionStorePoint = _storePoint.transform.localPosition;
-
-            _trashBagsReceivedCount = _maxPickedQuantity - _pickedTrashBags.Count;
         }
         
         private void OnDisable()

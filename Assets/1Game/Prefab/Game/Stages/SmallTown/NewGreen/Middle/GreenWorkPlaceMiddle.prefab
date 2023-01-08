@@ -4887,8 +4887,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9dd94a3051837964ea82f2fc97818023, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxQuantityParticles: 0
-  _allQuantityParticles: 0
+  MaxQuantityParticles: 0
+  AllQuantityParticles: 0
 --- !u!95 &5890335636769608779
 Animator:
   serializedVersion: 4
@@ -4974,11 +4974,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 57d0bc2f1c2ed8844aa068d128338b8c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _objects:
-  - {fileID: 2705914830863456794}
-  - {fileID: 8637340623780503403}
-  - {fileID: 4971865981305630839}
-  - {fileID: 736027701127885888}
 --- !u!1001 &3810875420354632
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5319,6 +5314,36 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 5890335637984878032}
     m_Modifications:
+    - target: {fileID: 1897656362631592805, guid: e6f90e7fc34aa8e4cbef9ca570517fb0,
+        type: 3}
+      propertyPath: _objects.Array.data[0]
+      value: 
+      objectReference: {fileID: 2705914830863456794}
+    - target: {fileID: 1897656362631592805, guid: e6f90e7fc34aa8e4cbef9ca570517fb0,
+        type: 3}
+      propertyPath: _objects.Array.data[1]
+      value: 
+      objectReference: {fileID: 8637340623780503403}
+    - target: {fileID: 1897656362631592805, guid: e6f90e7fc34aa8e4cbef9ca570517fb0,
+        type: 3}
+      propertyPath: _objects.Array.data[2]
+      value: 
+      objectReference: {fileID: 4971865981305630839}
+    - target: {fileID: 1897656362631592805, guid: e6f90e7fc34aa8e4cbef9ca570517fb0,
+        type: 3}
+      propertyPath: _objects.Array.data[3]
+      value: 
+      objectReference: {fileID: 383290543053616936}
+    - target: {fileID: 1897656362631592805, guid: e6f90e7fc34aa8e4cbef9ca570517fb0,
+        type: 3}
+      propertyPath: _objects.Array.data[4]
+      value: 
+      objectReference: {fileID: 5498932763264927313}
+    - target: {fileID: 1897656362631592805, guid: e6f90e7fc34aa8e4cbef9ca570517fb0,
+        type: 3}
+      propertyPath: _objects.Array.data[5]
+      value: 
+      objectReference: {fileID: 736027701127885888}
     - target: {fileID: 1897656362631592806, guid: e6f90e7fc34aa8e4cbef9ca570517fb0,
         type: 3}
       propertyPath: m_RootOrder
@@ -5548,7 +5573,8 @@ PrefabInstance:
       propertyPath: m_Name
       value: GarbageMachineWater
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 2904620546265941731, guid: 8d7430a7c21847d43a2c8f87de9b530e, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 8d7430a7c21847d43a2c8f87de9b530e, type: 3}
 --- !u!4 &2889015480234769944 stripped
 Transform:

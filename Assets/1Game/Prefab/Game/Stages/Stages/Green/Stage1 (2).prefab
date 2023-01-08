@@ -3222,7 +3222,8 @@ PrefabInstance:
       propertyPath: m_Name
       value: GreenWorkPlaceMiddle (1)
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 5890335637010902139, guid: 4e8149f5633212a4bb4ec8715ca4b6e2, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 4e8149f5633212a4bb4ec8715ca4b6e2, type: 3}
 --- !u!4 &8651038187977323235 stripped
 Transform:

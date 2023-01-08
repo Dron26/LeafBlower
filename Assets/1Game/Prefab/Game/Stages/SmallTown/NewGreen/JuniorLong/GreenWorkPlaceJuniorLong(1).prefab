@@ -97,6 +97,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 990031160042019840}
+  - component: {fileID: 4993378923942034298}
   m_Layer: 22
   m_Name: CharacterWallsJunior
   m_TagString: Untagged
@@ -124,6 +125,18 @@ Transform:
   m_Father: {fileID: 7378441453737291750}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4993378923942034298
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 990031160042019841}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e6f16671992b2ec44886e4dc2c372171, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &990031160298027042
 GameObject:
   m_ObjectHideFlags: 0
@@ -371,7 +384,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cc30bf1a6b2243e40bd290c5a4c717c2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  scrollSpeed: 0
+  _scrollSpeed: 0
 --- !u!1 &2291215246187673558
 GameObject:
   m_ObjectHideFlags: 0
@@ -484,7 +497,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cc30bf1a6b2243e40bd290c5a4c717c2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  scrollSpeed: 0
+  _scrollSpeed: 0
 --- !u!1 &2291215246487114221
 GameObject:
   m_ObjectHideFlags: 0
@@ -597,7 +610,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cc30bf1a6b2243e40bd290c5a4c717c2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  scrollSpeed: 0
+  _scrollSpeed: 0
 --- !u!1 &2291215247193923782
 GameObject:
   m_ObjectHideFlags: 0
@@ -5852,7 +5865,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cc30bf1a6b2243e40bd290c5a4c717c2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  scrollSpeed: 0
+  _scrollSpeed: 0
 --- !u!1 &3774743154992402967
 GameObject:
   m_ObjectHideFlags: 0
@@ -5988,6 +6001,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4436728821947867938}
   - component: {fileID: 6139034752289003730}
+  - component: {fileID: 5379141686015126920}
   m_Layer: 0
   m_Name: Particle System Force Field
   m_TagString: Untagged
@@ -6505,6 +6519,18 @@ ParticleSystemForceField:
         m_RotationOrder: 4
     m_MultiplyDragByParticleSize: 1
     m_MultiplyDragByParticleVelocity: 1
+--- !u!114 &5379141686015126920
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4584465617280795302}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e6f16671992b2ec44886e4dc2c372171, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &5996350169282195085
 GameObject:
   m_ObjectHideFlags: 0
@@ -6515,6 +6541,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5297242729873491757}
   - component: {fileID: 5637274005111313199}
+  - component: {fileID: 8902210708484794550}
   m_Layer: 0
   m_Name: Particle System Force Field
   m_TagString: Untagged
@@ -7032,6 +7059,18 @@ ParticleSystemForceField:
         m_RotationOrder: 4
     m_MultiplyDragByParticleSize: 1
     m_MultiplyDragByParticleVelocity: 1
+--- !u!114 &8902210708484794550
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5996350169282195085}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e6f16671992b2ec44886e4dc2c372171, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &6899722321006925571
 GameObject:
   m_ObjectHideFlags: 0
@@ -7042,6 +7081,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7219067161751728056}
   - component: {fileID: 5177477275925350821}
+  - component: {fileID: 8068501552578254492}
   m_Layer: 0
   m_Name: Particle System Force Field
   m_TagString: Untagged
@@ -7559,6 +7599,18 @@ ParticleSystemForceField:
         m_RotationOrder: 4
     m_MultiplyDragByParticleSize: 1
     m_MultiplyDragByParticleVelocity: 1
+--- !u!114 &8068501552578254492
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6899722321006925571}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e6f16671992b2ec44886e4dc2c372171, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &7378441452807038587
 GameObject:
   m_ObjectHideFlags: 0
@@ -12446,8 +12498,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9dd94a3051837964ea82f2fc97818023, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxQuantityParticles: 0
-  _allQuantityParticles: 0
+  MaxQuantityParticles: 0
+  AllQuantityParticles: 0
 --- !u!95 &7378441452807038589
 Animator:
   serializedVersion: 4
@@ -12477,6 +12529,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7378441453164391150}
+  - component: {fileID: 7027768305814840666}
   m_Layer: 30
   m_Name: LeavesWallsJunior
   m_TagString: Untagged
@@ -12501,6 +12554,18 @@ Transform:
   m_Father: {fileID: 7378441453737291750}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7027768305814840666
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7378441453164391151}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e6f16671992b2ec44886e4dc2c372171, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &7378441453261744657
 GameObject:
   m_ObjectHideFlags: 0
@@ -12563,7 +12628,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 745bb93ddbd7b924dac6e4ab1e21ea10, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _numberPlace: 0
+  _objects:
+  - {fileID: 5379141686015126920}
+  - {fileID: 5093687833970998849}
+  - {fileID: 8902210708484794550}
+  - {fileID: 8068501552578254492}
+  - {fileID: 7027768305814840666}
+  - {fileID: 4993378923942034298}
 --- !u!1 &7378441453737291746
 GameObject:
   m_ObjectHideFlags: 0
@@ -12575,7 +12646,6 @@ GameObject:
   - component: {fileID: 7378441453737291750}
   - component: {fileID: 7378441453737291751}
   - component: {fileID: 7378441453737291749}
-  - component: {fileID: 7378441453737291748}
   - component: {fileID: 6746435579474009433}
   m_Layer: 0
   m_Name: GreenWorkPlaceJuniorLong(1)
@@ -12631,26 +12701,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 57d0bc2f1c2ed8844aa068d128338b8c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _objects: []
---- !u!114 &7378441453737291748
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7378441453737291746}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1ecd48d071d3d424db018a282e83cb28, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _images:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
 --- !u!65 &6746435579474009433
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -12718,6 +12768,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1896652026686944895}
   - component: {fileID: 8794347243031483451}
+  - component: {fileID: 5093687833970998849}
   m_Layer: 0
   m_Name: Particle System Force Field
   m_TagString: Untagged
@@ -13235,6 +13286,18 @@ ParticleSystemForceField:
         m_RotationOrder: 4
     m_MultiplyDragByParticleSize: 1
     m_MultiplyDragByParticleVelocity: 1
+--- !u!114 &5093687833970998849
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7845101488541061645}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e6f16671992b2ec44886e4dc2c372171, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &643221626902317098
 PrefabInstance:
   m_ObjectHideFlags: 0

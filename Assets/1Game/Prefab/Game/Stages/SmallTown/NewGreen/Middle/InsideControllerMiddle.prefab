@@ -107,6 +107,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _numberPlace: 0
+  _objects:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
 --- !u!1 &8395675193749897802
 GameObject:
   m_ObjectHideFlags: 0

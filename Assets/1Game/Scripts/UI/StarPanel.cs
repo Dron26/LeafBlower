@@ -8,12 +8,12 @@ namespace _1Game.Scripts.UI
     {
         [SerializeField] private StageController _stage;
         public int CountStars => _countStars;
-
+public int CountClearWorkPlaces=>_countClearWorkPlaces;
         private readonly List<Star> _stars = new();
         
         private int _numberWorkplace;
         private int _countStars;
-        private int _countParticleSystems;
+        private int _countClearWorkPlaces;
         private float _alfa;
         private float _time;
 
@@ -36,7 +36,7 @@ namespace _1Game.Scripts.UI
         private void OnCatchAllParticle()
         {
             _alfa = 1f;
-            _countParticleSystems--;
+            _countClearWorkPlaces--;
 
             if (_numberWorkplace == 0 | _numberWorkplace == 1)
             {
@@ -45,7 +45,7 @@ namespace _1Game.Scripts.UI
                 _numberWorkplace++;
                 _countStars++;
             }
-            else if (_countParticleSystems == 0)
+            else if (_countClearWorkPlaces == 0)
             {
                 _stars[_numberWorkplace].Fade(_alfa, _time);
                 _stars[_numberWorkplace].ChangeSize();
@@ -63,7 +63,7 @@ namespace _1Game.Scripts.UI
         {
             _countStars = 0;
             _numberWorkplace = 0;
-            _countParticleSystems = _stage.CountParticleSystems;
+            _countClearWorkPlaces = _stage.CountParticleSystems;
             InitializeStars();
         }
 
