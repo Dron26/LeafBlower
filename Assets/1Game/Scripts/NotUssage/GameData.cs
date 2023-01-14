@@ -8,8 +8,8 @@ namespace Core
     public class GameData : MonoBehaviour
     {
         public bool IsFirstGame { get; private set; }
-        public int Money { get; private set; }
-        public int MaxMoney { get; private set; }
+        public long Money { get; private set; }
+        public long MaxMoney { get; private set; }
         public int LeaveBlowerStandartLevel { get; private set; }
         public int LeaveBlowerlHardLevel { get; private set; }
         public int CharacterLevel { get; private set; }

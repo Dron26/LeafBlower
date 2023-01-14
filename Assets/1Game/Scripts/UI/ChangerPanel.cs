@@ -26,6 +26,7 @@ namespace _1Game.Scripts.UI
         private float _waitTime;
         private bool _isExitStartMenu;
         private bool _isPushAlarmWork;
+        private bool _isPaused = false;
         private float _speedChange = 1.2f;
 
         public UnityAction<int, int> SelectSmallTownStage;
@@ -163,6 +164,12 @@ namespace _1Game.Scripts.UI
             StartCoroutine(ChangeColorExit(_stagesGroupPanel, _statsPanel));
             _groupStages.SetStars();
             _smallTown.SetStars();
+        }
+
+        public void PauseGame()
+        {
+            _isPaused = !_isPaused;
+            Time.timeScale = _isPaused ? 0 : 1;
         }
     }
 }

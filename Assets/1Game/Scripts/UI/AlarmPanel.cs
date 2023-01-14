@@ -35,6 +35,7 @@ namespace _1Game.Scripts.UI
             _stageController.SetCharacter -= OnSetCharacter;
             _characterTrashBag.SallAllTrashBag -= OnSellTrashBag;
             _fuelChanger.ReachedMinLevel -= StartAlarm;
+            _characterTrashBag.TakeMaxQuantityTrashBag -= OnTakeMaxQuantityTrashBag;
         }
 
         private void OnTakeMaxQuantityTrashBag()

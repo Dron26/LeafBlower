@@ -5,13 +5,13 @@ namespace _1Game.Scripts.Core
 {
     public class Wallet : MonoBehaviour
     {
-        public int Money { get => _amountResource; private set { } }
-        public int MaxMoney { get => _maxAmountResource; private set { } }
+        public long Money { get => _amountResource; private set { } }
+        public long MaxMoney { get => _maxAmountResource; private set { } }
 
-        protected private int _amountResource;
-        protected private int _maxAmountResource;
+        protected private long _amountResource;
+        protected private long _maxAmountResource;
 
-        public UnityAction<int> ChangeResource;
+        public UnityAction<long> ChangeResource;
 
         private void Start()
         {
@@ -49,13 +49,13 @@ namespace _1Game.Scripts.Core
             }
         }
 
-        public void Initialization(int money, int maxMoney)
+        public void Initialization(long money, long maxMoney)
         {
             _amountResource = money;
             _maxAmountResource = maxMoney;
         }
 
-        public void LoadParametr(int money, int maxMoney)
+        public void LoadParametr(long money, long maxMoney)
         {
             _amountResource = money;
             _maxAmountResource = maxMoney;

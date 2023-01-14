@@ -39,7 +39,7 @@ namespace _1Game.Scripts.UI
             _store.EmptyWallet -= OnEmptyWallet;
         }
 
-        private void UpdateInfo(int amount)
+        private void UpdateInfo(long amount)
         {
             _amount.text = Convert.ToString(amount);
         }
