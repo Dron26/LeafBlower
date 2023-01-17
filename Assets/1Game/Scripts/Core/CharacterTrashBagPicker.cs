@@ -33,8 +33,10 @@ namespace _1Game.Scripts.Core
         private float _time;
         private readonly float _stepUpLevel = 0.4f;
         private bool _canSell;
+        private bool _isTutorialCompleted;
         
         public UnityAction TakeTrashBag;
+        
         public UnityAction<TrashBag> SallTrashBag;
         public UnityAction TakeMaxQuantityTrashBag;
         public UnityAction SallAllTrashBag;
@@ -157,6 +159,11 @@ namespace _1Game.Scripts.Core
 
         private IEnumerator SellBags()
         {
+            if (_isTutorialCompleted==false)
+            {
+                
+            }
+            
             _canSell = false;
             _cartTrashBagsReceivedCount = _cartPiker.TrashBagsReceivedCount;
 

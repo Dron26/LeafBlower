@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 8755156347800024388}
   - component: {fileID: 8755156347800024389}
   - component: {fileID: 8755156347800024390}
+  - component: {fileID: 5628110270239241147}
   m_Layer: 28
   m_Name: SM_Bld_OfficeSquare_Roof_01 (2)
   m_TagString: Untagged
@@ -99,6 +100,18 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 15.4, y: 0.54, z: 15.550177}
   m_Center: {x: -7.500003, y: 0.3180826, z: -7.499997}
+--- !u!114 &5628110270239241147
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8755156347800024384}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ab42805c467f0cf489277569d681402f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1931203453522104851
 PrefabInstance:
   m_ObjectHideFlags: 0

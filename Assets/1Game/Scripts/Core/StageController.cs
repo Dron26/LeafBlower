@@ -108,8 +108,7 @@ namespace _1Game.Scripts.Core
         {
             Destroy(_newStage.gameObject, 1f);
         }
-
-
+        
         private void OnDisable()
         {
             _changerPanel.SelectSmallTownStage -= OnSelectSmallTownStage;
@@ -122,6 +121,8 @@ namespace _1Game.Scripts.Core
                     _particleSystems[i].CatchAllParticle -= OnCatchAllParticle;
                 }
             }
+            
+            
         }
     }
 }

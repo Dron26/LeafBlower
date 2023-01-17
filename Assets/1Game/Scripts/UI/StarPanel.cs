@@ -8,7 +8,7 @@ namespace _1Game.Scripts.UI
     {
         [SerializeField] private StageController _stage;
         public int CountStars => _countStars;
-public int CountClearWorkPlaces=>_countClearWorkPlaces;
+        public int CountClearWorkPlaces=>_countClearWorkPlaces;
         private readonly List<Star> _stars = new();
         
         private int _numberWorkplace;

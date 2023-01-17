@@ -28,6 +28,10 @@ namespace _1Game.Scripts.Item
         private float _minLevel = 15f;
 
         public UnityAction<float> ChangeFuel;
+        public UnityAction StartRefuel;
+        public UnityAction StopRefuel;
+        
+        
         public UnityAction<bool> ReachedMinLevel;
         public UnityAction ReachedMaxLevel;
 
@@ -63,6 +67,7 @@ namespace _1Game.Scripts.Item
             {
                 if (_fuelLevel < _maxFuelLevel)
                 {
+                    StartRefuel?.Invoke();
                     StartCoroutine(StartRefueling());
                 }
             }
@@ -77,6 +82,7 @@ namespace _1Game.Scripts.Item
             if (other.TryGetComponent(out FuelTank fuelTank))
             {
                 _isExiteFuelPlace = true;
+                StopRefuel?.Invoke();
                 StopCoroutine(StartRefueling());
             }
             else if (other.TryGetComponent(out WorkPlace workPlace))
@@ -121,6 +127,8 @@ namespace _1Game.Scripts.Item
 
             _isStartRefuil = true;
             _isExiteFuelPlace = false;
+            
+            
 
             while (_isExiteFuelPlace == false)
             {
@@ -141,6 +149,7 @@ namespace _1Game.Scripts.Item
                 if (_fuelLevel == _maxFuelLevel & isFuelMax == false)
                 {
                     ReachedMaxLevel?.Invoke();
+                    StopRefuel?.Invoke();
                     isFuelMax = true;
                 }
 

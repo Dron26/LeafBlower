@@ -1,7 +1,5 @@
 using System.Collections.Generic;
 using _1Game.Scripts.UI;
-using Unity.VisualScripting;
-using UnityEditor;
 using UnityEngine;
 
 namespace _1Game.Scripts.Core
@@ -16,6 +14,7 @@ namespace _1Game.Scripts.Core
         private List< int> _countStages = new List<int>();
         public int CountStars => _countStars;
         public int NumberStage => _numberStage;
+        public bool IsTutorialCompleted=> _isTutorialCompleted;
 
         private StageController _stageController;
         private ExitPanel _exitPanel;
@@ -23,6 +22,7 @@ namespace _1Game.Scripts.Core
         private int _countStars;
         private int _numberStage;
         private int _numberGroup;
+        private bool _isTutorialCompleted;
 
         private void Awake()
         {
