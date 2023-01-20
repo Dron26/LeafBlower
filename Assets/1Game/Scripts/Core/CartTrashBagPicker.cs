@@ -29,7 +29,7 @@ namespace _1Game.Scripts.Core
         private Stack<TrashBag> _pickedTrashBags;
         private WaitForSeconds _waitForSeconds;
         private Cart _cart;
-        private List<Vector3> _changePointStore;
+        private List<Vector3> _changePointStore = new List<Vector3>();
         private Vector3 _mainPoint;
         private Vector3 _storeLocalPosition;
         private Vector3 _removePositionStorePoint;
@@ -64,7 +64,6 @@ namespace _1Game.Scripts.Core
 
         private void OnEnable()
         {
-            _stageController.SetCharacter += OnSetCharacter;
             _trashBagPicker.SallTrashBag += OnSallTrashBag;
             _cart.FinishMove += OnFinishMove;
             _upgradeParametrs.UpCart += OnUpLevel;
@@ -77,7 +76,7 @@ namespace _1Game.Scripts.Core
             _trashBagsReceivedCount = _maxQuantityInRow;
             _maxPickedQuantity = 6;
             _pickedTrashBags = new Stack<TrashBag>();
-            _changePointStore = new List<Vector3>();
+            
 
             _storeLocalPosition = _storePoint.transform.localPosition;
             _mainPoint = _mainPointForTrashBag.transform.localPosition;
@@ -91,7 +90,6 @@ namespace _1Game.Scripts.Core
         
         private void OnDisable()
         {
-            _stageController.SetCharacter -= OnSetCharacter;
             _trashBagPicker.SallTrashBag -= OnSallTrashBag;
             _cart.FinishMove -= OnFinishMove;
             _upgradeParametrs.UpCart -= OnUpLevel;
@@ -217,7 +215,6 @@ namespace _1Game.Scripts.Core
             const int minQuantity = 6;
             const int stepOnQuamtity = 2;
             int numberLevel = 0;
-            const int maxlevel = 5;
             const int maxQuantityInLevel = 12;
 
             _maxQuantityInLevel = minQuantity;

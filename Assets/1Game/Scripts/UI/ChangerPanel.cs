@@ -23,11 +23,11 @@ namespace _1Game.Scripts.UI
         private Panel _stagesGroupPanel;
         private Color _colorScreen;
         
-        private float _waitTime;
+        private float _waitTime=0.03f;
         private bool _isExitStartMenu;
         private bool _isPushAlarmWork;
         private bool _isPaused = false;
-        private float _speedChange = 1.2f;
+        private float _speedChange = 0.2f;
 
         public UnityAction<int, int> SelectSmallTownStage;
         public UnityAction<bool> PushAlarm;
@@ -39,7 +39,7 @@ namespace _1Game.Scripts.UI
             _logoPanel = _logo.gameObject.GetComponent<Panel>();
             _logo.gameObject.SetActive(true);
 
-            _stats = GetComponentInChildren<StatsPanel>();
+          _stats = GetComponentInChildren<StatsPanel>();
             _statsPanel = _stats.gameObject.GetComponent<Panel>();
 
             _exitPanel = GetComponentInChildren<ExitPanel>();
@@ -87,9 +87,9 @@ namespace _1Game.Scripts.UI
 
             while (_colorScreen.a < 1)
             {
-                _waitTime = Time.fixedDeltaTime * _speedChange;
+                
                 yield return new WaitForSeconds(_waitTime);
-                _colorScreen.a += _waitTime;
+                _colorScreen.a += _speedChange;
                 _screenDim.color = _colorScreen;
             }
 
@@ -109,9 +109,9 @@ namespace _1Game.Scripts.UI
 
             while (_colorScreen.a > 0)
             {
-                _waitTime = Time.fixedDeltaTime;
+                
                 yield return new WaitForSeconds(_waitTime);
-                _colorScreen.a -= _waitTime * _speedChange;
+                _colorScreen.a -= _speedChange;
                 _screenDim.color = _colorScreen;
             }
 
@@ -137,7 +137,7 @@ namespace _1Game.Scripts.UI
             SelectSmallTownStage?.Invoke(numberStage, numberGroup);
             _isExitStartMenu = true;
 
-            StartCoroutine(ChangeColorExit(_statsPanel, _stagesGroupPanel));
+           StartCoroutine(ChangeColorExit(_statsPanel, _stagesGroupPanel));
         }
 
         public void OnClickBack(GameObject panel)
@@ -155,13 +155,13 @@ namespace _1Game.Scripts.UI
 
         private void OnDisable()
         {
-            _exitPanel.SetNextLevel -= OnSetNextLevel;
+           _exitPanel.SetNextLevel -= OnSetNextLevel;
         }
 
         private void OnSetNextLevel()
         {
             _isExitStartMenu = false;
-            StartCoroutine(ChangeColorExit(_stagesGroupPanel, _statsPanel));
+           StartCoroutine(ChangeColorExit(_stagesGroupPanel, _statsPanel));
             _groupStages.SetStars();
             _smallTown.SetStars();
         }

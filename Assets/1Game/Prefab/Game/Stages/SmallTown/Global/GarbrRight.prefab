@@ -5542,7 +5542,6 @@ GameObject:
   - component: {fileID: 4603485014516784788}
   - component: {fileID: 4603485014516784790}
   - component: {fileID: 4603485014516784791}
-  - component: {fileID: 1190091303465801642}
   m_Layer: 0
   m_Name: WindlinesSpeedy (2)
   m_TagString: Untagged
@@ -10345,18 +10344,6 @@ ParticleSystemRenderer:
   m_MeshWeighting2: 1
   m_MeshWeighting3: 1
   m_MaskInteraction: 0
---- !u!114 &1190091303465801642
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4603485014516784789}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 922c36581b31b7647bb0145b62e9fc56, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &7017459517982043889
 GameObject:
   m_ObjectHideFlags: 0
@@ -15439,7 +15426,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e8fdf1cdc107b044b8cd82b532b7e72e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _particleSystem: {fileID: 0}
   _trashBag: {fileID: -5479627070531232122, guid: 012ced539bf9cce46b512ee20411f32c,
     type: 3}
 --- !u!1 &9153491078671625068

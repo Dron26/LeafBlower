@@ -1,4 +1,3 @@
-using Core;
 using UnityEngine;
 
 namespace _1Game.Scripts.Particle

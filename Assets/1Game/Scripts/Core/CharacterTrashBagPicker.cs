@@ -22,7 +22,7 @@ namespace _1Game.Scripts.Core
         private Stack<TrashBag> _pickedTrashBags;
         private Vector3 _mainPoint;
         private Vector3 _localPositionStorePoint;
-        private List<Vector3> _changePointStore;
+        private List<Vector3> _changePointStore=new List<Vector3>();
         private WaitForSeconds _waitForSeconds;
 
         private int _cartTrashBagsReceivedCount;
@@ -65,7 +65,6 @@ namespace _1Game.Scripts.Core
 
             _time = 0.2f;
             _pickedTrashBags = new Stack<TrashBag>();
-            _changePointStore = new List<Vector3>();
             _canSell = true;
             _waitForSeconds = new WaitForSeconds(timeToSell);
             _mainPoint = _mainPointForTrashBag.transform.localPosition;

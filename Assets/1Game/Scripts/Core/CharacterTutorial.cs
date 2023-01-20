@@ -1,3 +1,4 @@
+using _1Game.Scripts.Empty;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -7,6 +8,7 @@ namespace _1Game.Scripts.Core
     {
         public UnityAction ReachedPoint; 
         public UnityAction ReachedCart; 
+        public UnityAction ReachedRefuel; 
     
     
         private void OnTriggerEnter(Collider other)
@@ -18,7 +20,6 @@ namespace _1Game.Scripts.Core
             
             else if (other.TryGetComponent(out WorkPlaceTutorialPoint point))
             {
-                point.gameObject.SetActive(false);
                 ReachedPoint?.Invoke();
             }
             else if (other.TryGetComponent(out WorkplaceTutorialSecondPoint secondPoint))
@@ -26,7 +27,10 @@ namespace _1Game.Scripts.Core
                 secondPoint.gameObject.SetActive(false);
                 ReachedPoint?.Invoke();
             }
-            
+            else if (other.TryGetComponent(out FuelTank fuelTank))
+            {
+                ReachedRefuel?.Invoke();
+            }
         }
     }
 }

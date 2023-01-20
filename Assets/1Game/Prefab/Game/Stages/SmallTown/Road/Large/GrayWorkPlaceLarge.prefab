@@ -2909,7 +2909,6 @@ GameObject:
   - component: {fileID: 7134201659577036195}
   - component: {fileID: 7134201659577036222}
   - component: {fileID: 7134201659577036193}
-  - component: {fileID: 7134201659577036192}
   m_Layer: 0
   m_Name: GrayWorkPlaceLarge
   m_TagString: Untagged
@@ -2963,26 +2962,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 57d0bc2f1c2ed8844aa068d128338b8c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _objects: []
---- !u!114 &7134201659577036192
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7134201659577036194}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1ecd48d071d3d424db018a282e83cb28, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _images:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
 --- !u!1 &7134201659596753796
 GameObject:
   m_ObjectHideFlags: 0

@@ -19,10 +19,9 @@ namespace _1Game.Scripts.Item
 
         private bool _isExiteFuelPlace;
         private bool _isWork;
-        private bool _isStartRefuil;
 
         private float _fuelLevel;
-        private int _maxFuelLevel = 100;
+        private int _maxFuelLevel = 50;
         private float _stepChangeLevel;
         private float _stepRefuelingLevel;
         private float _minLevel = 15f;
@@ -31,8 +30,7 @@ namespace _1Game.Scripts.Item
         public UnityAction StartRefuel;
         public UnityAction StopRefuel;
         
-        
-        public UnityAction<bool> ReachedMinLevel;
+        public UnityAction ReachedMinLevel;
         public UnityAction ReachedMaxLevel;
 
         public UnityAction<float> UpVolumeFuel;
@@ -44,9 +42,8 @@ namespace _1Game.Scripts.Item
 
         private void Start()
         {
-            _isStartRefuil = false;
             _isExiteFuelPlace = true;
-            _fuelLevel = _maxFuelLevel;
+            _fuelLevel = 50;
             _isWork = true;
             _stepChangeLevel = 0.1f;
             _stepRefuelingLevel = 0.4f;
@@ -67,6 +64,10 @@ namespace _1Game.Scripts.Item
             {
                 if (_fuelLevel < _maxFuelLevel)
                 {
+                    if (false)
+                    {
+                        
+                    }
                     StartRefuel?.Invoke();
                     StartCoroutine(StartRefueling());
                 }
@@ -108,7 +109,7 @@ namespace _1Game.Scripts.Item
 
                 if (_fuelLevel < _minLevel)
                 {
-                    ReachedMinLevel?.Invoke(true);
+                    ReachedMinLevel?.Invoke();
                 }
 
                 if (_fuelLevel == 0)
@@ -125,7 +126,6 @@ namespace _1Game.Scripts.Item
             bool isLevelUp = false;
             bool isFuelMax = false;
 
-            _isStartRefuil = true;
             _isExiteFuelPlace = false;
             
             
@@ -140,7 +140,6 @@ namespace _1Game.Scripts.Item
 
                 if (_fuelLevel > _minLevel & isLevelUp == false)
                 {
-                    ReachedMinLevel?.Invoke(false);
                     isLevelUp = true;
                 }
 
@@ -158,7 +157,6 @@ namespace _1Game.Scripts.Item
                 yield return _waitForRefuelSeconds;
             }
 
-            _isStartRefuil = false;
         }
 
         public void SetItemParametrs(float stepChangeLevel, float stepRefuelingLevel)

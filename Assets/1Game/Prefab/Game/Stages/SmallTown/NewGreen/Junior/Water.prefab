@@ -1294,6 +1294,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: WaterRoadRight
       objectReference: {fileID: 0}
+    - target: {fileID: 5255014920519975429, guid: e58bef55db660f942bff85fbe9e214a5,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e58bef55db660f942bff85fbe9e214a5, type: 3}
 --- !u!4 &7334640684786024771 stripped

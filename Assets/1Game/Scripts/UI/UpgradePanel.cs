@@ -20,12 +20,7 @@ namespace _1Game.Scripts.UI
         private Button _buttonMaxLevel;
         private int _numberUpgrade;
         private int _maxLevel;
-        private void Awake()
-        {
-            _price = GetComponentInChildren<UpgradePanelPrice>().GetComponent<TMP_Text>();
-            _buyUpgradeButton = GetComponentInChildren<BuyUpgradeButton>().GetComponent<Button>();
-            _buttonMaxLevel = GetComponentInChildren<MaxLevelButton>().GetComponent<Button>();
-        }
+        
         
         private void Start()
         {
@@ -37,6 +32,10 @@ namespace _1Game.Scripts.UI
 
         public void Initialize(int numberUpgrade,UpgradeParametrs upgradeParametrs)
         {
+            _price = GetComponentInChildren<UpgradePanelPrice>().GetComponent<TMP_Text>();
+            _buyUpgradeButton = GetComponentInChildren<BuyUpgradeButton>().GetComponent<Button>();
+            _buttonMaxLevel = GetComponentInChildren<MaxLevelButton>().GetComponent<Button>();
+            
             _upgradeParametrs = upgradeParametrs;
             _numberUpgrade = numberUpgrade;
             _maxLevel = _upgradeParametrs.GetMaxLevel(_numberUpgrade);
@@ -53,7 +52,7 @@ namespace _1Game.Scripts.UI
             _price.text = Convert.ToString(_upgradeParametrs.GetPrice(_numberUpgrade));
             int level = _upgradeParametrs.GetLevel(_numberUpgrade);
             _slider.OnUpLevel(level);
-
+        
             if (level==_maxLevel)
             {
                 ReachleMaxLevel();

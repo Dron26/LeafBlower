@@ -7,10 +7,9 @@ namespace _1Game.Scripts.UI
 {
     public class AlarmPanel : MonoBehaviour
     {
-        [SerializeField] private StageController _stageController;
         [SerializeField] private FuelChanger _fuelChanger;
-
-        private CharacterTrashBagPicker _characterTrashBag;
+        [SerializeField] private CharacterTrashBagPicker _characterTrashBag;
+        
         private MaxTrashBagAlarm _alarmTrashBagPanel;
         private MinFuelAlarm _minFuelAlarm;
 
@@ -26,13 +25,13 @@ namespace _1Game.Scripts.UI
 
         private void OnEnable()
         {
-            _stageController.SetCharacter += OnSetCharacter;
+            _characterTrashBag.TakeMaxQuantityTrashBag += OnTakeMaxQuantityTrashBag;
+            _characterTrashBag.SallAllTrashBag += OnSellTrashBag;
             _fuelChanger.ReachedMinLevel += StartAlarm;
         }
 
         private void OnDisable()
         {
-            _stageController.SetCharacter -= OnSetCharacter;
             _characterTrashBag.SallAllTrashBag -= OnSellTrashBag;
             _fuelChanger.ReachedMinLevel -= StartAlarm;
             _characterTrashBag.TakeMaxQuantityTrashBag -= OnTakeMaxQuantityTrashBag;
@@ -45,22 +44,15 @@ namespace _1Game.Scripts.UI
             _isSend = true;
         }
 
-        private void StartAlarm(bool isWork)
+        private void StartAlarm()
         {
-            _minFuelAlarm.gameObject.SetActive(isWork);
+            _minFuelAlarm.gameObject.SetActive(true);
         }
 
         private void OnSellTrashBag()
         {
             _alarmTrashBagPanel.gameObject.SetActive(false);
             _isSend = false;
-        }
-
-        private void OnSetCharacter(Core.Character character)
-        {
-            _characterTrashBag = character.GetComponent<CharacterTrashBagPicker>();
-            _characterTrashBag.TakeMaxQuantityTrashBag += OnTakeMaxQuantityTrashBag;
-            _characterTrashBag.SallAllTrashBag += OnSellTrashBag;
         }
     }
 }

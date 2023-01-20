@@ -12,8 +12,6 @@ namespace _1Game.Scripts.Core
 
         [HideInInspector] private List<LocationController> _insideControllers = new List<LocationController>();
 
-        private int firstStart = 1;
-
         public UnityAction<GameObject> ChangeWorkPlace;
 
         private void Start()

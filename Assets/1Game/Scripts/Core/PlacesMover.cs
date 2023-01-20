@@ -1,7 +1,6 @@
 using System.Collections.Generic;
 using _1Game.Scripts.Empty;
 using _1Game.Scripts.WorkPlaces;
-using Core;
 using UnityEngine;
 
 namespace _1Game.Scripts.Core

@@ -1,8 +1,6 @@
 using System.Collections.Generic;
 using _1Game.Scripts.Particle;
 using _1Game.Scripts.UI;
-using Core;
-using JetBrains.Annotations;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -23,21 +21,17 @@ namespace _1Game.Scripts.Core
         public int CountSecondStages => _liststages[1].Count;
 
         private List<ParticleSystemController> _particleSystems;
-        private Character _character;
         private Stage _newStage;
         private int _selectNumberStage;
         private int _selectNumberGroup;
         private bool _isGetParticles;
 
         public UnityAction<GameObject> SetStage;
-        public UnityAction<Character> SetCharacter;
         public UnityAction CatchAllParticle;
 
 
         private void Awake()
         {
-            _character = GetComponentInChildren<Character>();
-            SetCharacter?.Invoke(_character);
             FillListStages();
         }
 

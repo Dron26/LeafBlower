@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 895935438469932588}
   - component: {fileID: 895935438469932593}
   - component: {fileID: 895935438469932594}
-  - component: {fileID: 895935438469932595}
   m_Layer: 0
   m_Name: GrayWorkPlaceMiddle
   m_TagString: Untagged
@@ -65,26 +64,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 57d0bc2f1c2ed8844aa068d128338b8c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _objects: []
---- !u!114 &895935438469932595
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 895935438469932589}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1ecd48d071d3d424db018a282e83cb28, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _images:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
 --- !u!1 &895935438564468255
 GameObject:
   m_ObjectHideFlags: 0
@@ -546,7 +525,8 @@ PrefabInstance:
       propertyPath: m_Name
       value: GarbrRight
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 1190091303465801642, guid: 7c1e2bbb75fd478409fe259fc923e6ea, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 7c1e2bbb75fd478409fe259fc923e6ea, type: 3}
 --- !u!4 &8316102505817515162 stripped
 Transform:

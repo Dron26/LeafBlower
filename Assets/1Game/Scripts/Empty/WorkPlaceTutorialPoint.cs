@@ -1,4 +1,7 @@
 using UnityEngine;
 
-public class WorkPlaceTutorialPoint : MonoBehaviour
-{}
+namespace _1Game.Scripts.Empty
+{
+    public class WorkPlaceTutorialPoint : MonoBehaviour
+    {}
+}

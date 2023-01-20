@@ -15,7 +15,6 @@ namespace _1Game.Scripts.UI
         private int _countStars;
         private int _countClearWorkPlaces;
         private float _alfa;
-        private float _time;
 
         private void Awake()
         {
@@ -40,15 +39,13 @@ namespace _1Game.Scripts.UI
 
             if (_numberWorkplace == 0 | _numberWorkplace == 1)
             {
-                _stars[_numberWorkplace].Fade(_alfa, _time);
-                _stars[_numberWorkplace].ChangeSize();
+                _stars[_numberWorkplace].Fade(_alfa);
                 _numberWorkplace++;
                 _countStars++;
             }
             else if (_countClearWorkPlaces == 0)
             {
-                _stars[_numberWorkplace].Fade(_alfa, _time);
-                _stars[_numberWorkplace].ChangeSize();
+                _stars[_numberWorkplace].Fade(_alfa);
                 _countStars++;
             }
         }
@@ -70,12 +67,10 @@ namespace _1Game.Scripts.UI
         private void InitializeStars()
         {
             _alfa = 0.3f;
-            ;
-            _time = 1f;
 
             foreach (Star star in _stars)
             {
-                star.Fade(_alfa, _time);
+                star.Fade(_alfa);
             }
         }
     }
