@@ -10,8 +10,8 @@ namespace _1Game.Scripts.UI
 {
     public class UpgradePanel : MonoBehaviour
     {
-         private TMP_Text _price;
-        [SerializeField] private SliderPanel _slider;
+        [SerializeField] private TMP_Text _price;
+         [SerializeField] private SliderPanel _slider;
         [SerializeField] private Image _upIcon;
 
         private UpgradeParametrs _upgradeParametrs;
@@ -32,7 +32,6 @@ namespace _1Game.Scripts.UI
 
         public void Initialize(int numberUpgrade,UpgradeParametrs upgradeParametrs)
         {
-            _price = GetComponentInChildren<UpgradePanelPrice>().GetComponent<TMP_Text>();
             _buyUpgradeButton = GetComponentInChildren<BuyUpgradeButton>().GetComponent<Button>();
             _buttonMaxLevel = GetComponentInChildren<MaxLevelButton>().GetComponent<Button>();
             

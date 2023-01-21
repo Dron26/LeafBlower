@@ -52,6 +52,7 @@ namespace _1Game.Scripts.UI
             _groupStages = _stagesPanel.GetComponentInChildren<GroupStages>();
 
             _smallTown = GetComponentInChildren<SmallTowm>();
+
         }
 
         private void OnEnable()

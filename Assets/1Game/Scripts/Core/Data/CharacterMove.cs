@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 namespace _1Game.Scripts.Core
@@ -11,6 +12,11 @@ namespace _1Game.Scripts.Core
         private float _maxSpeed;
         private float _horizontal => Input.GetAxis("Horizontal");
         private float _vertical => Input.GetAxis("Vertical");
+
+        private void Awake()
+        {
+            Rigidbody rigidbody=GetComponent<Rigidbody>();
+        }
 
         private void Start()
         {
@@ -35,6 +41,8 @@ namespace _1Game.Scripts.Core
             }
             else
             {
+                
+                GetComponent<Rigidbody>().velocity = Vector3.zero;
                 magnitude = 0;
             }
 

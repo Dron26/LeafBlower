@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using _1Game.Scripts.Core;
+using _1Game.Scripts.Core.SaveLoad.Data;
 using _1Game.Scripts.Empty;
 using UnityEngine;
 

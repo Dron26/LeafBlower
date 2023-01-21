@@ -13,7 +13,8 @@ namespace _1Game.Scripts.Core
     {
         [SerializeField] private ParkPlace _parkPlace;
         [SerializeField] private Cart _cart;
-
+        [SerializeField] private ExitPanel _exitPanel;
+        
         private UpgradeParametrs _upgradeParametrs;
         private CartTrashBagPicker _cartPiker;
         private TrashBagStorePoint _storePoint;
@@ -53,6 +54,7 @@ namespace _1Game.Scripts.Core
         {
             _cart.FinishMove += OnFinishCart;
             _upgradeParametrs.UpPower += OnUpLevel;
+            _exitPanel.SetNextLevel+= OnExitLevel;
         }
 
         private void Start()
@@ -154,15 +156,11 @@ namespace _1Game.Scripts.Core
         {
             _parkPlace.CartEnter -= OnFinishCart;
             _upgradeParametrs.UpPower -= OnUpLevel;
+            _exitPanel.SetNextLevel-= OnExitLevel;
         }
 
         private IEnumerator SellBags()
         {
-            if (_isTutorialCompleted==false)
-            {
-                
-            }
-            
             _canSell = false;
             _cartTrashBagsReceivedCount = _cartPiker.TrashBagsReceivedCount;
 
@@ -222,6 +220,11 @@ namespace _1Game.Scripts.Core
         private void OnUpLevel(int value)
         {
             _maxPickedQuantity = value;
+        }
+
+        private void OnExitLevel()
+        {
+            _pickedTrashBags.Clear();
         }
     }
 }

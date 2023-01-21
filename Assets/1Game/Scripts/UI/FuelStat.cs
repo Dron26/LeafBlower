@@ -1,5 +1,4 @@
 using _1Game.Scripts.Core;
-using _1Game.Scripts.Empty;
 using _1Game.Scripts.Item;
 using UnityEngine;
 using UnityEngine.UI;
@@ -14,9 +13,7 @@ namespace _1Game.Scripts.UI
         private float _maxValue;
         private float _minValue;
         private Slider _slider;
-
         
-
         private void Awake()
         {
             _slider = GetComponentInChildren<Slider>();
@@ -34,7 +31,7 @@ namespace _1Game.Scripts.UI
             _maxValue = _fuelChanger.MaxFueLevel;
             _slider.maxValue = _maxValue;
             _slider.minValue = _minValue;
-            _slider.value = _slider.maxValue;
+            _slider.value = _fuelChanger.FuelLevel;
         }
 
         public void OnDisable()

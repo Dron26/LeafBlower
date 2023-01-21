@@ -7,7 +7,7 @@ namespace _1Game.Scripts.WorkPlaces
 {
     public class UpgradePlace : MonoBehaviour
     {
-        [SerializeField] private UpgradePanel _upgradePanelContainer;
+        [SerializeField] private Panel _upgradePanelContainer;
         
         public UnityAction EnterPlace;
         public UnityAction ExitPlace;

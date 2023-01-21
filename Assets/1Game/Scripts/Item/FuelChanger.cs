@@ -20,8 +20,8 @@ namespace _1Game.Scripts.Item
         private bool _isExiteFuelPlace;
         private bool _isWork;
 
-        private float _fuelLevel;
-        private int _maxFuelLevel = 50;
+        private float _fuelLevel=50;
+        private int _maxFuelLevel = 100;
         private float _stepChangeLevel;
         private float _stepRefuelingLevel;
         private float _minLevel = 15f;
@@ -35,6 +35,7 @@ namespace _1Game.Scripts.Item
 
         public UnityAction<float> UpVolumeFuel;
 
+        
         private void OnEnable()
         {
             _upgradeParametrs.UpFuel += OnUpLevel;
@@ -43,7 +44,7 @@ namespace _1Game.Scripts.Item
         private void Start()
         {
             _isExiteFuelPlace = true;
-            _fuelLevel = 50;
+            
             _isWork = true;
             _stepChangeLevel = 0.1f;
             _stepRefuelingLevel = 0.4f;

@@ -40,7 +40,11 @@ namespace _1Game.Scripts.UI
 
         private void OnEnterPlace(bool isEnterPlace)
         {
-            _warningPanel.gameObject.SetActive(_starPanel.CountStars<_countStars);
+            if (_starPanel.CountStars != _countStars)
+            {
+                _warningPanel.gameObject.SetActive(true);
+            }
+            
             _panel.gameObject.SetActive(isEnterPlace);
         }
 

@@ -12,16 +12,18 @@ namespace _1Game.Scripts.Core
     [RequireComponent(typeof(ChangerCartSize))]
     public class Cart : MonoBehaviour
     {
-        [SerializeField] private Wallet _wallet;
-
+        
+        [SerializeField]private ParkPoint _parkPoint;
+        
         [FormerlySerializedAs("_uIParkStat")] [SerializeField]
         private ParkPlaceInfo _uIParkPlaceInfo;
 
-        private FinishPoint _finishPoint;
+        private FinishPoint _finishPosition;
         private WorkPlacesSwitcher _workPlacesSwitcher;
         private StageController _stageController;
+        private Vector3 _startPoint;
         private Vector3 _parkPlacePoint;
-        private Vector3 _point;
+        private Vector3 _finishPoint;
         private Tween _tween;
         private Collider _collider;
         private CartTrashBagPicker _cartTrashBagPicker;
@@ -29,17 +31,16 @@ namespace _1Game.Scripts.Core
 
         public float Time => _time;
         private const float _time = 5f;
-        private bool _isMoveToFinish;
+        private bool _isMove;
 
         public UnityAction StartMove;
         public UnityAction FinishMove;
-        private const int _trashBagPrice = 10;
 
         private void Awake()
         {
             _collider = GetComponent<Collider>();
             _stageController = GetComponentInParent<StageController>();
-            _isMoveToFinish = false;
+            _isMove = false;
 
             float waiteTime = 2f;
             _waitForSeconds = new WaitForSeconds(waiteTime);
@@ -50,13 +51,12 @@ namespace _1Game.Scripts.Core
         {
             _stageController.SetStage += OnSetStage;
             _cartTrashBagPicker.TakeMaxQuantityTrashBag += OnTakeMaxQuantityTrashBag;
-            _cartTrashBagPicker.BagReachedFinish += OnTrashBagReachedFinish;
         }
 
         private void Start()
         {
-            _parkPlacePoint = transform.position;
-            _isMoveToFinish = false;
+            _startPoint = transform.position;
+            _isMove = false;
             InitializeUIStat();
         }
 
@@ -64,9 +64,7 @@ namespace _1Game.Scripts.Core
         {
             if (other.TryGetComponent(out FinishPoint finish))
             {
-                _cartTrashBagPicker.ClearCart();
-                _isMoveToFinish = false;
-                SetSecondPosition();
+               
             }
             else if (other.TryGetComponent(out ParkPlace parkPlace))
             {
@@ -74,40 +72,44 @@ namespace _1Game.Scripts.Core
             }
         }
 
-        private void InitializeUIStat()
+        
+        private void OnSetStage(GameObject stage)
         {
-            _uIParkPlaceInfo.Initialize(_time);
+            _workPlacesSwitcher = stage.GetComponentInChildren<WorkPlacesSwitcher>();
+            _workPlacesSwitcher.ChangeWorkPlace += OnChangeWorkPlace;
+        }
+        
+        private void OnChangeWorkPlace(GameObject insideControllers)
+        {
+            WaitMoveFinish(insideControllers);
+        }
+        
+        private void WaitMoveFinish(GameObject insideControllers)
+        {
+            _finishPosition = insideControllers.GetComponentInChildren<FinishPoint>();
+            _parkPlacePoint = insideControllers.GetComponentInChildren<ParkPlacePoint>().transform.position;
+
+            if (_isMove == true)
+            {
+                _finishPoint = _finishPosition.transform.position;
+                _startPoint = _parkPlacePoint;
+            }
+            else
+            {
+                _finishPoint = _parkPlacePoint;
+                WaitBeforeMove();
+                
+            }
         }
 
         private void OnTakeMaxQuantityTrashBag()
         {
-            _parkPlacePoint = transform.position;
-            _point = _finishPoint.transform.position;
-            StartCoroutine(WaitBeforeMove());
+            _startPoint = transform.position;
+            _finishPoint = _finishPosition.transform.position;
             StartCoroutine(TempOffCollider());
+            StartCoroutine(WaitBeforeMove());
         }
-
-        private void MovePosition()
-        {
-            StartMove?.Invoke();
-            _tween = transform.DOMove(_point, _time);
-        }
-
-        public void SetSecondPosition()
-        {
-            _tween.Kill();
-            _point = _parkPlacePoint;
-            MovePosition();
-        }
-
-        private IEnumerator WaitBeforeMove()
-        {
-            _isMoveToFinish = true;
-            yield return _waitForSeconds;
-            MovePosition();
-            yield break;
-        }
-
+        
         private IEnumerator TempOffCollider()
         {
             _collider.enabled = false;
@@ -115,52 +117,69 @@ namespace _1Game.Scripts.Core
             _collider.enabled = true;
             yield break;
         }
-
-        private void OnTrashBagReachedFinish()
+        
+        private IEnumerator WaitBeforeMove()
         {
-            _wallet.AddResource(_trashBagPrice);
+            _isMove = true;
+            yield return _waitForSeconds;
+            StartMove?.Invoke();
+            Move(_finishPoint);
         }
 
-        private void OnChangeWorkPlace(GameObject insideControllers)
+        private IEnumerator WaitFinish(Vector3 position)
         {
-            WaitMoveFinish(insideControllers);
+            
+            
+            while (transform.position != position)
+            {
+                if (transform.position == position)
+                {
+                    if (position==_finishPoint)
+                    {
+                        _cartTrashBagPicker.ClearCart();
+                        _tween.Kill();
+                        Move(_startPoint);
+                    }
+                    else if (position==_startPoint)
+                    {
+                        _isMove = false;
+                    }
+                }
+                
+                yield return null;
+            }
+            
+            yield break;
         }
+        
+        private void Move( Vector3 position )
+        {
+            if (WaitFinish(position)!=null)
+            {
+                StopCoroutine(WaitFinish(position));
+            }
+            else
+            {
+                StartCoroutine(WaitFinish(position));
+            }
 
+            _tween = transform.DOMove(position, _time);
+        }
+        
+        private void InitializeUIStat()
+        {
+            _uIParkPlaceInfo.Initialize(_time);
+        }
+        
         private void OnDisable()
         {
             _cartTrashBagPicker.TakeMaxQuantityTrashBag -= OnTakeMaxQuantityTrashBag;
-            _cartTrashBagPicker.BagReachedFinish -= OnTrashBagReachedFinish;
 
             if (_workPlacesSwitcher != null)
             {
                 _workPlacesSwitcher.ChangeWorkPlace -= OnChangeWorkPlace;
             }
         }
-
-        private void WaitMoveFinish(GameObject insideControllers)
-        {
-            _finishPoint = insideControllers.GetComponentInChildren<FinishPoint>();
-            Vector3 parkPoint = insideControllers.GetComponentInChildren<ParkPlacePoint>().transform.position;
-
-            if (_isMoveToFinish == true)
-            {
-                _point = _finishPoint.transform.position;
-                _parkPlacePoint = parkPoint;
-            }
-            else
-            {
-                WaitBeforeMove();
-                _point = parkPoint;
-            }
-
-            _tween.Kill();
-            MovePosition();
-        }
-
-        private void OnSetStage(GameObject stage)
-        {
-            _workPlacesSwitcher = stage.GetComponentInChildren<WorkPlacesSwitcher>();
-            _workPlacesSwitcher.ChangeWorkPlace += OnChangeWorkPlace;
-        }
+        
     }
 }
