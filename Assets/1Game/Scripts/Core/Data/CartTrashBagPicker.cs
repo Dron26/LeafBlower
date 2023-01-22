@@ -43,7 +43,6 @@ namespace _1Game.Scripts.Core
         private int _trashBagsReceivedCount;
         private float stepInRow;
         private float _time = 0.5f;
-        private bool _canTake;
 
         public UnityAction TakeTrashBag;
         public UnityAction TakeMaxQuantityTrashBag;
@@ -65,7 +64,6 @@ namespace _1Game.Scripts.Core
         private void OnEnable()
         {
             _trashBagPicker.SallTrashBag += OnSallTrashBag;
-            _cart.FinishMove += OnFinishMove;
             _upgradeParametrs.UpCart += OnUpLevel;
             _exitPanel.SetNextLevel += ClearCart;
         }
@@ -73,8 +71,8 @@ namespace _1Game.Scripts.Core
         private void Start()
         {
             _maxQuantityInRow = 3;
-            _trashBagsReceivedCount = _maxQuantityInRow;
             _maxPickedQuantity = 6;
+            _trashBagsReceivedCount=_maxPickedQuantity;
             _pickedTrashBags = new Stack<TrashBag>();
             
 
@@ -91,21 +89,20 @@ namespace _1Game.Scripts.Core
         private void OnDisable()
         {
             _trashBagPicker.SallTrashBag -= OnSallTrashBag;
-            _cart.FinishMove -= OnFinishMove;
             _upgradeParametrs.UpCart -= OnUpLevel;
             _exitPanel.SetNextLevel -= ClearCart;
         }
 
         private void OnSallTrashBag(TrashBag trashBag)
         {
-            if (_pickedTrashBags.Count != _maxPickedQuantity & _canTake == true)
+            if (_pickedTrashBags.Count != _maxPickedQuantity)
             {
                 _quantityPickedTrashBag++;
                 float waiteTime = 2f;
                 _waitForSeconds = new WaitForSeconds(waiteTime);
                 _pickedTrashBags.Push(trashBag);
 
-                trashBag.transform.SetParent(_trashBagStore.transform, false);
+                trashBag.transform.SetParent(_trashBagStore.transform, true);
                 _collider = trashBag.GetComponent<Collider>();
                 _collider.enabled = false;
                 _trashBagMover = trashBag.GetComponent<TrashBagMover>();
@@ -116,7 +113,6 @@ namespace _1Game.Scripts.Core
 
                 if (_pickedTrashBags.Count == _maxPickedQuantity)
                 {
-                    _canTake = false;
                     StartCoroutine(WaitFillingAll());
                 }
             }
@@ -181,11 +177,6 @@ namespace _1Game.Scripts.Core
             _storeLocalPosition = _storePoint.transform.localPosition;
             _trashBagsReceivedCount = _maxPickedQuantity;
             SetPoint();
-        }
-
-        private void OnFinishMove()
-        {
-            _canTake = true;
         }
 
         private IEnumerator WaitFillingAll()

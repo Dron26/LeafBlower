@@ -18,6 +18,7 @@ namespace _1Game.Scripts.UI
         [SerializeField] private Panel _endFuel;
         [SerializeField] private Panel _fullFuel;
         [SerializeField] private Panel _reachedFuelPlace;
+        [SerializeField] private Panel _alarmPanel;
         [SerializeField] private Image _screenDim;
         
         
@@ -27,6 +28,11 @@ namespace _1Game.Scripts.UI
 
 
         public UnityAction OnSetScreenDim; 
+        public UnityAction TutorialClose;
+        public UnityAction TutorialCompleted;
+        public UnityAction SetStartPosition;
+        
+        
         private void Awake()
         {
             _colorScreen = _screenDim.color;
@@ -145,11 +151,23 @@ namespace _1Game.Scripts.UI
         {
             OnSetScreenDim?.Invoke();
         }
-
-
+        
         public void InitializePanel()
         {
             StartCoroutine(WaitChangePanel());
         }
+        
+        
+        public void OnTutorialClose()
+        {
+            TutorialClose?.Invoke();
+        }
+
+        public void OnTutorialCompleted()
+        {
+            TutorialCompleted?.Invoke();
+        }
+
+   
     }
 }

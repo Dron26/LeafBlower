@@ -7,11 +7,10 @@ namespace _1Game.Scripts.Core
     public class CharacterTutorial : MonoBehaviour
     {
         public UnityAction ReachedPoint; 
+        public UnityAction ReachedSecondPoint;
         public UnityAction ReachedCart; 
-        public UnityAction ReachedRefuel; 
-    
-        private bool _isTutorialCompleted;
-    
+        public UnityAction ReachedRefuel;
+
         private void OnTriggerEnter(Collider other)
         {
             if (other.TryGetComponent(out Cart _cart))
@@ -26,7 +25,7 @@ namespace _1Game.Scripts.Core
             else if (other.TryGetComponent(out WorkplaceTutorialSecondPoint secondPoint))
             {
                 secondPoint.gameObject.SetActive(false);
-                ReachedPoint?.Invoke();
+                ReachedSecondPoint?.Invoke();
             }
             else if (other.TryGetComponent(out FuelTank fuelTank))
             {

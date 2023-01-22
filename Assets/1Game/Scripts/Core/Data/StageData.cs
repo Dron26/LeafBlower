@@ -10,7 +10,7 @@ namespace _1Game.Scripts.Core.SaveLoad.Data
         [SerializeField] private StarPanel _starPanel;
 
         private List<Dictionary<int, int>> _stagesStarGroup = new();
-
+        [SerializeField] private TutorialPanel _tutorialPanel;
         private List< int> _countStages = new List<int>();
         
         public int CountStars => _countStars;
@@ -34,6 +34,9 @@ namespace _1Game.Scripts.Core.SaveLoad.Data
         private void OnEnable()
         {
             _exitPanel.UpdateData += OnSetNextLevel;
+            _tutorialPanel.TutorialClose += SetFibishTutorial;
+            _tutorialPanel.TutorialCompleted += SetFibishTutorial;
+            
         }
 
         private void Start()
@@ -113,6 +116,13 @@ namespace _1Game.Scripts.Core.SaveLoad.Data
         private void OnDisable()
         {
             _exitPanel.UpdateData -= OnSetNextLevel;
+        }
+
+        private void SetFibishTutorial()
+        {
+            _tutorialPanel.TutorialClose -= SetFibishTutorial;
+            _tutorialPanel.TutorialCompleted -= SetFibishTutorial;
+            _isTutorialCompleted=true;
         }
     }
 }
