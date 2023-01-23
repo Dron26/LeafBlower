@@ -47,22 +47,15 @@ namespace _1Game.Scripts.Core
 
         private void Awake()
         {
-            CreateLevel();
-            UpdateLevels();
         }
 
         void Start()
         {
-            Actions.Add(UpFuel);
-            Actions.Add(UpPower);
-            Actions.Add(UpCart);
-
-            SetStartParametr();
         }
 
         private void CreateLevel()
         {
-            SetLevel();
+            //SetLevel();
 
             int number = 0;
 
@@ -114,15 +107,15 @@ namespace _1Game.Scripts.Core
         private void FillUpgradeList(Upgrade upgrade, int number)
         {
             upgrade.SetNumber(number);
+
+
             _upgrades.Add(upgrade);
         }
 
         private void SetStartParametr()
         {
             Actions[_numberFuelUpgrade]?.Invoke(_upgrades[_numberFuelUpgrade].Levels[_currentFuelLevel].Value);
-
             Actions[_numberPowerUpgrade]?.Invoke(_upgrades[_numberPowerUpgrade].Levels[_currentPowerLevel].Value);
-
             Actions[_numberCartUpgrade]?.Invoke(_upgrades[_numberCartUpgrade].Levels[_currentCartLevel].Value);
         }
 
@@ -135,6 +128,7 @@ namespace _1Game.Scripts.Core
                 upgrade.SetLevel(level);
             }
         }
+
 
         public void OnTapUp(int numberUpgrade)
         {
@@ -169,23 +163,26 @@ namespace _1Game.Scripts.Core
             return _upgrades[numberUpgrade].MaxLevel;
         }
 
+
         private void UpdateLevels()
         {
             _currentFuelLevel = _upgrades[_numberFuelUpgrade].CurrentLevel;
+
             _currentPowerLevel = _upgrades[_numberPowerUpgrade].CurrentLevel;
             _currentCartLevel = _upgrades[_numberCartUpgrade].CurrentLevel;
         }
 
+
         public List<Upgrade> GetUpgrades()
         {
-             List<Upgrade> _tempUpgrades = new List<Upgrade>();
+            List<Upgrade> _tempUpgrades = new List<Upgrade>();
 
-             for (int i = 0; i < _upgrades.Count; i++)
-             {
-                 _tempUpgrades.Add(_upgrades[i]);
-             }
-             
-             return _tempUpgrades;
+            for (int i = 0; i < _upgrades.Count; i++)
+            {
+                _tempUpgrades.Add(_upgrades[i]);
+            }
+
+            return _tempUpgrades;
         }
 
         public void SetUpgrades(List<Upgrade> tempUpgrades)
@@ -195,12 +192,21 @@ namespace _1Game.Scripts.Core
                 _upgrades.Add(tempUpgrades[i]);
             }
         }
-        
+
+        public void Initialize()
+        {
+            CreateLevel();
+            UpdateLevels();
+            Actions.Add(UpFuel);
+            Actions.Add(UpPower);
+            Actions.Add(UpCart);
+
+            SetStartParametr();
+        }
+
+
         public void LoadParametrs()
         {
-            
         }
-        
-        
     }
 }

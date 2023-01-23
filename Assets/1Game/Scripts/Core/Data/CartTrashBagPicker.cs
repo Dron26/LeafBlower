@@ -18,7 +18,7 @@ namespace _1Game.Scripts.Core
         public int MaxPickedBag => _maxPickedQuantity;
 
         public int MaxBagInLevel => _maxQuantityInLevel;
-
+        public int CountPpickedTrashBags => _pickedTrashBags.Count;
         private CharacterTrashBagPicker _trashBagPicker;
         private StageController _stageController;
         private TrashBagStorePoint _storePoint;

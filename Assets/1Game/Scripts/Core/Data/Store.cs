@@ -11,17 +11,18 @@ namespace _1Game.Scripts.Core
 {
     public class Store : MonoBehaviour
     {
-            
-        [SerializeField] private UpgradePlace _upgradePlace;
         [SerializeField] private Wallet _wallet;
         [SerializeField] private UpgradeParametrs _upgradeParametrs;
+        [SerializeField]private UpgradePlace _upgradePlace;
         [SerializeField] private RewardedAdsButton _rewardedAdsButton;
         [SerializeField] private AdsSetter _adsSetter;
+        
+        [SerializeField] private StageController _controller;
         
         private CartPanel _cartPanel;
         private CharacterPanel _characterPanel;
         private FuelPanel _fuelPanel;
-        private Panel _upgradePanelContainer;
+        private PanelContainer _panelContainer;
         public UnityAction Update;
         public UnityAction EmptyWallet;
         public UnityAction<int> RachedMaxLevel;
@@ -30,11 +31,10 @@ namespace _1Game.Scripts.Core
 
         private void Awake()
         {
-            _upgradePanelContainer = GetComponentInChildren<Panel>();
-            InitializeUpgradePanels();
-            _fuelPanel = _upgradePanelContainer.GetComponentInChildren<FuelPanel>();
-            _characterPanel = _upgradePanelContainer.GetComponentInChildren<CharacterPanel>();
-            _cartPanel = _upgradePanelContainer.GetComponentInChildren<CartPanel>();
+            _panelContainer = GetComponentInChildren<PanelContainer>();
+            _fuelPanel = _panelContainer.GetComponentInChildren<FuelPanel>();
+            _characterPanel = _panelContainer.GetComponentInChildren<CharacterPanel>();
+            _cartPanel = _panelContainer.GetComponentInChildren<CartPanel>();
         }
 
         private void OnEnable()
@@ -45,11 +45,14 @@ namespace _1Game.Scripts.Core
             }
 
             _adsSetter.OnRewardViwed += OnRewardViwed;
+            _controller.SetStage += TernOffPanel;
+            _upgradePlace.EnterPlace += OnEnter;
         }
         
         private void Start()
         {
-            _upgradePanelContainer.gameObject.SetActive(false);
+            _upgradeParametrs.Initialize();
+            InitializeUpgradePanels();
             _rewardedAdsButton.gameObject.SetActive(false);
         }
 
@@ -80,14 +83,12 @@ namespace _1Game.Scripts.Core
                 _rewardedAdsButton.gameObject.SetActive(true);
             }
         }
-
         
-
         private void InitializeUpgradePanels()
         {
           int  numberUpgrade = 0;
             
-            foreach (UpgradePanel upgradePanel in _upgradePanelContainer.GetComponentsInChildren<UpgradePanel>())
+            foreach (UpgradePanel upgradePanel in _panelContainer.GetComponentsInChildren<UpgradePanel>())
             {
 
                 upgradePanel.Initialize(numberUpgrade,_upgradeParametrs);
@@ -104,6 +105,19 @@ namespace _1Game.Scripts.Core
             {
                 _upgradePanels[i].UpgradeParametr -= OnTapUp;
             }
+            _adsSetter.OnRewardViwed += OnRewardViwed;
+            _controller.SetStage -= TernOffPanel;
+            _upgradePlace.EnterPlace -= OnEnter;
+        }
+        
+        private void TernOffPanel(GameObject stage)
+        {
+            _panelContainer.gameObject.SetActive(false);
+        }
+        
+        private void OnEnter( bool isWork)
+        {
+            _panelContainer.gameObject.SetActive(isWork);
         }
     }
 }

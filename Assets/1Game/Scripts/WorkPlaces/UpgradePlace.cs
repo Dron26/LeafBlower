@@ -7,18 +7,14 @@ namespace _1Game.Scripts.WorkPlaces
 {
     public class UpgradePlace : MonoBehaviour
     {
-        [SerializeField] private Panel _upgradePanelContainer;
         
-        public UnityAction EnterPlace;
-        public UnityAction ExitPlace;
+        public UnityAction <bool> EnterPlace;
 
         private void OnTriggerEnter(Collider other)
         {
             if (other.TryGetComponent(out Character character))
             {
-                EnterPlace?.Invoke();
-                _upgradePanelContainer.gameObject.SetActive(true);
-                Debug.Log("SendActionEnter");
+                EnterPlace?.Invoke(true);
             }
         }
 
@@ -26,9 +22,7 @@ namespace _1Game.Scripts.WorkPlaces
         {
             if (other.TryGetComponent(out Character character))
             {
-                _upgradePanelContainer.gameObject.SetActive(false);
-                ExitPlace?.Invoke();
-                Debug.Log("SendActionExit");
+                EnterPlace?.Invoke(false);
             }
         }
     }

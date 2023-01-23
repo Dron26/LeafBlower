@@ -57,6 +57,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Border
       objectReference: {fileID: 0}
+    - target: {fileID: 6910245572216625344, guid: b57ce8d4f8663ce408f2cc270acffeac,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 6910245572216625356, guid: b57ce8d4f8663ce408f2cc270acffeac,
         type: 3}
       propertyPath: m_RootOrder

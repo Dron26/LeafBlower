@@ -33,6 +33,7 @@ namespace _1Game.Scripts.Core
         public float Time => _time;
         private const float _time = 5f;
         private bool _isMove;
+        private bool _isMoveSell;
 
         public UnityAction StartMove;
         public UnityAction FinishMove;
@@ -58,11 +59,10 @@ namespace _1Game.Scripts.Core
         {
             _startPoint = transform.position;
             _isMove = false;
-            
+
             StartCoroutine(TempOffCollider());
-            StartCoroutine(CheckPosition());
         }
-        
+
         private void OnSetStage(GameObject stage)
         {
             _workPlacesSwitcher = stage.GetComponentInChildren<WorkPlacesSwitcher>();
@@ -72,7 +72,6 @@ namespace _1Game.Scripts.Core
         private void OnChangeWorkPlace(GameObject insideControllers)
         {
             WaitMoveFinish(insideControllers);
-            
         }
 
         private void WaitMoveFinish(GameObject insideControllers)
@@ -84,9 +83,24 @@ namespace _1Game.Scripts.Core
             _finishPoint = _finishPosition.transform.position;
             _startPoint = transform.position;
 
-            if (_startPoint!=_parkPlacePoint&&_isMove == false)
+            if (_startPoint != _parkPlacePoint && _isMove == false)
             {
                 StartCoroutine(WaitBeforeMove());
+            }
+            else
+            {
+                if (_waiteMove != null)
+                {
+                    StopCoroutine(_waiteMove);
+                }
+
+                if (_isMoveSell == false)
+                {
+                    _waiteMove = StartCoroutine(WaitFinishMove(_parkPlacePoint));
+                    _tween.Kill();
+                    _tween = transform.DOMove(_parkPlacePoint, _time);
+                    _isMove = true;
+                }
             }
         }
 
@@ -94,46 +108,48 @@ namespace _1Game.Scripts.Core
         {
             _startPoint = transform.position;
             _finishPoint = _finishPosition.transform.position;
+            _isMove = true;
             StartCoroutine(TempOffCollider());
             StartCoroutine(WaitBeforeMoveToSell());
-            
         }
 
         private IEnumerator TempOffCollider()
         {
             while (this.gameObject != null)
             {
-                if (_isMove==false)
+                if (_isMove == false)
                 {
                     _collider.enabled = true;
                 }
                 else
                 {
-                    _collider.enabled = false;    
+                    _collider.enabled = false;
                 }
-                
+
                 yield return _waitForSeconds;
             }
-            
+
             yield break;
         }
 
-        private IEnumerator WaitBeforeMove( )
+        private IEnumerator WaitBeforeMove()
         {
             yield return _waitForSeconds;
             Move();
+            yield break;
         }
-        
+
         private IEnumerator WaitBeforeMoveToSell()
         {
             yield return _waitForSeconds;
             MoveToSell();
+            yield break;
         }
-        
-        
-        private IEnumerator WaitFinishMove()
+
+
+        private IEnumerator WaitFinishMove(Vector3 position)
         {
-            while (transform.position != _parkPlacePoint)
+            while (transform.position != position)
             {
                 yield return null;
             }
@@ -142,7 +158,7 @@ namespace _1Game.Scripts.Core
             _isMove = false;
             yield break;
         }
-        
+
         private void Move()
         {
             if (_waiteMove != null)
@@ -150,25 +166,30 @@ namespace _1Game.Scripts.Core
                 StopCoroutine(_waiteMove);
             }
 
-            _waiteMove = StartCoroutine(WaitFinishMove());
-            _tween.Kill();
-            _tween = transform.DOMove(_parkPlacePoint, _time);
-            _isMove = true;
+            if (_isMove == false)
+            {
+                _waiteMove = StartCoroutine(WaitFinishMove(_parkPlacePoint));
+                _tween.Kill();
+                _tween = transform.DOMove(_parkPlacePoint, _time);
+                _isMove = true;
+            }
         }
-        
-        private IEnumerator WaitMoveSell()
+
+        private IEnumerator WaitMoveSell(Vector3 position)
         {
-            while (transform.position != _finishPoint)
+            while (transform.position != position)
             {
                 yield return null;
             }
-            
+
             _cartTrashBagPicker.ClearCart();
             _tween.Kill();
+            _isMove = false;
+            _isMoveSell = false;
             Move();
             yield break;
         }
-        
+
         private void MoveToSell()
         {
             if (_waiteMoveSell != null)
@@ -176,16 +197,15 @@ namespace _1Game.Scripts.Core
                 StopCoroutine(_waiteMoveSell);
             }
 
-            _waiteMoveSell = StartCoroutine(WaitMoveSell());
-
+            _waiteMoveSell = StartCoroutine(WaitMoveSell(_finishPoint));
+            _tween.Kill();
             _tween = transform.DOMove(_finishPoint, _time);
-            _isMove = true;
+            _isMoveSell = true;
         }
 
 
         private void OnDisable()
         {
-            StopCoroutine(CheckPosition());
             _cartTrashBagPicker.TakeMaxQuantityTrashBag -= OnTakeMaxQuantityTrashBag;
 
             if (_workPlacesSwitcher != null)
@@ -193,32 +213,5 @@ namespace _1Game.Scripts.Core
                 _workPlacesSwitcher.ChangeWorkPlace -= OnChangeWorkPlace;
             }
         }
-
-        private IEnumerator CheckPosition()
-        {
-            float waiteTime = 5f;
-            _waitForSeconds = new WaitForSeconds(waiteTime);
-            
-            while(gameObject)
-            {
-                if (_insideControllers!=null)
-                {
-                    _finishPosition = _insideControllers.GetComponentInChildren<FinishPoint>();
-                    _parkPlacePoint = _insideControllers.GetComponentInChildren<ParkPlacePoint>().transform.position;
-                    yield return _waitForSeconds;
-                
-                    if (_isMove==false)
-                    {
-                        if (transform.position!=_parkPlacePoint)
-                        {
-                            Move();
-                        }
-                    }
-                }
-                
-                yield return null;
-            }
-        }
-        
     }
 }

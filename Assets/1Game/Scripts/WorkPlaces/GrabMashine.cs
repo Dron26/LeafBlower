@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Collections.Generic;
 using _1Game.Scripts.Empty;
 using _1Game.Scripts.Particle;
 using UnityEngine;
@@ -11,6 +12,9 @@ namespace _1Game.Scripts.WorkPlaces
         [SerializeField] private TrashBag _trashBag;
 
         private ParticleSystemController _particleSystem;
+        private List<ParticleSystem> _particleSystems = new List<ParticleSystem>();
+        private List<ParticleSystemForceField> _particleSystemsForceField = new List<ParticleSystemForceField>();
+
         private WorkPlace _workPlace;
         private FinishPointForTrashBag _finishPoint;
         private TrashBagIdle _trashBagIdle;
@@ -42,7 +46,7 @@ namespace _1Game.Scripts.WorkPlaces
             _createPoint = GetComponentInChildren<CreatePoint>();
             _trashBagIdle = GetComponentInChildren<TrashBagIdle>();
         }
-        
+
         private void OnEnable()
         {
             _particleSystem.CatchAllParticle += OnCatchAllParticle;
@@ -62,6 +66,15 @@ namespace _1Game.Scripts.WorkPlaces
             _tempQuantityUpSize = _quantityUpSize;
             _quantityStepUp = 4;
 
+            foreach (ParticleSystem system in transform.GetComponentsInChildren<ParticleSystem>())
+            {
+                _particleSystems.Add(system);
+            }
+            foreach (ParticleSystemForceField system in transform.GetComponentsInChildren<ParticleSystemForceField>())
+            {
+                _particleSystemsForceField.Add(system);
+            }
+            
             StartCoroutine(CountParticle());
         }
 
@@ -103,29 +116,30 @@ namespace _1Game.Scripts.WorkPlaces
             }
         }
 
+        private void OnCatchAllParticle()
+        {
+            StartCoroutine(WaitQueue());
+        }
+
         private IEnumerator WaitQueue()
         {
             while (_isWork == true)
             {
                 if (_quantityAllStepUp == 0 & _isFilling == false & _quantityCathcedParticle >= _quantityUpSize)
                 {
-                    EndFill();
                     _isWork = false;
+                    EndFill();
                 }
                 else if (_quantityCathcedParticle < _quantityUpSize)
                 {
                     _isWork = false;
+                    FinishWork();
                 }
 
                 yield return null;
             }
-
+            
             yield break;
-        }
-
-        private void OnCatchAllParticle()
-        {
-            StartCoroutine(WaitQueue());
         }
 
         private void EndFill()
@@ -143,8 +157,25 @@ namespace _1Game.Scripts.WorkPlaces
             _newTrashBag.transform.SetParent(transform, false);
             _newTrashBag.GetComponent<TrashBagMover>().SetFirstPosition(_finishPoint.transform.localPosition);
             CreateNewTrashBag?.Invoke();
+
+            if (_isWork == false)
+            {
+                FinishWork();
+            }
         }
 
+        private void FinishWork()
+        {
+            foreach (ParticleSystem system in _particleSystems)
+            {
+                Destroy(system.gameObject);
+            }
+            
+            foreach (ParticleSystemForceField system in _particleSystemsForceField)
+            {
+                Destroy(system.gameObject);
+            }
+        }
 
         private void OnDisable()
         {

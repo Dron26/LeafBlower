@@ -65,17 +65,16 @@ namespace _1Game.Scripts.Item
             {
                 if (_fuelLevel < _maxFuelLevel)
                 {
-                    if (false)
-                    {
-                        
-                    }
                     StartRefuel?.Invoke();
                     StartCoroutine(StartRefueling());
                 }
             }
             else if (other.TryGetComponent(out WorkPlace workPlace))
             {
-                StartCoroutine(ChangeFuelLevel());
+                if (workPlace.IsCleaned==false)
+                {
+                    StartCoroutine(ChangeFuelLevel());
+                }
             }
         }
 
@@ -120,6 +119,8 @@ namespace _1Game.Scripts.Item
 
                 yield return _waitForSeconds;
             }
+            
+            yield break;
         }
 
         private IEnumerator StartRefueling()
@@ -158,6 +159,7 @@ namespace _1Game.Scripts.Item
                 yield return _waitForRefuelSeconds;
             }
 
+            yield break;
         }
 
         public void SetItemParametrs(float stepChangeLevel, float stepRefuelingLevel)

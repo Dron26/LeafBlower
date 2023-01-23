@@ -525,6 +525,26 @@ PrefabInstance:
       propertyPath: m_Name
       value: GarbrRight
       objectReference: {fileID: 0}
+    - target: {fileID: 9153491078671625057, guid: 7c1e2bbb75fd478409fe259fc923e6ea,
+        type: 3}
+      propertyPath: m_ReceiveShadows
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9153491078712951072, guid: 7c1e2bbb75fd478409fe259fc923e6ea,
+        type: 3}
+      propertyPath: m_ReceiveShadows
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9153491079231378960, guid: 7c1e2bbb75fd478409fe259fc923e6ea,
+        type: 3}
+      propertyPath: m_ReceiveShadows
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9153491080601286101, guid: 7c1e2bbb75fd478409fe259fc923e6ea,
+        type: 3}
+      propertyPath: m_ReceiveShadows
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 1190091303465801642, guid: 7c1e2bbb75fd478409fe259fc923e6ea, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 7c1e2bbb75fd478409fe259fc923e6ea, type: 3}
@@ -541,6 +561,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 895935438469932588}
     m_Modifications:
+    - target: {fileID: 1917208115323121176, guid: 4f3931463db54b54bbd698c36ce0d0b2,
+        type: 3}
+      propertyPath: m_ReceiveShadows
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1917208115441741074, guid: 4f3931463db54b54bbd698c36ce0d0b2,
         type: 3}
       propertyPath: m_RootOrder
@@ -600,6 +625,21 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: GarbLeft
+      objectReference: {fileID: 0}
+    - target: {fileID: 1917208115516654681, guid: 4f3931463db54b54bbd698c36ce0d0b2,
+        type: 3}
+      propertyPath: m_ReceiveShadows
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1917208115879295272, guid: 4f3931463db54b54bbd698c36ce0d0b2,
+        type: 3}
+      propertyPath: m_ReceiveShadows
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1917208117209340653, guid: 4f3931463db54b54bbd698c36ce0d0b2,
+        type: 3}
+      propertyPath: m_ReceiveShadows
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4f3931463db54b54bbd698c36ce0d0b2, type: 3}

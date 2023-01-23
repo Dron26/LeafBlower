@@ -20,7 +20,7 @@ namespace _1Game.Scripts.UI
         [SerializeField] private Panel _reachedFuelPlace;
         [SerializeField] private Panel _alarmPanel;
         [SerializeField] private Image _screenDim;
-        
+        [SerializeField] private GameObject _bossPanel;
         
         private Color _colorScreen;
         private float _waitTime;
@@ -36,7 +36,8 @@ namespace _1Game.Scripts.UI
         private void Awake()
         {
             _colorScreen = _screenDim.color;
-            _screenDim.raycastTarget = true;
+       //     _screenDim.raycastTarget = true;
+            _bossPanel.SetActive(false);
         }
 
         public void OnEndHello()
@@ -101,14 +102,15 @@ namespace _1Game.Scripts.UI
                 _screenDim.color = _colorScreen;
             }
 
-            _screenDim.raycastTarget = false;
+        //    _screenDim.raycastTarget = false;
             yield break;
         }
 
         public IEnumerator ChangeColorEnter(Panel active)
+        
         {
-            GameObject panelExit = active.gameObject;
-            _screenDim.raycastTarget = false;
+            GameObject panelEnter = active.gameObject;
+           // _screenDim.raycastTarget = false;
 
             while (_colorScreen.a < 0.6)
             {
@@ -120,11 +122,12 @@ namespace _1Game.Scripts.UI
 
             if (_colorScreen.a >= 0.6)
             {
-                _screenDim.raycastTarget = true;
+               // _screenDim.raycastTarget = true;
                 OnSetScreenDim?.Invoke();
             }
             
-            panelExit.SetActive(true);
+            panelEnter.SetActive(true);
+            _bossPanel.SetActive(true);
             yield break;
         }
         
@@ -147,9 +150,10 @@ namespace _1Game.Scripts.UI
             yield break;
         }
 
-        public void SetScreenDim()
+        public void SetScreenDim(Panel activated)
         {
             OnSetScreenDim?.Invoke();
+            StartCoroutine(ChangeColorExit(activated));
         }
         
         public void InitializePanel()
@@ -167,7 +171,5 @@ namespace _1Game.Scripts.UI
         {
             TutorialCompleted?.Invoke();
         }
-
-   
     }
 }

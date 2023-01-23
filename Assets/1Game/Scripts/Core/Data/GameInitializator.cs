@@ -25,6 +25,9 @@ namespace _1Game.Scripts.Core.Data
             yield return YandexGamesSdk.Initialize();
             LoadCloudData();
             LoadSave(PlayerPrefs.GetString(nameof(SaveData)));
+            Debug.Log("GameInitializator -IEnumerator Start()-LoadSave(PlayerPrefs.GetString(nameof(SaveData)));");
+            Debug.Log("nameof(SaveData)");
+
         }
 
         public void LoadCloudData()
@@ -43,24 +46,34 @@ namespace _1Game.Scripts.Core.Data
 
         private void LoadSave(string jsonSave)
         {
+            Debug.Log("string jsonSave");
+            
             if (string.IsNullOrEmpty(jsonSave))
             {
                 FirstStart?.Invoke();
+                
+                Debug.Log("string.IsNullOrEmpty(jsonSave");
+                Debug.Log("FirstStart?.Invoke();");
                 return;
             }
 
             SaveData save = JsonConvert.DeserializeObject<SaveData>(jsonSave);
-
+            
+            Debug.Log("SaveData save = JsonConvert.DeserializeObject<SaveData>(jsonSave);");
             if (save != null && save.IsTutorialCompleted == false)
             {
+                Debug.Log("if (save != null && save.IsTutorialCompleted == false)");
+                Debug.Log("FirstStart?.Invoke();");
                 FirstStart?.Invoke();
             }
             else
             {
+                Debug.Log("else");
                 _wallet.ChangeResource(save.Money);
                 _isTutorialCompleted = save.IsTutorialCompleted;
                 _stageData.SetStagesStarGroup(save.StagesStarGroup);
                 _upgradeParametrs.SetUpgrades(save.Upgrades);
+                Debug.Log("_wallet.ChangeResource(save.Money);_isTutorialCompleted = save.IsTutorialCompleted;_stageData.SetStagesStarGroup(save.StagesStarGroup);_upgradeParametrs.SetUpgrades(save.Upgrades);");
             }
         }
     }

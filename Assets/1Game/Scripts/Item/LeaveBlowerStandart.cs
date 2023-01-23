@@ -87,8 +87,12 @@ namespace _1Game.Scripts.Item
         private void OnTriggerEnter(Collider other)
         {
             if (other.TryGetComponent(out WorkPlace workPlace) & _isThereFuel == true)
-            {
-                _airZone.gameObject.SetActive(true);
+            { 
+                if (workPlace.IsCleaned==false)
+                {
+                    _airZone.gameObject.SetActive(true);
+                }
+
             }
         }
 
@@ -96,7 +100,11 @@ namespace _1Game.Scripts.Item
         {
             if (other.TryGetComponent(out WorkPlace workPlace))
             {
-                _airZone.gameObject.SetActive(false);
+                if (workPlace.IsCleaned==false)
+                {
+                    _airZone.gameObject.SetActive(false);
+                }
+               
             }
         }
 

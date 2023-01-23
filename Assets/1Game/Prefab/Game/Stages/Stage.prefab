@@ -223,7 +223,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 5fd85ccc9f6abc642b915a3ce7a2cfd3, type: 2}
+  - {fileID: 2100000, guid: a836cfc2ad478534f88fc84e282bfd1b, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1049,8 +1049,7 @@ MonoBehaviour:
   _character: {fileID: 408922926788705957}
   _cart: {fileID: 2359428614787888841}
   _canvas: {fileID: 0}
-  _workPlaceTutorialPoint: {fileID: 2640702004308879581, guid: 9d7745c82a03d624ca47231890e1509c,
-    type: 3}
+  _workPlaceTutorialPoint: {fileID: 1745269904710388743}
   _workPlaceTutorialSecondPoint: {fileID: -846984014021240720, guid: c0c01c1fe9b1c514d9dbae97a025c4e1,
     type: 3}
   _tutorialWall: {fileID: 1967288846284359881}

@@ -7,13 +7,11 @@ namespace _1Game.Scripts.Core
     public class ExitPlace : MonoBehaviour
     {
         public UnityAction<bool> EnterPlace;
-        [SerializeField] private CharacterPanel _characterPanel;
         
         private void OnTriggerEnter(Collider other)
         {
             if (other.TryGetComponent(out Character character))
             {
-                
                 EnterPlace?.Invoke(true);
             }
         }
