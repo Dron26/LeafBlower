@@ -16,14 +16,16 @@ namespace _1Game.Scripts.Item
 
         private WaitForSeconds _waitForSeconds;
         private WaitForSeconds _waitForRefuelSeconds;
-
+        private int _maxFuelLevelUpgrade = 300;
         private bool _isExiteFuelPlace;
         private bool _isWork;
 
         private float _fuelLevel=50;
         private int _maxFuelLevel = 100;
-        private float _stepChangeLevel;
+        private float _stepChangeLevel= 0.1f;
         private float _stepRefuelingLevel;
+        private float _stepRefuel = 0.4f;
+        private float _maxSteprefuel = 1.2f;
         private float _minLevel = 15f;
 
         public UnityAction<float> ChangeFuel;
@@ -46,8 +48,6 @@ namespace _1Game.Scripts.Item
             _isExiteFuelPlace = true;
             
             _isWork = true;
-            _stepChangeLevel = 0.1f;
-            _stepRefuelingLevel = 0.4f;
             float waiteTime = Time.fixedDeltaTime;
             float waiteRefuelTime = Time.fixedDeltaTime;
             _waitForSeconds = new WaitForSeconds(waiteTime);
@@ -57,6 +57,12 @@ namespace _1Game.Scripts.Item
         private void OnUpLevel(int value)
         {
             _maxFuelLevel = value;
+            _stepRefuelingLevel+=_stepRefuel;
+            
+            if (_maxFuelLevel==_maxFuelLevelUpgrade)
+            {
+                _stepRefuelingLevel *= _maxSteprefuel;
+            }
         }
 
         private void OnTriggerEnter(Collider other)
@@ -166,12 +172,6 @@ namespace _1Game.Scripts.Item
         {
             _stepChangeLevel = stepChangeLevel;
             _stepRefuelingLevel = stepRefuelingLevel;
-        }
-
-        public void SetFuelParametrs(int maxFuelLevel)
-        {
-            _maxFuelLevel = maxFuelLevel;
-            _fuelLevel = _maxFuelLevel;
         }
 
         private void OnDisable()

@@ -468,8 +468,25 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 9213444430787395286, guid: eff07ec8314689144823693deaefc426,
+        type: 3}
+      propertyPath: _particleSystem
+      value: 
+      objectReference: {fileID: 1296018068644574709}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: eff07ec8314689144823693deaefc426, type: 3}
+--- !u!114 &1296018068644574709 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2491263358251875405, guid: eff07ec8314689144823693deaefc426,
+    type: 3}
+  m_PrefabInstance: {fileID: 3706145018646399416}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9dd94a3051837964ea82f2fc97818023, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &1648232833677997933 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 2716071096641371861, guid: eff07ec8314689144823693deaefc426,
@@ -592,8 +609,25 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 9213444430787395286, guid: eff07ec8314689144823693deaefc426,
+        type: 3}
+      propertyPath: _particleSystem
+      value: 
+      objectReference: {fileID: 1296018069324939834}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: eff07ec8314689144823693deaefc426, type: 3}
+--- !u!114 &1296018069324939834 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2491263358251875405, guid: eff07ec8314689144823693deaefc426,
+    type: 3}
+  m_PrefabInstance: {fileID: 3706145019847343735}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9dd94a3051837964ea82f2fc97818023, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &1648232834878849186 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 2716071096641371861, guid: eff07ec8314689144823693deaefc426,
@@ -644,7 +678,7 @@ PrefabInstance:
     - target: {fileID: 3681343753962847737, guid: db38f11d4149b82409f7a3da5b0b429a,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 33.25
+      value: 35.71
       objectReference: {fileID: 0}
     - target: {fileID: 3681343753962847737, guid: db38f11d4149b82409f7a3da5b0b429a,
         type: 3}
@@ -766,6 +800,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 9213444430787395286, guid: eff07ec8314689144823693deaefc426,
+        type: 3}
+      propertyPath: _particleSystem
+      value: 
+      objectReference: {fileID: 5408732760997686806}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: eff07ec8314689144823693deaefc426, type: 3}
 --- !u!4 &3677526890041774989 stripped
@@ -774,3 +813,15 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 7610259944205734491}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &5408732760997686806 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2491263358251875405, guid: eff07ec8314689144823693deaefc426,
+    type: 3}
+  m_PrefabInstance: {fileID: 7610259944205734491}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9dd94a3051837964ea82f2fc97818023, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

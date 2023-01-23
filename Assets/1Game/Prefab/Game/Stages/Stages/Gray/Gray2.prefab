@@ -133,8 +133,25 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 9213444430787395286, guid: eff07ec8314689144823693deaefc426,
+        type: 3}
+      propertyPath: _particleSystem
+      value: 
+      objectReference: {fileID: 4002898060131483194}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: eff07ec8314689144823693deaefc426, type: 3}
+--- !u!114 &4002898060131483194 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2491263358251875405, guid: eff07ec8314689144823693deaefc426,
+    type: 3}
+  m_PrefabInstance: {fileID: 1522102603556586103}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9dd94a3051837964ea82f2fc97818023, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &5731877677889438625 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6526877090135359958, guid: eff07ec8314689144823693deaefc426,
@@ -208,6 +225,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: GrayWorkPlaceMiddle
       objectReference: {fileID: 0}
+    - target: {fileID: 5204619179220473095, guid: 70104096cfa479841b7f013f9be8cdde,
+        type: 3}
+      propertyPath: _particleSystem
+      value: 
+      objectReference: {fileID: 3127597445901010118}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 70104096cfa479841b7f013f9be8cdde, type: 3}
 --- !u!4 &3127597444517789629 stripped
@@ -248,7 +270,7 @@ PrefabInstance:
     - target: {fileID: 3681343753962847737, guid: db38f11d4149b82409f7a3da5b0b429a,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 33.25
+      value: 41.6
       objectReference: {fileID: 0}
     - target: {fileID: 3681343753962847737, guid: db38f11d4149b82409f7a3da5b0b429a,
         type: 3}
@@ -370,6 +392,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 9213444430787395286, guid: eff07ec8314689144823693deaefc426,
+        type: 3}
+      propertyPath: _particleSystem
+      value: 
+      objectReference: {fileID: 7985619128075311212}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: eff07ec8314689144823693deaefc426, type: 3}
 --- !u!4 &1644940568479245815 stripped
@@ -378,6 +405,18 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 5494427393989993505}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &7985619128075311212 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2491263358251875405, guid: eff07ec8314689144823693deaefc426,
+    type: 3}
+  m_PrefabInstance: {fileID: 5494427393989993505}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9dd94a3051837964ea82f2fc97818023, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &6234688915409424796
 PrefabInstance:
   m_ObjectHideFlags: 0

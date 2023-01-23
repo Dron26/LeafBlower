@@ -1,5 +1,3 @@
-using _1Game.Scripts.Core.SaveLoad;
-using _1Game.Scripts.Core.SaveLoad.Data;
 using UnityEngine;
 using UnityEngine.Events;
 

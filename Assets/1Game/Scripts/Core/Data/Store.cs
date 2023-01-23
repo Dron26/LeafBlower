@@ -35,6 +35,8 @@ namespace _1Game.Scripts.Core
             _fuelPanel = _panelContainer.GetComponentInChildren<FuelPanel>();
             _characterPanel = _panelContainer.GetComponentInChildren<CharacterPanel>();
             _cartPanel = _panelContainer.GetComponentInChildren<CartPanel>();
+            _upgradeParametrs.Initialize();
+            InitializeUpgradePanels();
         }
 
         private void OnEnable()
@@ -51,8 +53,8 @@ namespace _1Game.Scripts.Core
         
         private void Start()
         {
-            _upgradeParametrs.Initialize();
-            InitializeUpgradePanels();
+            
+            
             _rewardedAdsButton.gameObject.SetActive(false);
         }
 

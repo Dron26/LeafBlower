@@ -39,26 +39,18 @@ namespace _1Game.Scripts.UI
         {
             UpgradeParametr?.Invoke(_numberUpgrade);
             SetUpdate();
-
-            Debug.Log(_numberUpgrade);
         }
 
         private void SetUpdate()
         {
             _price.text = Convert.ToString(_upgradeParametrs.GetPrice(_numberUpgrade));
-
-            Debug.Log(_price.text);
             int level = _upgradeParametrs.GetLevel(_numberUpgrade);
-            
-            Debug.Log(level);
             _slider.OnUpLevel(level);
-        
-           
+            
             if (level==_maxLevel)
             {
                 ReachleMaxLevel();
             }
-            Debug.Log(_maxLevel);
         }
 
         private void ReachleMaxLevel()

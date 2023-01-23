@@ -18,7 +18,7 @@ public class ParkPlace : MonoBehaviour
     
     private void OnTriggerEnter(Collider other)
     {
-        if (other.TryGetComponent(out Cart cart))
+        if (other.TryGetComponent(out CartPlane cart))
         {
             CartEnter?.Invoke();
             ChangeState(false);
@@ -27,7 +27,7 @@ public class ParkPlace : MonoBehaviour
     
     private void OnTriggerExit(Collider other)
     {
-        if (other.TryGetComponent(out Cart cart))
+        if (other.TryGetComponent(out CartPlane cart))
         {
             ChangeState(true);
         }

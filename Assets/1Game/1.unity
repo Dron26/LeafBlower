@@ -1105,12 +1105,12 @@ PrefabInstance:
     - target: {fileID: 4076745215784136932, guid: 872b6cc8550d5cc40b230672b3e68bd7,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.000000015106876
+      value: -0.000000015106874
       objectReference: {fileID: 0}
     - target: {fileID: 4076745215784136932, guid: 872b6cc8550d5cc40b230672b3e68bd7,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0.000000008236617
+      value: 0.000000008236616
       objectReference: {fileID: 0}
     - target: {fileID: 4076745215784136932, guid: 872b6cc8550d5cc40b230672b3e68bd7,
         type: 3}
@@ -5220,7 +5220,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -165.07, y: -34.469}
+  m_AnchoredPosition: {x: -0.0030518, y: -0.0000076294}
   m_SizeDelta: {x: 936.61, y: 511.61}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &332170015
@@ -9330,6 +9330,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6915675371439710588, guid: 0d05a2e06a08a414aa5c6a82605ff245,
         type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgument
+      value: 
+      objectReference: {fileID: 1053936574}
+    - target: {fileID: 6915675371439710588, guid: 0d05a2e06a08a414aa5c6a82605ff245,
+        type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
@@ -12097,6 +12102,25 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 802678409}
   m_CullTransparentMesh: 1
+--- !u!1 &803927314 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2359428616547640375, guid: 9bd5f67f38d479641adf7092064c7e83,
+    type: 3}
+  m_PrefabInstance: {fileID: 4367886632672817936}
+  m_PrefabAsset: {fileID: 0}
+--- !u!65 &803927319
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 803927314}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 10.000001, y: 12.24, z: 17.11}
+  m_Center: {x: 0, y: 0, z: 0.0000038146973}
 --- !u!1 &803997846
 GameObject:
   m_ObjectHideFlags: 0
@@ -18521,12 +18545,12 @@ PrefabInstance:
     - target: {fileID: 2185637229457505186, guid: 8f9b898e2bdcd5c439e9ec2608001d82,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.000000015106876
+      value: -0.000000015106874
       objectReference: {fileID: 0}
     - target: {fileID: 2185637229457505186, guid: 8f9b898e2bdcd5c439e9ec2608001d82,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0.000000008236617
+      value: 0.000000008236616
       objectReference: {fileID: 0}
     - target: {fileID: 2185637229457505186, guid: 8f9b898e2bdcd5c439e9ec2608001d82,
         type: 3}
@@ -19524,7 +19548,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -165.07097, y: -34.469}
+  m_AnchoredPosition: {x: 0.000015259, y: -0.0000076294}
   m_SizeDelta: {x: 936.6161, y: 511.61}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1397523204
@@ -24719,7 +24743,7 @@ MonoBehaviour:
     m_PressedTrigger: Pressed
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
-  m_Interactable: 1
+  m_Interactable: 0
   m_TargetGraphic: {fileID: 1895784099}
   m_FillRect: {fileID: 1405678467}
   m_HandleRect: {fileID: 0}
@@ -31922,7 +31946,7 @@ MonoBehaviour:
     m_PressedTrigger: Pressed
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
-  m_Interactable: 1
+  m_Interactable: 0
   m_TargetGraphic: {fileID: 2808043014951198305}
   m_FillRect: {fileID: 2808043015061491543}
   m_HandleRect: {fileID: 0}
@@ -32973,6 +32997,11 @@ PrefabInstance:
       propertyPath: _upgradePanelContainer
       value: 
       objectReference: {fileID: 1043851249900438142}
+    - target: {fileID: 2359428614787888694, guid: 9bd5f67f38d479641adf7092064c7e83,
+        type: 3}
+      propertyPath: m_Size.z
+      value: 4.71
+      objectReference: {fileID: 0}
     - target: {fileID: 2359428614787888695, guid: 9bd5f67f38d479641adf7092064c7e83,
         type: 3}
       propertyPath: _exitPanel
@@ -34746,7 +34775,7 @@ MonoBehaviour:
     m_PressedTrigger: Pressed
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
-  m_Interactable: 1
+  m_Interactable: 0
   m_TargetGraphic: {fileID: 6094297833950977942}
   m_FillRect: {fileID: 6094297832776488920}
   m_HandleRect: {fileID: 0}
@@ -34791,9 +34820,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
-  m_Maskable: 1
+  m_Maskable: 0
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
