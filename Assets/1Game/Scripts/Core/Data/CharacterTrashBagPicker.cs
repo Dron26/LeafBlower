@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using _1Game.Scripts.Empty;
@@ -14,8 +15,7 @@ namespace _1Game.Scripts.Core
         [SerializeField] private ParkPlace _parkPlace;
         [SerializeField] private Cart _cart;
         [SerializeField] private ExitPanel _exitPanel;
-        
-        private UpgradeParametrs _upgradeParametrs;
+        [SerializeField] UpgradeParametrs _upgradeParametrs;
         private CartTrashBagPicker _cartPiker;
         private TrashBagStorePoint _storePoint;
         private MainPointForTrashBag _mainPointForTrashBag;
@@ -25,7 +25,8 @@ namespace _1Game.Scripts.Core
         private Vector3 _localPositionStorePoint;
         private List<Vector3> _changePointStore=new List<Vector3>();
         private WaitForSeconds _waitForSeconds;
-
+        
+        
         private int _cartTrashBagsReceivedCount;
         private int _quantityPickedTrashBag;
         private int _maxPickedQuantity;
@@ -42,23 +43,24 @@ namespace _1Game.Scripts.Core
         public UnityAction TakeMaxQuantityTrashBag;
         public UnityAction SallAllTrashBag;
 
+
         private void Awake()
         {
-            _upgradeParametrs = GetComponentInParent<UpgradeParametrs>();
             _cartPiker = _cart.gameObject.GetComponent<CartTrashBagPicker>();
             _storePoint = GetComponentInChildren<TrashBagStorePoint>();
             _mainPointForTrashBag = _storePoint.GetComponentInChildren<MainPointForTrashBag>();
         }
-
-        private void OnEnable()
+        
+        public void OnEnable()
         {
-            _cart.FinishMove += OnFinishCart;
             _upgradeParametrs.UpPower += OnUpLevel;
+            _cart.FinishMove += OnFinishCart;
             _exitPanel.SetNextLevel+= OnExitLevel;
         }
-
+        
         private void Start()
         {
+            
             float stepInRow = 0.3f;
             float stepinSecondRow = -0.4f;
             float timeToSell = 0.1f;
@@ -202,7 +204,7 @@ namespace _1Game.Scripts.Core
             if (_pickedTrashBags.Count != _maxPickedQuantity)
             {
                 _quantityPickedTrashBag++;
-
+                
                 if (_quantityPickedTrashBag > _maxPickedQuantity) return;
                 _pickedTrashBags.Push(trashBag);
                 trashBag.transform.SetParent(transform, true);

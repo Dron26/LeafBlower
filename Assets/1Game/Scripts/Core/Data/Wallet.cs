@@ -8,7 +8,7 @@ namespace _1Game.Scripts.Core
         public long Money { get => _amountResource; private set { } }
         public long MaxMoney { get => _maxAmountResource; private set { } }
 
-        protected private long _amountResource= 0;
+        protected private long _amountResource= 100000000;
         protected private long _maxAmountResource= 100000000;
 
         public UnityAction<long> ChangeResource;

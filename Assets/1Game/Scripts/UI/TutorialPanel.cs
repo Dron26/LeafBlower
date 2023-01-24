@@ -65,9 +65,9 @@ namespace _1Game.Scripts.UI
             StartCoroutine(ChangeColorEnter(_reachedCart));
         }
         
-        public void PanelTurnOn(Panel activated)
+        public void PanelTurnOn(Panel active)
         {
-            StartCoroutine(ChangeColorEnter(_takeTrashBag));
+            StartCoroutine(ChangeColorEnter(active));
         }
         
         public void PanelTurnOff(Panel activated)
@@ -164,6 +164,7 @@ namespace _1Game.Scripts.UI
         
         public void OnTutorialClose()
         {
+            OnSetScreenDim?.Invoke();
             TutorialClose?.Invoke();
         }
 

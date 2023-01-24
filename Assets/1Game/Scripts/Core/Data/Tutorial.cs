@@ -183,7 +183,7 @@ namespace _1Game.Scripts.Core
             _characterMove.enabled = _isMoveActive;
         }
 
-        private void OnSetStartPosition()
+        public void OnSetStartPosition()
         {
             _character.transform.position = _startPosition;
         }

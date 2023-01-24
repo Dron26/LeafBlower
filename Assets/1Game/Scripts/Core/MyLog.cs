@@ -7,14 +7,7 @@ namespace _1Game.Scripts.Core
     {
         string myLog;
         Queue myLogQueue = new Queue();
- 
-        void Start(){
-            Debug.Log("Log1");
-            Debug.Log("Log2");
-            Debug.Log("Log3");
-            Debug.Log("Log4");
-        }
- 
+
         void OnEnable () {
             Application.logMessageReceived += HandleLog;
         }

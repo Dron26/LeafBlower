@@ -16,7 +16,7 @@ namespace _1Game.Scripts.WorkPlaces
         private Collider _collider;
         private WaitForSeconds _waitForSeconds;
         private int numberFinishPoint;
-        private int finishPoint;
+        private int finishPoint= 2;
         private bool _isPositionChange;
         private float _time;
 
@@ -24,7 +24,6 @@ namespace _1Game.Scripts.WorkPlaces
 
         private void Start()
         {
-            finishPoint = 2;
             _collider = GetComponent<Collider>();
             _collider.enabled = false;
 

@@ -7,15 +7,15 @@ namespace _1Game.Scripts.Empty
 {
     public class TutorialWall : MonoBehaviour
     {
-        [SerializeField]private TutorialAlarmPanel _panel;
-        [SerializeField]private ChangerPanel _changerPanel;
+        [SerializeField]private Panel _panel;
+        [SerializeField]private TutorialPanel _tutorialPanel;
 
         private void OnTriggerEnter(Collider other)
         {
             if (other.TryGetComponent(out LeaveBlowerStandart standart))
             {
                 _panel.gameObject.SetActive(true);
-                _changerPanel.PauseGame();
+                _tutorialPanel.PanelTurnOn(_panel);
             }
         }
     }

@@ -16,7 +16,7 @@ namespace _1Game.Scripts.Core
         [SerializeField]private UpgradePlace _upgradePlace;
         [SerializeField] private RewardedAdsButton _rewardedAdsButton;
         [SerializeField] private AdsSetter _adsSetter;
-        
+        [SerializeField] private ChangerPanel _changerPanel;
         [SerializeField] private StageController _controller;
         
         private CartPanel _cartPanel;
@@ -53,8 +53,6 @@ namespace _1Game.Scripts.Core
         
         private void Start()
         {
-            
-            
             _rewardedAdsButton.gameObject.SetActive(false);
         }
 
