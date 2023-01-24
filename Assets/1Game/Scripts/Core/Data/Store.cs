@@ -31,11 +31,13 @@ namespace _1Game.Scripts.Core
 
         private void Awake()
         {
+            _upgradeParametrs.Initialize();
+            
             _panelContainer = GetComponentInChildren<PanelContainer>();
             _fuelPanel = _panelContainer.GetComponentInChildren<FuelPanel>();
             _characterPanel = _panelContainer.GetComponentInChildren<CharacterPanel>();
             _cartPanel = _panelContainer.GetComponentInChildren<CartPanel>();
-            _upgradeParametrs.Initialize();
+            
             InitializeUpgradePanels();
         }
 

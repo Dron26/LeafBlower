@@ -22,7 +22,7 @@ namespace _1Game.Scripts.Core
         public int MaxPowerLevel => GetMaxLevel(_numberPowerUpgrade);
         public int MaxCartLevel => GetMaxLevel(_numberCartUpgrade);
 
-        private List<Upgrade> _upgrades = new();
+        public List<Upgrade> _upgrades = new();
 
         public List<UnityAction<int>> Actions = new();
 
@@ -48,20 +48,18 @@ namespace _1Game.Scripts.Core
         public UnityAction<int> UpPower;
         public UnityAction<int> UpCart;
 
-        private void Awake()
+        public void Initialize()
         {
-            
+            CreateLevel();
         }
-
+        
         private void Start()
         {
-            _stageController.SetStage+=SetStartParametr;
+            SetStartParametr();
         }
 
         private void CreateLevel()
         {
-            //SetLevel();
-
             int number = 0;
 
             _maxLevel = 10;
@@ -89,7 +87,10 @@ namespace _1Game.Scripts.Core
 
             FillLevel(ref _cartUpgrade);
             FillUpgradeList(_cartUpgrade, number);
-            UpdateLevels();
+
+            _upgrades[_numberFuelUpgrade].UpgradeUP += UpFuel;
+            _upgrades[_numberPowerUpgrade].UpgradeUP += UpPower;
+            _upgrades[_numberCartUpgrade].UpgradeUP += UpCart;
         }
 
         private void FillLevel(ref Upgrade upgrade)
@@ -118,23 +119,19 @@ namespace _1Game.Scripts.Core
             _upgrades.Add(upgrade);
         }
 
-        private void SetStartParametr(GameObject stage)
+        private void UpdateLevels()
+        {
+            _currentFuelLevel = _upgrades[_numberFuelUpgrade].CurrentLevel;
+            _currentPowerLevel = _upgrades[_numberPowerUpgrade].CurrentLevel;
+            _currentCartLevel = _upgrades[_numberCartUpgrade].CurrentLevel;
+        }
+
+        private void SetStartParametr()
         {
             UpFuel?.Invoke(_upgrades[_numberFuelUpgrade].Levels[_currentFuelLevel].Value);
             UpPower?.Invoke(_upgrades[_numberPowerUpgrade].Levels[_currentPowerLevel].Value);
             UpCart?.Invoke(_upgrades[_numberCartUpgrade].Levels[_currentCartLevel].Value);
         }
-
-        public void SetLevel()
-        {
-            int level = 0;
-
-            foreach (Upgrade upgrade in _upgrades)
-            {
-                upgrade.SetLevel(level);
-            }
-        }
-
 
         public void OnTapUp(int numberUpgrade)
         {
@@ -142,8 +139,17 @@ namespace _1Game.Scripts.Core
             _particleSystem.Play();
             _upgrades[numberUpgrade].UpLevel();
             int value = GetLevelValue(numberUpgrade);
-            Actions[numberUpgrade]?.Invoke(value);
+
             UpdateLevels();
+            
+            for (int i = 0; i < _upgrades.Count; i++)
+            {
+                if (i == numberUpgrade)
+                {
+                    _upgrades[i].UpgradeUP?.Invoke(value);
+                }
+            }
+            
         }
 
         public int GetPrice(int numberUpgrade)
@@ -172,14 +178,6 @@ namespace _1Game.Scripts.Core
         }
 
 
-        private void UpdateLevels()
-        {
-            _currentFuelLevel = _upgrades[_numberFuelUpgrade].CurrentLevel;
-            _currentPowerLevel = _upgrades[_numberPowerUpgrade].CurrentLevel;
-            _currentCartLevel = _upgrades[_numberCartUpgrade].CurrentLevel;
-        }
-
-
         public List<Upgrade> GetUpgrades()
         {
             List<Upgrade> _tempUpgrades = new List<Upgrade>();
@@ -200,14 +198,11 @@ namespace _1Game.Scripts.Core
             }
         }
 
-        public void Initialize()
+        private void OnDisable()
         {
-
-            CreateLevel();
-            Actions.Add(UpFuel);
-            Actions.Add(UpPower);
-            Actions.Add(UpCart);
-
+            _upgrades[_numberFuelUpgrade].UpgradeUP -= UpFuel;
+            _upgrades[_numberPowerUpgrade].UpgradeUP -= UpPower;
+            _upgrades[_numberCartUpgrade].UpgradeUP -= UpCart;
         }
     }
 }

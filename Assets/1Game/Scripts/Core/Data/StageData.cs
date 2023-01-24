@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using _1Game.Scripts.Empty;
 using _1Game.Scripts.UI;
 using UnityEngine;
 
@@ -8,8 +9,14 @@ namespace _1Game.Scripts.Core.SaveLoad.Data
     public class StageData : MonoBehaviour
     {
         [SerializeField] private StarPanel _starPanel;
+[SerializeField]private Character _character;
+[SerializeField] private Cart _cart;
+[SerializeField] private FuelPlace _fuelPlace;
 
-        private List<Dictionary<int, int>> _stagesStarGroup = new();
+
+
+
+private List<Dictionary<int, int>> _stagesStarGroup = new();
         [SerializeField] private TutorialPanel _tutorialPanel;
         private List< int> _countStages = new List<int>();
         
@@ -27,6 +34,7 @@ namespace _1Game.Scripts.Core.SaveLoad.Data
 
         private void Awake()
         {
+            
             _stageController = GetComponent<StageController>();
             _exitPanel = _stageController.GetComponent<StageController>()._exitPanel;
         }

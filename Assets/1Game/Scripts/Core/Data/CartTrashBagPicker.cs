@@ -229,7 +229,7 @@ namespace _1Game.Scripts.Core
         {
 
             float upStep = 0.08f;
-                Vector3 localPosition =_trashBagStore.transform.localPosition;
+            Vector3 localPosition =_trashBagStore.transform.localPosition;
             localPosition = new Vector3(localPosition.x, localPosition.y , localPosition.z+upStep);
             _trashBagStore.transform.localPosition = localPosition;
         }

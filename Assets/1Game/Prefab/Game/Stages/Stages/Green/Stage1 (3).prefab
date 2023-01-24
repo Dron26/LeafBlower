@@ -514,6 +514,21 @@ PrefabInstance:
       propertyPath: m_LocalPosition.z
       value: 5.9723253
       objectReference: {fileID: 0}
+    - target: {fileID: 6845318583552354916, guid: 72e0903513e205b41a4ad9cb5b791c69,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6845318583552354916, guid: 72e0903513e205b41a4ad9cb5b791c69,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -0.19
+      objectReference: {fileID: 0}
+    - target: {fileID: 6845318583552354918, guid: 72e0903513e205b41a4ad9cb5b791c69,
+        type: 3}
+      propertyPath: m_Radius
+      value: 0.25
+      objectReference: {fileID: 0}
     - target: {fileID: 6845318583830529231, guid: 72e0903513e205b41a4ad9cb5b791c69,
         type: 3}
       propertyPath: m_LocalScale.y
@@ -754,6 +769,11 @@ PrefabInstance:
         type: 3}
       propertyPath: InitialModule.maxNumParticles
       value: 500
+      objectReference: {fileID: 0}
+    - target: {fileID: 7331791274728407763, guid: e988b58b4e5dfb94ba6ba3e85408ce34,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.02
       objectReference: {fileID: 0}
     - target: {fileID: 7331791275489167137, guid: e988b58b4e5dfb94ba6ba3e85408ce34,
         type: 3}

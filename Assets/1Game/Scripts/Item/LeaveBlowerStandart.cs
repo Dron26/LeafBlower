@@ -92,6 +92,10 @@ namespace _1Game.Scripts.Item
                 {
                     _airZone.gameObject.SetActive(true);
                 }
+                else
+                {
+                    _airZone.gameObject.SetActive(false);
+                }
 
             }
         }
@@ -100,11 +104,7 @@ namespace _1Game.Scripts.Item
         {
             if (other.TryGetComponent(out WorkPlace workPlace))
             {
-                if (workPlace.IsCleaned==false)
-                {
-                    _airZone.gameObject.SetActive(false);
-                }
-               
+                _airZone.gameObject.SetActive(false);
             }
         }
 

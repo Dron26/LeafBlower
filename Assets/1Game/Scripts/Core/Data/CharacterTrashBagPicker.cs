@@ -16,6 +16,7 @@ namespace _1Game.Scripts.Core
         [SerializeField] private Cart _cart;
         [SerializeField] private ExitPanel _exitPanel;
         [SerializeField] UpgradeParametrs _upgradeParametrs;
+
         private CartTrashBagPicker _cartPiker;
         private TrashBagStorePoint _storePoint;
         private MainPointForTrashBag _mainPointForTrashBag;
@@ -23,10 +24,10 @@ namespace _1Game.Scripts.Core
         private Stack<TrashBag> _pickedTrashBags;
         private Vector3 _mainPoint;
         private Vector3 _localPositionStorePoint;
-        private List<Vector3> _changePointStore=new List<Vector3>();
+        private List<Vector3> _changePointStore = new List<Vector3>();
         private WaitForSeconds _waitForSeconds;
-        
-        
+
+
         private int _cartTrashBagsReceivedCount;
         private int _quantityPickedTrashBag;
         private int _maxPickedQuantity;
@@ -36,13 +37,12 @@ namespace _1Game.Scripts.Core
         private readonly float _stepUpLevel = 0.4f;
         private bool _canSell;
         private bool _isTutorialCompleted;
-        
+
         public UnityAction TakeTrashBag;
-        
+
         public UnityAction<TrashBag> SallTrashBag;
         public UnityAction TakeMaxQuantityTrashBag;
         public UnityAction SallAllTrashBag;
-
 
         private void Awake()
         {
@@ -50,17 +50,16 @@ namespace _1Game.Scripts.Core
             _storePoint = GetComponentInChildren<TrashBagStorePoint>();
             _mainPointForTrashBag = _storePoint.GetComponentInChildren<MainPointForTrashBag>();
         }
-        
+
         public void OnEnable()
         {
             _upgradeParametrs.UpPower += OnUpLevel;
             _cart.FinishMove += OnFinishCart;
-            _exitPanel.SetNextLevel+= OnExitLevel;
+            _exitPanel.SetNextLevel += OnExitLevel;
         }
-        
+
         private void Start()
         {
-            
             float stepInRow = 0.3f;
             float stepinSecondRow = -0.4f;
             float timeToSell = 0.1f;
@@ -158,7 +157,7 @@ namespace _1Game.Scripts.Core
         {
             _parkPlace.CartEnter -= OnFinishCart;
             _upgradeParametrs.UpPower -= OnUpLevel;
-            _exitPanel.SetNextLevel-= OnExitLevel;
+            _exitPanel.SetNextLevel -= OnExitLevel;
         }
 
         private IEnumerator SellBags()
@@ -166,16 +165,17 @@ namespace _1Game.Scripts.Core
             _canSell = false;
             _cartTrashBagsReceivedCount = _cartPiker.TrashBagsReceivedCount;
 
-           int quantity = _cartTrashBagsReceivedCount>=_pickedTrashBags.Count ?  _pickedTrashBags.Count:_cartTrashBagsReceivedCount ;
-            
+            int quantity = _cartTrashBagsReceivedCount >= _pickedTrashBags.Count
+                ? _pickedTrashBags.Count
+                : _cartTrashBagsReceivedCount;
+
             for (int i = 0; i < quantity; i++)
             {
-
                 yield return _waitForSeconds;
 
                 _pickedTrashBags.TryPop(out TrashBag trashBag);
                 SallTrashBag?.Invoke(trashBag);
-                _quantityPickedTrashBag=_pickedTrashBags.Count;
+                _quantityPickedTrashBag = _pickedTrashBags.Count;
                 _quantityInLevel--;
 
                 if (_quantityInLevel == 0 & _numberLevel > 0)
@@ -204,7 +204,7 @@ namespace _1Game.Scripts.Core
             if (_pickedTrashBags.Count != _maxPickedQuantity)
             {
                 _quantityPickedTrashBag++;
-                
+
                 if (_quantityPickedTrashBag > _maxPickedQuantity) return;
                 _pickedTrashBags.Push(trashBag);
                 trashBag.transform.SetParent(transform, true);
@@ -227,6 +227,11 @@ namespace _1Game.Scripts.Core
         private void OnExitLevel()
         {
             _pickedTrashBags.Clear();
+
+            foreach (TrashBag trashBag in transform.GetComponentsInChildren<TrashBag>())
+            {
+                Destroy(trashBag.gameObject);
+            }
         }
     }
 }

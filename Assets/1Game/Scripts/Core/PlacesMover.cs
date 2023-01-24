@@ -74,8 +74,8 @@ namespace _1Game.Scripts.Core
         }
 
         private void SetCharacterPlace()
-        {
-            _character.transform.position = _characterPlace.transform.position;
+        {   
+            _character.transform.localPosition = _characterPlace.transform.localPosition;
         }
     }
 }

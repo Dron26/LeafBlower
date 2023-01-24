@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using UnityEngine.Events;
 
 namespace _1Game.Scripts.Core
 {
@@ -14,7 +15,9 @@ namespace _1Game.Scripts.Core
         private int _maxLevel;
         private int _number;
         private bool isSetLevelEnd;
-        
+
+        public UnityAction<int> UpgradeUP;
+
         public Upgrade(List<Level> levels,int currentLevel,int maxLevel)
         {
             Levels = new List<Level>();
