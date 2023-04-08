@@ -1,6 +1,4 @@
-using System;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -10,6 +8,8 @@ namespace _1Game.Scripts.Core
     {
         [SerializeField] private StageController _stageController;
         [SerializeField] private ParticleSystem _particleSystem;
+        
+        [SerializeField] private SaveLoad.SaveLoad _saveLoad;
         public int FuelPrice => GetPrice(_numberFuelUpgrade);
         public int PowerPrice => GetPrice(_numberPowerUpgrade);
         public int CartPrice => GetPrice(_numberCartUpgrade);
@@ -51,20 +51,16 @@ namespace _1Game.Scripts.Core
         public void Initialize()
         {
             CreateLevel();
-        }
-        
-        private void Start()
-        {
             SetStartParametr();
         }
-
+        
         private void CreateLevel()
         {
             int number = 0;
 
             _maxLevel = 10;
             _stepUp = 20;
-            _price = 100;
+            _price = 40;
             _value = 100;
 
             FillLevel(ref _fuelUpgrade);
@@ -73,7 +69,7 @@ namespace _1Game.Scripts.Core
 
             _maxLevel = 10;
             _stepUp = 1;
-            _price = 300;
+            _price = 100;
             _value = 6;
 
             FillLevel(ref _powerUpgrade);
@@ -82,7 +78,7 @@ namespace _1Game.Scripts.Core
 
             _maxLevel = 10;
             _stepUp = 1;
-            _price = 500;
+            _price = 100;
             _value = 6;
 
             FillLevel(ref _cartUpgrade);
@@ -150,6 +146,7 @@ namespace _1Game.Scripts.Core
                 }
             }
             
+            _saveLoad.Save();
         }
 
         public int GetPrice(int numberUpgrade)

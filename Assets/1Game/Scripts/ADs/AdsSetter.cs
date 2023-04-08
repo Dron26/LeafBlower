@@ -14,54 +14,51 @@ namespace _1Game.Scripts.ADs
 {
     public class AdsSetter : MonoBehaviour
     {
-
         [SerializeField] private AdsManager _adsManager;
-        [SerializeField] private ExitPanel _exitPanel;
+        // [SerializeField] private ExitPanel _exitPanel;
         [SerializeField] private Wallet _wallet;
 
         private UnityEvent _onRewardViwed = new UnityEvent();
         private UnityEvent _onOpenViwed = new UnityEvent();
         private UnityEvent _onClosedViwed = new UnityEvent();
-        
+
         private bool _soundStatus = false;
 
         public event UnityAction OnRewardViwed
         {
-            add=>_onRewardViwed.AddListener(value);
-            remove=>_onRewardViwed.RemoveListener(value);
-    } 
+            add => _onRewardViwed.AddListener(value);
+            remove => _onRewardViwed.RemoveListener(value);
+        }
+
         public event UnityAction OnOpenViwed
         {
-            add=>_onOpenViwed.AddListener(value);
-            remove=>_onOpenViwed.RemoveListener(value);
+            add => _onOpenViwed.AddListener(value);
+            remove => _onOpenViwed.RemoveListener(value);
         }
+
         public event UnityAction OnClosedViwed
         {
-            add=>_onClosedViwed.AddListener(value);
-            remove=>_onClosedViwed.RemoveListener(value);
+            add => _onClosedViwed.AddListener(value);
+            remove => _onClosedViwed.RemoveListener(value);
         }
 
         private void OnEnable()
         {
-            _exitPanel.SetNextLevel+= OnEndLevel;
+            // _exitPanel.SetNextLevel += OnEndLevel;
             OnOpenViwed += OnOpen;
             OnRewardViwed += OnRewarded;
             OnClosedViwed += OnClosed;
         }
         
-          
-        public void  Start()
+        public void Start()
         {
-            ShowFullScreenAd(); 
+            ShowFullScreenAd();
         }
         
-
         private void OnEndLevel()
         {
             ShowFullScreenAd();
         }
-
-        
         
         public void ShowRewardedAd()
         {
@@ -74,10 +71,10 @@ namespace _1Game.Scripts.ADs
             }
 
             print("Show Ads");
-            VideoAd.Show(onOpenCallback:_onOpenViwed.Invoke,onRewardedCallback:_onRewardViwed.Invoke,onCloseCallback:_onClosedViwed.Invoke);
+            VideoAd.Show(onOpenCallback: _onOpenViwed.Invoke, onRewardedCallback: _onRewardViwed.Invoke,
+                onCloseCallback: _onClosedViwed.Invoke);
         }
         
-
         public void ShowFullScreenAd()
         {
 #if !UNITY_WEBGL || UNITY_EDITOR
@@ -89,9 +86,9 @@ namespace _1Game.Scripts.ADs
             }
 
             print("Show Ads");
-            InterstitialAd.Show(onOpenCallback:OnOpen, onCloseCallback: OnFullScreenShowed);
+            InterstitialAd.Show(onOpenCallback: OnOpen, onCloseCallback: OnFullScreenShowed);
         }
-        
+
         public void OnOpen()
         {
             _soundStatus = AudioListener.pause;
@@ -119,11 +116,10 @@ namespace _1Game.Scripts.ADs
 
         public void OnDisable()
         {
-            _exitPanel.SetNextLevel-= OnEndLevel;
+            // _exitPanel.SetNextLevel -= OnEndLevel;
             OnOpenViwed -= OnOpen;
             OnRewardViwed -= OnRewarded;
             OnClosedViwed -= OnClosed;
         }
-        
     }
 }

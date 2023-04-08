@@ -12,13 +12,15 @@ namespace _1Game.Scripts.Core
     {
         [SerializeField] private ExitPanel _exitPanel;
         [SerializeField] private Wallet _wallet;
-        private UpgradeParametrs _upgradeParametrs;
 
         public int TrashBagsReceivedCount => _trashBagsReceivedCount;
         public int MaxPickedBag => _maxPickedQuantity;
 
         public int MaxBagInLevel => _maxQuantityInLevel;
         public int CountPpickedTrashBags => _pickedTrashBags.Count;
+        
+        
+        private UpgradeParametrs _upgradeParametrs;
         private CharacterTrashBagPicker _trashBagPicker;
         private StageController _stageController;
         private TrashBagStorePoint _storePoint;
@@ -36,13 +38,13 @@ namespace _1Game.Scripts.Core
 
         private const int _trashBagPrice = 10;
         private int _quantityPickedTrashBag;
-        private int _maxPickedQuantity;
+        private int _maxPickedQuantity= 6;
         private int _maxQuantityInLevel;
         private int _count;
-        private int _maxQuantityInRow;
+        private int _maxQuantityInRow = 3;
         private int _trashBagsReceivedCount;
         private float stepInRow;
-        private float _time = 0.5f;
+        private const float _time = 0.5f;
 
         public UnityAction TakeTrashBag;
         public UnityAction TakeMaxQuantityTrashBag;
@@ -58,7 +60,7 @@ namespace _1Game.Scripts.Core
             _trashBagPicker = _stageController.GetComponentInChildren<CharacterTrashBagPicker>();
             _storePoint = GetComponentInChildren<TrashBagStorePoint>();
             _mainPointForTrashBag = GetComponentInChildren<MainPointForTrashBag>();
-            _trashBagStore=GetComponentInChildren<TrashBagStore>();
+            _trashBagStore = GetComponentInChildren<TrashBagStore>();
         }
 
         private void OnEnable()
@@ -67,14 +69,12 @@ namespace _1Game.Scripts.Core
             _upgradeParametrs.UpCart += OnUpLevel;
             _exitPanel.SetNextLevel += ClearCart;
         }
-        
+
         private void Start()
         {
-            _maxQuantityInRow = 3;
-            _maxPickedQuantity = 6;
-            _trashBagsReceivedCount=_maxPickedQuantity;
+            _trashBagsReceivedCount = _maxPickedQuantity;
             _pickedTrashBags = new Stack<TrashBag>();
-            
+
 
             _storeLocalPosition = _storePoint.transform.localPosition;
             _mainPoint = _mainPointForTrashBag.transform.localPosition;
@@ -85,7 +85,7 @@ namespace _1Game.Scripts.Core
                 _storeLocalPosition.z));
             _removePositionStorePoint = _storePoint.transform.localPosition;
         }
-        
+
         private void OnDisable()
         {
             _trashBagPicker.SallTrashBag -= OnSallTrashBag;
@@ -227,13 +227,10 @@ namespace _1Game.Scripts.Core
 
         private void ChangeStorePosition()
         {
-
             float upStep = 0.08f;
-            Vector3 localPosition =_trashBagStore.transform.localPosition;
-            localPosition = new Vector3(localPosition.x, localPosition.y , localPosition.z+upStep);
+            Vector3 localPosition = _trashBagStore.transform.localPosition;
+            localPosition = new Vector3(localPosition.x, localPosition.y, localPosition.z + upStep);
             _trashBagStore.transform.localPosition = localPosition;
         }
-
-
     }
 }

@@ -13,9 +13,6 @@ namespace _1Game.Scripts.Core.SaveLoad.Data
 [SerializeField] private Cart _cart;
 [SerializeField] private FuelPlace _fuelPlace;
 
-
-
-
 private List<Dictionary<int, int>> _stagesStarGroup = new();
         [SerializeField] private TutorialPanel _tutorialPanel;
         private List< int> _countStages = new List<int>();
@@ -34,7 +31,6 @@ private List<Dictionary<int, int>> _stagesStarGroup = new();
 
         private void Awake()
         {
-            
             _stageController = GetComponent<StageController>();
             _exitPanel = _stageController.GetComponent<StageController>()._exitPanel;
         }
@@ -42,8 +38,8 @@ private List<Dictionary<int, int>> _stagesStarGroup = new();
         private void OnEnable()
         {
             _exitPanel.UpdateData += OnSetNextLevel;
-            _tutorialPanel.TutorialClose += SetFibishTutorial;
-            _tutorialPanel.TutorialCompleted += SetFibishTutorial;
+            _tutorialPanel.TutorialClose += SetFinishTutorial;
+            _tutorialPanel.TutorialCompleted += SetFinishTutorial;
             
         }
 
@@ -115,6 +111,11 @@ private List<Dictionary<int, int>> _stagesStarGroup = new();
 
         public void  SetStagesStarGroup(List<Dictionary<int, int>> tempStagesStarGroup)
         {
+            if(tempStagesStarGroup == null)
+            {
+                Debug.LogError("tempStagesStarGroup is null");
+                return;
+            }
             for (int i = 0; i < tempStagesStarGroup.Count; i++)
             {
                 _stagesStarGroup.Add(tempStagesStarGroup[i]);
@@ -126,10 +127,10 @@ private List<Dictionary<int, int>> _stagesStarGroup = new();
             _exitPanel.UpdateData -= OnSetNextLevel;
         }
 
-        private void SetFibishTutorial()
+        public void SetFinishTutorial()
         {
-            _tutorialPanel.TutorialClose -= SetFibishTutorial;
-            _tutorialPanel.TutorialCompleted -= SetFibishTutorial;
+            _tutorialPanel.TutorialClose -= SetFinishTutorial;
+            _tutorialPanel.TutorialCompleted -= SetFinishTutorial;
             _isTutorialCompleted=true;
         }
     }

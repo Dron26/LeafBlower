@@ -15,9 +15,9 @@ namespace _1Game.Scripts.UI
         private LogoPanel _logo;
         private Panel _logoPanel;
         private SmallTowm _smallTown;
-        private StatsPanel _stats;
-        private Panel _statsPanel;
-        private ExitPanel _exitPanel;
+        // private StatsPanel _stats;
+        // private Panel _statsPanel;
+        // private ExitPanel _exitPanel;
         private StagesPanel _stagesPanel;
         private GroupStages _groupStages;
         private Panel _stagesGroupPanel;
@@ -39,10 +39,10 @@ namespace _1Game.Scripts.UI
             _logoPanel = _logo.gameObject.GetComponent<Panel>();
             _logo.gameObject.SetActive(true);
 
-          _stats = GetComponentInChildren<StatsPanel>();
-            _statsPanel = _stats.gameObject.GetComponent<Panel>();
+          // _stats = GetComponentInChildren<StatsPanel>();
+          //   _statsPanel = _stats.gameObject.GetComponent<Panel>();
 
-            _exitPanel = GetComponentInChildren<ExitPanel>();
+            // _exitPanel = GetComponentInChildren<ExitPanel>();
 
             _colorScreen = _screenDim.color;
             _screenDim.raycastTarget = false;
@@ -55,10 +55,10 @@ namespace _1Game.Scripts.UI
 
         }
 
-        private void OnEnable()
-        {
-            _exitPanel.SetNextLevel += OnSetNextLevel;
-        }
+        // private void OnEnable()
+        // {
+        //     _exitPanel.SetNextLevel += OnSetNextLevel;
+        // }
 
         private void Start()
         {
@@ -138,7 +138,8 @@ namespace _1Game.Scripts.UI
             SelectSmallTownStage?.Invoke(numberStage, numberGroup);
             _isExitStartMenu = true;
 
-           StartCoroutine(ChangeColorExit(_statsPanel, _stagesGroupPanel));
+            print(" StartCoroutine(ChangeColorExit(_statsPanel, _stagesGroupPanel));");
+            // StartCoroutine(ChangeColorExit(_statsPanel, _stagesGroupPanel));
         }
 
         public void OnClickBack(GameObject panel)
@@ -154,15 +155,17 @@ namespace _1Game.Scripts.UI
             PushAlarm?.Invoke(_isPushAlarmWork);
         }
 
-        private void OnDisable()
-        {
-           _exitPanel.SetNextLevel -= OnSetNextLevel;
-        }
+        // private void OnDisable()
+        // {
+        //    _exitPanel.SetNextLevel -= OnSetNextLevel;
+        // }
 
         private void OnSetNextLevel()
         {
             _isExitStartMenu = false;
-           StartCoroutine(ChangeColorExit(_stagesGroupPanel, _statsPanel));
+            print(" StartCoroutine(ChangeColorExit(_stagesGroupPanel, _statsPanel));");
+
+           // StartCoroutine(ChangeColorExit(_stagesGroupPanel, _statsPanel));
             _groupStages.SetStars();
             _smallTown.SetStars();
         }

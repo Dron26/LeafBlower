@@ -1,82 +1,85 @@
-using Agava.YandexGames;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using _1Game.Scripts.Core;
 using _1Game.Scripts.UI;
+using Agava.YandexGames;
 using UnityEngine;
 
-public class Leaderboard : MonoBehaviour
+namespace _1Game.Scripts.Leaderbord
 {
-    [SerializeField] private LeaderboardRecord _template;
-    [SerializeField] private Transform _container;
-    [SerializeField] private int _amountRecords;
-[SerializeField] private ExitPanel _exitPanel;
-[SerializeField] private Wallet _wallet;
-
-private Panel _panel;
-    public int AmountRecords => _amountRecords;
-
-    private List<LeaderboardEntryResponse> _entries = new List<LeaderboardEntryResponse>();
-    private readonly List<LeaderboardRecord> _records = new List<LeaderboardRecord>();
-    private LeaderboardEntryResponse _player;
-
-    private void Start()
+    public class Leaderboard : MonoBehaviour
     {
-        UpdateData();
-        _panel=GetComponentInChildren<Panel>();
-        _panel.gameObject.SetActive(false);
-    }
+        [SerializeField] private LeaderboardRecord _template;
+        [SerializeField] private Transform _container;
+        [SerializeField] private int _amountRecords;
+        [SerializeField] private ExitPanel _exitPanel;
+        [SerializeField] private Wallet _wallet;
 
-    private void OnEnable()
-    {
-        _exitPanel.SetNextLevel += UpdateData;
-    }
-    
-    private void OnDisable()
-    {
-        _exitPanel.SetNextLevel -= UpdateData;
-    }
+        private Panel _panel;
+        public int AmountRecords => _amountRecords;
 
+        private List<LeaderboardEntryResponse> _entries = new List<LeaderboardEntryResponse>();
+        private readonly List<LeaderboardRecord> _records = new List<LeaderboardRecord>();
+        private LeaderboardEntryResponse _player;
 
-    public void Init(LeaderboardGetEntriesResponse leaderboardGetEntriesResponse)
-    {
-        for (int i = 0; i < _amountRecords; i++)
+        private void Start()
         {
-            if (leaderboardGetEntriesResponse.entries.Length <= i)
-                break;
-
-            LeaderboardRecord record = Instantiate(_template, _container);
-            LeaderboardEntryResponse entity = leaderboardGetEntriesResponse.entries[i];
-            record.UpdateData(entity);
-            _records.Add(record);
-            _entries.Add(entity);
-
-            if (leaderboardGetEntriesResponse.userRank == entity.rank)
-                _player = entity;
+            UpdateData();
+            _panel=GetComponentInChildren<Panel>();
+            _panel.gameObject.SetActive(false);
         }
-    }
 
-    private void UpdateData()
-    {
+        // private void OnEnable()
+        // {
+        //     _exitPanel.SetNextLevel += UpdateData;
+        // }
+    
+        // private void OnDisable()
+        // {
+        //     _exitPanel.SetNextLevel -= UpdateData;
+        // }
+
+
+        public void Init(LeaderboardGetEntriesResponse leaderboardGetEntriesResponse)
+        {
+            for (int i = 0; i < _amountRecords; i++)
+            {
+                if (leaderboardGetEntriesResponse.entries.Length <= i)
+                    break;
+
+                LeaderboardRecord record = Instantiate(_template, _container);
+                LeaderboardEntryResponse entity = leaderboardGetEntriesResponse.entries[i];
+                record.UpdateData(entity);
+                _records.Add(record);
+                _entries.Add(entity);
+
+                if (leaderboardGetEntriesResponse.userRank == entity.rank)
+                    _player = entity;
+            }
+        }
+
+        private void UpdateData()
+        {
 #if !UNITY_WEBGL || UNITY_EDITOR
-        return;
+            return;
 #endif
-        _player.score += Convert.ToInt32(_wallet.Money);
+            _player.score += Convert.ToInt32(_wallet.Money);
 
-        Agava.YandexGames.Leaderboard.SetScore(LeaderboardConstants.Name, _player.score);
+            Agava.YandexGames.Leaderboard.SetScore(LeaderboardConstants.Name, _player.score);
 
-        UpdateViews();
-    }
+            UpdateViews();
+        }
 
-    private void UpdateViews()
-    {
+        private void UpdateViews()
+        {
 #if !UNITY_WEBGL || UNITY_EDITOR
-        return;
+            return;
 #endif
-        _entries = _entries.OrderByDescending(entry => entry.score).ToList();
+            _entries = _entries.OrderByDescending(entry => entry.score).ToList();
 
-        for (int i = 0; i < _records.Count; i++)
-            _records[i].UpdateData(_entries[i], i + 1);
+            for (int i = 0; i < _records.Count; i++)
+                _records[i].UpdateData(_entries[i], i + 1);
+        }
     }
 }

@@ -20,15 +20,15 @@ namespace _1Game.Scripts.UI
             gameObject.SetActive(false);
         }
 
-        private void OnEnable()
-        {
-            _upgradePlace.EnterPlace += SetState;
-        }
-
-        private void OnDisable()
-        {
-            _upgradePlace.EnterPlace += SetState;
-        }
+        // private void OnEnable()
+        // {
+        //     _upgradePlace.EnterPlace += SetState;
+        // }
+        //
+        // private void OnDisable()
+        // {
+        //     _upgradePlace.EnterPlace -= SetState;
+        // }
 
         public void OnClick()
         {

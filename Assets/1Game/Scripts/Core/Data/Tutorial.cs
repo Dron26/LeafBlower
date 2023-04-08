@@ -191,6 +191,7 @@ namespace _1Game.Scripts.Core
         private void OnTutorialClose()
         {
             _fuelTankPoint.enabled = true;
+            _stageData.SetFinishTutorial();
             DisableAll();
             _isTutorialCompleted = true;
             _tutorialWall.SetActive(false);

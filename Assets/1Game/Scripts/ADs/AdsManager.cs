@@ -20,8 +20,6 @@ namespace ADs
             yield return YandexGamesSdk.Initialize();
         }
 
-
-        
         public void ShowVideo(Action action)
         {
 #if !UNITY_WEBGL || UNITY_EDITOR
@@ -47,6 +45,5 @@ namespace ADs
 
             InterstitialAd.Show();
         }
-        
     }
 }

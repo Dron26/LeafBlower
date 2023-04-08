@@ -6,7 +6,7 @@ using UnityEngine.UI;
 [RequireComponent(typeof(Button))]
 public class Authorization : MonoBehaviour
 {
-    [SerializeField] private GameInitializator _initializator;
+    [SerializeField] private GameInitializer _initializer;
 
     private Button _button;
 
@@ -17,12 +17,16 @@ public class Authorization : MonoBehaviour
 
     private void OnEnable()
     {
+#if !UNITY_EDITOR
         _button.onClick.AddListener(Execute);
+#endif
     }
 
     private void OnDisable()
     {
+#if !UNITY_EDITOR
         _button.onClick.RemoveListener(Execute);
+#endif
     }
 
     private void Execute()
@@ -32,7 +36,7 @@ public class Authorization : MonoBehaviour
 
     private void Disable()
     {
-        _initializator.LoadCloudData();
+        _initializer.LoadCloudData();
         gameObject.SetActive(false);
     }
 }
